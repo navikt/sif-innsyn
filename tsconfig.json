@@ -1,0 +1,23 @@
+{
+    "compilerOptions": {
+        "outDir": "build/dist",
+        "module": "esnext",
+        "target": "es5",
+        "lib": ["es6", "dom", "es2019"],
+        "sourceMap": true,
+        "jsx": "react",
+        "moduleResolution": "node",
+        "strict": true,
+        "forceConsistentCasingInFileNames": true,
+        "skipLibCheck": false,
+        "suppressImplicitAnyIndexErrors": false,
+        "noUnusedLocals": true,
+        "baseUrl": "./src",
+        "typeRoots": ["./node_modules/@types"],
+        "allowSyntheticDefaultImports": true
+    },
+    "awesomeTypescriptLoaderOptions": {
+        "useCache": false
+    },
+    "exclude": ["node_modules", "src/build", "**.js", "dist"]
+}
