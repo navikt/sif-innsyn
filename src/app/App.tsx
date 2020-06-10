@@ -34,8 +34,8 @@ const App: React.FunctionComponent = () => {
                     <UnavailablePage />
                 ) : (
                     <Switch>
-                        <Route path={RouteConfig.ROOT} component={RootPageRoute} />
-                        <Route path={RouteConfig.LOGGED_IN} component={InnsynRoute} />
+                        <Route exact={true} path={RouteConfig.LOGGED_IN} component={InnsynRoute} />
+                        <Route exact={false} path={RouteConfig.ROOT} component={RootPageRoute} />
                     </Switch>
                 )}
             </div>

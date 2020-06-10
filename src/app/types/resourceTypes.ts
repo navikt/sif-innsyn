@@ -1,3 +1,3 @@
 export enum ResourceType {
-    SØKER = 'SØKER',
+    SØKER = 'soker',
 }
