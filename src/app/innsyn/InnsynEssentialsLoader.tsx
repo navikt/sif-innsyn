@@ -65,7 +65,7 @@ const InnsynEssentialsLoader: React.FC<Props> = (props: Props): React.ReactEleme
         return contentLoadedRenderer(state.søkerdata);
     }
     if (state.status === Status.ERROR && state.error) {
-        appSentryLogger.logError('InnsynEssentialsLoader error', state.error);
+        appSentryLogger.logError('InnsynEssentialsLoader error.', state.error);
         return <GeneralErrorPage payload={state.error} />;
     }
     return <LoadingPage />;
