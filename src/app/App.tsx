@@ -12,6 +12,7 @@ import { Locale } from '@navikt/sif-common-core/lib/types/Locale';
 import appSentryLogger from './utils/appSentryLogger';
 import { RouteConfig } from './config/routeConfig';
 import InnsynRoute from './innsyn/InnsynRoute';
+import KalkulatorView from './components/omsorgspenger-kalkulator/components/KalkulatorView';
 import '@navikt/sif-common-core/lib/styles/globalStyles.less';
 import './app.less';
 
@@ -35,6 +36,7 @@ const App: React.FunctionComponent = () => {
                 ) : (
                     <Switch>
                         <Route exact={true} path={RouteConfig.LOGGED_IN} component={InnsynRoute} />
+                        <Route exact={true} path={RouteConfig.KALKULATOR} component={KalkulatorView} />
                         <Route exact={false} path={RouteConfig.ROOT} component={RootPageRoute} />
                     </Switch>
                 )}
