@@ -15,13 +15,13 @@ export interface GoGetOrLoginResponse<T> {
     data: T | undefined;
 }
 
-export function goGet<T>(resourcetype: ResourceType): Promise<AxiosResponse<T>> {
+export function axiosGet<T>(resourcetype: ResourceType): Promise<AxiosResponse<T>> {
     return axios.get<T, AxiosResponse<T>>(getApiUrlByResourceType(resourcetype), axiosConfig);
 }
 
 export async function getOrLogin<T>(resourcetype: ResourceType): Promise<GoGetOrLoginResponse<T>> {
     try {
-        const axiosResponse: AxiosResponse<T> = await goGet<T>(resourcetype);
+        const axiosResponse: AxiosResponse<T> = await axiosGet<T>(resourcetype);
         return { result: GetOrLoginResult.GOT_DATA, data: axiosResponse.data };
     } catch (error) {
         if (isForbidden(error) || isUnauthorized(error)) {
@@ -32,18 +32,3 @@ export async function getOrLogin<T>(resourcetype: ResourceType): Promise<GoGetOr
         }
     }
 }
-
-// export const getSøkerApiResponse: () => Promise<AxiosResponse<SøkerApiResponse>> = () =>
-//     axios.get<SøkerApiResponse, AxiosResponse<SøkerApiResponse>>(
-//         getApiUrlByResourceType(ResourceType.SØKER),
-//         axiosConfig
-//     );
-//
-// export const redirectIfForbiddenOrUnauthorized = (response: AxiosError): WillRedirect => {
-//     if (isForbidden(response) || isUnauthorized(response)) {
-//         navigateToLoginPage();
-//         return WillRedirect.Yes;
-//     } else {
-//         return WillRedirect.No;
-//     }
-// };

@@ -4,7 +4,7 @@ import Page from '@navikt/sif-common-core/lib/components/page/Page';
 import intlHelper from '@navikt/sif-common-core/lib/utils/intlUtils';
 import LoadingSpinner from '@navikt/sif-common-core/lib/components/loading-spinner/LoadingSpinner';
 
-const LoadingPage: React.FunctionComponent = () => {
+const LoadingPage: React.FunctionComponent = (): React.ReactElement => {
     const intl = useIntl();
     return (
         <Page title={intlHelper(intl, 'page.loadingPage.tekst')}>

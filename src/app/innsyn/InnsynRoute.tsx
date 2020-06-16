@@ -1,15 +1,15 @@
 import * as React from 'react';
 import InnsynEssentialsLoader from './InnsynEssentialsLoader';
 import InnsynView from './InnsynView';
-import { Søkerdata } from '../types/søkerdataTypes';
+import { Essentials } from '../types/types';
 
 const InnsynRoute: React.FC = (): JSX.Element => (
     <InnsynEssentialsLoader
-        contentLoadedRenderer={(søkerdata: Søkerdata): JSX.Element => {
+        contentLoadedRenderer={(essentials: Essentials): JSX.Element => {
             // if (!søkerdata.person.myndig) { // TODO: Fix
             //     return <IkkeMyndigPage />;
             // }
-            return <InnsynView søkerdata={søkerdata} />;
+            return <InnsynView essentials={essentials} />;
         }}
     />
 );

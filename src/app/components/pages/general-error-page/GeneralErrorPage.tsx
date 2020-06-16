@@ -13,7 +13,7 @@ export interface Props {
     payload: string | undefined;
 }
 
-const GeneralErrorPage: React.FC<Props> = ({ payload }: Props): JSX.Element => {
+const GeneralErrorPage: React.FC<Props> = ({ payload }: Props): React.ReactElement => {
     const intl = useIntl();
 
     useEffect(() => {

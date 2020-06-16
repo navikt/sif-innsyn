@@ -1,74 +1,57 @@
 import React, { useEffect, useState } from 'react';
-import { getOrLogin, GetOrLoginResult, GoGetOrLoginResponse } from '../api/api';
-import LoadingPage from '../components/pages/loading-page/LoadingPage';
-import GeneralErrorPage from '../components/pages/general-error-page/GeneralErrorPage';
-import { isSøkerApiResponse, isSøkerdata, SøkerApiResponse, Søkerdata } from '../types/søkerdataTypes';
-import { ResourceType } from '../types/resourceTypes';
-import appSentryLogger from '../utils/appSentryLogger';
+import { Essentials } from '../types/types';
+import { EssentialsRenderer, loadAppEssentials, LoadError } from './loadUtils';
+import { none, Option, fold as foldOption } from 'fp-ts/lib/Option';
+import { Either, fold as foldEither, left as leftEither } from 'fp-ts/lib/Either';
+import { pipe } from 'fp-ts/lib/pipeable';
+import { renderGeneralErrorPage, showLoadingPageOrRenderContent } from './loadUtilsViews';
 
-enum Status {
-    INITIALIZING = 'INITIALIZING ',
-    LOADING = 'LOADING',
-    REDIRECTING = 'REDIRECTING',
-    DONE = 'DONE',
-    ERROR = 'ERROR',
+interface Props {
+    contentLoadedRenderer: EssentialsRenderer;
 }
 
 interface State {
-    status: Status;
-    søkerdata: Partial<Søkerdata>;
-    error: string | undefined;
+    essentials: Either<Option<Essentials>, LoadError>;
 }
 
-interface Props {
-    contentLoadedRenderer: (søkerdata: Søkerdata) => React.ReactElement;
+const setInitialLoadState = () => leftEither(none);
+
+function optionsAreNone<T>(options: Option<T>): boolean {
+    return pipe(
+        options,
+        foldOption(
+            () => true,
+            (a) => false
+        )
+    );
 }
 
-const toStatus = (result: GetOrLoginResult): Status => {
-    if (result === GetOrLoginResult.GOT_DATA) {
-        return Status.DONE;
-    }
-    if (result === GetOrLoginResult.WILL_REDIRECT) {
-        return Status.REDIRECTING;
-    }
-    return Status.ERROR;
+const essentialsAreNone = (essentials: Either<Option<Essentials>, LoadError>): boolean => {
+    return pipe(
+        essentials,
+        foldEither(optionsAreNone, (a) => false)
+    );
 };
-
-const emptySøkerdata = (): Partial<Søkerdata> => ({ person: undefined });
 
 const InnsynEssentialsLoader: React.FC<Props> = (props: Props): React.ReactElement => {
     const { contentLoadedRenderer } = props;
 
     const [state, setState] = useState<State>({
-        status: Status.INITIALIZING,
-        søkerdata: emptySøkerdata(),
-        error: undefined,
+        essentials: setInitialLoadState(),
     });
 
-    async function loadAppEssentials(): Promise<void> {
-        const response: GoGetOrLoginResponse<SøkerApiResponse> = await getOrLogin<SøkerApiResponse>(ResourceType.SØKER);
-        setState({
-            ...state,
-            status: toStatus(response.result),
-            søkerdata: { ...state.søkerdata, person: isSøkerApiResponse(response.data) ? response.data : undefined },
-        });
-    }
-
     useEffect(() => {
-        if (state.status === Status.INITIALIZING) {
-            loadAppEssentials();
-            setState({ ...state, status: Status.LOADING });
+        if (essentialsAreNone(state.essentials)) {
+            loadAppEssentials().then((essentialsResult: Either<Option<Essentials>, LoadError>) => {
+                setState({ ...state, essentials: essentialsResult });
+            });
         }
-    }, [state]);
+    });
 
-    if (state.status === Status.DONE && isSøkerdata(state.søkerdata)) {
-        return contentLoadedRenderer(state.søkerdata);
-    }
-    if (state.status === Status.ERROR && state.error) {
-        appSentryLogger.logError('InnsynEssentialsLoader error.', state.error);
-        return <GeneralErrorPage payload={state.error} />;
-    }
-    return <LoadingPage />;
+    return pipe(
+        state.essentials,
+        foldEither(showLoadingPageOrRenderContent(contentLoadedRenderer), renderGeneralErrorPage)
+    );
 };
 
 export default InnsynEssentialsLoader;
