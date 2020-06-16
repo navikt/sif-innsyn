@@ -28,19 +28,24 @@ server.use((req, res, next) => {
 
 const søkerMock1 = {
     aktørId: '1234567890',
+    fødselsnummer: '12345123456',
     fornavn: 'Test',
     mellomnavn: null,
     etternavn: 'Testesen',
-    myndig: true,
-    fødselsnummer: '12345123456',
-    fødselsdato: '2020-01-01'
 };
 
 const barnMock = {
     barn: [
-        { fødselsdato: '1990-01-01', fornavn: 'Barn', mellomnavn: 'Barne', etternavn: 'Barnesen', aktørId: '1' },
-        { fodselsdato: '1990-01-02', fornavn: 'Mock', etternavn: 'Mocknes', aktørId: '2' }
-    ]
+        { aktørId: '1', fødselsnummer: '12345123456', fornavn: 'Barn', mellomnavn: 'Barne', etternavn: 'Barnesen' },
+        { aktørId: '2', fødselsnummer: '12345123456', fornavn: 'Mock', etternavn: 'Mocknes' },
+    ],
+};
+
+const arbeidsgivereMock = {
+    organisasjoner: [
+        { navn: 'Arbeids- og velferdsetaten', organisasjonsnummer: '123451234' },
+        { navn: 'Arbeids- og sosialdepartementet', organisasjonsnummer: '123451235' },
+    ],
 };
 
 const startServer = () => {
@@ -54,6 +59,10 @@ const startServer = () => {
     });
 
     server.get('/barn', (req, res) => res.send(barnMock));
+
+    server.get('/arbeidsgiver', (req, res) => {
+        res.send(arbeidsgivereMock);
+    });
 
     server.listen(port, () => {
         console.log(`App listening on port: ${port}`);

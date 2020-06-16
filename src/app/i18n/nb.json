@@ -42,5 +42,9 @@
     "timeInput.minutes": "Minutter",
 
     "innsyn.root.tittel": "Innsyn root tittel",
-    "innsyn.root.stegTittel": "Innsyn root steg tittel"
+    "innsyn.root.stegTittel": "Innsyn root steg tittel",
+
+    "page.generalErrorPage.sidetittel": "Feil",
+    "page.generalErrorPage.tittel": "Noe gikk galt...",
+    "page.generalErrorPage.tekst": "Beklager, her har det dessverre skjedd en feil."
 }
