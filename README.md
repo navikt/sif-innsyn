@@ -6,12 +6,18 @@ Kildekoden til frontend-appen for sykdom i familien sin innsynsløsning
 
 For å kjøre opp app-en i dev:
 
-1.  `npm install`.
-2.  `npm start`.
+1.  `npm install` 
+2.  `npm start` (i en terminal)
+3.  `npm run api-mock` (i en annen terminal)
 
 For å kjøre enhetstester:
 
-1.  `npm install && npm test`.
+1.  `npm test`.
+
+## Dekoratør
+
+For å kjøre appen med NAV dekoratør:
+`npm run swd` i stede for `npm start`
 
 ## Henvendelser
 

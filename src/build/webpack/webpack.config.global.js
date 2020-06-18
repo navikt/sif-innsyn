@@ -67,7 +67,7 @@ const webpackConfig = {
             },
             {
                 test: /\.svg$/,
-                use: 'svg-sprite-loader',
+                use: ['@svgr/webpack', 'url-loader'],
             },
         ],
     },
