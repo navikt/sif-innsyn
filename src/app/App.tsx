@@ -9,16 +9,14 @@ import UnavailablePage from './components/pages/unavailable-page/UnavailablePage
 import { Feature, isFeatureEnabled } from './utils/featureToggleUtils';
 import { getLocaleFromSessionStorage, setLocaleInSessionStorage } from './utils/localeUtils';
 import { Locale } from '@navikt/sif-common-core/lib/types/Locale';
-import appSentryLogger from './utils/appSentryLogger';
 import { RouteConfig } from './config/routeConfig';
 import InnsynRoute from './innsyn/InnsynRoute';
+import KalkulatorRoute from './kalkulator/KalkulatorRoute';
 import '@navikt/sif-common-core/lib/styles/globalStyles.less';
 import './app.less';
 
 const localeFromSessionStorage = getLocaleFromSessionStorage();
 moment.locale(localeFromSessionStorage);
-
-appSentryLogger.init();
 
 const App: React.FunctionComponent = () => {
     const [locale, setLocale] = React.useState<Locale>(localeFromSessionStorage);
@@ -35,6 +33,7 @@ const App: React.FunctionComponent = () => {
                 ) : (
                     <Switch>
                         <Route exact={true} path={RouteConfig.LOGGED_IN} component={InnsynRoute} />
+                        <Route exact={true} path={RouteConfig.KALKULATOR} component={KalkulatorRoute} />
                         <Route exact={false} path={RouteConfig.ROOT} component={RootPageRoute} />
                     </Switch>
                 )}

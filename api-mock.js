@@ -3,6 +3,7 @@ const fs = require('fs');
 const express = require('express');
 const Busboy = require('busboy');
 const _ = require('lodash');
+const path = require('path');
 
 const server = express();
 
@@ -48,14 +49,28 @@ const arbeidsgivereMock = {
     ],
 };
 
+const isLoggedIn = (req) => req.headers.cookie !== undefined;
+
 const startServer = () => {
     const port = 1234;
 
     server.get('/health/isAlive', (req, res) => res.sendStatus(200));
     server.get('/health/isReady', (req, res) => res.sendStatus(200));
 
+    server.get('/auth-mock', (req, res) => {
+        let authMockHtmlFilePath = path.resolve(__dirname, 'api-mock-login.html');
+        res.sendFile(authMockHtmlFilePath);
+    });
+    server.get('/auth-mock/cookie', (req, res) => {
+        res.cookie('omsLocalLoginCookie', 'mysecrettoken').sendStatus(201);
+    });
+
     server.get('/soker', (req, res) => {
-        res.send(søkerMock1);
+        if (isLoggedIn(req)) {
+            res.send(søkerMock1);
+        } else {
+            res.status(401).send();
+        }
     });
 
     server.get('/barn', (req, res) => res.send(barnMock));
