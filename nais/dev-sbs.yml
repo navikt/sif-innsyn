@@ -2,7 +2,7 @@ apiVersion: "nais.io/v1alpha1"
 kind: "Application"
 metadata:
     name: sif-innsyn
-    namespace: default
+    namespace: dusseldorf
     labels:
         team: dusseldorf
 spec:
@@ -41,7 +41,7 @@ spec:
         - name: APPRES_CMS_URL
           value: https://appres.nav.no
         - name: API_URL
-          value: https://sif-innsyn-api-q.nav.no
+          value: https://sif-innsyn-api.dev-gcp.nais.io
         - name: PUBLIC_PATH
           value: /familie/sykdom-i-familien/soknad/innsyn
         - name: LOGIN_URL
