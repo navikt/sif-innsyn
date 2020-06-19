@@ -14,6 +14,7 @@ import InnsynRoute from './innsyn/InnsynRoute';
 import KalkulatorRoute from './kalkulator/KalkulatorRoute';
 import '@navikt/sif-common-core/lib/styles/globalStyles.less';
 import './app.less';
+import FpEssentials from './fpload/FpEssentials';
 
 const localeFromSessionStorage = getLocaleFromSessionStorage();
 moment.locale(localeFromSessionStorage);
@@ -33,6 +34,7 @@ const App: React.FunctionComponent = () => {
                 ) : (
                     <Switch>
                         <Route exact={true} path={RouteConfig.LOGGED_IN} component={InnsynRoute} />
+                        <Route exact={true} path={RouteConfig.FP} component={FpEssentials} />
                         <Route exact={true} path={RouteConfig.KALKULATOR} component={KalkulatorRoute} />
                         <Route exact={false} path={RouteConfig.ROOT} component={RootPageRoute} />
                     </Switch>
