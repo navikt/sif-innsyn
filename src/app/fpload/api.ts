@@ -11,8 +11,6 @@ export async function fetchJson<T, O, I>(
     init?: RequestInit
 ): Promise<E.Either<Error, T>> {
     try {
-        // const response = await fetch(url, init);
-        // const json: I = await response.json();
         const axiosResponse: AxiosResponse<I> = await axios.get<I>(url, axiosConfig);
         const json: I = axiosResponse.data;
         const result: E.Either<ioTs.Errors, T> = validator.decode(json);
@@ -21,7 +19,7 @@ export async function fetchJson<T, O, I>(
             E.fold<ioTs.Errors, T, E.Either<Error, T>>(
                 (errors: ioTs.Errors) => {
                     const messages = reporter(result);
-                    return E.left<Error, T>(new Error(messages.join('\n')));
+                    return E.left<Error, T>({ name: 'TypeGuardError', message: messages.join('\n') });
                 },
                 (value: T) => {
                     return E.right<Error, T>(value);
@@ -29,8 +27,6 @@ export async function fetchJson<T, O, I>(
             )
         );
     } catch (err) {
-        console.warn('Error:');
-        console.warn(JSON.stringify(err, null, 4));
         return Promise.resolve(E.left<Error, T>(err));
     }
 }
