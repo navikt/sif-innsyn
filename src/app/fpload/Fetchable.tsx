@@ -15,21 +15,25 @@ interface FetchableProps<T, O, I> {
 }
 
 interface FetchableState<T> {
+    doApiCalls: boolean;
     data: Either<Error | null, T>;
 }
 
 export function Fetchable<T, O, I>(props: FetchableProps<T, O, I>) {
     const { url, init, validator, loading, error, success } = props;
-    const [state, setState] = useState<FetchableState<T>>({ data: E.left(null) });
+    const [state, setState] = useState<FetchableState<T>>({ data: E.left(null), doApiCalls: true });
 
     useEffect(() => {
-        (async () => {
-            const result: E.Either<Error | null, T> = await fetchJson(url, validator, init);
-            setState({
-                data: result,
-            });
-        })();
-    }, []); // TODO: Finn ut om det blir uendlig cycle uten []
+        if (state.doApiCalls) {
+            (async () => {
+                const result: E.Either<Error | null, T> = await fetchJson(url, validator, init);
+                setState({
+                    data: result,
+                    doApiCalls: false,
+                });
+            })();
+        }
+    });
 
     return <Remote<T> loading={loading} error={error} data={state.data} success={success} />;
 }
