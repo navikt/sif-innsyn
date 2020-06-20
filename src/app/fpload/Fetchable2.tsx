@@ -19,14 +19,14 @@ export interface Fetchable2Props<T1, O1, I1, T2, O2, I2> {
     success: (data: EssentialData2<T1, T2>) => JSX.Element;
 }
 
-interface FetchTwoThingsState<T1, T2> {
+interface Fetchable2State<T1, T2> {
     doApiCalls: boolean;
     data: Either<Error | null, EssentialData2<T1, T2>>;
 }
 
 export function Fetchable2<T1, O1, I1, T2, O2, I2>(props: Fetchable2Props<T1, O1, I1, T2, O2, I2>) {
     const { t1recipe, t2recipe, success, loading, error } = props;
-    const [state, setState] = useState<FetchTwoThingsState<T1, T2>>({
+    const [state, setState] = useState<Fetchable2State<T1, T2>>({
         data: E.left(null),
         doApiCalls: true,
     });
@@ -40,35 +40,26 @@ export function Fetchable2<T1, O1, I1, T2, O2, I2>(props: Fetchable2Props<T1, O1
                 const essentialData2: Either<Error, EssentialData2<T1, T2>> = pipe(
                     resultT1,
                     E.fold(
-                        (t1error: Error) => {
-                            return pipe(
+                        (t1error: Error) =>
+                            pipe(
                                 resultT2,
                                 E.fold(
-                                    (t2error) => {
-                                        return E.left(t2error); // TODO: Combine the two errors
-                                    },
-                                    (t2) => {
-                                        return E.left(t1error); // Since t1 was successfully retrieved, returning error1
-                                    }
+                                    (t2error) => E.left(t2error), // TODO: Combine the two errors
+                                    (t2) => E.left(t1error) // Since t1 was successfully retrieved, returning error1
                                 )
-                            );
-                        },
-                        (t1: T1) => {
-                            return pipe(
+                            ),
+                        (t1: T1) =>
+                            pipe(
                                 resultT2,
                                 E.fold(
-                                    (t2error) => {
-                                        return E.left(t2error);
-                                    },
-                                    (t2: T2) => {
-                                        return E.right({
+                                    (t2error) => E.left(t2error),
+                                    (t2: T2) =>
+                                        E.right({
                                             t1: t1,
                                             t2: t2,
-                                        });
-                                    }
+                                        })
                                 )
-                            );
-                        }
+                            )
                     )
                 );
                 setState({ data: essentialData2, doApiCalls: false });

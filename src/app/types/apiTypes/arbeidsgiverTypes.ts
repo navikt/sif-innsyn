@@ -1,5 +1,17 @@
 import { isString } from '@navikt/sif-common-core/lib/utils/typeGuardUtils';
 import { allValuesInArrayAreTrue } from '../../utils/utilityFunctions';
+import * as ioTs from 'io-ts';
+
+export const ArbeidsgiverValidator = ioTs.type({
+    navn: ioTs.string,
+    organisasjonsnummer: ioTs.string,
+});
+
+export const ArbeidsgiverResponseValidator = ioTs.type({
+    organisasjoner: ioTs.array(ArbeidsgiverValidator),
+});
+
+export type ArbeidsgiverResponse = ioTs.TypeOf<typeof ArbeidsgiverResponseValidator>;
 
 export interface Arbeidsgiver {
     navn: string;
