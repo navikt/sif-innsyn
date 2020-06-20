@@ -36,7 +36,9 @@ const FpEssentials: React.FC = () => {
                 t2recipe={barnApiDescription}
                 loading={() => <LoadingPage />}
                 error={(e) => <FpError error={e} />}
-                success={(essentialsData2) => <FpSuccess2 data={essentialsData2} />}
+                success={(essentialsData2) => (
+                    <FpSuccess2 søker={essentialsData2.t1} listeAvBarn={essentialsData2.t2.barn} />
+                )}
             />
         </>
     );

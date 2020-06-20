@@ -1,25 +1,25 @@
 import * as React from 'react';
-import { EssentialData2 } from './Fetchable2';
-import { Barn, BarnFp } from '../types/apiTypes/barnTypes';
+import { Barn } from '../types/apiTypes/barnTypes';
 import { Søker } from '../types/apiTypes/søkerTypes';
 
 interface Props {
-    data: EssentialData2<Søker, BarnFp>;
+    søker: Søker;
+    listeAvBarn: Barn[];
 }
 
-const FpSuccess2: React.FC<Props> = ({ data }: Props) => {
+const FpSuccess2: React.FC<Props> = ({ søker, listeAvBarn }: Props) => {
     return (
         <div>
             <div>Søker:</div>
             <div>
-                Navn: {data.t1.fornavn} {data.t1.mellomnavn} {data.t1.etternavn}
+                Navn: {søker.fornavn} {søker.mellomnavn} {søker.etternavn}
             </div>
             <div>
                 Barn:
                 <div>
-                    {data.t2.barn.map((barn: Barn) => {
+                    {listeAvBarn.map((barn: Barn, index: number) => {
                         return (
-                            <div>
+                            <div key={index}>
                                 Barn1 :
                                 <div>
                                     navn: {barn.fornavn} {barn.mellomnavn} {barn.etternavn}
@@ -29,7 +29,6 @@ const FpSuccess2: React.FC<Props> = ({ data }: Props) => {
                     })}
                 </div>
             </div>
-            Søker: {JSON.stringify(data, null, 4)}
         </div>
     );
 };
