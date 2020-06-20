@@ -1,12 +1,11 @@
 import * as React from 'react';
-import { Søker } from '../types/apiTypes/søkerTypes';
 
 interface Props {
-    søker: Søker;
+    data: any;
 }
 
-const FpSuccess: React.FC<Props> = ({ søker }: Props) => {
-    return <div>Søker: {JSON.stringify(søker, null, 4)}</div>;
+const FpSuccess: React.FC<Props> = ({ data }: Props) => {
+    return <div>Søker: {JSON.stringify(data, null, 4)}</div>;
 };
 
 export default FpSuccess;

@@ -16,6 +16,8 @@ export const SøkerValidator: ioTs.TypeC<{
     etternavn: ioTs.string,
 });
 
+export type Søker = ioTs.TypeOf<typeof SøkerValidator>;
+
 export interface SøkerApiResponse {
     aktørId: string;
     fødselsnummer: string;
@@ -23,8 +25,6 @@ export interface SøkerApiResponse {
     mellomnavn: string | null;
     etternavn: string;
 }
-
-export type Søker = ioTs.TypeOf<typeof SøkerValidator>;
 
 export const isSøkerApiResponse = (søkerApiResponse: any): søkerApiResponse is SøkerApiResponse => {
     if (
