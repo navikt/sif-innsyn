@@ -1,20 +1,40 @@
 import { isString } from '@navikt/sif-common-core/lib/utils/typeGuardUtils';
 import { allValuesInArrayAreTrue } from '../../utils/utilityFunctions';
-import * as ioTs from 'io-ts';
+import * as IoTs from 'io-ts/es6';
+import { getApiUrlByResourceType } from '../../utils/apiUtils';
+import { ResourceType } from '../resourceTypes';
+import { FetchRecipe } from '../../fpload/fetcher/utilityFunctions';
 
-export const BarnValidator = ioTs.type({
-    aktørId: ioTs.string,
-    fødselsnummer: ioTs.string,
-    fornavn: ioTs.string,
-    mellomnavn: ioTs.union([ioTs.string, ioTs.voidType]),
-    etternavn: ioTs.string,
+export const BarnValidator = IoTs.type({
+    aktørId: IoTs.string,
+    fødselsnummer: IoTs.string,
+    fornavn: IoTs.string,
+    mellomnavn: IoTs.union([IoTs.string, IoTs.voidType]),
+    etternavn: IoTs.string,
 });
 
-export const BarnResponseValidator = ioTs.type({
-    barn: ioTs.array(BarnValidator),
+export interface BarnP extends IoTs.Props {
+    barn: IoTs.ArrayC<
+        IoTs.TypeC<{
+            mellomnavn: IoTs.UnionC<[IoTs.StringC, IoTs.VoidC]>;
+            etternavn: IoTs.StringC;
+            aktørId: IoTs.StringC;
+            fødselsnummer: IoTs.StringC;
+            fornavn: IoTs.StringC;
+        }>
+    >;
+}
+
+export const barnResponseValidator: IoTs.TypeC<BarnP> = IoTs.type({
+    barn: IoTs.array(BarnValidator),
 });
 
-export type BarnFp = ioTs.TypeOf<typeof BarnResponseValidator>;
+export type BarnFp = IoTs.TypeOf<typeof barnResponseValidator>;
+
+export const barnRecipe: FetchRecipe<BarnP> = {
+    url: getApiUrlByResourceType(ResourceType.BARN),
+    validator: barnResponseValidator,
+};
 
 export interface Barn {
     aktørId: string;

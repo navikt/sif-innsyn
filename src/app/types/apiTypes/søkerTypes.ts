@@ -1,16 +1,21 @@
 import { isStringOrNull } from '../../utils/typeGuardUtilities';
 import { isString } from '@navikt/sif-common-core/lib/utils/typeGuardUtils';
-import * as ioTs from 'io-ts';
+import * as ioTs from 'io-ts/es6';
+import { getApiUrlByResourceType } from '../../utils/apiUtils';
+import { ResourceType } from '../resourceTypes';
+import { FetchRecipe } from '../../fpload/fetcher/utilityFunctions';
 
-export type SøkerValidatorType = ioTs.TypeC<{
+export interface SøkerP extends ioTs.Props {
     mellomnavn: ioTs.UnionC<[ioTs.StringC, ioTs.NullC]>;
     etternavn: ioTs.StringC;
     aktørId: ioTs.StringC;
     fødselsnummer: ioTs.StringC;
     fornavn: ioTs.StringC;
-}>;
+}
 
-export const SøkerValidator: SøkerValidatorType = ioTs.type({
+export type SøkerValidatorType = ioTs.TypeC<SøkerP>;
+
+export const søkerValidator: SøkerValidatorType = ioTs.type({
     aktørId: ioTs.string,
     fødselsnummer: ioTs.string,
     fornavn: ioTs.string,
@@ -18,7 +23,14 @@ export const SøkerValidator: SøkerValidatorType = ioTs.type({
     etternavn: ioTs.string,
 });
 
-export type Søker = ioTs.TypeOf<typeof SøkerValidator>;
+export type Søker = ioTs.TypeOf<typeof søkerValidator>;
+
+export const søkerRecipe: FetchRecipe<SøkerP> = {
+    url: getApiUrlByResourceType(ResourceType.SØKER),
+    validator: søkerValidator,
+};
+
+// --------
 
 export interface SøkerApiResponse {
     aktørId: string;

@@ -1,17 +1,31 @@
 import { isString } from '@navikt/sif-common-core/lib/utils/typeGuardUtils';
 import { allValuesInArrayAreTrue } from '../../utils/utilityFunctions';
-import * as ioTs from 'io-ts';
+import * as IoTs from 'io-ts/es6';
+import { getApiUrlByResourceType } from '../../utils/apiUtils';
+import { ResourceType } from '../resourceTypes';
+import { FetchRecipe } from '../../fpload/fetcher/utilityFunctions';
 
-export const ArbeidsgiverValidator = ioTs.type({
-    navn: ioTs.string,
-    organisasjonsnummer: ioTs.string,
+export const ArbeidsgiverValidator = IoTs.type({
+    navn: IoTs.string,
+    organisasjonsnummer: IoTs.string,
 });
 
-export const ArbeidsgiverResponseValidator = ioTs.type({
-    organisasjoner: ioTs.array(ArbeidsgiverValidator),
+export interface ArbeidsgiverP extends IoTs.Props {
+    organisasjoner: IoTs.ArrayC<IoTs.TypeC<{ navn: IoTs.StringC; organisasjonsnummer: IoTs.StringC }>>;
+}
+
+export const ArbeidsgiverResponseValidator: IoTs.TypeC<ArbeidsgiverP> = IoTs.type({
+    organisasjoner: IoTs.array(ArbeidsgiverValidator),
 });
 
-export type ArbeidsgiverFp = ioTs.TypeOf<typeof ArbeidsgiverResponseValidator>;
+export type ArbeidsgiverFp = IoTs.TypeOf<typeof ArbeidsgiverResponseValidator>;
+
+export const arbeidsgiverRecipe: FetchRecipe<ArbeidsgiverP> = {
+    url: getApiUrlByResourceType(ResourceType.ARBEIDSGIVER),
+    validator: ArbeidsgiverResponseValidator,
+};
+
+// ---------
 
 export interface Arbeidsgiver {
     navn: string;

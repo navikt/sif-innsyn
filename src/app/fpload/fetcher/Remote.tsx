@@ -1,8 +1,8 @@
 import React from 'react';
 import * as E from 'fp-ts/lib/Either';
 import { pipe } from 'fp-ts/lib/pipeable';
-import { isForbidden, isUnauthorized } from '../utils/apiUtils';
-import { navigateToLoginPage } from '../utils/navigationUtils';
+import { isForbidden, isUnauthorized } from '../../utils/apiUtils';
+import { navigateToLoginPage } from '../../utils/navigationUtils';
 import { AxiosError } from 'axios';
 
 interface RemoteProps<T> {
@@ -10,12 +10,6 @@ interface RemoteProps<T> {
     loading: () => JSX.Element;
     error: (error: Error) => JSX.Element;
     success: (data: T) => JSX.Element;
-}
-
-export interface TypeWithResponseStatus {
-    response: {
-        status: string;
-    };
 }
 
 export const hasResponseStatus = (value: any): value is AxiosError =>
