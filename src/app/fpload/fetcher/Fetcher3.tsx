@@ -17,10 +17,12 @@ export interface FetcherState<T1, T2, T3> {
     doApiCalls: boolean;
 }
 
-export function Fetcher3<P1 extends IoTs.Props, T1, P2 extends IoTs.Props, T2, P3 extends IoTs.Props, T3>(
-    props: FetcherProps<P1, T1, P2, T2, P3, T3>
-) {
-    const { recipies, success, loading, error } = props;
+export function Fetcher3<P1 extends IoTs.Props, T1, P2 extends IoTs.Props, T2, P3 extends IoTs.Props, T3>({
+    error,
+    loading,
+    recipies,
+    success,
+}: FetcherProps<P1, T1, P2, T2, P3, T3>) {
     const [state, setState] = useState<FetcherState<T1, T2, T3>>({
         fetchedData: E.left(null),
         doApiCalls: true,

@@ -15,15 +15,15 @@ interface RemoteProps<T> {
 export const hasResponseStatus = (value: any): value is AxiosError =>
     !!(value && value.response && value.response.status);
 
-export function Remote<T>(props: RemoteProps<T>) {
+export function Remote<T>({ data, error, loading, success }: RemoteProps<T>) {
     return (
         <>
             {pipe(
-                props.data,
+                data,
                 E.fold(
                     (errorOrNull) => {
                         if (errorOrNull === null) {
-                            return props.loading();
+                            return loading();
                         } else {
                             // TODO: Finne ut om det er en bedre måte / bedre plass å håndtere 401 redirect
                             // if (
@@ -38,14 +38,14 @@ export function Remote<T>(props: RemoteProps<T>) {
                                 (isForbidden(errorOrNull) || isUnauthorized(errorOrNull))
                             ) {
                                 navigateToLoginPage();
-                                return props.loading();
+                                return loading();
                             } else {
-                                return props.error(errorOrNull);
+                                return error(errorOrNull);
                             }
                         }
                     },
                     (r) => {
-                        return props.success(r);
+                        return success(r);
                     }
                 )
             )}

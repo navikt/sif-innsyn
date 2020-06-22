@@ -17,8 +17,12 @@ export interface FetcherState<T1, T2> {
     doApiCalls: boolean;
 }
 
-export function Fetcher2<P1 extends IoTs.Props, T1, P2 extends IoTs.Props, T2>(props: FetcherProps<P1, T1, P2, T2>) {
-    const { recipies, success, loading, error } = props;
+export function Fetcher2<P1 extends IoTs.Props, T1, P2 extends IoTs.Props, T2>({
+    error,
+    loading,
+    recipies,
+    success,
+}: FetcherProps<P1, T1, P2, T2>) {
     const [state, setState] = useState<FetcherState<T1, T2>>({
         fetchedData: E.left(null),
         doApiCalls: true,
