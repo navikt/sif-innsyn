@@ -1,6 +1,9 @@
 import React from 'react';
 import * as E from 'fp-ts/lib/Either';
 import { pipe } from 'fp-ts/lib/pipeable';
+import { isForbidden, isUnauthorized } from '../utils/apiUtils';
+import { navigateToLoginPage } from '../utils/navigationUtils';
+import { AxiosError } from 'axios';
 
 interface RemoteProps<T> {
     data: E.Either<Error | null, T>;
@@ -9,17 +12,42 @@ interface RemoteProps<T> {
     success: (data: T) => JSX.Element;
 }
 
+export interface TypeWithResponseStatus {
+    response: {
+        status: string;
+    };
+}
+
+export const hasResponseStatus = (value: any): value is AxiosError =>
+    !!(value && value.response && value.response.status);
+
 export function Remote<T>(props: RemoteProps<T>) {
     return (
-        <React.Fragment>
+        <>
             {pipe(
                 props.data,
                 E.fold(
-                    (l) => {
-                        if (l === null) {
+                    (errorOrNull) => {
+                        if (errorOrNull === null) {
                             return props.loading();
                         } else {
-                            return props.error(l);
+                            // TODO: Finne ut om det er en bedre måte / bedre plass å håndtere 401 redirect
+                            // if (
+                            //     isForbidden(errorOrNull.response.status) ||
+                            //     isUnauthorized(errorOrNull.response.status)
+                            // ) {
+                            //     return props.loading();
+                            // } else {
+                            // }
+                            if (
+                                hasResponseStatus(errorOrNull) &&
+                                (isForbidden(errorOrNull) || isUnauthorized(errorOrNull))
+                            ) {
+                                navigateToLoginPage();
+                                return props.loading();
+                            } else {
+                                return props.error(errorOrNull);
+                            }
                         }
                     },
                     (r) => {
@@ -27,7 +55,7 @@ export function Remote<T>(props: RemoteProps<T>) {
                     }
                 )
             )}
-        </React.Fragment>
+        </>
     );
 }
 

@@ -11,7 +11,7 @@ export const ArbeidsgiverResponseValidator = ioTs.type({
     organisasjoner: ioTs.array(ArbeidsgiverValidator),
 });
 
-export type ArbeidsgiverResponse = ioTs.TypeOf<typeof ArbeidsgiverResponseValidator>;
+export type ArbeidsgiverFp = ioTs.TypeOf<typeof ArbeidsgiverResponseValidator>;
 
 export interface Arbeidsgiver {
     navn: string;

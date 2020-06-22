@@ -2,12 +2,12 @@ import * as React from 'react';
 import { getApiUrlByResourceType } from '../utils/apiUtils';
 import { ResourceType } from '../types/resourceTypes';
 import LoadingPage from '../components/pages/loading-page/LoadingPage';
-import { SøkerValidator } from '../types/apiTypes/søkerTypes';
+import { Søker, SøkerValidator } from '../types/apiTypes/søkerTypes';
 import FpError from './FpError';
-import Fetchable3 from './Fetchable3';
-import { BarnResponseValidator } from '../types/apiTypes/barnTypes';
-import { ArbeidsgiverResponseValidator } from '../types/apiTypes/arbeidsgiverTypes';
-import FpSuccess3 from './FpSuccess3';
+import { BarnFp, BarnResponseValidator } from '../types/apiTypes/barnTypes';
+import { ArbeidsgiverFp, ArbeidsgiverResponseValidator } from '../types/apiTypes/arbeidsgiverTypes';
+import Fetcher from './Fetcher';
+import FpFetcherSuccessView from './FpFetcherSuccessView';
 
 const søkerApiDescription = {
     url: getApiUrlByResourceType(ResourceType.SØKER),
@@ -44,19 +44,28 @@ const FpEssentials: React.FC = () => {
             {/*        <FpSuccess2 søker={essentialsData2.t1} listeAvBarn={essentialsData2.t2.barn} />*/}
             {/*    )}*/}
             {/*/>*/}
+            {/*<div>-----------------------------</div>*/}
+            {/*<Fetchable3*/}
+            {/*    t1recipe={søkerApiDescription}*/}
+            {/*    t2recipe={barnApiDescription}*/}
+            {/*    t3recipe={arbeidsgiverDescription}*/}
+            {/*    loading={() => <LoadingPage />}*/}
+            {/*    error={(e) => <FpError error={e} />}*/}
+            {/*    success={(essentialsData3) => (*/}
+            {/*        <FpSuccess3*/}
+            {/*            søker={essentialsData3.t1}*/}
+            {/*            listeAvBarn={essentialsData3.t2.barn}*/}
+            {/*            organisasjoner={essentialsData3.t3.organisasjoner}*/}
+            {/*        />*/}
+            {/*    )}*/}
+            {/*/>*/}
             <div>-----------------------------</div>
-            <Fetchable3
-                t1recipe={søkerApiDescription}
-                t2recipe={barnApiDescription}
-                t3recipe={arbeidsgiverDescription}
+            <Fetcher
+                fetch={[søkerApiDescription, barnApiDescription, arbeidsgiverDescription]}
                 loading={() => <LoadingPage />}
                 error={(e) => <FpError error={e} />}
-                success={(essentialsData3) => (
-                    <FpSuccess3
-                        søker={essentialsData3.t1}
-                        listeAvBarn={essentialsData3.t2.barn}
-                        organisasjoner={essentialsData3.t3.organisasjoner}
-                    />
+                success={([søker, barnFp, arbeidsgiver]: [Søker, BarnFp, ArbeidsgiverFp]) => (
+                    <FpFetcherSuccessView søker={søker} listeAvBarn={barnFp} organisasjoner={arbeidsgiver} />
                 )}
             />
         </>

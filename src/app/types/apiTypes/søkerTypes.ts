@@ -2,13 +2,15 @@ import { isStringOrNull } from '../../utils/typeGuardUtilities';
 import { isString } from '@navikt/sif-common-core/lib/utils/typeGuardUtils';
 import * as ioTs from 'io-ts';
 
-export const SøkerValidator: ioTs.TypeC<{
+export type SøkerValidatorType = ioTs.TypeC<{
     mellomnavn: ioTs.UnionC<[ioTs.StringC, ioTs.NullC]>;
     etternavn: ioTs.StringC;
     aktørId: ioTs.StringC;
     fødselsnummer: ioTs.StringC;
     fornavn: ioTs.StringC;
-}> = ioTs.type({
+}>;
+
+export const SøkerValidator: SøkerValidatorType = ioTs.type({
     aktørId: ioTs.string,
     fødselsnummer: ioTs.string,
     fornavn: ioTs.string,

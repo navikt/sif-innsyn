@@ -1,16 +1,16 @@
 import * as React from 'react';
-import { Barn } from '../types/apiTypes/barnTypes';
+import { BarnFp } from '../types/apiTypes/barnTypes';
 import { Søker } from '../types/apiTypes/søkerTypes';
-import { Arbeidsgiver } from '../types/apiTypes/arbeidsgiverTypes';
+import { ArbeidsgiverFp } from '../types/apiTypes/arbeidsgiverTypes';
 import ReactJson from 'react-json-view';
 
 interface Props {
     søker: Søker;
-    listeAvBarn: Barn[];
-    organisasjoner: Arbeidsgiver[];
+    listeAvBarn: BarnFp;
+    organisasjoner: ArbeidsgiverFp;
 }
 
-const FpSuccess3: React.FC<Props> = ({ søker, listeAvBarn, organisasjoner }: Props) => {
+const FpFetcherSuccessView: React.FC<Props> = ({ søker, listeAvBarn, organisasjoner }: Props) => {
     return (
         <div>
             <div>Søker:</div>
@@ -23,4 +23,4 @@ const FpSuccess3: React.FC<Props> = ({ søker, listeAvBarn, organisasjoner }: Pr
     );
 };
 
-export default FpSuccess3;
+export default FpFetcherSuccessView;
