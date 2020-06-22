@@ -5,11 +5,19 @@ import { getApiUrlByResourceType } from '../../utils/apiUtils';
 import { ResourceType } from '../resourceTypes';
 import { FetchRecipe } from '../../fpload/fetcher/utilityFunctions';
 
+export interface SøkerApiResponse {
+    aktørId: string;
+    fødselsnummer: string;
+    fornavn: string;
+    mellomnavn: string | null;
+    etternavn: string;
+}
+
 export interface SøkerP extends ioTs.Props {
-    mellomnavn: ioTs.UnionC<[ioTs.StringC, ioTs.NullC]>;
-    etternavn: ioTs.StringC;
     aktørId: ioTs.StringC;
     fødselsnummer: ioTs.StringC;
+    mellomnavn: ioTs.UnionC<[ioTs.StringC, ioTs.NullC]>;
+    etternavn: ioTs.StringC;
     fornavn: ioTs.StringC;
 }
 
@@ -29,16 +37,6 @@ export const søkerRecipe: FetchRecipe<SøkerP> = {
     url: getApiUrlByResourceType(ResourceType.SØKER),
     validator: søkerValidator,
 };
-
-// --------
-
-export interface SøkerApiResponse {
-    aktørId: string;
-    fødselsnummer: string;
-    fornavn: string;
-    mellomnavn: string | null;
-    etternavn: string;
-}
 
 export const isSøkerApiResponse = (søkerApiResponse: any): søkerApiResponse is SøkerApiResponse => {
     if (

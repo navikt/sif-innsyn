@@ -9,27 +9,29 @@ export interface FetchRecipe<P extends IoTs.Props> {
     validator: IoTs.TypeC<P>;
 }
 
-export async function fetchFunc1<P1 extends IoTs.Props>(recipies: [FetchRecipe<P1>]): Promise<E.Either<Error, [P1]>> {
-    const [t1recipe] = recipies;
-    const resultT1: E.Either<Error, P1> = await fetchJson<P1>(t1recipe.url, t1recipe.validator, t1recipe.init);
-    return Promise.resolve(sequenceT(E.either)(resultT1));
+export async function fetchFunc1<P1 extends IoTs.Props, T1>(
+    recipies: [FetchRecipe<P1>]
+): Promise<E.Either<Error, [T1]>> {
+    const [p1recipe] = recipies;
+    const t1: E.Either<Error, T1> = await fetchJson<P1, T1>(p1recipe.url, p1recipe.validator, p1recipe.init);
+    return Promise.resolve(sequenceT(E.either)(t1));
 }
 
-export async function fetchFunc2<P1 extends IoTs.Props, P2 extends IoTs.Props>(
+export async function fetchFunc2<P1 extends IoTs.Props, T1, P2 extends IoTs.Props, T2>(
     recipies: [FetchRecipe<P1>, FetchRecipe<P2>]
-): Promise<E.Either<Error, [P1, P2]>> {
-    const [t1recipe, t2recipe] = recipies;
-    const resultT1: E.Either<Error, P1> = await fetchJson<P1>(t1recipe.url, t1recipe.validator, t1recipe.init);
-    const resultT2: E.Either<Error, P2> = await fetchJson<P2>(t2recipe.url, t2recipe.validator, t2recipe.init);
-    return Promise.resolve(sequenceT(E.either)(resultT1, resultT2));
+): Promise<E.Either<Error, [T1, T2]>> {
+    const [p1recipe, p2recipe] = recipies;
+    const t1: E.Either<Error, T1> = await fetchJson<P1, T1>(p1recipe.url, p1recipe.validator, p1recipe.init);
+    const t2: E.Either<Error, T2> = await fetchJson<P2, T2>(p2recipe.url, p2recipe.validator, p2recipe.init);
+    return Promise.resolve(sequenceT(E.either)(t1, t2));
 }
 
-export async function fetchFunc3<P1 extends IoTs.Props, P2 extends IoTs.Props, P3 extends IoTs.Props>(
+export async function fetchFunc3<P1 extends IoTs.Props, T1, P2 extends IoTs.Props, T2, P3 extends IoTs.Props, T3>(
     recipies: [FetchRecipe<P1>, FetchRecipe<P2>, FetchRecipe<P3>]
-): Promise<E.Either<Error, [P1, P2, P3]>> {
-    const [t1recipe, t2recipe, t3recipe] = recipies;
-    const resultT1: E.Either<Error, P1> = await fetchJson<P1>(t1recipe.url, t1recipe.validator, t1recipe.init);
-    const resultT2: E.Either<Error, P2> = await fetchJson<P2>(t2recipe.url, t2recipe.validator, t2recipe.init);
-    const resultT3: E.Either<Error, P3> = await fetchJson<P3>(t3recipe.url, t3recipe.validator, t3recipe.init);
-    return Promise.resolve(sequenceT(E.either)(resultT1, resultT2, resultT3));
+): Promise<E.Either<Error, [T1, T2, T3]>> {
+    const [p1recipe, p2recipe, p3recipe] = recipies;
+    const t1: E.Either<Error, T1> = await fetchJson<P1, T1>(p1recipe.url, p1recipe.validator, p1recipe.init);
+    const t2: E.Either<Error, T2> = await fetchJson<P2, T2>(p2recipe.url, p2recipe.validator, p2recipe.init);
+    const t3: E.Either<Error, T3> = await fetchJson<P3, T3>(p3recipe.url, p3recipe.validator, p3recipe.init);
+    return Promise.resolve(sequenceT(E.either)(t1, t2, t3));
 }

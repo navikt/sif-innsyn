@@ -5,6 +5,18 @@ import { getApiUrlByResourceType } from '../../utils/apiUtils';
 import { ResourceType } from '../resourceTypes';
 import { FetchRecipe } from '../../fpload/fetcher/utilityFunctions';
 
+export interface Barn {
+    aktørId: string;
+    fødselsnummer: string;
+    fornavn: string;
+    mellomnavn: string | void;
+    etternavn: string;
+}
+
+export interface BarnApiResponse {
+    barn: Barn[];
+}
+
 export const BarnValidator = IoTs.type({
     aktørId: IoTs.string,
     fødselsnummer: IoTs.string,
@@ -35,18 +47,6 @@ export const barnRecipe: FetchRecipe<BarnP> = {
     url: getApiUrlByResourceType(ResourceType.BARN),
     validator: barnResponseValidator,
 };
-
-export interface Barn {
-    aktørId: string;
-    fødselsnummer: string;
-    fornavn: string;
-    mellomnavn: string | void;
-    etternavn: string;
-}
-
-export interface BarnApiResponse {
-    barn: Barn[];
-}
 
 export const isBarn = (value: any): value is Barn => {
     if (
