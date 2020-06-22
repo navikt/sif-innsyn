@@ -1,5 +1,5 @@
 import * as E from 'fp-ts/lib/Either';
-import * as IoTs from 'io-ts/es6';
+import * as IoTs from 'io-ts/lib';
 import { reporter } from 'io-ts-reporters';
 import { pipe } from 'fp-ts/lib/pipeable';
 import axios, { AxiosResponse } from 'axios';

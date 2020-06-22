@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
-import * as E from 'fp-ts/es6/Either';
+import * as E from 'fp-ts/lib/Either';
 import Remote from './Remote';
-import * as IoTs from 'io-ts/es6';
+import * as IoTs from 'io-ts/lib';
 import { fetchFunc1, FetchRecipe } from './utilityFunctions';
 
 interface FetcherProps<P1 extends IoTs.Props, T1> {

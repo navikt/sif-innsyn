@@ -1,7 +1,7 @@
 import { fetchJson } from './api';
-import { sequenceT } from 'fp-ts/es6/Apply';
-import * as E from 'fp-ts/es6/Either';
-import * as IoTs from 'io-ts/es6';
+import { sequenceT } from 'fp-ts/lib/Apply';
+import * as E from 'fp-ts/lib/Either';
+import * as IoTs from 'io-ts/lib';
 
 export interface FetchRecipe<P extends IoTs.Props> {
     url: string;

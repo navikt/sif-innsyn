@@ -1,6 +1,6 @@
 import { isString } from '@navikt/sif-common-core/lib/utils/typeGuardUtils';
 import { allValuesInArrayAreTrue } from '../../utils/utilityFunctions';
-import * as IoTs from 'io-ts/es6';
+import * as IoTs from 'io-ts/lib';
 import { getApiUrlByResourceType } from '../../utils/apiUtils';
 import { ResourceType } from '../resourceTypes';
 import { FetchRecipe } from '../../fpload/fetcher/utilityFunctions';
