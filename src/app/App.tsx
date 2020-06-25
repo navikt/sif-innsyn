@@ -12,9 +12,9 @@ import { Locale } from '@navikt/sif-common-core/lib/types/Locale';
 import { RouteConfig } from './config/routeConfig';
 import InnsynRoute from './innsyn/InnsynRoute';
 import KalkulatorRoute from './kalkulator/KalkulatorRoute';
+import NotFoundRoute from './components/pages/not-found-route/NotFoundRoute';
 import '@navikt/sif-common-core/lib/styles/globalStyles.less';
 import './app.less';
-import NotFoundRoute from './NotFoundRoute/NotFoundRoute';
 
 const localeFromSessionStorage = getLocaleFromSessionStorage();
 moment.locale(localeFromSessionStorage);
