@@ -5,27 +5,27 @@ import { pipe } from 'fp-ts/lib/pipeable';
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import defaultAxiosConfig from '../../config/axiosConfig';
 
-export async function fetchJson<P extends IoTs.Props, T>(
+export async function fetchJson<P>(
     url: string,
-    validator: IoTs.InterfaceType<P>,
+    validator: IoTs.Type<P>,
     axiosConfig?: AxiosRequestConfig
-): Promise<E.Either<Error, T>> {
+): Promise<E.Either<Error, P>> {
     try {
         const axiosResponse: AxiosResponse<P> = await axios.get(url, axiosConfig || defaultAxiosConfig);
         const json = axiosResponse.data;
-        const result: E.Either<IoTs.Errors, T> = validator.decode(json);
+        const result: E.Either<IoTs.Errors, P> = validator.decode(json);
         return pipe(
             result,
-            E.fold<IoTs.Errors, T, E.Either<Error, T>>(
+            E.fold<IoTs.Errors, P, E.Either<Error, P>>(
                 (errors: IoTs.Errors) =>
-                    E.left<Error, T>({
+                    E.left<Error, P>({
                         name: 'TypeGuardError',
                         message: reporter(result).join('\n'),
                     }),
-                (value: T) => E.right<Error, T>(value)
+                (value: P) => E.right<Error, P>(value)
             )
         );
     } catch (err) {
-        return Promise.resolve(E.left<Error, T>(err));
+        return Promise.resolve(E.left<Error, P>(err));
     }
 }

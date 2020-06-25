@@ -5,28 +5,6 @@ import { getApiUrlByResourceType } from '../../utils/apiUtils';
 import { ResourceType } from '../resourceTypes';
 import { FetchRecipe } from '../../functional/fetcher/utilityFunctions';
 
-export const ArbeidsgiverValidator = IoTs.type({
-    navn: IoTs.string,
-    organisasjonsnummer: IoTs.string,
-});
-
-export interface ArbeidsgiverP extends IoTs.Props {
-    organisasjoner: IoTs.ArrayC<IoTs.TypeC<{ navn: IoTs.StringC; organisasjonsnummer: IoTs.StringC }>>;
-}
-
-export const ArbeidsgiverResponseValidator: IoTs.TypeC<ArbeidsgiverP> = IoTs.type({
-    organisasjoner: IoTs.array(ArbeidsgiverValidator),
-});
-
-export type ArbeidsgiverFp = IoTs.TypeOf<typeof ArbeidsgiverResponseValidator>;
-
-export const arbeidsgiverRecipe: FetchRecipe<ArbeidsgiverP> = {
-    url: getApiUrlByResourceType(ResourceType.ARBEIDSGIVER),
-    validator: ArbeidsgiverResponseValidator,
-};
-
-// ---------
-
 export interface Arbeidsgiver {
     navn: string;
     organisasjonsnummer: string;
@@ -55,4 +33,21 @@ export const isArbeidsgiverApiResponse = (value: any): value is ArbeidsgiverApiR
     } else {
         return false;
     }
+};
+
+export const arbeidsgiverApiResponseType: IoTs.Type<ArbeidsgiverApiResponse> = new IoTs.Type<
+    ArbeidsgiverApiResponse,
+    ArbeidsgiverApiResponse,
+    unknown
+>(
+    'ArbeidsgiverApiResponse',
+    isArbeidsgiverApiResponse,
+    (input: unknown, context: IoTs.Context) =>
+        isArbeidsgiverApiResponse(input) ? IoTs.success(input) : IoTs.failure(input, context),
+    IoTs.identity
+);
+
+export const arbeidsgiverRecipe: FetchRecipe<ArbeidsgiverApiResponse> = {
+    url: getApiUrlByResourceType(ResourceType.ARBEIDSGIVER),
+    validator: arbeidsgiverApiResponseType,
 };

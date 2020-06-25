@@ -17,37 +17,6 @@ export interface BarnApiResponse {
     barn: Barn[];
 }
 
-export const BarnValidator = IoTs.type({
-    aktørId: IoTs.string,
-    fødselsnummer: IoTs.string,
-    fornavn: IoTs.string,
-    mellomnavn: IoTs.union([IoTs.string, IoTs.voidType]),
-    etternavn: IoTs.string,
-});
-
-export interface BarnP extends IoTs.Props {
-    barn: IoTs.ArrayC<
-        IoTs.TypeC<{
-            mellomnavn: IoTs.UnionC<[IoTs.StringC, IoTs.VoidC]>;
-            etternavn: IoTs.StringC;
-            aktørId: IoTs.StringC;
-            fødselsnummer: IoTs.StringC;
-            fornavn: IoTs.StringC;
-        }>
-    >;
-}
-
-export const barnResponseValidator: IoTs.TypeC<BarnP> = IoTs.type({
-    barn: IoTs.array(BarnValidator),
-});
-
-export type BarnFp = IoTs.TypeOf<typeof barnResponseValidator>;
-
-export const barnRecipe: FetchRecipe<BarnP> = {
-    url: getApiUrlByResourceType(ResourceType.BARN),
-    validator: barnResponseValidator,
-};
-
 export const isBarn = (value: any): value is Barn => {
     if (
         value &&
@@ -73,4 +42,17 @@ export const isBarnApiResponse = (maybeBarnApiResponse: any): maybeBarnApiRespon
     } else {
         return false;
     }
+};
+
+export const barnApiResponseType: IoTs.Type<BarnApiResponse> = new IoTs.Type<BarnApiResponse, BarnApiResponse, unknown>(
+    'BarnApiResponse',
+    isBarnApiResponse,
+    (input: unknown, context: IoTs.Context) =>
+        isBarnApiResponse(input) ? IoTs.success(input) : IoTs.failure(input, context),
+    IoTs.identity
+);
+
+export const barnRecipe: FetchRecipe<BarnApiResponse> = {
+    url: getApiUrlByResourceType(ResourceType.BARN),
+    validator: barnApiResponseType,
 };

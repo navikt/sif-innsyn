@@ -6,26 +6,38 @@ import { useIntl } from 'react-intl';
 import bemUtils from '@navikt/sif-common-core/lib/utils/bemUtils';
 import { SøkerApiResponse } from '../types/apiTypes/søkerTypes';
 import ReactJson from 'react-json-view';
+import { Søknad, SøknadApiResponse } from '../types/apiTypes/søknadTypes';
 
 interface Props {
-    bruker: SøkerApiResponse;
+    bruker?: SøkerApiResponse;
+    søknad?: SøknadApiResponse;
 }
 
 const bem = bemUtils('innsynPage');
 
-const InnsynView: React.FC<Props> = ({ bruker }: Props) => {
+const InnsynView: React.FC<Props> = ({ bruker, søknad }: Props) => {
     const intl = useIntl();
     return (
         <Page
             className={bem.block}
             title={intlHelper(intl, 'innsyn.root.tittel')}
             topContentRenderer={(): JSX.Element => <StepBanner text={intlHelper(intl, 'innsyn.root.stegTittel')} />}>
-            <div>
-                Innsyn logged in. Hi {bruker.fornavn} {bruker.etternavn} :)
+            {bruker && (
                 <div>
-                    <ReactJson src={bruker} />
+                    Innsyn logged in. Hi {bruker.fornavn} {bruker.etternavn} :)
+                    <div>
+                        <ReactJson src={bruker} />
+                    </div>
                 </div>
-            </div>
+            )}
+            {søknad && (
+                <div>
+                    {søknad.map((søknad: Søknad) => (
+                        <div>{søknad.søknadstype}</div>
+                    ))}
+                    <ReactJson src={søknad} />
+                </div>
+            )}
         </Page>
     );
 };

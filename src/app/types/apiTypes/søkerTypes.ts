@@ -1,6 +1,6 @@
 import { isStringOrNull } from '../../utils/typeGuardUtilities';
 import { isString } from '@navikt/sif-common-core/lib/utils/typeGuardUtils';
-import * as ioTs from 'io-ts/lib';
+import * as IoTs from 'io-ts/lib';
 import { getApiUrlByResourceType } from '../../utils/apiUtils';
 import { ResourceType } from '../resourceTypes';
 import { FetchRecipe } from '../../functional/fetcher/utilityFunctions';
@@ -12,31 +12,6 @@ export interface SøkerApiResponse {
     mellomnavn: string | null;
     etternavn: string;
 }
-
-export interface SøkerP extends ioTs.Props {
-    aktørId: ioTs.StringC;
-    fødselsnummer: ioTs.StringC;
-    mellomnavn: ioTs.UnionC<[ioTs.StringC, ioTs.NullC]>;
-    etternavn: ioTs.StringC;
-    fornavn: ioTs.StringC;
-}
-
-export type SøkerValidatorType = ioTs.TypeC<SøkerP>;
-
-export const søkerValidator: SøkerValidatorType = ioTs.type({
-    aktørId: ioTs.string,
-    fødselsnummer: ioTs.string,
-    fornavn: ioTs.string,
-    mellomnavn: ioTs.union([ioTs.string, ioTs.nullType]),
-    etternavn: ioTs.string,
-});
-
-export type Søker = ioTs.TypeOf<typeof søkerValidator>;
-
-export const søkerRecipe: FetchRecipe<SøkerP> = {
-    url: getApiUrlByResourceType(ResourceType.SØKER),
-    validator: søkerValidator,
-};
 
 export const isSøkerApiResponse = (søkerApiResponse: any): søkerApiResponse is SøkerApiResponse => {
     if (
@@ -51,4 +26,17 @@ export const isSøkerApiResponse = (søkerApiResponse: any): søkerApiResponse i
     } else {
         return false;
     }
+};
+
+export const søkerType: IoTs.Type<SøkerApiResponse> = new IoTs.Type<SøkerApiResponse, SøkerApiResponse, unknown>(
+    'SøkerApiResponse',
+    isSøkerApiResponse,
+    (input: unknown, context: IoTs.Context) =>
+        isSøkerApiResponse(input) ? IoTs.success(input) : IoTs.failure(input, context),
+    IoTs.identity
+);
+
+export const søkerRecipe: FetchRecipe<SøkerApiResponse> = {
+    url: getApiUrlByResourceType(ResourceType.SØKER),
+    validator: søkerType,
 };

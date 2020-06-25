@@ -1,14 +1,14 @@
 import * as IoTs from 'io-ts/lib';
-import * as ioTs from 'io-ts';
-import { stringEnum } from '../../functional/utilities';
+import { getApiUrlByResourceType } from '../../utils/apiUtils';
+import { ResourceType } from '../resourceTypes';
+import { FetchRecipe } from '../../functional/fetcher/utilityFunctions';
+import { allValuesInArrayAreTrue } from '../../utils/utilityFunctions';
 
 export enum Søknadsstatus {
     MOTTATT = 'MOTTATT',
     UNDER_BEHANDLING = 'UNDER_BEHANDLING',
     FERDIG_BEHANDLET = 'FERDIG_BEHANDLET',
 }
-
-export const søknadsstatusValidator = stringEnum(Søknadsstatus, 'Søknadsstatus');
 
 export enum Søknadstype {
     OMP_UTVIDET_RETT = 'OMP_UTVIDET_RETT',
@@ -19,8 +19,6 @@ export enum Søknadstype {
     PP_SYKT_BARN = 'PP_SYKT_BARN',
     OMD_OVERFØRING = 'OMD_OVERFØRING',
 }
-
-export const søknadstypeValidator = stringEnum(Søknadstype, 'Søknadstype');
 
 export interface Søknad {
     søknadstype: Søknadstype;
@@ -33,17 +31,37 @@ export interface Søknad {
     behandlingsdato: string | null; // LocalDate e.g. 2007-12-03
 }
 
-export const søknadValidator = IoTs.type({
-    søknadstype: søknadstypeValidator,
-    status: søknadsstatusValidator,
-    søknad: IoTs.unknown, // TODO: Lag søknadstyper for hver av søknadene
-    saksId: IoTs.string,
-    journalpostId: IoTs.string,
-    opprettet: ioTs.union([ioTs.string, ioTs.nullType]), // LocalDateTime e.g. 2007-12-03T10:15:30.948652
-    endret: ioTs.union([ioTs.string, ioTs.nullType]), // LocalDateTime e.g. 2020-06-23T09:11:21.948652
-    behandlingsdato: ioTs.union([ioTs.string, ioTs.nullType]), // LocalDate e.g. 2007-12-03
-});
-
 export type SøknadApiResponse = Søknad[];
 
-export const søknadApiResponseValidator = IoTs.array(søknadValidator);
+export const isSøknad = (input: any): input is Søknad => {
+    if (input && input.søknadstype && input.status && input.saksId && input.journalpostId) {
+        return true;
+    } else {
+        return false;
+    }
+};
+
+export const isSøknadApiResponse = (input: unknown): input is SøknadApiResponse => {
+    if (Array.isArray(input) && allValuesInArrayAreTrue(input.map(isSøknad))) {
+        return true;
+    } else {
+        return false;
+    }
+};
+
+export const søknadApiResponseType: IoTs.Type<SøknadApiResponse> = new IoTs.Type<
+    SøknadApiResponse,
+    SøknadApiResponse,
+    unknown
+>(
+    'SøknadApiResponse',
+    isSøknadApiResponse,
+    (input: unknown, context: IoTs.Context) =>
+        isSøknadApiResponse(input) ? IoTs.success(input) : IoTs.failure(input, context),
+    IoTs.identity
+);
+
+export const søknadRecipe: FetchRecipe<SøknadApiResponse> = {
+    url: getApiUrlByResourceType(ResourceType.SØKNAD),
+    validator: søknadApiResponseType,
+};
