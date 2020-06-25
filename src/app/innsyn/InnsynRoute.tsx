@@ -1,16 +1,16 @@
 import * as React from 'react';
-import InnsynEssentialsLoader from './InnsynEssentialsLoader';
+import { SøkerApiResponse, SøkerP, søkerRecipe } from '../types/apiTypes/søkerTypes';
+import LoadingPage from '../components/pages/loading-page/LoadingPage';
+import FpError from '../functional/fetcher/example-usage/FpError';
+import Fetcher from '../functional/fetcher/Fetcher';
 import InnsynView from './InnsynView';
-import { Essentials } from '../types/types';
 
 const InnsynRoute: React.FC = (): JSX.Element => (
-    <InnsynEssentialsLoader
-        contentLoadedRenderer={(essentials: Essentials): JSX.Element => {
-            // if (!søkerdata.person.myndig) { // TODO: Fix
-            //     return <IkkeMyndigPage />;
-            // }
-            return <InnsynView essentials={essentials} />;
-        }}
+    <Fetcher<SøkerP, SøkerApiResponse>
+        recipies={[søkerRecipe]}
+        loading={() => <LoadingPage />}
+        error={(e: Error) => <FpError error={e} />}
+        success={([søkerApiResponse]: [SøkerApiResponse]) => <InnsynView bruker={søkerApiResponse} />}
     />
 );
 

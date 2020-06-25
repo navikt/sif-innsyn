@@ -1,18 +1,19 @@
 import * as React from 'react';
-import { SøkerApiResponse, SøkerP, søkerRecipe } from '../types/apiTypes/søkerTypes';
+import { SøkerApiResponse, SøkerP, søkerRecipe } from '../../../types/apiTypes/søkerTypes';
 import FpFetcherSuccessView from './FpFetcherSuccessView';
 import FpError from './FpError';
-import LoadingPage from '../components/pages/loading-page/LoadingPage';
-import { BarnApiResponse, BarnP, barnRecipe } from '../types/apiTypes/barnTypes';
-import Fetcher2 from './fetcher/Fetcher2';
-import Fetcher from './fetcher/Fetcher';
-import Fetcher3 from './fetcher/Fetcher3';
-import { ArbeidsgiverApiResponse, ArbeidsgiverP, arbeidsgiverRecipe } from '../types/apiTypes/arbeidsgiverTypes';
+import LoadingPage from '../../../components/pages/loading-page/LoadingPage';
+import { BarnApiResponse, BarnP, barnRecipe } from '../../../types/apiTypes/barnTypes';
+import Fetcher2 from '../Fetcher2';
+import Fetcher from '../Fetcher';
+import Fetcher3 from '../Fetcher3';
+import { ArbeidsgiverApiResponse, ArbeidsgiverP, arbeidsgiverRecipe } from '../../../types/apiTypes/arbeidsgiverTypes';
 
-const FpEssentials: React.FC = () => {
+const FpEssentialsExample: React.FC = () => {
     return (
         <>
             <div>-----------------------------</div>
+            {/* Fetch 1 ressurs */}
             <Fetcher<SøkerP, SøkerApiResponse>
                 recipies={[søkerRecipe]}
                 loading={() => <LoadingPage />}
@@ -22,6 +23,7 @@ const FpEssentials: React.FC = () => {
                 )}
             />
             <div>-----------------------------</div>
+            {/* Fetch 2 ressurser */}
             <Fetcher2<SøkerP, SøkerApiResponse, BarnP, BarnApiResponse>
                 recipies={[søkerRecipe, barnRecipe]}
                 loading={() => <LoadingPage />}
@@ -31,6 +33,7 @@ const FpEssentials: React.FC = () => {
                 )}
             />
             <div>-----------------------------</div>
+            {/* Fetch 3 ressurser */}
             <Fetcher3<SøkerP, SøkerApiResponse, BarnP, BarnApiResponse, ArbeidsgiverP, ArbeidsgiverApiResponse>
                 recipies={[søkerRecipe, barnRecipe, arbeidsgiverRecipe]}
                 loading={() => <LoadingPage />}
@@ -52,4 +55,4 @@ const FpEssentials: React.FC = () => {
     );
 };
 
-export default FpEssentials;
+export default FpEssentialsExample;

@@ -25,14 +25,6 @@ export function Remote<T>({ data, error, loading, success }: RemoteProps<T>) {
                         if (errorOrNull === null) {
                             return loading();
                         } else {
-                            // TODO: Finne ut om det er en bedre måte / bedre plass å håndtere 401 redirect
-                            // if (
-                            //     isForbidden(errorOrNull.response.status) ||
-                            //     isUnauthorized(errorOrNull.response.status)
-                            // ) {
-                            //     return props.loading();
-                            // } else {
-                            // }
                             if (
                                 hasResponseStatus(errorOrNull) &&
                                 (isForbidden(errorOrNull) || isUnauthorized(errorOrNull))

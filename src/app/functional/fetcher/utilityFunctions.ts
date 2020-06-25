@@ -2,10 +2,11 @@ import { fetchJson } from './api';
 import { sequenceT } from 'fp-ts/lib/Apply';
 import * as E from 'fp-ts/lib/Either';
 import * as IoTs from 'io-ts/lib';
+import { AxiosRequestConfig } from 'axios';
 
 export interface FetchRecipe<P extends IoTs.Props> {
     url: string;
-    init?: RequestInit;
+    init?: AxiosRequestConfig;
     validator: IoTs.TypeC<P>;
 }
 
