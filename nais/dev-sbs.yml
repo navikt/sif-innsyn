@@ -41,11 +41,11 @@ spec:
         - name: APPRES_CMS_URL
           value: https://appres.nav.no
         - name: API_URL
-          value: https://sif-innsyn-api-q.nav.no
+          value: https://sif-innsyn-api.dev-gcp.nais.io
         - name: PUBLIC_PATH
           value: /familie/sykdom-i-familien/soknad/innsyn
         - name: LOGIN_URL
-          value: https://loginservice-q.nav.no/login?redirect=https://www-q0.nav.no/familie/sykdom-i-familien/soknad/innsyn
+          value: https://loginservice-q.nav.no/login?redirect=https://www-q0.nav.no/familie/sykdom-i-familien/soknad/innsyn/bruker
         - name: UTILGJENGELIG
           value: "off"
         - name: MELLOMLAGRING
