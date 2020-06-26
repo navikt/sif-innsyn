@@ -2,7 +2,7 @@ apiVersion: "nais.io/v1alpha1"
 kind: "Application"
 metadata:
     name: sif-innsyn
-    namespace: default
+    namespace: dusseldorf
     labels:
         team: dusseldorf
 spec:
@@ -27,7 +27,6 @@ spec:
             memory: 128Mi
     ingresses:
         - https://www-q0.nav.no/familie/sykdom-i-familien/soknad/innsyn
-        - https://innsyn.nais.oera-q.local
         - https://sif-innsyn.dev-gcp.nais.io
     replicas:
         min: 1
@@ -46,7 +45,7 @@ spec:
         - name: PUBLIC_PATH
           value: /familie/sykdom-i-familien/soknad/innsyn
         - name: LOGIN_URL
-          value: https://loginservice-q.nav.no/login?redirect=https://www-q0.nav.no/familie/sykdom-i-familien/soknad/innsyn/bruker
+          value: https://stub-oidc-provider.azurewebsites.net/auth?client_id=sif-innsyn&redirect_uri=https://www-q0.nav.no/familie/sykdom-i-familien/soknad/innsyn/bruker
         - name: UTILGJENGELIG
           value: "off"
         - name: MELLOMLAGRING
