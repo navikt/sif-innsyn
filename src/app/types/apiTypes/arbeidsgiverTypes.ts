@@ -1,5 +1,9 @@
 import { isString } from '@navikt/sif-common-core/lib/utils/typeGuardUtils';
 import { allValuesInArrayAreTrue } from '../../utils/utilityFunctions';
+import * as IoTs from 'io-ts/lib';
+import { getApiUrlByResourceType } from '../../utils/apiUtils';
+import { ResourceType } from '../resourceTypes';
+import { FetchRecipe } from '../../functional/fetcher/utilityFunctions';
 
 export interface Arbeidsgiver {
     navn: string;
@@ -29,4 +33,21 @@ export const isArbeidsgiverApiResponse = (value: any): value is ArbeidsgiverApiR
     } else {
         return false;
     }
+};
+
+export const arbeidsgiverApiResponseType: IoTs.Type<ArbeidsgiverApiResponse> = new IoTs.Type<
+    ArbeidsgiverApiResponse,
+    ArbeidsgiverApiResponse,
+    unknown
+>(
+    'ArbeidsgiverApiResponse',
+    isArbeidsgiverApiResponse,
+    (input: unknown, context: IoTs.Context) =>
+        isArbeidsgiverApiResponse(input) ? IoTs.success(input) : IoTs.failure(input, context),
+    IoTs.identity
+);
+
+export const arbeidsgiverRecipe: FetchRecipe<ArbeidsgiverApiResponse> = {
+    url: getApiUrlByResourceType(ResourceType.ARBEIDSGIVER),
+    validator: arbeidsgiverApiResponseType,
 };

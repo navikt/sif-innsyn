@@ -15,7 +15,6 @@
 </div>
 <script>
     function logIn() {
-        console.info("You are now logged in...");
         fetch('http://localhost:1234/auth-mock/cookie').then(handleLogin)
     }
     function handleLogin(res) {

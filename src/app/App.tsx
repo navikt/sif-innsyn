@@ -12,6 +12,7 @@ import { Locale } from '@navikt/sif-common-core/lib/types/Locale';
 import { RouteConfig } from './config/routeConfig';
 import InnsynRoute from './innsyn/InnsynRoute';
 import KalkulatorRoute from './kalkulator/KalkulatorRoute';
+import NotFoundRoute from './components/pages/not-found-route/NotFoundRoute';
 import '@navikt/sif-common-core/lib/styles/globalStyles.less';
 import './app.less';
 
@@ -32,9 +33,10 @@ const App: React.FunctionComponent = () => {
                     <UnavailablePage />
                 ) : (
                     <Switch>
-                        <Route exact={true} path={RouteConfig.LOGGED_IN} component={InnsynRoute} />
+                        <Route exact={true} path={RouteConfig.ROOT} component={RootPageRoute} />
+                        <Route exact={true} path={RouteConfig.BRUKER} component={InnsynRoute} />
                         <Route exact={true} path={RouteConfig.KALKULATOR} component={KalkulatorRoute} />
-                        <Route exact={false} path={RouteConfig.ROOT} component={RootPageRoute} />
+                        <Route exact={false} path={RouteConfig.ROOT} component={NotFoundRoute} />
                     </Switch>
                 )}
             </div>

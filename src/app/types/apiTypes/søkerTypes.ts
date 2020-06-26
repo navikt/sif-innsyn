@@ -1,5 +1,9 @@
 import { isStringOrNull } from '../../utils/typeGuardUtilities';
 import { isString } from '@navikt/sif-common-core/lib/utils/typeGuardUtils';
+import * as IoTs from 'io-ts/lib';
+import { getApiUrlByResourceType } from '../../utils/apiUtils';
+import { ResourceType } from '../resourceTypes';
+import { FetchRecipe } from '../../functional/fetcher/utilityFunctions';
 
 export interface SøkerApiResponse {
     aktørId: string;
@@ -22,4 +26,17 @@ export const isSøkerApiResponse = (søkerApiResponse: any): søkerApiResponse i
     } else {
         return false;
     }
+};
+
+export const søkerType: IoTs.Type<SøkerApiResponse> = new IoTs.Type<SøkerApiResponse, SøkerApiResponse, unknown>(
+    'SøkerApiResponse',
+    isSøkerApiResponse,
+    (input: unknown, context: IoTs.Context) =>
+        isSøkerApiResponse(input) ? IoTs.success(input) : IoTs.failure(input, context),
+    IoTs.identity
+);
+
+export const søkerRecipe: FetchRecipe<SøkerApiResponse> = {
+    url: getApiUrlByResourceType(ResourceType.SØKER),
+    validator: søkerType,
 };
