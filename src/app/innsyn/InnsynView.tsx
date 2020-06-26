@@ -32,8 +32,8 @@ const InnsynView: React.FC<Props> = ({ bruker, søknad }: Props) => {
             )}
             {søknad && (
                 <div>
-                    {søknad.map((søknad: Søknad) => (
-                        <div>{søknad.søknadstype}</div>
+                    {søknad.map((søknad: Søknad, index: number) => (
+                        <div id={`${index}`}>{søknad.søknadstype}</div>
                     ))}
                     <ReactJson src={søknad} />
                 </div>

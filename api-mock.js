@@ -158,11 +158,11 @@ const startServer = () => {
     server.get('/health/isAlive', (req, res) => res.sendStatus(200));
     server.get('/health/isReady', (req, res) => res.sendStatus(200));
 
-    server.get('/auth-mock', (req, res) => {
+    server.get('/login', (req, res) => {
         let authMockHtmlFilePath = path.resolve(__dirname, 'api-mock-login.html');
         res.sendFile(authMockHtmlFilePath);
     });
-    server.get('/auth-mock/cookie', (req, res) => {
+    server.get('/login/cookie', (req, res) => {
         res.cookie('omsLocalLoginCookie', 'mysecrettoken').sendStatus(201);
     });
 
