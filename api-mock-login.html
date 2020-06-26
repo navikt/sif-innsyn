@@ -15,11 +15,11 @@
 </div>
 <script>
     function logIn() {
-        fetch('http://localhost:1234/auth-mock/cookie').then(handleLogin)
+        fetch('http://localhost:1234/login/cookie').then(handleLogin)
     }
     function handleLogin(res) {
         var search = window.location.search;
-        var searchResult = search.match(/(redirect_location=(.+))/i);
+        var searchResult = search.match(/(redirect=(.+))/i);
         var redirectUrl = searchResult[2];
         window.location.href = redirectUrl;
     }
