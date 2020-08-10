@@ -28,6 +28,7 @@ spec:
     ingresses:
         - https://sif-innsyn.dev-gcp.nais.io
         - https://sif-innsyn.dev.nav.no
+        - https://sif-innsyn.intern.dev.nav.no
         - https://sif-innsyn.dev.adeo.no
         - https://sif-innsyn.internal.dev.nav.no
     replicas:
