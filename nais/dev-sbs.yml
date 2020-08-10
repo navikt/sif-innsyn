@@ -26,9 +26,10 @@ spec:
             cpu: 50m
             memory: 128Mi
     ingresses:
-        - https://www-q0.nav.no/familie/sykdom-i-familien/soknad/innsyn
         - https://sif-innsyn.dev-gcp.nais.io
         - https://sif-innsyn.dev.nav.no
+        - https://sif-innsyn.dev.adeo.no
+        - https://sif-innsyn.internal.dev.nav.no
     replicas:
         min: 1
         max: 1
