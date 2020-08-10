@@ -7,7 +7,7 @@
     "author": "NAV",
     "scripts": {
         "build": "node src/build/scripts/production-build.js",
-        "dev": "npm-run-all -p api-mock start-no-decorator",
+        "dev": "npm-run-all -p api-mock start",
         "prestart": "npm-run-all eslint",
         "start": "node ./src/build/scripts/start-dev-no-decorator.js",
         "swd": "node ./src/build/scripts/start-dev.js",

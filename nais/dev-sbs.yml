@@ -42,7 +42,7 @@ spec:
         - name: APPRES_CMS_URL
           value: https://appres.nav.no
         - name: API_URL
-          value: https://sif-innsyn-api.dev-gcp.nais.io
+          value: https://sif-innsyn-api.dev.nav.no
         - name: PUBLIC_PATH
           value: /familie/sykdom-i-familien/soknad/innsyn
         - name: LOGIN_URL
