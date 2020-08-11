@@ -22,7 +22,7 @@ export enum Søknadstype {
 
 export interface Søknad {
     søknadstype: Søknadstype;
-    status: Søknadstype;
+    status: Søknadsstatus;
     søknad: any; // TODO: Lag søknadstyper for hver av søknadene
     saksId: string;
     journalpostId: string;

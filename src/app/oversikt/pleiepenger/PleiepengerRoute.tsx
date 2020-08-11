@@ -10,7 +10,7 @@ const PleiepengerRoute: React.FC = (): JSX.Element => (
         recipies={[søknadRecipe]}
         loading={() => <LoadingPage />}
         error={(e: Error) => <FpError error={e} />}
-        success={([søknadApiResponse]: [SøknadApiResponse]) => <PleiepengerView søknad={søknadApiResponse} />}
+        success={([søknadApiResponse]: [SøknadApiResponse]) => <PleiepengerView søknader={søknadApiResponse} />}
     />
 );
 
