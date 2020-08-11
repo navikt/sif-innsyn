@@ -5,7 +5,11 @@ import { getEnvironmentVariable } from './envUtils';
 const navNoUrl = 'https://www.nav.no/';
 
 export const navigateToLoginPage = () => {
-    window.location.href = getEnvironmentVariable('LOGIN_URL') + '?redirect=' + window.location.href;
+    window.location.href =
+        getEnvironmentVariable('LOGIN_URL') +
+        '?redirect=' +
+        window.location.origin +
+        '/familie/sykdom-i-familien/soknad/innsyn/bruker';
 };
 
 export const navigateTo = (route: string, history: History): void => history.push(route);

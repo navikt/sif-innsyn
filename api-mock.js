@@ -163,7 +163,7 @@ const startServer = () => {
         res.sendFile(authMockHtmlFilePath);
     });
     server.get('/login/cookie', (req, res) => {
-        res.cookie('omsLocalLoginCookie', 'mysecrettoken').sendStatus(201);
+        res.cookie('localLoginCookie', 'mysecrettoken').sendStatus(201);
     });
 
     server.get('/soker', (req, res) => {
