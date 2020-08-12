@@ -1,17 +1,13 @@
 import * as React from 'react';
 import { SøkerApiResponse } from '../../types/apiTypes/søkerTypes';
 import ReactJson from 'react-json-view';
-import { Søknad, SøknadApiResponse, Søknadsstatus } from '../../types/apiTypes/søknadTypes';
+import { Søknad, SøknadApiResponse, Søknadstype } from '../../types/apiTypes/søknadTypes';
 import InnsynPage from '../../components/innsyn-page/InnsynPage';
 import { getEnvironmentVariable } from '../../utils/envUtils';
 import Lesmerpanel from 'nav-frontend-lesmerpanel';
-import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
-import { Column, Row } from 'nav-frontend-grid';
-import { Undertittel, Ingress, Systemtittel } from 'nav-frontend-typografi';
 import './PleiepengerView.less';
-import Lenke from 'nav-frontend-lenker';
-import AttachmentIkon from '../../svg/FellesIkoner';
-import moment from 'moment';
+import SoknadstatusinfoComponent from 'app/components/soknadstatusinfoComponent/SoknadstatusinfoComponent';
+import { Sidetittel, Undertittel } from 'nav-frontend-typografi';
 
 interface Props {
     bruker?: SøkerApiResponse;
@@ -32,7 +28,7 @@ const PleiepengerView: React.FC<Props> = ({ bruker, søknader }: Props) => {
             )}
             {søknader && (
                 <div>
-                    <h1>Dine Pleiepenger</h1>
+                    <Sidetittel>Dine Pleiepenger</Sidetittel>
 
                     <Lesmerpanel intro={<span>Dette kan du forvente av saksgangen</span>} border>
                         <div>
@@ -48,64 +44,16 @@ const PleiepengerView: React.FC<Props> = ({ bruker, søknader }: Props) => {
                         </div>
                     </Lesmerpanel>
 
-                    <p>Siste status</p>
+                    <Undertittel>Siste status</Undertittel>
                     <h3>Dine søknader</h3>
                     <div>
-                        {søknader?.map((søknad, index) => {
-                            return (
-                                <Ekspanderbartpanel
-                                    key={index}
-                                    tittel={
-                                        <Undertittel>
-                                            Status: {formaterStatus(søknad)} {formaterDateTime(søknad)}
-                                        </Undertittel>
-                                    }
-                                    className={`mb-1 ${statusFarge(søknad)}`}
-                                    border>
-                                    <Row className={'lp-1'}>
-                                        <Column md={'8'}>
-                                            <Row>
-                                                <Systemtittel>Søknad pleiepenger sykt barn</Systemtittel>
-                                                <Undertittel>Sakstatus:</Undertittel>
-                                                <Ingress>
-                                                    Sakstatus: Søknaden din er under behandling Du vil få beskjed når
-                                                    statusen endrer seg
-                                                </Ingress>
-                                            </Row>
-                                            <Row className={'mt-2-5'}>
-                                                <Undertittel>Søknad mottatt: {søknad.søknad.mottatt}</Undertittel>
-                                                <Ingress>
-                                                    Søker om periode: {søknad.søknad.fraOgMed} -{' '}
-                                                    {søknad.søknad.tilOgMed}
-                                                </Ingress>
-                                            </Row>
-                                        </Column>
-                                        <Column md={'4'}>
-                                            <Ingress className={'mb-1'}>
-                                                <Lenke href="#">
-                                                    <AttachmentIkon />
-                                                    <span>Søknad</span>
-                                                </Lenke>
-                                            </Ingress>
-
-                                            <Ingress className={'mb-1'}>
-                                                <Lenke href="#">
-                                                    <AttachmentIkon />
-                                                    <span>Inntektsmelding</span>
-                                                </Lenke>
-                                            </Ingress>
-
-                                            <Ingress className={'mb-1'}>
-                                                <Lenke href="#">
-                                                    <AttachmentIkon />
-                                                    <span>Legeerklæring</span>
-                                                </Lenke>
-                                            </Ingress>
-                                        </Column>
-                                    </Row>
-                                </Ekspanderbartpanel>
-                            );
-                        })}
+                        {søknader
+                            ?.filter((søknad) => erPleiepenger(søknad))
+                            .map((søknad, index) => {
+                                return (
+                                    <SoknadstatusinfoComponent key={index} søknad={søknad}></SoknadstatusinfoComponent>
+                                );
+                            })}
                     </div>
                 </div>
             )}
@@ -113,30 +61,8 @@ const PleiepengerView: React.FC<Props> = ({ bruker, søknader }: Props) => {
     );
 };
 
-const formaterStatus = (søknad: Søknad) => {
-    switch (søknad.status) {
-        case Søknadsstatus.MOTTATT:
-            return 'Mottatt';
-        case Søknadsstatus.UNDER_BEHANDLING:
-            return 'Under behandling';
-        case Søknadsstatus.FERDIG_BEHANDLET:
-            return 'Ferdig behandlet';
-    }
+const erPleiepenger = (søknad: Søknad) => {
+    return søknad.søknadstype == Søknadstype.PP_ETTERSENDING || søknad.søknadstype == Søknadstype.PP_SYKT_BARN;
 };
-
-const statusFarge = (søknad: Søknad) => {
-    switch (søknad.status) {
-        case Søknadsstatus.MOTTATT:
-            return 'status-mottatt';
-        case Søknadsstatus.UNDER_BEHANDLING:
-            return 'status-under-behandling';
-        case Søknadsstatus.FERDIG_BEHANDLET:
-            return 'status-ferdig-behandlet';
-    }
-};
-
-function formaterDateTime(søknad: Søknad) {
-    return moment(søknad.opprettet).format('DD.MM.YYYY');
-}
 
 export default PleiepengerView;
