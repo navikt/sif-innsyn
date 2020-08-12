@@ -13,7 +13,6 @@ interface Props {
     søknader?: SøknadApiResponse;
 }
 const PleiepengerView: React.FC<Props> = ({ bruker, søknader }: Props) => {
-
     return (
         <InnsynPage>
             {bruker && (
