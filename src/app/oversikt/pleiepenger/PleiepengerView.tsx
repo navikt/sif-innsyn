@@ -3,7 +3,6 @@ import { SøkerApiResponse } from '../../types/apiTypes/søkerTypes';
 import ReactJson from 'react-json-view';
 import { Søknad, SøknadApiResponse, Søknadstype } from '../../types/apiTypes/søknadTypes';
 import InnsynPage from '../../components/innsyn-page/InnsynPage';
-import { getEnvironmentVariable } from '../../utils/envUtils';
 import Lesmerpanel from 'nav-frontend-lesmerpanel';
 import './PleiepengerView.less';
 import SoknadstatusinfoComponent from 'app/components/soknadstatusinfoComponent/SoknadstatusinfoComponent';
@@ -14,7 +13,6 @@ interface Props {
     søknader?: SøknadApiResponse;
 }
 const PleiepengerView: React.FC<Props> = ({ bruker, søknader }: Props) => {
-    getEnvironmentVariable('PUBLIC_PATH');
 
     return (
         <InnsynPage>
