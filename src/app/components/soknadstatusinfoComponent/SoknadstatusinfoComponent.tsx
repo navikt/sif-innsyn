@@ -19,7 +19,7 @@ const SoknadstatusinfoComponent: React.FC<Props> = ({ søknad }: Props) => {
                 //key={index}
                 tittel={
                     <Undertittel>
-                        Status: {formaterStatus(søknad)} {formaterDateTime(søknad)}
+                        Status: {formaterStatus(søknad)} {formaterDateTime(søknad.opprettet)}
                     </Undertittel>
                 }
                 className={`mb-1 ${statusFarge(søknad)}`}
@@ -34,9 +34,10 @@ const SoknadstatusinfoComponent: React.FC<Props> = ({ søknad }: Props) => {
                             </Ingress>
                         </Row>
                         <Row className={'mt-2-5'}>
-                            <Undertittel>Søknad mottatt: {søknad.søknad.mottatt}</Undertittel>
+                            <Undertittel>Søknad mottatt: {formaterDateTime(søknad.søknad.mottatt)}</Undertittel>
                             <Ingress>
-                                Søker om periode: {søknad.søknad.fraOgMed} - {søknad.søknad.tilOgMed}
+                                Søker om periode: {formaterDateTime(søknad.søknad.fraOgMed)} -{' '}
+                                {formaterDateTime(søknad.søknad.tilOgMed)}
                             </Ingress>
                         </Row>
                     </Column>
@@ -109,8 +110,8 @@ const statusFarge = (søknad: Søknad) => {
     }
 };
 
-function formaterDateTime(søknad: Søknad) {
-    return moment(søknad.opprettet).format('DD.MM.YYYY');
+function formaterDateTime(dateTime: string | null) {
+    return dateTime == null ? '' : moment(dateTime).format('DD.MM.YYYY');
 }
 
 export default SoknadstatusinfoComponent;
