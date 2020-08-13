@@ -13,6 +13,8 @@ import {
     søknadTypeErPleiepenger,
     søknadTypeErPleiepengerNærstående,
 } from '../utils/SøknadUtils';
+import Box from '@navikt/sif-common-core/lib/components/box/Box';
+import InformationPoster from '@navikt/sif-common-core/lib/components/information-poster/InformationPoster';
 
 const uniq = require('lodash.uniq');
 
@@ -38,6 +40,11 @@ const OversiktView: React.FC<Props> = ({ bruker, søknad }: Props) => {
                 <div>
                     <h1>Ytelsesoversikt</h1>
                     <br />
+                    {søknad?.length === 0 && (
+                        <InformationPoster>
+                            <Box padBottom={'l'}>Du har ingen registrerte søknader</Box>
+                        </InformationPoster>
+                    )}
                     {søknadTyper?.map((type, index) => {
                         if (søknadTypeErPleiepenger(type)) {
                             return genererLenkeBase(`${publicPath}/dine-pleiepenger`, ' Dine Pleiepenger', index);
