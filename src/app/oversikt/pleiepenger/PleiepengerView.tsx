@@ -1,17 +1,21 @@
 import * as React from 'react';
 import { SøkerApiResponse } from '../../types/apiTypes/søkerTypes';
 import ReactJson from 'react-json-view';
-import { Søknad, SøknadApiResponse, Søknadstype } from '../../types/apiTypes/søknadTypes';
+import { SøknadApiResponse } from '../../types/apiTypes/søknadTypes';
 import InnsynPage from '../../components/innsyn-page/InnsynPage';
 import Lesmerpanel from 'nav-frontend-lesmerpanel';
 import './PleiepengerView.less';
 import SoknadstatusinfoComponent from 'app/components/soknadstatusinfoComponent/SoknadstatusinfoComponent';
 import { Sidetittel, Undertittel } from 'nav-frontend-typografi';
+import { Link } from 'react-router-dom';
+import { ArrowBack } from '../../svg/FellesIkoner';
+import { erPleiepenger } from '../../utils/SøknadUtils';
 
 interface Props {
     bruker?: SøkerApiResponse;
     søknader?: SøknadApiResponse;
 }
+
 const PleiepengerView: React.FC<Props> = ({ bruker, søknader }: Props) => {
     return (
         <InnsynPage>
@@ -23,6 +27,11 @@ const PleiepengerView: React.FC<Props> = ({ bruker, søknader }: Props) => {
                     </div>
                 </div>
             )}
+
+            <Link to={'/oversikt'}>
+                <ArrowBack /> <span> Tilbake til oversikt</span>
+            </Link>
+
             {søknader && (
                 <div>
                     <Sidetittel>Dine Pleiepenger</Sidetittel>
@@ -54,12 +63,11 @@ const PleiepengerView: React.FC<Props> = ({ bruker, søknader }: Props) => {
                     </div>
                 </div>
             )}
+            <Link to={'/oversikt'}>
+                <ArrowBack /> <span> Tilbake til oversikt</span>
+            </Link>
         </InnsynPage>
     );
-};
-
-const erPleiepenger = (søknad: Søknad) => {
-    return søknad.søknadstype == Søknadstype.PP_ETTERSENDING || søknad.søknadstype == Søknadstype.PP_SYKT_BARN;
 };
 
 export default PleiepengerView;
