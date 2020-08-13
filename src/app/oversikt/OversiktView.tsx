@@ -2,7 +2,6 @@ import * as React from 'react';
 import { SøkerApiResponse } from '../types/apiTypes/søkerTypes';
 import ReactJson from 'react-json-view';
 import { SøknadApiResponse, Søknadstype } from '../types/apiTypes/søknadTypes';
-import InnsynPage from '../components/innsyn-page/InnsynPage';
 import { getEnvironmentVariable } from '../utils/envUtils';
 import { PleiepengerIkon } from '../svg/FellesIkoner';
 import { LenkepanelBase } from 'nav-frontend-lenkepanel/lib';
@@ -26,7 +25,7 @@ const OversiktView: React.FC<Props> = ({ bruker, søknad }: Props) => {
     const publicPath = getEnvironmentVariable('PUBLIC_PATH');
     const søknadTyper: Søknadstype[] | undefined = uniq(søknad?.map((value) => value.søknadstype));
     return (
-        <InnsynPage>
+        <div>
             {bruker && (
                 <div>
                     Innsyn logged in. Hi {bruker.fornavn} {bruker.etternavn} :)
@@ -60,7 +59,7 @@ const OversiktView: React.FC<Props> = ({ bruker, søknad }: Props) => {
                     })}
                 </div>
             )}
-        </InnsynPage>
+        </div>
     );
 };
 

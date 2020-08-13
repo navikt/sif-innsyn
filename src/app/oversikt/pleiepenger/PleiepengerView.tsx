@@ -28,7 +28,7 @@ const PleiepengerView: React.FC<Props> = ({ bruker, søknader }: Props) => {
                 </div>
             )}
 
-            <Link to={'/oversikt'}>
+            <Link to={'/'}>
                 <ArrowBack /> <span> Tilbake til oversikt</span>
             </Link>
 
@@ -63,7 +63,7 @@ const PleiepengerView: React.FC<Props> = ({ bruker, søknader }: Props) => {
                     </div>
                 </div>
             )}
-            <Link to={'/oversikt'}>
+            <Link to={'/'}>
                 <ArrowBack /> <span> Tilbake til oversikt</span>
             </Link>
         </InnsynPage>
