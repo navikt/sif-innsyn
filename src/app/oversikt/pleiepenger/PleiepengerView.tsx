@@ -7,9 +7,8 @@ import Lesmerpanel from 'nav-frontend-lesmerpanel';
 import './PleiepengerView.less';
 import SoknadstatusinfoComponent from 'app/components/soknadstatusinfoComponent/SoknadstatusinfoComponent';
 import { Sidetittel, Undertittel } from 'nav-frontend-typografi';
-import { Link } from 'react-router-dom';
-import { ArrowBack } from '../../svg/FellesIkoner';
 import { erPleiepenger } from '../../utils/SøknadUtils';
+import BackLink from '../../components/backlink/BackLink';
 
 interface Props {
     bruker?: SøkerApiResponse;
@@ -27,10 +26,7 @@ const PleiepengerView: React.FC<Props> = ({ bruker, søknader }: Props) => {
                     </div>
                 </div>
             )}
-
-            <Link to={'/'}>
-                <ArrowBack /> <span> Tilbake til oversikt</span>
-            </Link>
+            <BackLink href={'/'} tittel={'Tilbake til oversikt'} />
 
             {søknader && (
                 <div>
@@ -63,9 +59,7 @@ const PleiepengerView: React.FC<Props> = ({ bruker, søknader }: Props) => {
                     </div>
                 </div>
             )}
-            <Link to={'/'}>
-                <ArrowBack /> <span> Tilbake til oversikt</span>
-            </Link>
+            <BackLink href={'/'} tittel={'Tilbake til oversikt'} />
         </InnsynPage>
     );
 };
