@@ -6,7 +6,7 @@ import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import { Ingress, Systemtittel, Undertittel } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
 import Lenke from 'nav-frontend-lenker';
-import AttachmentIkon from '../../svg/FellesIkoner';
+import { AttachmentIkon } from '../../svg/FellesIkoner';
 
 interface Props {
     søknad: Søknad;

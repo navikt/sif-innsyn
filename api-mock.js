@@ -51,7 +51,7 @@ const arbeidsgivereMock = {
 
 const soknadMock = [
     {
-        søknadstype: 'OP_UTVIDET_RETT',
+        søknadstype: 'OMP_UTVIDET_RETT',
         status: 'MOTTATT',
         søknad: {
             barn: {

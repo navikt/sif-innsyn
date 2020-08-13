@@ -17,7 +17,9 @@ export enum Søknadstype {
     OMP_ETTERSENDING = 'OMP_ETTERSENDING',
     PP_ETTERSENDING = 'PP_ETTERSENDING',
     PP_SYKT_BARN = 'PP_SYKT_BARN',
+    PP_NÆRSTÅENDE = 'PP_NÆRSTÅENDE',
     OMD_OVERFØRING = 'OMD_OVERFØRING',
+    OPPLÆRINGSPENGER = 'OPPLÆRINGSPENGER',
 }
 
 export interface Søknad {
