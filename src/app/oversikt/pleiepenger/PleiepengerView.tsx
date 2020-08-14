@@ -6,7 +6,7 @@ import InnsynPage from '../../components/innsyn-page/InnsynPage';
 import Lesmerpanel from 'nav-frontend-lesmerpanel';
 import './PleiepengerView.less';
 import SoknadstatusinfoComponent from 'app/components/soknadstatusinfoComponent/SoknadstatusinfoComponent';
-import { Sidetittel, Undertittel } from 'nav-frontend-typografi';
+import { Sidetittel } from 'nav-frontend-typografi';
 import { erPleiepenger } from '../../utils/SøknadUtils';
 import BackLink from '../../components/backlink/BackLink';
 
@@ -46,7 +46,6 @@ const PleiepengerView: React.FC<Props> = ({ bruker, søknader }: Props) => {
                         </div>
                     </Lesmerpanel>
 
-                    <Undertittel>Siste status</Undertittel>
                     <h3>Dine søknader</h3>
                     <div>
                         {søknader

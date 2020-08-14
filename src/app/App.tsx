@@ -17,6 +17,7 @@ import './app.less';
 import { RouteConfig } from './config/routeConfig';
 import OversiktRoute from './oversikt/OversiktRoute';
 import PleiepengerRoute from './oversikt/pleiepenger/PleiepengerRoute';
+import OmsorgspengerRoute from './oversikt/omsorgspenger/OmsorgspengerRoute';
 
 const localeFromSessionStorage = getLocaleFromSessionStorage();
 moment.locale(localeFromSessionStorage);
@@ -39,6 +40,7 @@ const App: React.FunctionComponent = () => {
                         <Route exact={true} path={RouteConfig.BRUKER} component={InnsynRoute} />
                         <Route exact={true} path={RouteConfig.OVERSIKT} component={OversiktRoute} />
                         <Route exact={true} path={RouteConfig.DINE_PLEIEPENGER} component={PleiepengerRoute} />
+                        <Route exact={true} path={RouteConfig.DINE_OMSORGSPENGER} component={OmsorgspengerRoute} />
                         <Route exact={true} path={RouteConfig.KALKULATOR} component={KalkulatorRoute} />
                         <Route exact={false} path={RouteConfig.ROOT} component={NotFoundRoute} />
                     </Switch>
