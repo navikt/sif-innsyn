@@ -1,16 +1,20 @@
 import * as React from 'react';
-import Box from '@navikt/sif-common-core/lib/components/box/Box';
-import InformationPoster from '@navikt/sif-common-core/lib/components/information-poster/InformationPoster';
 import InnsynPage from '../../innsyn-page/InnsynPage';
+import OversiktView from '../../../oversikt/OversiktView';
+import { SøknadApiResponse, søknadRecipe } from '../../../types/apiTypes/søknadTypes';
+import LoadingPage from '../loading-page/LoadingPage';
+import FpError from '../../../functional/fetcher/example-usage/FpError';
+import Fetcher from '../../../functional/fetcher/Fetcher';
 
 const RootPage: React.FC = (): JSX.Element => {
     return (
         <InnsynPage>
-            <Box margin="xxxl">
-                <InformationPoster>
-                    <Box padBottom={'l'}>Sykdom i familien sin innsynsløsning</Box>
-                </InformationPoster>
-            </Box>
+            <Fetcher<SøknadApiResponse>
+                recipies={[søknadRecipe]}
+                loading={() => <LoadingPage />}
+                error={(e: Error) => <FpError error={e} />}
+                success={([søknadApiResponse]: [SøknadApiResponse]) => <OversiktView søknad={søknadApiResponse} />}
+            />
         </InnsynPage>
     );
 };
