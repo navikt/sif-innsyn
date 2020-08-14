@@ -19,7 +19,7 @@ const SoknadstatusinfoComponent: React.FC<Props> = ({ søknad }: Props) => {
                 //key={index}
                 tittel={
                     <Undertittel>
-                        {formaterStatus(søknad)}: {formaterDateTime(søknad.opprettet)}
+                        {formaterSøknadType(søknad)}, {formaterStatus(søknad)}: {formaterDateTime(søknad.opprettet)}
                     </Undertittel>
                 }
                 className={`mb-1 ${statusFarge(søknad)}`}
