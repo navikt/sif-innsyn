@@ -1,4 +1,3 @@
-import React from 'react';
 import * as E from 'fp-ts/lib/Either';
 import * as O from 'fp-ts/lib/Option';
 import { pipe } from 'fp-ts/lib/pipeable';
@@ -11,23 +10,16 @@ interface RemoteProps<T> {
 }
 
 export function ResponseHandler<T>({ data, error, loading, success }: RemoteProps<T>): JSX.Element {
-    return (
-        <>
-            {pipe(
-                data,
-                E.fold(
-                    (maybeError: O.Option<Error>) => {
-                        O.fold<Error, JSX.Element>(
-                            () => loading(),
-                            (someError: Error) => error(someError)
-                        )(maybeError);
-                    },
-                    (r) => {
-                        return success(r);
-                    }
-                )
-            )}
-        </>
+    return pipe(
+        data,
+        E.fold(
+            (maybeError: O.Option<Error>) =>
+                O.fold<Error, JSX.Element>(
+                    () => loading(),
+                    (someError: Error) => error(someError)
+                )(maybeError),
+            (r) => success(r)
+        )
     );
 }
 
