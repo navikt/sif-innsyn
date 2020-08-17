@@ -3,6 +3,6 @@ import * as IoTs from 'io-ts';
 
 export interface FetchRecipe<P> {
     url: string;
-    init?: AxiosRequestConfig; // TODO: Denne må også fjernes
+    init?: AxiosRequestConfig;
     validator: IoTs.Type<P>;
 }
