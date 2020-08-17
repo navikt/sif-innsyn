@@ -12,11 +12,11 @@ import { Locale } from '@navikt/sif-common-core/lib/types/Locale';
 import InnsynRoute from './innsyn/InnsynRoute';
 import KalkulatorRoute from './kalkulator/KalkulatorRoute';
 import NotFoundRoute from './components/pages/not-found-route/NotFoundRoute';
-import '@navikt/sif-common-core/lib/styles/globalStyles.less';
-import './app.less';
 import { RouteConfig } from './config/routeConfig';
 import OversiktRoute from './oversikt/OversiktRoute';
 import PleiepengerRoute from './oversikt/pleiepenger/PleiepengerRoute';
+import '@navikt/sif-common-core/lib/styles/globalStyles.less';
+import './app.less';
 
 const localeFromSessionStorage = getLocaleFromSessionStorage();
 moment.locale(localeFromSessionStorage);

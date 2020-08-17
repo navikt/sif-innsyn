@@ -3,7 +3,7 @@ import InnsynPage from '../../innsyn-page/InnsynPage';
 import OversiktView from '../../../oversikt/OversiktView';
 import { SøknadApiResponse, søknadRecipe } from '../../../types/apiTypes/søknadTypes';
 import LoadingPage from '../loading-page/LoadingPage';
-import FpError from '../../../functional/fetcher/example-usage/FpError';
+import ReactJsonView from '../../../functional/ReactJsonView';
 import Fetcher from '../../../functional/fetcher/Fetcher';
 
 const RootPage: React.FC = (): JSX.Element => {
@@ -12,7 +12,7 @@ const RootPage: React.FC = (): JSX.Element => {
             <Fetcher<SøknadApiResponse>
                 recipies={[søknadRecipe]}
                 loading={() => <LoadingPage />}
-                error={(e: Error) => <FpError error={e} />}
+                error={(e: Error) => <ReactJsonView input={e} />}
                 success={([søknadApiResponse]: [SøknadApiResponse]) => <OversiktView søknad={søknadApiResponse} />}
             />
         </InnsynPage>

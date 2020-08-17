@@ -3,7 +3,7 @@ import { allValuesInArrayAreTrue } from '../../utils/utilityFunctions';
 import * as IoTs from 'io-ts/lib';
 import { getApiUrlByResourceType } from '../../utils/apiUtils';
 import { ResourceType } from '../resourceTypes';
-import { FetchRecipe } from '../../functional/fetcher/utilityFunctions';
+import { FetchRecipe } from '../../functional/fetcher/types';
 
 export interface Barn {
     aktørId: string;

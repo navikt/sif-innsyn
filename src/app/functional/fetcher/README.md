@@ -1,7 +1,15 @@
 # Fetcher
-Pure functional component som kan brukes til å gjøre GET kall.
 
-Benytt Fetcher for å gjøre et kall. Se eksempler i "example-usage/FpEssentialsExample.tsx" 
-for hvordan den brukes. 
-Fetcher2 kan benyttes for å gjøre 2 kall, og Fetcher 3 for 3 kall.
-Fetcher4 etc er ikke implementert ennå.
+Use fetcher to fetch stuff. 
+
+Pass a recipe to the Fetcher describing what you want to fetch.
+
+Also pass a function for "loading", "error" and "success", so that you can easily handle each case.
+
+If you want to fetch two things, use Fetcher2. And for three things, use Fetcher3.
+
+The Fetcher components uses the libraries fp-ts, io-ts, io-ts-reporters and axios.
+
+For examples of how to use the Fetcher see ExampleView.tsx in the example-usage folder.
+
+For an example on how to construct the recipe for a type, see exampleType.ts in the example-usage folder.
