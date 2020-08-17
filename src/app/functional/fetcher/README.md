@@ -13,3 +13,4 @@ The Fetcher components uses the libraries fp-ts, io-ts, io-ts-reporters and axio
 For examples of how to use the Fetcher see ExampleView.tsx in the example-usage folder.
 
 For an example on how to construct the recipe for a type, see exampleType.ts in the example-usage folder.
+
