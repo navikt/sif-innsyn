@@ -9,7 +9,7 @@ export const navigateToLoginPage = () => {
         getEnvironmentVariable('LOGIN_URL') +
         '?redirect=' +
         window.location.origin +
-        '/familie/sykdom-i-familien/soknad/innsyn/bruker';
+        '/familie/sykdom-i-familien/soknad/innsyn';
 };
 
 export const navigateTo = (route: string, history: History): void => history.push(route);

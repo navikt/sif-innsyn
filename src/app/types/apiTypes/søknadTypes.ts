@@ -1,8 +1,8 @@
 import * as IoTs from 'io-ts/lib';
 import { getApiUrlByResourceType } from '../../utils/apiUtils';
 import { ResourceType } from '../resourceTypes';
-import { FetchRecipe } from '../../functional/fetcher/utilityFunctions';
 import { allValuesInArrayAreTrue } from '../../utils/utilityFunctions';
+import { FetchRecipe } from '../../functional/fetcher/types';
 
 export enum Søknadsstatus {
     MOTTATT = 'MOTTATT',

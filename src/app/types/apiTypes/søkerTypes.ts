@@ -3,7 +3,7 @@ import { isString } from '@navikt/sif-common-core/lib/utils/typeGuardUtils';
 import * as IoTs from 'io-ts/lib';
 import { getApiUrlByResourceType } from '../../utils/apiUtils';
 import { ResourceType } from '../resourceTypes';
-import { FetchRecipe } from '../../functional/fetcher/utilityFunctions';
+import { FetchRecipe } from '../../functional/fetcher/types';
 
 export interface SøkerApiResponse {
     aktørId: string;
