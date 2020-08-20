@@ -5,6 +5,7 @@ export enum RouteConfig {
     BRUKER = '/bruker',
     OVERSIKT = '/oversikt',
     DINE_PLEIEPENGER = '/dine-pleiepenger',
+    DINE_OMSORGSPENGER = '/dine-omsorgspenger',
     KALKULATOR = '/kalkis',
     UTILGJENGELIG_ROUTE = '/utilgjengelig',
     FP = '/fp',

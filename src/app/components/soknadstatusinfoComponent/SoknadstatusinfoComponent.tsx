@@ -19,7 +19,7 @@ const SoknadstatusinfoComponent: React.FC<Props> = ({ søknad }: Props) => {
                 //key={index}
                 tittel={
                     <Undertittel>
-                        Status: {formaterStatus(søknad)} {formaterDateTime(søknad.opprettet)}
+                        {formaterSøknadType(søknad)}, {formaterStatus(søknad)}: {formaterDateTime(søknad.opprettet)}
                     </Undertittel>
                 }
                 className={`mb-1 ${statusFarge(søknad)}`}
@@ -28,9 +28,12 @@ const SoknadstatusinfoComponent: React.FC<Props> = ({ søknad }: Props) => {
                     <Column md={'8'}>
                         <Row>
                             <Systemtittel>{formaterSøknadType(søknad)}</Systemtittel>
-                            <Undertittel>Sakstatus:</Undertittel>
+                            <Ingress>Vi har mottatt søknaden din.</Ingress>
+                            <br />
                             <Ingress>
-                                Sakstatus: Søknaden din er under behandling Du vil få beskjed når statusen endrer seg
+                                Grunnet svært mange søknader inn til NAV kan det dessverre ta lang tid før en
+                                saksbehandler ser på søknaden din. Du kan likevel være trygg på at du rykker fremover i
+                                køen og blir kontaktet hvis det er behov for mer dokumentasjon.
                             </Ingress>
                         </Row>
                         <Row className={'mt-2-5'}>
@@ -46,20 +49,6 @@ const SoknadstatusinfoComponent: React.FC<Props> = ({ søknad }: Props) => {
                             <Lenke href="#">
                                 <AttachmentIkon />
                                 <span>Søknad</span>
-                            </Lenke>
-                        </Ingress>
-
-                        <Ingress className={'mb-1'}>
-                            <Lenke href="#">
-                                <AttachmentIkon />
-                                <span>Inntektsmelding</span>
-                            </Lenke>
-                        </Ingress>
-
-                        <Ingress className={'mb-1'}>
-                            <Lenke href="#">
-                                <AttachmentIkon />
-                                <span>Legeerklæring</span>
                             </Lenke>
                         </Ingress>
                     </Column>
@@ -84,7 +73,7 @@ function formaterSøknadType(søknad: Søknad) {
         case Søknadstype.OMP_ETTERSENDING:
             return 'Omsorgspenger - Ettersending';
         case Søknadstype.OMP_UTVIDET_RETT:
-            return 'Omsorgspenger - Utivet rett';
+            return 'Omsorgspenger - Utvidet rett';
     }
 }
 

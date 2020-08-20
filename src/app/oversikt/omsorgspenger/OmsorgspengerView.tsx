@@ -4,10 +4,10 @@ import ReactJson from 'react-json-view';
 import { SøknadApiResponse } from '../../types/apiTypes/søknadTypes';
 import InnsynPage from '../../components/innsyn-page/InnsynPage';
 import Lesmerpanel from 'nav-frontend-lesmerpanel';
-import './PleiepengerView.less';
+import './OmsorgspengerView.less';
 import SoknadstatusinfoComponent from 'app/components/soknadstatusinfoComponent/SoknadstatusinfoComponent';
 import { Sidetittel } from 'nav-frontend-typografi';
-import { erPleiepenger } from '../../utils/SøknadUtils';
+import { erOmsorgspenger } from '../../utils/SøknadUtils';
 import BackLink from '../../components/backlink/BackLink';
 
 interface Props {
@@ -15,7 +15,7 @@ interface Props {
     søknader?: SøknadApiResponse;
 }
 
-const PleiepengerView: React.FC<Props> = ({ bruker, søknader }: Props) => {
+const OmsorgspengerView: React.FC<Props> = ({ bruker, søknader }: Props) => {
     return (
         <InnsynPage>
             {bruker && (
@@ -30,7 +30,7 @@ const PleiepengerView: React.FC<Props> = ({ bruker, søknader }: Props) => {
 
             {søknader && (
                 <div>
-                    <Sidetittel>Dine Pleiepenger</Sidetittel>
+                    <Sidetittel>Dine Omsorgspenger</Sidetittel>
 
                     <Lesmerpanel intro={<span>Dette kan du forvente av saksgangen</span>} border>
                         <div>
@@ -49,7 +49,7 @@ const PleiepengerView: React.FC<Props> = ({ bruker, søknader }: Props) => {
                     <h3>Dine søknader</h3>
                     <div>
                         {søknader
-                            ?.filter((søknad) => erPleiepenger(søknad))
+                            ?.filter((søknad) => erOmsorgspenger(søknad))
                             .map((søknad, index) => {
                                 return (
                                     <SoknadstatusinfoComponent key={index} søknad={søknad}></SoknadstatusinfoComponent>
@@ -63,4 +63,4 @@ const PleiepengerView: React.FC<Props> = ({ bruker, søknader }: Props) => {
     );
 };
 
-export default PleiepengerView;
+export default OmsorgspengerView;

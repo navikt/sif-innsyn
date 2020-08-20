@@ -12,9 +12,12 @@ import { Locale } from '@navikt/sif-common-core/lib/types/Locale';
 import InnsynRoute from './innsyn/InnsynRoute';
 import KalkulatorRoute from './kalkulator/KalkulatorRoute';
 import NotFoundRoute from './components/pages/not-found-route/NotFoundRoute';
+import '@navikt/sif-common-core/lib/styles/globalStyles.less';
+import './app.less';
 import { RouteConfig } from './config/routeConfig';
 import OversiktRoute from './oversikt/OversiktRoute';
 import PleiepengerRoute from './oversikt/pleiepenger/PleiepengerRoute';
+import OmsorgspengerRoute from './oversikt/omsorgspenger/OmsorgspengerRoute';
 import '@navikt/sif-common-core/lib/styles/globalStyles.less';
 import './app.less';
 
@@ -39,6 +42,7 @@ const App: React.FunctionComponent = () => {
                         <Route exact={true} path={RouteConfig.BRUKER} component={InnsynRoute} />
                         <Route exact={true} path={RouteConfig.OVERSIKT} component={OversiktRoute} />
                         <Route exact={true} path={RouteConfig.DINE_PLEIEPENGER} component={PleiepengerRoute} />
+                        <Route exact={true} path={RouteConfig.DINE_OMSORGSPENGER} component={OmsorgspengerRoute} />
                         <Route exact={true} path={RouteConfig.KALKULATOR} component={KalkulatorRoute} />
                         <Route exact={false} path={RouteConfig.ROOT} component={NotFoundRoute} />
                     </Switch>
