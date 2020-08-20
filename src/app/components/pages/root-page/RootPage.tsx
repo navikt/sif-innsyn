@@ -1,10 +1,10 @@
 import * as React from 'react';
-import OversiktView from '../../../oversikt/OversiktView';
 import { SøknadApiResponse, søknadRecipe } from '../../../types/apiTypes/søknadTypes';
 import LoadingPage from '../loading-page/LoadingPage';
 import ReactJsonView from '../../../functional/ReactJsonView';
 import Fetcher from '../../../functional/fetcher/Fetcher';
 import HandleUnauthorized from '../../../functional/HandleUnauthorized';
+import OversiktView from '../../../oversikt/OversiktView';
 
 const RootPage: React.FC = (): JSX.Element => (
     <Fetcher<SøknadApiResponse>

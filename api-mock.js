@@ -51,6 +51,7 @@ const arbeidsgivereMock = {
 
 const soknadMock = [
     {
+        søknadId: '0f44f965-e3fb-489c-a757-b0ad46619e33',
         søknadstype: 'OMP_UTVIDET_RETT',
         status: 'MOTTATT',
         søknad: {
@@ -247,6 +248,7 @@ const soknadMock = [
         behandlingsdato: null,
     },
     {
+        søknadId: '0f44f965-e3fb-489c-a757-b0ad46619e33',
         søknadstype: 'PP_SYKT_BARN',
         status: 'MOTTATT',
         søknad: {
@@ -345,6 +347,7 @@ const soknadMock = [
         behandlingsdato: null,
     },
     {
+        søknadId: '0f44f965-e3fb-489c-a757-b0ad46619e33',
         søknadstype: 'PP_SYKT_BARN',
         status: 'MOTTATT',
         søknad: {

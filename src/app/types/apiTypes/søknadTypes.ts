@@ -2,6 +2,7 @@ import * as IoTs from 'io-ts/lib';
 import { getApiUrlByResourceType } from '../../utils/apiUtils';
 import { ResourceType } from '../resourceTypes';
 import { allValuesInArrayAreTrue } from '../../utils/utilityFunctions';
+import { UUID } from 'io-ts-types/es6/UUID';
 import { FetchRecipe } from '../../functional/fetcher/types';
 
 export enum Søknadsstatus {
@@ -23,6 +24,7 @@ export enum Søknadstype {
 }
 
 export interface Søknad {
+    søknadId: UUID;
     søknadstype: Søknadstype;
     status: Søknadsstatus;
     søknad: any; // TODO: Lag søknadstyper for hver av søknadene

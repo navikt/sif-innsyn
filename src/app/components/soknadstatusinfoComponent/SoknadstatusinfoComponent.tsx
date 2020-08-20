@@ -46,7 +46,9 @@ const SoknadstatusinfoComponent: React.FC<Props> = ({ søknad }: Props) => {
                     </Column>
                     <Column md={'4'}>
                         <Ingress className={'mb-1'}>
-                            <Lenke href="#">
+                            <Lenke
+                                target="_blank"
+                                href={`http://localhost:8080/soknad/68d9657f-5bef-4e83-bd88-8d0332f8d1a0/dokument`}>
                                 <AttachmentIkon />
                                 <span>Søknad</span>
                             </Lenke>

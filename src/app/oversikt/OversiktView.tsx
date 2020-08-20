@@ -15,6 +15,7 @@ import {
 } from '../utils/SøknadUtils';
 import Box from '@navikt/sif-common-core/lib/components/box/Box';
 import InformationPoster from '@navikt/sif-common-core/lib/components/information-poster/InformationPoster';
+import InnsynPage from '../components/innsyn-page/InnsynPage';
 
 const uniq = require('lodash.uniq');
 
@@ -32,7 +33,7 @@ const OversiktView: React.FC<Props> = ({ bruker, søknad }: Props) => {
         søknadTyper?.filter((type) => søknadTypeErPleiepengerNærstående(type)).length !== 0;
     const harOpplæringspenger = søknadTyper?.filter((type) => søknadTypeErOpplæringspenger(type)).length !== 0;
     return (
-        <div>
+        <InnsynPage>
             {bruker && (
                 <div>
                     Innsyn logged in. Hi {bruker.fornavn} {bruker.etternavn} :)
@@ -58,7 +59,7 @@ const OversiktView: React.FC<Props> = ({ bruker, søknad }: Props) => {
                         genererLenkeBase(`${publicPath}/dine-pleiepeneger-nærstående`, 'Pleiepenger Nærstående')}
                 </div>
             )}
-        </div>
+        </InnsynPage>
     );
 };
 
