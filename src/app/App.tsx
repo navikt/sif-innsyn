@@ -18,6 +18,8 @@ import { RouteConfig } from './config/routeConfig';
 import OversiktRoute from './oversikt/OversiktRoute';
 import PleiepengerRoute from './oversikt/pleiepenger/PleiepengerRoute';
 import OmsorgspengerRoute from './oversikt/omsorgspenger/OmsorgspengerRoute';
+import '@navikt/sif-common-core/lib/styles/globalStyles.less';
+import './app.less';
 
 const localeFromSessionStorage = getLocaleFromSessionStorage();
 moment.locale(localeFromSessionStorage);
