@@ -1,6 +1,4 @@
 import * as React from 'react';
-import { SøkerApiResponse } from '../../types/apiTypes/søkerTypes';
-import ReactJson from 'react-json-view';
 import { SøknadApiResponse } from '../../types/apiTypes/søknadTypes';
 import InnsynPage from '../../components/innsyn-page/InnsynPage';
 import Lesmerpanel from 'nav-frontend-lesmerpanel';
@@ -11,21 +9,12 @@ import { erOmsorgspenger } from '../../utils/SøknadUtils';
 import BackLink from '../../components/backlink/BackLink';
 
 interface Props {
-    bruker?: SøkerApiResponse;
-    søknader?: SøknadApiResponse;
+    søknader: SøknadApiResponse;
 }
 
-const OmsorgspengerView: React.FC<Props> = ({ bruker, søknader }: Props) => {
+const OmsorgspengerView: React.FC<Props> = ({ søknader }: Props) => {
     return (
         <InnsynPage>
-            {bruker && (
-                <div>
-                    Innsyn logged in. Hi {bruker.fornavn} {bruker.etternavn} :)
-                    <div>
-                        <ReactJson src={bruker} />
-                    </div>
-                </div>
-            )}
             <BackLink href={'/'} tittel={'Tilbake til oversikt'} />
 
             {søknader && (

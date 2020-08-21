@@ -9,14 +9,13 @@ import {
 import { navigateToLoginPage } from '../utils/navigationUtils';
 import { ResourceType } from '../types/resourceTypes';
 import { UUID } from 'io-ts-types/es6/UUID';
-import HandleUnauthorized from '../functional/HandleUnauthorized';
 
-axios.interceptors.response.use(
-    (response) => response,
-    (error) => {
-        HandleUnauthorized(error);
-    }
-);
+// axios.interceptors.response.use(
+//     (response) => response,
+//     (error) => {
+//         HandleUnauthorized(error);
+//     }
+// );
 
 export enum GetOrLoginResult {
     GOT_DATA = 'GOT_DATA ',
