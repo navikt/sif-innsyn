@@ -44,7 +44,7 @@ spec:
         - name: PUBLIC_PATH
           value: /familie/sykdom-i-familien/soknad/innsyn
         - name: LOGIN_URL
-          value: https://loginservice.dev.nav.no/login
+          value: https://loginservice.dev.nav.no/login?redirect=https://sif-innsyn.dev.nav.no/familie/sykdom-i-familien/soknad/innsyn
         - name: UTILGJENGELIG
           value: "off"
         - name: MELLOMLAGRING

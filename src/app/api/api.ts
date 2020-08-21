@@ -9,16 +9,12 @@ import {
 import { navigateToLoginPage } from '../utils/navigationUtils';
 import { ResourceType } from '../types/resourceTypes';
 import { UUID } from 'io-ts-types/es6/UUID';
+import HandleUnauthorized from '../functional/HandleUnauthorized';
 
 axios.interceptors.response.use(
     (response) => response,
     (error) => {
-        if (isForbidden(error) || isUnauthorized(error)) {
-            navigateToLoginPage();
-            return { result: GetOrLoginResult.WILL_REDIRECT, data: undefined };
-        } else {
-            return { result: GetOrLoginResult.GOT_ERROR, data: undefined };
-        }
+        HandleUnauthorized(error);
     }
 );
 
