@@ -3,4 +3,5 @@ export enum ResourceType {
     BARN = 'barn',
     ARBEIDSGIVER = 'arbeidsgiver',
     SØKNAD = 'soknad',
+    DOKUMENT = 'dokument',
 }

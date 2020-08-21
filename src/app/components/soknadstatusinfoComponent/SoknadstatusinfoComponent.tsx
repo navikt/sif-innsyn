@@ -5,8 +5,13 @@ import moment from 'moment';
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import { Ingress, Systemtittel, Undertittel } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
-import Lenke from 'nav-frontend-lenker';
 import { AttachmentIkon } from '../../svg/FellesIkoner';
+import { axiosGetSøknadDocument } from '../../api/api';
+import { AxiosResponse } from 'axios';
+import Lenke from 'nav-frontend-lenker';
+import { ResourceType } from '../../types/resourceTypes';
+
+const fileDownload = require('js-file-download');
 
 interface Props {
     søknad: Søknad;
@@ -46,9 +51,7 @@ const SoknadstatusinfoComponent: React.FC<Props> = ({ søknad }: Props) => {
                     </Column>
                     <Column md={'4'}>
                         <Ingress className={'mb-1'}>
-                            <Lenke
-                                target="_blank"
-                                href={`http://localhost:8080/soknad/68d9657f-5bef-4e83-bd88-8d0332f8d1a0/dokument`}>
+                            <Lenke href={'#'} onClick={() => hentDokument(søknad)}>
                                 <AttachmentIkon />
                                 <span>Søknad</span>
                             </Lenke>
@@ -58,6 +61,14 @@ const SoknadstatusinfoComponent: React.FC<Props> = ({ søknad }: Props) => {
             </Ekspanderbartpanel>
         </div>
     );
+};
+
+const hentDokument = (søknad: Søknad): Promise<void | AxiosResponse<Blob>> => {
+    return axiosGetSøknadDocument<Blob>(ResourceType.SØKNAD, søknad.søknadId, ResourceType.DOKUMENT)
+        .then((response) => {
+            fileDownload(response.data, 'søknad.pdf');
+        })
+        .catch((reason) => console.log(reason));
 };
 
 function formaterSøknadType(søknad: Søknad) {

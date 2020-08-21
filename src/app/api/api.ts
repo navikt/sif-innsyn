@@ -1,8 +1,14 @@
 import axios, { AxiosResponse } from 'axios';
 import axiosConfig from '../config/axiosConfig';
-import { getApiUrlByResourceType, isForbidden, isUnauthorized } from '../utils/apiUtils';
+import {
+    getApiUrlByResourceType,
+    getApiUrlForDocumentByResourceTypes,
+    isForbidden,
+    isUnauthorized,
+} from '../utils/apiUtils';
 import { navigateToLoginPage } from '../utils/navigationUtils';
 import { ResourceType } from '../types/resourceTypes';
+import { UUID } from 'io-ts-types/es6/UUID';
 
 export enum GetOrLoginResult {
     GOT_DATA = 'GOT_DATA ',
@@ -17,6 +23,20 @@ export interface GoGetOrLoginResponse<T> {
 
 export function axiosGet<T>(resourcetype: ResourceType): Promise<AxiosResponse<T>> {
     return axios.get<T, AxiosResponse<T>>(getApiUrlByResourceType(resourcetype), axiosConfig);
+}
+
+export function axiosGetSøknadDocument<T>(
+    søknadResource: ResourceType,
+    søknadId: UUID,
+    dokumentResource: ResourceType
+): Promise<AxiosResponse<T>> {
+    return axios.get<T, AxiosResponse<T>>(
+        getApiUrlForDocumentByResourceTypes(søknadResource, søknadId, dokumentResource),
+        {
+            ...axiosConfig,
+            responseType: 'blob',
+        }
+    );
 }
 
 export async function getOrLogin<T>(resourcetype: ResourceType): Promise<GoGetOrLoginResponse<T>> {

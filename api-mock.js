@@ -248,7 +248,7 @@ const soknadMock = [
         behandlingsdato: null,
     },
     {
-        søknadId: '0f44f965-e3fb-489c-a757-b0ad46619e33',
+        søknadId: '9c3a3ebf-e02a-4843-ad2c-9187e2f00cfa',
         søknadstype: 'PP_SYKT_BARN',
         status: 'MOTTATT',
         søknad: {
@@ -347,7 +347,7 @@ const soknadMock = [
         behandlingsdato: null,
     },
     {
-        søknadId: '0f44f965-e3fb-489c-a757-b0ad46619e33',
+        søknadId: '9c3a3ebf-e02a-4843-ad2c-9187e2f00cfa',
         søknadstype: 'PP_SYKT_BARN',
         status: 'MOTTATT',
         søknad: {
@@ -578,6 +578,14 @@ const startServer = () => {
     server.get('/soknad', (req, res) => {
         if (isLoggedIn(req)) {
             res.send(soknadMock);
+        } else {
+            res.status(401).send();
+        }
+    });
+
+    server.get('/soknad/:soknadId/dokument', (req, res) => {
+        if (isLoggedIn(req)) {
+            res.download('eksempel-søknad.pdf', 'søknad.pdf');
         } else {
             res.status(401).send();
         }
