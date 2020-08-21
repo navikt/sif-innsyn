@@ -50,7 +50,7 @@ const SoknadstatusinfoComponent: React.FC<Props> = ({ søknad }: Props) => {
                         </Row>
                     </Column>
                     <Column md={'4'}>
-                        <Ingress className={'mb-1'}>
+                        <Ingress className={'mb-1 mt-1'}>
                             <Lenke href={'#'} onClick={() => hentDokument(søknad)}>
                                 <AttachmentIkon />
                                 <span>Søknad</span>
