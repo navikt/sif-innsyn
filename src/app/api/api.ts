@@ -10,8 +10,8 @@ import { navigateToLoginPage } from '../utils/navigationUtils';
 import { ResourceType } from '../types/resourceTypes';
 import { UUID } from 'io-ts-types/es6/UUID';
 
-axios.interceptors.request.use(
-    (config) => config,
+axios.interceptors.response.use(
+    (response) => response,
     (error) => {
         if (isForbidden(error) || isUnauthorized(error)) {
             navigateToLoginPage();
