@@ -592,7 +592,7 @@ const startServer = () => {
     });
 
     server.listen(port, () => {
-        console.log(`App listening on port: ${port}`);
+        console.log(`Mockserver is listening on port: ${port}`);
     });
 };
 
