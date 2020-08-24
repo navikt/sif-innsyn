@@ -3,7 +3,7 @@ import { SøknadApiResponse } from '../../types/apiTypes/søknadTypes';
 import Lesmerpanel from 'nav-frontend-lesmerpanel';
 import './PleiepengerView.less';
 import SoknadstatusinfoComponent from 'app/components/soknadstatusinfoComponent/SoknadstatusinfoComponent';
-import { Sidetittel } from 'nav-frontend-typografi';
+import { Ingress, Sidetittel, Undertittel } from 'nav-frontend-typografi';
 import { Tilbakeknapp } from 'nav-frontend-ikonknapper';
 import { useHistory } from 'react-router-dom';
 import { RouteConfig } from '../../config/routeConfig';
@@ -21,21 +21,21 @@ const PleiepengerView: React.FC<Props> = ({ søknader }: Props) => {
                 <div>
                     <Sidetittel>Dine Pleiepenger</Sidetittel>
 
-                    <Lesmerpanel intro={<span>Dette kan du forvente av saksgangen</span>} border>
+                    <Lesmerpanel intro={<Ingress>Dette kan du forvente av saksgangen</Ingress>} border>
                         <div>
-                            <p style={{ marginTop: 0 }}>
+                            <Ingress style={{ marginTop: 0 }}>
                                 Du bestemmer selv om du vil bruke sykmeldingen eller avbryte den. Du kan også jobbe i
                                 kombinasjon med sykmelding. Det kommer an på hva sykdommen din tillater og hva det er
                                 praktisk mulig å få til på arbeidsplassen.
-                            </p>
-                            <p>
+                            </Ingress>
+                            <Ingress>
                                 Greit å vite: Arbeidsgiveren har plikt til å legge til rette for at du kan jobbe helt
                                 eller delvis selv om du er syk.
-                            </p>
+                            </Ingress>
                         </div>
                     </Lesmerpanel>
 
-                    <h3>Dine søknader</h3>
+                    <Undertittel>Dine søknader</Undertittel>
                     <div>
                         {søknader.map((søknad, index) => {
                             return <SoknadstatusinfoComponent key={index} søknad={søknad}></SoknadstatusinfoComponent>;
