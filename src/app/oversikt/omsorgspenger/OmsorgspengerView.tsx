@@ -1,22 +1,22 @@
 import * as React from 'react';
 import { SøknadApiResponse } from '../../types/apiTypes/søknadTypes';
-import InnsynPage from '../../components/innsyn-page/InnsynPage';
 import Lesmerpanel from 'nav-frontend-lesmerpanel';
 import './OmsorgspengerView.less';
 import SoknadstatusinfoComponent from 'app/components/soknadstatusinfoComponent/SoknadstatusinfoComponent';
 import { Sidetittel } from 'nav-frontend-typografi';
-import { erOmsorgspenger } from '../../utils/SøknadUtils';
-import BackLink from '../../components/backlink/BackLink';
+import { RouteConfig } from '../../config/routeConfig';
+import { Tilbakeknapp } from 'nav-frontend-ikonknapper';
+import { useHistory } from 'react-router-dom';
 
 interface Props {
     søknader: SøknadApiResponse;
 }
 
 const OmsorgspengerView: React.FC<Props> = ({ søknader }: Props) => {
+    const history = useHistory();
     return (
-        <InnsynPage>
-            <BackLink href={'/'} tittel={'Tilbake til oversikt'} />
-
+        <>
+            <Tilbakeknapp onClick={() => history.push(RouteConfig.ROOT)}>Tilbake til oversikt</Tilbakeknapp>
             {søknader && (
                 <div>
                     <Sidetittel>Dine Omsorgspenger</Sidetittel>
@@ -37,18 +37,14 @@ const OmsorgspengerView: React.FC<Props> = ({ søknader }: Props) => {
 
                     <h3>Dine søknader</h3>
                     <div>
-                        {søknader
-                            ?.filter((søknad) => erOmsorgspenger(søknad))
-                            .map((søknad, index) => {
-                                return (
-                                    <SoknadstatusinfoComponent key={index} søknad={søknad}></SoknadstatusinfoComponent>
-                                );
-                            })}
+                        {søknader.map((søknad, index) => {
+                            return <SoknadstatusinfoComponent key={index} søknad={søknad}></SoknadstatusinfoComponent>;
+                        })}
                     </div>
                 </div>
             )}
-            <BackLink href={'/'} tittel={'Tilbake til oversikt'} />
-        </InnsynPage>
+            <Tilbakeknapp onClick={() => history.push(RouteConfig.ROOT)}>Tilbake til oversikt</Tilbakeknapp>
+        </>
     );
 };
 

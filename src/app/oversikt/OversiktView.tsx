@@ -41,15 +41,14 @@ const OversiktView: React.FC<Props> = ({ søknad }: Props) => {
             {søknad && (
                 <div>
                     <h1>Ytelsesoversikt</h1>
-                    <Link to={RouteConfig.DINE_PLEIEPENGER}>Denne linker uten å refreshe</Link>
                     <br />
                     {søknad?.length === 0 && (
                         <InformationPoster>
                             <Box padBottom={'l'}>Du har ingen registrerte søknader</Box>
                         </InformationPoster>
                     )}
-                    {harPleiepenger && genererLenkeBase(`/innlogget/dine-pleiepenger`, ' Dine Pleiepenger')}
-                    {harOmsorgspenger && genererLenkeBase(`${publicPath}/dine-omsorgspenger`, ' Dine Omsorgspenger')}
+                    {harPleiepenger && genererLenkeBase(`${RouteConfig.DINE_PLEIEPENGER}`, ' Dine Pleiepenger')}
+                    {harOmsorgspenger && genererLenkeBase(`${RouteConfig.DINE_OMSORGSPENGER}`, ' Dine Omsorgspenger')}
                     {harOpplæringspenger &&
                         genererLenkeBase(`${publicPath}/dine-opplæringspenger`, ' Dine Opplæringspenger')}
                     {harPleiepengerNærstående &&
@@ -61,15 +60,22 @@ const OversiktView: React.FC<Props> = ({ søknad }: Props) => {
 };
 
 const genererLenkeBase = (href: string, tittel: string) => (
-    <LenkepanelBase href={href} border>
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-            <div>
-                <PleiepengerIkon></PleiepengerIkon>
-            </div>
-            <div>
-                <Undertittel className="lenkepanel_heading ml-1 ">{tittel}</Undertittel>
-            </div>
-        </div>
+    <LenkepanelBase
+        href={'#'}
+        border
+        linkCreator={(props: React.AnchorHTMLAttributes<HTMLAnchorElement>) => (
+            <Link to={href} {...props}>
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <div>
+                        <PleiepengerIkon></PleiepengerIkon>
+                    </div>
+                    <div>
+                        <Undertittel className="lenkepanel_heading ml-1 ">{tittel}</Undertittel>
+                    </div>
+                </div>
+            </Link>
+        )}>
+        <div></div>
     </LenkepanelBase>
 );
 

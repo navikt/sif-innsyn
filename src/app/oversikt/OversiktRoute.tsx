@@ -9,6 +9,7 @@ import { Route, Switch } from 'react-router-dom';
 import { RouteConfig } from '../config/routeConfig';
 import PleiepengerView from './pleiepenger/PleiepengerView';
 import OmsorgspengerView from './omsorgspenger/OmsorgspengerView';
+import { erOmsorgspenger, erPleiepenger } from '../utils/SøknadUtils';
 
 const OversiktRoute: React.FC = (): JSX.Element => (
     <Fetcher<SøknadApiResponse>
@@ -32,12 +33,18 @@ const OversiktRoute: React.FC = (): JSX.Element => (
                     <Route
                         exact={true}
                         path={RouteConfig.DINE_PLEIEPENGER}
-                        component={() => <PleiepengerView søknader={søknadApiResponse} />}
+                        component={() => (
+                            <PleiepengerView søknader={søknadApiResponse.filter((søknad) => erPleiepenger(søknad))} />
+                        )}
                     />
                     <Route
                         exact={true}
                         path={RouteConfig.DINE_OMSORGSPENGER}
-                        component={() => <OmsorgspengerView søknader={søknadApiResponse} />}
+                        component={() => (
+                            <OmsorgspengerView
+                                søknader={søknadApiResponse.filter((søknad) => erOmsorgspenger(søknad))}
+                            />
+                        )}
                     />
                     <Route
                         path={'/innlogget'}
