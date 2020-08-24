@@ -3,7 +3,7 @@ import { SøknadApiResponse, Søknadstype } from '../types/apiTypes/søknadTypes
 import { getEnvironmentVariable } from '../utils/envUtils';
 import { PleiepengerIkon } from '../svg/FellesIkoner';
 import { LenkepanelBase } from 'nav-frontend-lenkepanel/lib';
-import { Undertittel, Sidetittel } from 'nav-frontend-typografi';
+import { Undertittel } from 'nav-frontend-typografi';
 import './OversiktView.less';
 import {
     søknadTypeErOmsorgspenger,
@@ -40,8 +40,6 @@ const OversiktView: React.FC<Props> = ({ søknad }: Props) => {
         <>
             {søknad && (
                 <div>
-                    <Sidetittel>Ytelsesoversikt</Sidetittel>
-                    <br />
                     {søknad?.length === 0 && (
                         <InformationPoster>
                             <Box padBottom={'l'}>Du har ingen registrerte søknader</Box>

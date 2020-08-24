@@ -1,6 +1,5 @@
 import * as React from 'react';
 import LoadingPage from '../components/pages/loading-page/LoadingPage';
-import ReactJsonView from '../functional/ReactJsonView';
 import Fetcher from '../functional/fetcher/Fetcher';
 import { SøknadApiResponse, søknadRecipe } from '../types/apiTypes/søknadTypes';
 import OversiktView from './OversiktView';
@@ -10,6 +9,7 @@ import { RouteConfig } from '../config/routeConfig';
 import PleiepengerView from './pleiepenger/PleiepengerView';
 import OmsorgspengerView from './omsorgspenger/OmsorgspengerView';
 import { erOmsorgspenger, erPleiepenger } from '../utils/SøknadUtils';
+import AlertStripe from 'nav-frontend-alertstriper';
 
 const OversiktRoute: React.FC = (): JSX.Element => (
     <Fetcher<SøknadApiResponse>
@@ -19,7 +19,11 @@ const OversiktRoute: React.FC = (): JSX.Element => (
             <HandleUnauthorized
                 error={e}
                 onWillRedirect={() => <LoadingPage />}
-                handleError={() => <ReactJsonView input={e} />} // TODO: Håndter error.
+                handleError={() => (
+                    <AlertStripe type="feil">
+                        Vi opplever ustablitet med våre søknadstjenester. Vennligst prøv igjen senere.
+                    </AlertStripe>
+                )}
             />
         )}
         success={([søknadApiResponse]: [SøknadApiResponse]) => {
