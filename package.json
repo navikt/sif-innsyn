@@ -26,7 +26,9 @@
     "dependencies": {
         "@formatjs/intl-pluralrules": "^2.2.6",
         "@formatjs/intl-relativetimeformat": "^5.2.6",
+        "@navikt/omsorgspenger-kalkulator": "^1.0.1",
         "@navikt/sif-common-core": "^4.0.8",
+        "@navikt/sif-common-formik": "^10.0.7",
         "@navikt/sif-common-sentry": "0.0.8",
         "@sentry/browser": "^5.17.0",
         "@testing-library/react": "^10.2.1",
@@ -83,7 +85,6 @@
         "nav-frontend-typografi": "^2.0.26",
         "nav-frontend-veileder": "^2.0.17",
         "nav-frontend-veilederpanel": "^0.1.25",
-        "omsorgspenger-kalkulator": "^0.2.4",
         "promise": "^8.1.0",
         "prop-types": "^15.7.2",
         "react": "^16.13.1",
