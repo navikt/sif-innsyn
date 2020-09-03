@@ -18,8 +18,8 @@ export const ValueBoolRadioValue = (value: Value<boolean>): RadioValue =>
 export const YesOrNoToBool = (yesOrNo: YesOrNo): boolean => yesOrNo === YesOrNo.Yes;
 
 export const yesOrNoRadios = (id: string) => [
-    { label: 'Ja', value: YesOrNo.Yes, id },
-    { label: 'Nei', value: YesOrNo.No, id },
+    { label: 'Ja', value: YesOrNo.Yes },
+    { label: 'Nei', value: YesOrNo.No },
 ];
 
 export const toISODateStringOrUndefined = (
