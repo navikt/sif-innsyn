@@ -21,7 +21,7 @@ import { Datovelger, ISODateString } from 'nav-datovelger';
 import {
     toISODateStringOrUndefined,
     toValueOrUndefined,
-    ValueBoolToYesOrNo,
+    ValueBoolRadioValue,
     yesOrNoRadios,
     YesOrNoToBool,
 } from './utils';
@@ -122,8 +122,8 @@ const ReducerKalkulator = () => {
                                             dispatch(setKroniskSykt(YesOrNoToBool(value), barnInfo.id));
                                         }
                                     }}
-                                    checked={ValueBoolToYesOrNo(barnInfo.kroniskSykt)}
-                                    radios={yesOrNoRadios}
+                                    checked={ValueBoolRadioValue(barnInfo.kroniskSykt)}
+                                    radios={yesOrNoRadios(barnInfo.kroniskSykt.id)}
                                 />
                                 <RadioPanelGruppe
                                     name={barnInfo.borSammen.id}
@@ -138,8 +138,8 @@ const ReducerKalkulator = () => {
                                             dispatch(setBorSammen(YesOrNoToBool(value), barnInfo.id));
                                         }
                                     }}
-                                    checked={ValueBoolToYesOrNo(barnInfo.borSammen)}
-                                    radios={yesOrNoRadios}
+                                    checked={ValueBoolRadioValue(barnInfo.borSammen)}
+                                    radios={yesOrNoRadios(barnInfo.borSammen.id)}
                                 />
                                 <RadioPanelGruppe
                                     name={barnInfo.aleneOmOmsorgen.id}
@@ -156,8 +156,8 @@ const ReducerKalkulator = () => {
                                             dispatch(setAleneOmOmsorgen(YesOrNoToBool(value), barnInfo.id));
                                         }
                                     }}
-                                    checked={ValueBoolToYesOrNo(barnInfo.aleneOmOmsorgen)}
-                                    radios={yesOrNoRadios}
+                                    checked={ValueBoolRadioValue(barnInfo.aleneOmOmsorgen)}
+                                    radios={yesOrNoRadios(barnInfo.aleneOmOmsorgen.id)}
                                 />
                             </Ekspanderbartpanel>
                         </FormBlock>

@@ -9,7 +9,7 @@ import { pipe } from 'fp-ts/lib/pipeable';
 
 export type RadioValue = YesOrNo | undefined;
 
-export const ValueBoolToYesOrNo = (value: Value<boolean>): RadioValue =>
+export const ValueBoolRadioValue = (value: Value<boolean>): RadioValue =>
     fold(
         () => undefined,
         (v) => (v ? YesOrNo.Yes : YesOrNo.No)
@@ -17,9 +17,9 @@ export const ValueBoolToYesOrNo = (value: Value<boolean>): RadioValue =>
 
 export const YesOrNoToBool = (yesOrNo: YesOrNo): boolean => yesOrNo === YesOrNo.Yes;
 
-export const yesOrNoRadios = [
-    { label: 'Ja', value: YesOrNo.Yes },
-    { label: 'Nei', value: YesOrNo.No },
+export const yesOrNoRadios = (id: string) => [
+    { label: 'Ja', value: YesOrNo.Yes, id },
+    { label: 'Nei', value: YesOrNo.No, id },
 ];
 
 export const toISODateStringOrUndefined = (
