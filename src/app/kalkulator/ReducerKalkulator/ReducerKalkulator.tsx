@@ -27,7 +27,7 @@ import {
 } from './utils';
 import { isYesOrNo } from './typeguards';
 import { createInitialBarnInformasjon } from './initializers';
-import { fold } from 'fp-ts/lib/Either';
+import { fold, isLeft, isRight } from 'fp-ts/lib/Either';
 import { Hovedknapp } from 'nav-frontend-knapper';
 
 export const isNumber = (input: any): input is number => {
@@ -98,6 +98,7 @@ const ReducerKalkulator = () => {
                                 }
                                 key={index}>
                                 <Datovelger
+                                    id={barnInfo.fodselsdato.id}
                                     valgtDato={toISODateStringOrUndefined(barnInfo.fodselsdato.value)}
                                     onChange={(maybeISODateString: ISODateString | undefined) => {
                                         if (maybeISODateString) {
@@ -105,16 +106,17 @@ const ReducerKalkulator = () => {
                                         }
                                     }}
                                     kanVelgeUgyldigDato={true}
+                                    datoErGyldig={isRight(barnInfo.fodselsdato.value)}
                                 />
                                 <RadioPanelGruppe
-                                    name={'kroniskSykt'}
+                                    name={barnInfo.kroniskSykt.id}
                                     legend={
                                         <LabelWithInfo info={'Noe beskrivende info'}>
                                             Har du fått ekstra omsorgsdager fordi barnet har en kronisk sykdom eller en
                                             funksjonshemning?
                                         </LabelWithInfo>
                                     }
-                                    feil={false}
+                                    feil={isLeft(barnInfo.kroniskSykt.value) ? <span>Feltet mangler</span> : undefined}
                                     onChange={(evt, value) => {
                                         if (isYesOrNo(value)) {
                                             dispatch(setKroniskSykt(YesOrNoToBool(value), barnInfo.id));
@@ -124,13 +126,13 @@ const ReducerKalkulator = () => {
                                     radios={yesOrNoRadios}
                                 />
                                 <RadioPanelGruppe
-                                    name={'borSammen'}
+                                    name={barnInfo.borSammen.id}
                                     legend={
                                         <LabelWithInfo info={'Noe beskrivende info'}>
                                             Bor barnet fast hos deg?
                                         </LabelWithInfo>
                                     }
-                                    feil={false}
+                                    feil={isLeft(barnInfo.borSammen.value) ? <span>Feltet mangler</span> : undefined}
                                     onChange={(evt, value) => {
                                         if (isYesOrNo(value)) {
                                             dispatch(setBorSammen(YesOrNoToBool(value), barnInfo.id));
@@ -140,13 +142,13 @@ const ReducerKalkulator = () => {
                                     radios={yesOrNoRadios}
                                 />
                                 <RadioPanelGruppe
-                                    name={'aleneOmOmsorgen'}
+                                    name={barnInfo.aleneOmOmsorgen.id}
                                     legend={
                                         <LabelWithInfo info={'Noe beskrivende info'}>
                                             Er du alene om omsorgen med barnet?
                                         </LabelWithInfo>
                                     }
-                                    feil={false}
+                                    feil={isLeft(barnInfo.aleneOmOmsorgen.value) ? <span>Feltet mangler</span> : undefined}
                                     onChange={(evt, value) => {
                                         if (isYesOrNo(value)) {
                                             dispatch(setAleneOmOmsorgen(YesOrNoToBool(value), barnInfo.id));

@@ -51,6 +51,7 @@ export function toValueOrUndefined<T>(eitherErrorOrValue: EitherErrorOr<T>): T |
     )(eitherErrorOrValue);
 }
 
+// TODO: Fiks all naming herifra og ned
 interface Tull {
     id: string;
     fodselsdato: ISODateString;
