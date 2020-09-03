@@ -148,7 +148,9 @@ const ReducerKalkulator = () => {
                                             Er du alene om omsorgen med barnet?
                                         </LabelWithInfo>
                                     }
-                                    feil={isLeft(barnInfo.aleneOmOmsorgen.value) ? <span>Feltet mangler</span> : undefined}
+                                    feil={
+                                        isLeft(barnInfo.aleneOmOmsorgen.value) ? <span>Feltet mangler</span> : undefined
+                                    }
                                     onChange={(evt, value) => {
                                         if (isYesOrNo(value)) {
                                             dispatch(setAleneOmOmsorgen(YesOrNoToBool(value), barnInfo.id));
