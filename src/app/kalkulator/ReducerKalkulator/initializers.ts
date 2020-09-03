@@ -36,7 +36,7 @@ export function initializeNotAnswered<T>(): Value<T> {
 export const createInitialBarnInformasjon = (): BarnInfo => ({
     id: uuidv4(),
     fodselsdato: initializeNotAnswered(),
-    ekstraOmsorgsdager: initializeNotAnswered(),
+    kroniskSykt: initializeNotAnswered(),
     borSammen: initializeNotAnswered(),
     aleneOmOmsorgen: initializeNotAnswered(),
 });

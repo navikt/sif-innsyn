@@ -4,8 +4,11 @@ export enum ActionType {
     SetBarn = 'SetBarn',
     ShowValidationErrorSummary = 'ShowValidationErrorSummary',
     HideValidationErrorSummary = 'HideValidationErrorSummary',
-    SetAleneOmOmsorgenForBarnInfo = 'SetAleneOmOmsorgenForBarnInfo',
     SetFodselsdatoForBarnInfo = 'SetFodselsdatoForBarnInfo',
+    SetKroniskSykt = 'SetKroniskSykt',
+    SetBorSammen = 'SetBorSammen',
+    SetAleneOmOmsorgen = 'SetAleneOmOmsorgen',
+    Beregn = 'Beregn',
 }
 
 export interface SetBarn {
@@ -46,20 +49,50 @@ export const setFodselsdatoForBarnInfo = (
     barnInfoId,
 });
 
-export interface SetAleneOmOmsorgenForBarnInfo {
-    type: ActionType.SetAleneOmOmsorgenForBarnInfo;
+export interface SetKroniskSykt {
+    type: ActionType.SetKroniskSykt;
     value: boolean;
     barnInfoId: string;
 }
-export const setAleneOmOmsorgenForBarnInfo = (value: boolean, barnInfoId: string): SetAleneOmOmsorgenForBarnInfo => ({
-    type: ActionType.SetAleneOmOmsorgenForBarnInfo,
+export const setKroniskSykt = (value: boolean, barnInfoId: string): SetKroniskSykt => ({
+    type: ActionType.SetKroniskSykt,
     value,
     barnInfoId,
 });
+export interface SetBorSammen {
+    type: ActionType.SetBorSammen;
+    value: boolean;
+    barnInfoId: string;
+}
+export const setBorSammen = (value: boolean, barnInfoId: string): SetBorSammen => ({
+    type: ActionType.SetBorSammen,
+    value,
+    barnInfoId,
+});
+export interface SetAleneOmOmsorgen {
+    type: ActionType.SetAleneOmOmsorgen;
+    value: boolean;
+    barnInfoId: string;
+}
+export const setAleneOmOmsorgen = (value: boolean, barnInfoId: string): SetAleneOmOmsorgen => ({
+    type: ActionType.SetAleneOmOmsorgen,
+    value,
+    barnInfoId,
+});
+
+export interface Beregn {
+    type: ActionType.Beregn;
+}
+export const beregn: Beregn = {
+    type: ActionType.Beregn,
+};
 
 export type Action =
     | SetBarn
     | ShowValidationErrorSummary
     | HideValidationErrorSummary
-    | SetAleneOmOmsorgenForBarnInfo
-    | SetFodselsdatoForBarnInfo;
+    | SetFodselsdatoForBarnInfo
+    | SetKroniskSykt
+    | SetBorSammen
+    | SetAleneOmOmsorgen
+    | Beregn;

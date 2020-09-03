@@ -2,6 +2,11 @@ import { Either } from 'fp-ts/lib/Either';
 import { FeiloppsummeringFeil } from 'nav-frontend-skjema';
 import { ISODateString } from 'nav-datovelger';
 
+export enum YesOrNo {
+    Yes = 'Yes',
+    No = 'No',
+}
+
 export interface ValueWithId<T> {
     id: string;
     value: T;
@@ -18,15 +23,15 @@ export interface NBarn {
 export interface BarnInfo {
     id: string;
     fodselsdato: Value<ISODateString>;
-    ekstraOmsorgsdager: Value<boolean>;
+    kroniskSykt: Value<boolean>;
     borSammen: Value<boolean>;
     aleneOmOmsorgen: Value<boolean>;
 }
 
-export interface ValidatedBarnInfo {
+export interface ValidBarnInfo {
     id: string;
     fodselsdato: ValidatedValue<ISODateString>;
-    ekstraOmsorgsdager: ValidatedValue<boolean>;
+    kroniskSykt: ValidatedValue<boolean>;
     borSammen: ValidatedValue<boolean>;
     aleneOmOmsorgen: ValidatedValue<boolean>;
 }

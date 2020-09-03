@@ -1,3 +1,3 @@
-import { DefinedRadioValue } from './utils';
+import { YesOrNo } from './types';
 
-export const isJaOrNei = (value: string): value is DefinedRadioValue => value === 'ja' || value === 'nei';
+export const isYesOrNo = (value: string): value is YesOrNo => value === YesOrNo.Yes || value === YesOrNo.No;
