@@ -1,12 +1,21 @@
 import * as React from 'react';
 import { useReducer } from 'react';
 import { KalkulatorReducer, reducer } from './reducer';
-import { BarnInfo, initialState, State } from './state';
-import { ActionType } from './actions';
+import { createInitialState, State } from './state';
+import { setAleneOmOmsorgenForBarnInfo, setBarn, setFodselsdatoForBarnInfo } from './actions';
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import SvgSuccessCircle from '../svgs/SvgSuccessCircle';
 import ValidationSummary from '@navikt/sif-common-formik/lib/components/helpers/ValidationSummary';
 import FormBlock from '@navikt/sif-common-core/lib/components/form-block/FormBlock';
+import { BarnInfo } from './types';
+import { FeiloppsummeringFeil, RadioPanelGruppe } from 'nav-frontend-skjema';
+import { LabelWithInfo } from '@navikt/sif-common-formik/lib';
+import { Datovelger, ISODateString } from 'nav-datovelger';
+import { definedJaOrNeiToBool, toISODateStringOrUndefined, toValueOrUndefined, valueToJaNeiRadioValue } from './utils';
+import { isJaOrNei } from './typeguards';
+import { createInitialBarnInformasjon } from './initializers';
+import { fold } from 'fp-ts/lib/Either';
+import Omsorgsprinsipper from '@navikt/omsorgspenger-kalkulator/lib/types/Omsorgsprinsipper';
 
 export const isNumber = (input: any): input is number => {
     // TODO: Implement.
@@ -14,7 +23,10 @@ export const isNumber = (input: any): input is number => {
 };
 
 const ReducerKalkulator = () => {
-    const [state, dispatch] = useReducer<KalkulatorReducer>(reducer, initialState);
+    const [state, dispatch] = useReducer<KalkulatorReducer>(
+        reducer,
+        createInitialState([createInitialBarnInformasjon(), createInitialBarnInformasjon()])
+    );
     const { nBarnMaks, barn }: State = state;
 
     // useMemo<Omsorgsprinsipper>(
@@ -31,13 +43,12 @@ const ReducerKalkulator = () => {
             <FormBlock>
                 <div>Hvor mange barn er det i husstanden?</div>
                 <select
+                    id={state.nBarn.id}
+                    value={toValueOrUndefined(state.nBarn.value)}
                     onChange={(event) => {
                         const maybeNumber: number = parseInt(event.target.value, 10);
                         if (isNumber(maybeNumber)) {
-                            dispatch({
-                                type: ActionType.SetBarn,
-                                nBarn: maybeNumber,
-                            });
+                            dispatch(setBarn(maybeNumber));
                         }
                     }}>
                     {Array.from({ length: nBarnMaks }, (_, i) => i).map((value: number) => {
@@ -71,17 +82,63 @@ const ReducerKalkulator = () => {
                                     </div>
                                 }
                                 key={index}>
-                                Innhold for barn nummer {index + 1}
+                                <Datovelger
+                                    valgtDato={toISODateStringOrUndefined(barnInfo.fodselsdato.value)}
+                                    onChange={(maybeISODateString: ISODateString | undefined) => {
+                                        if (maybeISODateString) {
+                                            dispatch(setFodselsdatoForBarnInfo(maybeISODateString, barnInfo.id));
+                                        }
+                                    }}
+                                    kanVelgeUgyldigDato={true}
+                                />
+                                <RadioPanelGruppe
+                                    name={'RadioPanelGroupName'}
+                                    legend={
+                                        <LabelWithInfo info={'Noe beskrivende info'}>
+                                            Legend for Ja/Nei radiopanel gruppe
+                                        </LabelWithInfo>
+                                    }
+                                    feil={false}
+                                    onChange={(evt, value) => {
+                                        if (isJaOrNei(value)) {
+                                            dispatch(
+                                                setAleneOmOmsorgenForBarnInfo(definedJaOrNeiToBool(value), barnInfo.id)
+                                            );
+                                        }
+                                    }}
+                                    checked={valueToJaNeiRadioValue(barnInfo.aleneOmOmsorgen)}
+                                    radios={[
+                                        { label: 'Ja', value: 'ja' },
+                                        { label: 'Nei', value: 'nei' },
+                                    ]}
+                                />
                             </Ekspanderbartpanel>
                         </FormBlock>
                     );
                 })}
             </FormBlock>
             <FormBlock>
-                <ValidationSummary
-                    title={'Validation summary tittel'}
-                    errorMessages={[{ skjemaelementId: 'theVerySecretId', feilmelding: 'Du har en feil lengre oppe.' }]}
-                />
+                {fold(
+                    (errors: FeiloppsummeringFeil[]) => {
+                        return (
+                            <div>
+                                <ValidationSummary
+                                    title={'Validation summary tittel'}
+                                    errorMessages={[
+                                        ...errors,
+                                        {
+                                            skjemaelementId: 'theVerySecretId',
+                                            feilmelding: 'Du har en feil lengre oppe.',
+                                        },
+                                    ]}
+                                />
+                            </div>
+                        );
+                    },
+                    (resultat: Omsorgsprinsipper) => {
+                        return <div>All info er riktig inputet, og resultatet kan vises her</div>;
+                    }
+                )(state.resultat)}
             </FormBlock>
         </div>
     );
