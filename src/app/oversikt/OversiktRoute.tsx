@@ -19,11 +19,14 @@ const OversiktRoute: React.FC = (): JSX.Element => (
             <HandleUnauthorized
                 error={e}
                 onWillRedirect={() => <LoadingPage />}
-                handleError={() => (
-                    <AlertStripe type="feil">
-                        Vi opplever ustablitet med våre søknadstjenester. Vennligst prøv igjen senere.
-                    </AlertStripe>
-                )}
+                handleError={(error) => {
+                    console.error(error);
+                    return (
+                        <AlertStripe type="feil">
+                            Vi opplever ustablitet med våre søknadstjenester. Vennligst prøv igjen senere.
+                        </AlertStripe>
+                    );
+                }}
             />
         )}
         success={([søknadApiResponse]: [SøknadApiResponse]) => {
