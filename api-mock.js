@@ -143,7 +143,7 @@ const soknadMock = [
             skalPassePaBarnetIHelePerioden: true,
             harForståttRettigheterOgPlikter: true,
         },
-        saksId: 'sak-5674839201',
+        saksId: null,
         journalpostId: '68493021',
         opprettet: '2018-11-05T03:04:05',
         endret: '2020-06-23T09:11:21.948652',

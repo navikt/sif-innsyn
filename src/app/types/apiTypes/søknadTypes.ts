@@ -38,7 +38,7 @@ export interface Søknad {
 export type SøknadApiResponse = Søknad[];
 
 export const isSøknad = (input: any): input is Søknad => {
-    if (input && input.søknadstype && input.status && input.saksId && input.journalpostId) {
+    if (input && input.søknadstype && input.status && input.journalpostId) {
         return true;
     } else {
         return false;
