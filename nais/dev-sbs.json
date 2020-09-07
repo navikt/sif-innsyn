@@ -1,6 +1,6 @@
 {
   "app": "sif-innsyn",
-  "cluster": "dev-gcp",
+  "cluster": "dev-sbs",
   "namespace": "dusseldorf",
   "team": "dusseldorf",
   "minReplicas": "1",
