@@ -3,7 +3,7 @@ import { initializeNotAnswered, initializeWithValue } from './initializers';
 import { FeiloppsummeringFeil } from 'nav-frontend-skjema';
 import Omsorgsprinsipper from '@navikt/omsorgspenger-kalkulator/lib/types/Omsorgsprinsipper';
 import { Either } from 'fp-ts/lib/Either';
-import { evaluateBarnInfo } from './utils';
+import { validateListOfBarnInfo } from './utils';
 import { none, Option } from 'fp-ts/lib/Option';
 
 export interface State {
@@ -24,7 +24,7 @@ export const createInitialState = (listeAvBarnInfo: BarnInfo[]): State => {
         nBarn: nBarnInitially,
         barn: listeAvBarnInfo,
         showErrors: false,
-        validationResult: evaluateBarnInfo(listeAvBarnInfo, nBarnInitially.id),
+        validationResult: validateListOfBarnInfo(listeAvBarnInfo, nBarnInitially.id),
         resultat: none,
     };
 };

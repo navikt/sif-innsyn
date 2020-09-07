@@ -1,5 +1,5 @@
 import { BarnInfo, EitherErrorOr, ValidBarnInfo, Value, YesOrNo } from './types';
-import { chain, Either, either, fold, getOrElse, left, map, right, swap } from 'fp-ts/lib/Either';
+import { chain, Either, either, fold, getOrElse, isRight, left, map, right, swap } from 'fp-ts/lib/Either';
 import { flatten, separate, sequence } from 'fp-ts/lib/Array';
 import { ISODateString } from 'nav-datovelger';
 import Barn, { AlderEnum, AlderType } from '@navikt/omsorgspenger-kalkulator/lib/types/Barn';
@@ -57,6 +57,8 @@ export function getListOfError<T>(input: Either<FeiloppsummeringFeil, T>): Feilo
     return getOrElse((): FeiloppsummeringFeil[] => [])(map((e: FeiloppsummeringFeil) => [e])(swap(input)));
 }
 
+export const isValidBarnInfo = (barnInfo: BarnInfo): boolean => isRight(validateBarnInfo(barnInfo));
+
 export const validateBarnInfo = (barnInfo: BarnInfo): Either<FeiloppsummeringFeil[], ValidBarnInfo> => {
     const { value: eitherF, id: idF } = barnInfo.fodselsdato;
     const { value: eitherK, id: idK } = barnInfo.kroniskSykt;
@@ -102,7 +104,7 @@ export const extractEitherFromList = (
         )
     );
 
-export const evaluateBarnInfo = (
+export const validateListOfBarnInfo = (
     listeAvBarnInfo: BarnInfo[],
     nBarnSelectId: string
 ): Either<FeiloppsummeringFeil[], ValidBarnInfo[]> => {

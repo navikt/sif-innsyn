@@ -4,7 +4,7 @@ import { createFeiloppsummeringFeilZeroChildren, createInitialBarnInformasjon } 
 import { BarnInfo, ValidBarnInfo } from './types';
 import { Either, left, right } from 'fp-ts/lib/Either';
 import { FeiloppsummeringFeil } from 'nav-frontend-skjema';
-import { evaluateBarnInfo } from './utils';
+import { validateListOfBarnInfo } from './utils';
 
 export type KalkulatorReducer = (state: State, action: Action) => State;
 
@@ -15,6 +15,7 @@ export const reducer: KalkulatorReducer = (state: State, action: Action): State 
                 ...state,
                 nBarn: { ...state.nBarn, value: right(action.nBarn) },
                 barn: Array.from({ length: action.nBarn }, (_, i) => createInitialBarnInformasjon()),
+                showErrors: false,
             };
         }
         case ActionType.SetNBarnInvalid: {
@@ -72,7 +73,7 @@ export const reducer: KalkulatorReducer = (state: State, action: Action): State 
         }
 
         case ActionType.Beregn: {
-            const validationResult: Either<FeiloppsummeringFeil[], ValidBarnInfo[]> = evaluateBarnInfo(
+            const validationResult: Either<FeiloppsummeringFeil[], ValidBarnInfo[]> = validateListOfBarnInfo(
                 state.barn,
                 state.nBarn.id
             );

@@ -6,7 +6,8 @@ export enum RouteConfig {
     OVERSIKT = '/oversikt',
     DINE_PLEIEPENGER = '/dine-pleiepenger',
     DINE_OMSORGSPENGER = '/dine-omsorgspenger',
-    KALKULATOR = '/kalkis',
+    KALKULATOR_INFO = '/kalkulator-info',
+    KALKULATOR = '/kalkulator',
     UTILGJENGELIG_ROUTE = '/utilgjengelig',
     FP = '/fp',
 }
