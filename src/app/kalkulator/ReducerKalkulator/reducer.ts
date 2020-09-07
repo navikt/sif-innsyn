@@ -1,8 +1,8 @@
 import { State } from './state';
 import { Action, ActionType } from './actions';
-import { createInitialBarnInformasjon } from './initializers';
+import { createFeiloppsummeringFeilZeroChildren, createInitialBarnInformasjon } from './initializers';
 import { BarnInfo, ValidBarnInfo } from './types';
-import { Either, right } from 'fp-ts/lib/Either';
+import { Either, left, right } from 'fp-ts/lib/Either';
 import { FeiloppsummeringFeil } from 'nav-frontend-skjema';
 import { evaluateBarnInfo } from './utils';
 
@@ -10,17 +10,24 @@ export type KalkulatorReducer = (state: State, action: Action) => State;
 
 export const reducer: KalkulatorReducer = (state: State, action: Action): State => {
     switch (action.type) {
-        case ActionType.SetBarn: {
+        case ActionType.SetNBarn: {
             return {
                 ...state,
                 nBarn: { ...state.nBarn, value: right(action.nBarn) },
                 barn: Array.from({ length: action.nBarn }, (_, i) => createInitialBarnInformasjon()),
             };
         }
+        case ActionType.SetNBarnInvalid: {
+            return {
+                ...state,
+                nBarn: { ...state.nBarn, value: left(createFeiloppsummeringFeilZeroChildren(state.nBarn.id)) },
+                barn: [],
+            };
+        }
         case ActionType.ShowValidationErrorSummary:
-            return { ...state, showValidationErrorSummary: true };
+            return { ...state, showErrors: true };
         case ActionType.HideValidationErrorSummary:
-            return { ...state, showValidationErrorSummary: false };
+            return { ...state, showErrors: false };
 
         case ActionType.SetFodselsdatoForBarnInfo: {
             return {
@@ -65,13 +72,14 @@ export const reducer: KalkulatorReducer = (state: State, action: Action): State 
         }
 
         case ActionType.Beregn: {
-            console.info('Beregner .....');
-            const validationResult: Either<FeiloppsummeringFeil[], ValidBarnInfo[]> = evaluateBarnInfo(state.barn);
-            console.info('Ferdig');
+            const validationResult: Either<FeiloppsummeringFeil[], ValidBarnInfo[]> = evaluateBarnInfo(
+                state.barn,
+                state.nBarn.id
+            );
 
             return {
                 ...state,
-                showValidationErrorSummary: true,
+                showErrors: true,
                 validationResult: validationResult,
             };
         }

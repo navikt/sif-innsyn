@@ -1,11 +1,13 @@
 import { BarnInfo, EitherErrorOr, ValidBarnInfo, Value, YesOrNo } from './types';
-import { chain, Either, either, fold, left, map, right } from 'fp-ts/lib/Either';
-import { sequence } from 'fp-ts/lib/Array';
+import { chain, Either, either, fold, getOrElse, left, map, right, swap } from 'fp-ts/lib/Either';
+import { flatten, separate, sequence } from 'fp-ts/lib/Array';
 import { ISODateString } from 'nav-datovelger';
 import Barn, { AlderEnum, AlderType } from '@navikt/omsorgspenger-kalkulator/lib/types/Barn';
 import moment from 'moment';
 import { FeiloppsummeringFeil } from 'nav-frontend-skjema';
 import { pipe } from 'fp-ts/lib/pipeable';
+import { Separated } from 'fp-ts/lib/Compactable';
+import { createFeiloppsummeringFeilNotAnswered } from './initializers';
 
 export type RadioValue = YesOrNo | undefined;
 
@@ -51,59 +53,64 @@ export function toValueOrUndefined<T>(eitherErrorOrValue: EitherErrorOr<T>): T |
     )(eitherErrorOrValue);
 }
 
-// TODO: Fiks all naming herifra og ned
-interface Tull {
-    id: string;
-    fodselsdato: ISODateString;
-    ekstraOmsorgsdager: boolean;
-    borSammen: boolean;
-    aleneOmOmsorgen: boolean;
+export function getListOfError<T>(input: Either<FeiloppsummeringFeil, T>): FeiloppsummeringFeil[] {
+    return getOrElse((): FeiloppsummeringFeil[] => [])(map((e: FeiloppsummeringFeil) => [e])(swap(input)));
 }
 
 export const validateBarnInfo = (barnInfo: BarnInfo): Either<FeiloppsummeringFeil[], ValidBarnInfo> => {
-    const ea: Either<FeiloppsummeringFeil, ISODateString> = barnInfo.fodselsdato.value;
-    const eb: Either<FeiloppsummeringFeil, boolean> = barnInfo.kroniskSykt.value;
-    const ec: Either<FeiloppsummeringFeil, boolean> = barnInfo.borSammen.value;
-    const ed: Either<FeiloppsummeringFeil, boolean> = barnInfo.aleneOmOmsorgen.value;
+    const { value: eitherF, id: idF } = barnInfo.fodselsdato;
+    const { value: eitherK, id: idK } = barnInfo.kroniskSykt;
+    const { value: eitherB, id: idB } = barnInfo.borSammen;
+    const { value: eitherA, id: idA } = barnInfo.aleneOmOmsorgen;
 
-    const result: Either<FeiloppsummeringFeil, Tull> = pipe(
-        ea,
-        map((d: ISODateString) => ({ fodselsdato: d })),
-        chain((a) => map((b: boolean) => ({ ...a, ekstraOmsorgsdager: b }))(eb)),
-        chain((a) => map((b: boolean) => ({ ...a, borSammen: b }))(ec)),
-        chain((a) => map((b: boolean) => ({ ...a, aleneOmOmsorgen: b }))(ed)),
-        chain((a) => map((b: string) => ({ ...a, id: b }))(right(barnInfo.id)))
+    const result: Either<FeiloppsummeringFeil, ValidBarnInfo> = pipe(
+        eitherF,
+        map((fodselsdato: ISODateString) => ({ fodselsdato: { id: idF, value: fodselsdato } })),
+        chain((a) => map((value: boolean) => ({ ...a, kroniskSykt: { id: idK, value } }))(eitherK)),
+        chain((a) => map((value: boolean) => ({ ...a, borSammen: { id: idB, value } }))(eitherB)),
+        chain((a) => map((value: boolean) => ({ ...a, aleneOmOmsorgen: { id: idA, value } }))(eitherA)),
+        chain((a) => map((id: string) => ({ ...a, id }))(right(barnInfo.id)))
     );
 
     return pipe(
         result,
         fold(
-            (e) => left([e]),
-            (t: Tull) => {
-                const validBarnInfo: ValidBarnInfo = {
-                    id: t.id,
-                    fodselsdato: { id: barnInfo.fodselsdato.id, value: t.fodselsdato },
-                    kroniskSykt: { id: barnInfo.kroniskSykt.id, value: t.ekstraOmsorgsdager },
-                    borSammen: { id: barnInfo.borSammen.id, value: t.borSammen },
-                    aleneOmOmsorgen: { id: barnInfo.aleneOmOmsorgen.id, value: t.aleneOmOmsorgen },
-                };
-                return right(validBarnInfo);
-            }
+            (e) =>
+                left([
+                    ...getListOfError(eitherF),
+                    ...getListOfError(eitherK),
+                    ...getListOfError(eitherB),
+                    ...getListOfError(eitherA),
+                ]),
+            (validBarnInfo: ValidBarnInfo) => right(validBarnInfo)
         )
     );
 };
 
 export const extractEitherFromList = (
     list: Either<FeiloppsummeringFeil[], ValidBarnInfo>[]
-): Either<FeiloppsummeringFeil[], ValidBarnInfo[]> => {
-    return sequence(either)(list);
-};
+): Either<FeiloppsummeringFeil[], ValidBarnInfo[]> =>
+    pipe(
+        sequence(either)(list),
+        fold(
+            () => {
+                const separated: Separated<Array<Array<FeiloppsummeringFeil>>, ValidBarnInfo[]> = separate(list);
+                const errors: Array<Array<FeiloppsummeringFeil>> = separated.left;
+                return left(flatten(errors));
+            },
+            (r) => right(r)
+        )
+    );
 
-export const evaluateBarnInfo = (listeAvBarnInfo: BarnInfo[]): Either<FeiloppsummeringFeil[], ValidBarnInfo[]> => {
+export const evaluateBarnInfo = (
+    listeAvBarnInfo: BarnInfo[],
+    nBarnSelectId: string
+): Either<FeiloppsummeringFeil[], ValidBarnInfo[]> => {
     if (listeAvBarnInfo.length === 0) {
-        return left([]);
+        return left([createFeiloppsummeringFeilNotAnswered(nBarnSelectId)]);
     }
-    const mapped: Either<FeiloppsummeringFeil[], ValidBarnInfo>[] = listeAvBarnInfo.map(validateBarnInfo);
-    const extractedEither: Either<FeiloppsummeringFeil[], ValidBarnInfo[]> = extractEitherFromList(mapped);
-    return extractedEither;
+    const listOfEitherErrorOrValidBarnInfo: Either<FeiloppsummeringFeil[], ValidBarnInfo>[] = listeAvBarnInfo.map(
+        validateBarnInfo
+    );
+    return extractEitherFromList(listOfEitherErrorOrValidBarnInfo);
 };

@@ -1,7 +1,8 @@
 import { ISODateString } from 'nav-datovelger/lib/types';
 
 export enum ActionType {
-    SetBarn = 'SetBarn',
+    SetNBarn = 'SetNBarn',
+    SetNBarnInvalid = 'SetNBarnInvalid',
     ShowValidationErrorSummary = 'ShowValidationErrorSummary',
     HideValidationErrorSummary = 'HideValidationErrorSummary',
     SetFodselsdatoForBarnInfo = 'SetFodselsdatoForBarnInfo',
@@ -11,13 +12,19 @@ export enum ActionType {
     Beregn = 'Beregn',
 }
 
-export interface SetBarn {
-    type: ActionType.SetBarn;
+export interface SetNBarn {
+    type: ActionType.SetNBarn;
     nBarn: number;
 }
-export const setBarn = (nBarn: number): SetBarn => ({
-    type: ActionType.SetBarn,
+export const setNBarn = (nBarn: number): SetNBarn => ({
+    type: ActionType.SetNBarn,
     nBarn,
+});
+export interface SetNBarnInvalid {
+    type: ActionType.SetNBarnInvalid;
+}
+export const setNBarnInvalid = (): SetNBarnInvalid => ({
+    type: ActionType.SetNBarnInvalid,
 });
 
 export interface ShowValidationErrorSummary {
@@ -88,7 +95,8 @@ export const beregn: Beregn = {
 };
 
 export type Action =
-    | SetBarn
+    | SetNBarn
+    | SetNBarnInvalid
     | ShowValidationErrorSummary
     | HideValidationErrorSummary
     | SetFodselsdatoForBarnInfo

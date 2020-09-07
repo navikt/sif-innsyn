@@ -5,17 +5,18 @@ import { createInitialState, State } from './state';
 import {
     beregn,
     setAleneOmOmsorgen,
-    setBarn,
+    setNBarn,
     setBorSammen,
     setFodselsdatoForBarnInfo,
     setKroniskSykt,
+    setNBarnInvalid,
 } from './actions';
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import SvgSuccessCircle from '../svgs/SvgSuccessCircle';
 import ValidationSummary from '@navikt/sif-common-formik/lib/components/helpers/ValidationSummary';
 import FormBlock from '@navikt/sif-common-core/lib/components/form-block/FormBlock';
 import { BarnInfo, ValidBarnInfo } from './types';
-import { FeiloppsummeringFeil, RadioPanelGruppe } from 'nav-frontend-skjema';
+import { FeiloppsummeringFeil, RadioPanelGruppe, Select } from 'nav-frontend-skjema';
 import { LabelWithInfo } from '@navikt/sif-common-formik/lib';
 import { Datovelger, ISODateString } from 'nav-datovelger';
 import {
@@ -26,9 +27,11 @@ import {
     YesOrNoToBool,
 } from './utils';
 import { isYesOrNo } from './typeguards';
-import { createInitialBarnInformasjon } from './initializers';
 import { fold, isLeft, isRight } from 'fp-ts/lib/Either';
 import { Hovedknapp } from 'nav-frontend-knapper';
+import { AlertStripeInfo } from 'nav-frontend-alertstriper';
+import './reducerKalkulator.less';
+import { createInitialBarnInformasjon } from './initializers';
 
 export const isNumber = (input: any): input is number => {
     // TODO: Implement.
@@ -38,7 +41,7 @@ export const isNumber = (input: any): input is number => {
 const ReducerKalkulator = () => {
     const [state, dispatch] = useReducer<KalkulatorReducer>(
         reducer,
-        createInitialState([createInitialBarnInformasjon(), createInitialBarnInformasjon()])
+        createInitialState([createInitialBarnInformasjon()])
     );
     const { nBarnMaks, barn }: State = state;
 
@@ -54,24 +57,18 @@ const ReducerKalkulator = () => {
     return (
         <div>
             <FormBlock>
-                Testelement for å teste linken fra FeiloppsummeringSummary:
-                <input
-                    id={'theVerySecretId'}
-                    onChange={(evt) => {
-                        console.info(evt.target.value);
-                    }}
-                />
-            </FormBlock>
-
-            <FormBlock>
                 <div>Hvor mange barn er det i husstanden?</div>
-                <select
+                <Select
                     id={state.nBarn.id}
                     value={toValueOrUndefined(state.nBarn.value)}
+                    bredde={'xs'}
+                    feil={isLeft(state.nBarn.value) && state.showErrors}
                     onChange={(event) => {
                         const maybeNumber: number = parseInt(event.target.value, 10);
-                        if (isNumber(maybeNumber)) {
-                            dispatch(setBarn(maybeNumber));
+                        if (isNumber(maybeNumber) && maybeNumber > 0) {
+                            dispatch(setNBarn(maybeNumber));
+                        } else {
+                            dispatch(setNBarnInvalid());
                         }
                     }}>
                     {Array.from({ length: nBarnMaks }, (_, i) => i).map((value: number) => {
@@ -81,21 +78,26 @@ const ReducerKalkulator = () => {
                             </option>
                         );
                     })}
-                </select>
+                </Select>
             </FormBlock>
 
-            <FormBlock>Liste av barn og info som skal fylles ut:</FormBlock>
+            <FormBlock>
+                <AlertStripeInfo>Legg inn opplysninger for ett barn om gangen.</AlertStripeInfo>
+            </FormBlock>
             <FormBlock>
                 {barn.map((barnInfo: BarnInfo, index: number) => {
                     return (
                         <FormBlock key={index}>
                             <Ekspanderbartpanel
                                 tittel={
-                                    <div>
-                                        Barn {index + 1}
-                                        <SvgSuccessCircle />
+                                    <div className={'omsorgsdagerkalkulator--ekspanderbarnpanel-tittel-wrapper'}>
+                                        <div>Barn {index + 1}</div>
+                                        <div>
+                                            <SvgSuccessCircle />
+                                        </div>
                                     </div>
                                 }
+                                apen={true}
                                 key={index}>
                                 <Datovelger
                                     id={barnInfo.fodselsdato.id}
@@ -175,17 +177,8 @@ const ReducerKalkulator = () => {
                         return (
                             <FormBlock>
                                 <FormBlock>
-                                    {state.showValidationErrorSummary && (
-                                        <ValidationSummary
-                                            title={'Validation summary tittel'}
-                                            errorMessages={[
-                                                ...errors,
-                                                {
-                                                    skjemaelementId: 'theVerySecretId',
-                                                    feilmelding: 'Du har en feil lengre oppe.',
-                                                },
-                                            ]}
-                                        />
+                                    {state.showErrors && (
+                                        <ValidationSummary title={'Validation summary tittel'} errorMessages={errors} />
                                     )}
                                 </FormBlock>
                             </FormBlock>
