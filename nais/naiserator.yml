@@ -8,6 +8,10 @@ metadata:
 spec:
     image: {{ image }}
     port: 8080
+    accessPolicy:
+        outbound:
+            rules:
+                - application: sif-innsyn-api
     liveness:
         path: /familie/sykdom-i-familien/soknad/innsyn/health/isAlive
         initialDelay: 20
@@ -26,7 +30,9 @@ spec:
             cpu: 50m
             memory: 128Mi
     ingresses:
-        - https://sif-innsyn.dev.nav.no
+      {{#each ingresses as |url|}}
+       - {{url}}
+          {{/each}}
     replicas:
         min: 1
         max: 1
@@ -37,15 +43,7 @@ spec:
     vault:
         enabled: false
     env:
-        - name: APPRES_CMS_URL
-          value: https://appres.nav.no
-        - name: API_URL
-          value: https://sif-innsyn-api.dev.nav.no
-        - name: PUBLIC_PATH
-          value: /familie/sykdom-i-familien/soknad/innsyn
-        - name: LOGIN_URL
-          value: https://loginservice.dev.nav.no/login?redirect=https://sif-innsyn.dev.nav.no/familie/sykdom-i-familien/soknad/innsyn
-        - name: UTILGJENGELIG
-          value: "off"
-        - name: MELLOMLAGRING
-          value: "on"
+  {{#each env}}
+     - name: {{@key}}
+       value: "{{this}}"
+    {{/each}}
