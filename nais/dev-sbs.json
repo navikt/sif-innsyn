@@ -6,7 +6,6 @@
   "minReplicas": "1",
   "maxReplicas": "1",
   "ingresses": [
-    "https://sif-innsyn.dev.nav.no",
     "https://www-q0.nav.no/familie/sykdom-i-familien/soknad/innsyn"
   ],
   "env": {
