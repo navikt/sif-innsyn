@@ -8,10 +8,6 @@ metadata:
 spec:
     image: {{ image }}
     port: 8080
-    accessPolicy:
-        outbound:
-            rules:
-                - application: sif-innsyn-api
     liveness:
         path: /familie/sykdom-i-familien/soknad/innsyn/health/isAlive
         initialDelay: 20
