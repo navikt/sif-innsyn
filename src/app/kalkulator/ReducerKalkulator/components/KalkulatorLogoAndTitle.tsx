@@ -2,6 +2,7 @@ import * as React from 'react';
 import FormBlock from '@navikt/sif-common-core/lib/components/form-block/FormBlock';
 import SvgCalculatorLogo from '../../svgs/SvgCalculatorLogo';
 import { Sidetittel } from 'nav-frontend-typografi';
+import SvgHeaderUnderline from '../../svgs/SvgHeaderUnderline';
 
 const KalkulatorLogoAndTitle = () => {
     return (
@@ -11,6 +12,7 @@ const KalkulatorLogoAndTitle = () => {
             </FormBlock>
             <FormBlock paddingBottom={'l'}>
                 <Sidetittel>Omsorgsdager kalkulator</Sidetittel>
+                <SvgHeaderUnderline />
             </FormBlock>
         </div>
     );

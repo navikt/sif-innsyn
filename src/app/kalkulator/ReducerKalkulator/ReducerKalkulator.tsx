@@ -28,8 +28,8 @@ import {
 } from './utils';
 import { isNumber, isYesOrNo } from './typeguards';
 import { fold, isLeft } from 'fp-ts/lib/Either';
-import { Hovedknapp } from 'nav-frontend-knapper';
-import { AlertStripeInfo } from 'nav-frontend-alertstriper';
+import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
+import { AlertStripeAdvarsel, AlertStripeInfo } from 'nav-frontend-alertstriper';
 import { createInitialBarnInformasjon } from './initializers';
 import { Element } from 'nav-frontend-typografi';
 import './reducerKalkulator.less';
@@ -37,6 +37,9 @@ import '@navikt/sif-common-formik/lib/styles/nav-frontend-skjema-extension.less'
 import ExpandableInfo from '@navikt/sif-common-core/lib/components/expandable-content/ExpandableInfo';
 import { evaluateDatoErGyldigProp, valueToFeilProps } from './componentUtils';
 import KalkulatorLogoAndTitle from './components/KalkulatorLogoAndTitle';
+import Box from '@navikt/sif-common-core/lib/components/box/Box';
+import Lenke from 'nav-frontend-lenker';
+import ResultBox from './components/ResultBox';
 
 const ReducerKalkulator = () => {
     const [state, dispatch] = useReducer<KalkulatorReducer>(
@@ -58,6 +61,11 @@ const ReducerKalkulator = () => {
         <div>
             <FormBlock>
                 <KalkulatorLogoAndTitle />
+                <FormBlock>
+                    Kalkulatoren beregner hvor mange omsorgsdager du har ut fra svarene du oppgir. Det betyr at riktig
+                    resultat er avhengig av at du gir riktige opplysninger. Kalkulatoren er ment som et hjelpeverktøy
+                    for deg, og er ikke et vedtak fra NAV.
+                </FormBlock>
                 <div className={'omsorgsdagerkalkulator--align-content-centre'}>
                     <FormBlock>
                         <Element>Hvor mange barn er det i husstanden?</Element>
@@ -115,7 +123,9 @@ const ReducerKalkulator = () => {
                                 <FormBlock>
                                     <Element>Når er barnet født?</Element>
                                     <ExpandableInfo title="Hvorfor spør vi om det?">
-                                        Vi spør om det fordi ...
+                                        Omsorgsdager gjelder i utgangspunktet ut kalenderåret barnet er 12 år. Hvis
+                                        barnet ditt er 13 år eller eldre må du ha søkt og fått vedtak fra NAV om at du
+                                        får omsorgsdager fordi barnet har en kronisk sykdom.
                                     </ExpandableInfo>
                                     <Datovelger
                                         id={barnInfo.fodselsdato.id}
@@ -130,6 +140,14 @@ const ReducerKalkulator = () => {
                                     />
                                 </FormBlock>
                                 <FormBlock>
+                                    <AlertStripeAdvarsel>
+                                        Du kan kun ha omsorgsdager ut kalenderåret barnet er 18 år.
+                                    </AlertStripeAdvarsel>
+                                    <Knapp onChange={() => console.info('Close denne, og gå til neste barn.')}>
+                                        Neste barn
+                                    </Knapp>
+                                </FormBlock>
+                                <FormBlock>
                                     <RadioPanelGruppe
                                         name={barnInfo.kroniskSykt.id}
                                         legend={
@@ -139,7 +157,10 @@ const ReducerKalkulator = () => {
                                                     eller en funksjonshemning?
                                                 </Element>
                                                 <ExpandableInfo title="Hvorfor spør vi om det?">
-                                                    Vi spør om det fordi ...
+                                                    Hvis barnet har en kronisk sykdom eller en funksjonshemning kan du
+                                                    ha rett på ekstra omsorgsdager. Du kan svare ja på dette spørsmålet
+                                                    dersom du har søkt og fått svar fra NAV om at du har fått ekstra
+                                                    omsorgsdager.
                                                 </ExpandableInfo>
                                             </div>
                                         }
@@ -155,13 +176,23 @@ const ReducerKalkulator = () => {
                                     />
                                 </FormBlock>
                                 <FormBlock>
+                                    <AlertStripeAdvarsel>
+                                        For å få omsorgsdager for barn som er 13 år eller eldre, må du ha søkt og fått
+                                        innvilget omsorgsdager fra NAV fordi barnet har en kronisk sykdom eller en
+                                        funksjonshemning.
+                                    </AlertStripeAdvarsel>
+                                    <Knapp onChange={() => console.info('Gå til neste barn.')}>Neste barn</Knapp>
+                                </FormBlock>
+                                <FormBlock>
                                     <RadioPanelGruppe
                                         name={barnInfo.borSammen.id}
                                         legend={
                                             <div>
                                                 <Element>Bor barnet fast hos deg?</Element>
                                                 <ExpandableInfo title="Hvorfor spør vi om det?">
-                                                    Vi spør om det fordi ...
+                                                    Barnet bor fast der barnet har folkeregistrert adresse. Hvis
+                                                    foreldrene ikke bor sammen, men har en avtale om delt bosted bor
+                                                    barnet fast hos begge foreldrene. Du kan svare ja hvis..
                                                 </ExpandableInfo>
                                             </div>
                                         }
@@ -177,13 +208,34 @@ const ReducerKalkulator = () => {
                                     />
                                 </FormBlock>
                                 <FormBlock>
+                                    <AlertStripeAdvarsel>
+                                        For å ha rett på omsorgsdager må barnet bo fast hos deg.
+                                    </AlertStripeAdvarsel>
+                                    <Knapp onChange={() => console.info('Gå til neste barn.')}>Neste barn</Knapp>
+                                </FormBlock>
+                                <FormBlock>
                                     <RadioPanelGruppe
                                         name={barnInfo.aleneOmOmsorgen.id}
                                         legend={
                                             <div>
                                                 <Element>Er du alene om omsorgen med barnet?</Element>
                                                 <ExpandableInfo title="Hvorfor spør vi om det?">
-                                                    Vi spør om det fordi ...
+                                                    <Box>
+                                                        Når det gjelder omsorgspenger, er du regnet som alene om
+                                                        omsorgen hvis du ikke bor sammen med den andre forelderen, og
+                                                        barnet bor fast bare hos deg. Dette gjelder også hvis du får ny
+                                                        samboer eller ektefelle.
+                                                    </Box>
+
+                                                    <Box>
+                                                        Hvis du og den andre forelderen har en avtale om delt bosted,
+                                                        hvor barnet bor fast hos dere begge, vil ingen av dere bli
+                                                        regnet som alene om omsorgen.
+                                                    </Box>
+
+                                                    <Box>
+                                                        <Lenke href={'TODO'}>Les mer om fast bosted og samvær</Lenke>
+                                                    </Box>
                                                 </ExpandableInfo>
                                             </div>
                                         }
@@ -226,6 +278,7 @@ const ReducerKalkulator = () => {
                     }
                 )(state.validationResult)}
             </FormBlock>
+            <ResultBox />
         </div>
     );
 };
