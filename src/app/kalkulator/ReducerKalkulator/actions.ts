@@ -6,6 +6,7 @@ export enum ActionType {
     ShowValidationErrorSummary = 'ShowValidationErrorSummary',
     HideValidationErrorSummary = 'HideValidationErrorSummary',
     SetFodselsdatoForBarnInfo = 'SetFodselsdatoForBarnInfo',
+    FjernFodselsdatoForBarnInfo = 'FjernFodselsdatoForBarnInfo',
     SetKroniskSykt = 'SetKroniskSykt',
     SetBorSammen = 'SetBorSammen',
     SetAleneOmOmsorgen = 'SetAleneOmOmsorgen',
@@ -45,7 +46,6 @@ export interface SetFodselsdatoForBarnInfo {
     isoDateString: ISODateString;
     barnInfoId: string;
 }
-
 // TODO: Typeguard ISODateString
 export const setFodselsdatoForBarnInfo = (
     isoDateString: ISODateString,
@@ -53,6 +53,15 @@ export const setFodselsdatoForBarnInfo = (
 ): SetFodselsdatoForBarnInfo => ({
     type: ActionType.SetFodselsdatoForBarnInfo,
     isoDateString,
+    barnInfoId,
+});
+
+export interface FjernFodselsdatoForBarnInfo {
+    type: ActionType.FjernFodselsdatoForBarnInfo;
+    barnInfoId: string;
+}
+export const fjernFodselsdatoForBarnInfo = (barnInfoId: string): FjernFodselsdatoForBarnInfo => ({
+    type: ActionType.FjernFodselsdatoForBarnInfo,
     barnInfoId,
 });
 
@@ -100,6 +109,7 @@ export type Action =
     | ShowValidationErrorSummary
     | HideValidationErrorSummary
     | SetFodselsdatoForBarnInfo
+    | FjernFodselsdatoForBarnInfo
     | SetKroniskSykt
     | SetBorSammen
     | SetAleneOmOmsorgen

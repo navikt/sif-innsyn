@@ -4,6 +4,7 @@ import { KalkulatorReducer, reducer } from './reducer';
 import { createInitialState, State } from './state';
 import {
     beregn,
+    fjernFodselsdatoForBarnInfo,
     setAleneOmOmsorgen,
     setBorSammen,
     setFodselsdatoForBarnInfo,
@@ -19,10 +20,16 @@ import { BarnInfo, ValidBarnInfo } from './types';
 import { FeiloppsummeringFeil, RadioPanelGruppe, Select } from 'nav-frontend-skjema';
 import { Datovelger, ISODateString } from 'nav-datovelger';
 import {
+    barnetErOverTolvOgIkkeKroniskSykt,
+    borIkkeSammen,
     isValidBarnInfo,
+    mapValueOptionBoolToRadioValue,
+    shouldViewAleneOmOmsorgenQuestion,
+    shouldViewBorSammenQuestion,
+    shouldViewKroniskSyktQuestion,
     toISODateStringOrUndefined,
     toValueOrUndefined,
-    ValueBoolRadioValue,
+    barnetErOverAtten,
     yesOrNoRadios,
     YesOrNoToBool,
 } from './utils';
@@ -30,7 +37,6 @@ import { isNumber, isYesOrNo } from './typeguards';
 import { fold, isLeft } from 'fp-ts/lib/Either';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 import { AlertStripeAdvarsel, AlertStripeInfo } from 'nav-frontend-alertstriper';
-import { createInitialBarnInformasjon } from './initializers';
 import { Element } from 'nav-frontend-typografi';
 import './reducerKalkulator.less';
 import '@navikt/sif-common-formik/lib/styles/nav-frontend-skjema-extension.less';
@@ -42,10 +48,7 @@ import Lenke from 'nav-frontend-lenker';
 import ResultBox from './components/ResultBox';
 
 const ReducerKalkulator = () => {
-    const [state, dispatch] = useReducer<KalkulatorReducer>(
-        reducer,
-        createInitialState([createInitialBarnInformasjon()])
-    );
+    const [state, dispatch] = useReducer<KalkulatorReducer>(reducer, createInitialState([]));
     const { nBarnMaks, barn }: State = state;
 
     // useMemo<Omsorgsprinsipper>(
@@ -133,123 +136,146 @@ const ReducerKalkulator = () => {
                                         onChange={(maybeISODateString: ISODateString | undefined) => {
                                             if (maybeISODateString) {
                                                 dispatch(setFodselsdatoForBarnInfo(maybeISODateString, barnInfo.id));
+                                            } else {
+                                                dispatch(fjernFodselsdatoForBarnInfo(barnInfo.id));
                                             }
                                         }}
                                         kanVelgeUgyldigDato={true}
                                         datoErGyldig={evaluateDatoErGyldigProp(barnInfo.fodselsdato, state.showErrors)}
+                                        visÅrVelger={true}
                                     />
                                 </FormBlock>
-                                <FormBlock>
-                                    <AlertStripeAdvarsel>
-                                        Du kan kun ha omsorgsdager ut kalenderåret barnet er 18 år.
-                                    </AlertStripeAdvarsel>
-                                    <Knapp onChange={() => console.info('Close denne, og gå til neste barn.')}>
-                                        Neste barn
-                                    </Knapp>
-                                </FormBlock>
-                                <FormBlock>
-                                    <RadioPanelGruppe
-                                        name={barnInfo.kroniskSykt.id}
-                                        legend={
-                                            <div>
-                                                <Element>
-                                                    Har du fått ekstra omsorgsdager fordi barnet har en kronisk sykdom
-                                                    eller en funksjonshemning?
-                                                </Element>
-                                                <ExpandableInfo title="Hvorfor spør vi om det?">
-                                                    Hvis barnet har en kronisk sykdom eller en funksjonshemning kan du
-                                                    ha rett på ekstra omsorgsdager. Du kan svare ja på dette spørsmålet
-                                                    dersom du har søkt og fått svar fra NAV om at du har fått ekstra
-                                                    omsorgsdager.
-                                                </ExpandableInfo>
-                                            </div>
-                                        }
-                                        feil={valueToFeilProps(barnInfo.kroniskSykt, state.showErrors)}
-                                        onChange={(evt, value) => {
-                                            if (isYesOrNo(value)) {
-                                                dispatch(setKroniskSykt(YesOrNoToBool(value), barnInfo.id));
-                                            }
-                                        }}
-                                        checked={ValueBoolRadioValue(barnInfo.kroniskSykt)}
-                                        radios={yesOrNoRadios(barnInfo.kroniskSykt.id)}
-                                        className={'twoColumnPanelGruppe'}
-                                    />
-                                </FormBlock>
-                                <FormBlock>
-                                    <AlertStripeAdvarsel>
-                                        For å få omsorgsdager for barn som er 13 år eller eldre, må du ha søkt og fått
-                                        innvilget omsorgsdager fra NAV fordi barnet har en kronisk sykdom eller en
-                                        funksjonshemning.
-                                    </AlertStripeAdvarsel>
-                                    <Knapp onChange={() => console.info('Gå til neste barn.')}>Neste barn</Knapp>
-                                </FormBlock>
-                                <FormBlock>
-                                    <RadioPanelGruppe
-                                        name={barnInfo.borSammen.id}
-                                        legend={
-                                            <div>
-                                                <Element>Bor barnet fast hos deg?</Element>
-                                                <ExpandableInfo title="Hvorfor spør vi om det?">
-                                                    Barnet bor fast der barnet har folkeregistrert adresse. Hvis
-                                                    foreldrene ikke bor sammen, men har en avtale om delt bosted bor
-                                                    barnet fast hos begge foreldrene. Du kan svare ja hvis..
-                                                </ExpandableInfo>
-                                            </div>
-                                        }
-                                        feil={valueToFeilProps(barnInfo.kroniskSykt, state.showErrors)}
-                                        onChange={(evt, value) => {
-                                            if (isYesOrNo(value)) {
-                                                dispatch(setBorSammen(YesOrNoToBool(value), barnInfo.id));
-                                            }
-                                        }}
-                                        checked={ValueBoolRadioValue(barnInfo.borSammen)}
-                                        radios={yesOrNoRadios(barnInfo.borSammen.id)}
-                                        className={'twoColumnPanelGruppe'}
-                                    />
-                                </FormBlock>
-                                <FormBlock>
-                                    <AlertStripeAdvarsel>
-                                        For å ha rett på omsorgsdager må barnet bo fast hos deg.
-                                    </AlertStripeAdvarsel>
-                                    <Knapp onChange={() => console.info('Gå til neste barn.')}>Neste barn</Knapp>
-                                </FormBlock>
-                                <FormBlock>
-                                    <RadioPanelGruppe
-                                        name={barnInfo.aleneOmOmsorgen.id}
-                                        legend={
-                                            <div>
-                                                <Element>Er du alene om omsorgen med barnet?</Element>
-                                                <ExpandableInfo title="Hvorfor spør vi om det?">
-                                                    <Box>
-                                                        Når det gjelder omsorgspenger, er du regnet som alene om
-                                                        omsorgen hvis du ikke bor sammen med den andre forelderen, og
-                                                        barnet bor fast bare hos deg. Dette gjelder også hvis du får ny
-                                                        samboer eller ektefelle.
-                                                    </Box>
 
-                                                    <Box>
-                                                        Hvis du og den andre forelderen har en avtale om delt bosted,
-                                                        hvor barnet bor fast hos dere begge, vil ingen av dere bli
-                                                        regnet som alene om omsorgen.
-                                                    </Box>
+                                {barnetErOverAtten(barnInfo.fodselsdato.value) && (
+                                    <FormBlock>
+                                        <AlertStripeAdvarsel>
+                                            Du kan kun ha omsorgsdager ut kalenderåret barnet er 18 år.
+                                        </AlertStripeAdvarsel>
+                                    </FormBlock>
+                                )}
 
-                                                    <Box>
-                                                        <Lenke href={'TODO'}>Les mer om fast bosted og samvær</Lenke>
-                                                    </Box>
-                                                </ExpandableInfo>
-                                            </div>
-                                        }
-                                        feil={valueToFeilProps(barnInfo.kroniskSykt, state.showErrors)}
-                                        onChange={(evt, value) => {
-                                            if (isYesOrNo(value)) {
-                                                dispatch(setAleneOmOmsorgen(YesOrNoToBool(value), barnInfo.id));
+                                {shouldViewKroniskSyktQuestion(barnInfo) && (
+                                    <FormBlock>
+                                        <RadioPanelGruppe
+                                            name={barnInfo.kroniskSykt.id}
+                                            legend={
+                                                <div>
+                                                    <Element>
+                                                        Har du fått ekstra omsorgsdager fordi barnet har en kronisk
+                                                        sykdom eller en funksjonshemning?
+                                                    </Element>
+                                                    <ExpandableInfo title="Hvorfor spør vi om det?">
+                                                        Hvis barnet har en kronisk sykdom eller en funksjonshemning kan
+                                                        du ha rett på ekstra omsorgsdager. Du kan svare ja på dette
+                                                        spørsmålet dersom du har søkt og fått svar fra NAV om at du har
+                                                        fått ekstra omsorgsdager.
+                                                    </ExpandableInfo>
+                                                </div>
                                             }
-                                        }}
-                                        checked={ValueBoolRadioValue(barnInfo.aleneOmOmsorgen)}
-                                        radios={yesOrNoRadios(barnInfo.aleneOmOmsorgen.id)}
-                                        className={'twoColumnPanelGruppe'}
-                                    />
-                                </FormBlock>
+                                            feil={valueToFeilProps(barnInfo.kroniskSykt, state.showErrors)}
+                                            onChange={(evt, value) => {
+                                                if (isYesOrNo(value)) {
+                                                    dispatch(setKroniskSykt(YesOrNoToBool(value), barnInfo.id));
+                                                }
+                                            }}
+                                            checked={mapValueOptionBoolToRadioValue(barnInfo.kroniskSykt)}
+                                            radios={yesOrNoRadios(barnInfo.kroniskSykt.id)}
+                                            className={'twoColumnPanelGruppe'}
+                                        />
+                                    </FormBlock>
+                                )}
+
+                                {barnetErOverTolvOgIkkeKroniskSykt(
+                                    barnInfo.fodselsdato.value,
+                                    barnInfo.kroniskSykt.value
+                                ) && (
+                                    <FormBlock>
+                                        <AlertStripeAdvarsel>
+                                            For å få omsorgsdager for barn som er 13 år eller eldre, må du ha søkt og
+                                            fått innvilget omsorgsdager fra NAV fordi barnet har en kronisk sykdom eller
+                                            en funksjonshemning.
+                                        </AlertStripeAdvarsel>
+                                    </FormBlock>
+                                )}
+
+                                {shouldViewBorSammenQuestion(barnInfo) && (
+                                    <FormBlock>
+                                        <RadioPanelGruppe
+                                            name={barnInfo.borSammen.id}
+                                            legend={
+                                                <div>
+                                                    <Element>Bor barnet fast hos deg?</Element>
+                                                    <ExpandableInfo title="Hvorfor spør vi om det?">
+                                                        Barnet bor fast der barnet har folkeregistrert adresse. Hvis
+                                                        foreldrene ikke bor sammen, men har en avtale om delt bosted bor
+                                                        barnet fast hos begge foreldrene. Du kan svare ja hvis..
+                                                    </ExpandableInfo>
+                                                </div>
+                                            }
+                                            feil={valueToFeilProps(barnInfo.kroniskSykt, state.showErrors)}
+                                            onChange={(evt, value) => {
+                                                if (isYesOrNo(value)) {
+                                                    dispatch(setBorSammen(YesOrNoToBool(value), barnInfo.id));
+                                                }
+                                            }}
+                                            checked={mapValueOptionBoolToRadioValue(barnInfo.borSammen)}
+                                            radios={yesOrNoRadios(barnInfo.borSammen.id)}
+                                            className={'twoColumnPanelGruppe'}
+                                        />
+                                    </FormBlock>
+                                )}
+
+                                {borIkkeSammen(barnInfo) && (
+                                    <FormBlock>
+                                        <AlertStripeAdvarsel>
+                                            For å ha rett på omsorgsdager må barnet bo fast hos deg.
+                                        </AlertStripeAdvarsel>
+                                    </FormBlock>
+                                )}
+
+                                {shouldViewAleneOmOmsorgenQuestion(barnInfo) && (
+                                    <FormBlock>
+                                        <RadioPanelGruppe
+                                            name={barnInfo.aleneOmOmsorgen.id}
+                                            legend={
+                                                <div>
+                                                    <Element>Er du alene om omsorgen med barnet?</Element>
+                                                    <ExpandableInfo title="Hvorfor spør vi om det?">
+                                                        <Box>
+                                                            Når det gjelder omsorgspenger, er du regnet som alene om
+                                                            omsorgen hvis du ikke bor sammen med den andre forelderen,
+                                                            og barnet bor fast bare hos deg. Dette gjelder også hvis du
+                                                            får ny samboer eller ektefelle.
+                                                        </Box>
+
+                                                        <Box>
+                                                            Hvis du og den andre forelderen har en avtale om delt
+                                                            bosted, hvor barnet bor fast hos dere begge, vil ingen av
+                                                            dere bli regnet som alene om omsorgen.
+                                                        </Box>
+
+                                                        <Box>
+                                                            <Lenke href={'TODO'}>
+                                                                Les mer om fast bosted og samvær
+                                                            </Lenke>
+                                                        </Box>
+                                                    </ExpandableInfo>
+                                                </div>
+                                            }
+                                            feil={valueToFeilProps(barnInfo.kroniskSykt, state.showErrors)}
+                                            onChange={(evt, value) => {
+                                                if (isYesOrNo(value)) {
+                                                    dispatch(setAleneOmOmsorgen(YesOrNoToBool(value), barnInfo.id));
+                                                }
+                                            }}
+                                            checked={mapValueOptionBoolToRadioValue(barnInfo.aleneOmOmsorgen)}
+                                            radios={yesOrNoRadios(barnInfo.aleneOmOmsorgen.id)}
+                                            className={'twoColumnPanelGruppe'}
+                                        />
+                                    </FormBlock>
+                                )}
+
+                                <Knapp onChange={() => console.info('Gå til neste barn.')}>Neste barn</Knapp>
                             </Ekspanderbartpanel>
                         </FormBlock>
                     );

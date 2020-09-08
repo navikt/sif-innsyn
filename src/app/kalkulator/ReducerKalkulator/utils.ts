@@ -8,10 +8,30 @@ import { FeiloppsummeringFeil } from 'nav-frontend-skjema';
 import { pipe } from 'fp-ts/lib/pipeable';
 import { Separated } from 'fp-ts/lib/Compactable';
 import { createFeiloppsummeringFeilNotAnswered } from './initializers';
+import {
+    chain as andThen,
+    flatten as flattenOption,
+    fold as foldOption,
+    fromEither,
+    isNone,
+    isSome,
+    map as mapOption,
+    Option,
+} from 'fp-ts/lib/Option';
 
 export type RadioValue = YesOrNo | undefined;
 
-export const ValueBoolRadioValue = (value: Value<boolean>): RadioValue =>
+export const mapValueOptionBoolToRadioValue = (value: Value<Option<boolean>>): RadioValue =>
+    fold(
+        () => undefined,
+        (optionalValue: Option<boolean>) =>
+            foldOption(
+                () => undefined,
+                (justValue: boolean) => (justValue ? YesOrNo.Yes : YesOrNo.No)
+            )(optionalValue)
+    )(value.value);
+
+export const mapValueBoolToRadioValue = (value: Value<boolean>): RadioValue =>
     fold(
         () => undefined,
         (v) => (v ? YesOrNo.Yes : YesOrNo.No)
@@ -32,10 +52,12 @@ export const toISODateStringOrUndefined = (
         (isoDateString: ISODateString) => isoDateString
     )(eitherErrorOrIsoDateString);
 
-export const isoDateStringFodselsdatoToAlderType = (isoDateStringFodselsdato: ISODateString): AlderType => {
-    const s: number = moment().diff(isoDateStringFodselsdato, 'years');
-    return s >= 12 ? AlderEnum.OVER12 : AlderEnum.UNDER12;
-};
+export const erOver = (fodselsdato: ISODateString, aar: number): boolean => moment().diff(fodselsdato, 'years') >= aar;
+export const erOverTolv = (fodselsdato: ISODateString): boolean => erOver(fodselsdato, 12);
+export const erOverAtten = (fodselsdato: ISODateString): boolean => erOver(fodselsdato, 18);
+
+export const isoDateStringFodselsdatoToAlderType = (isoDateStringFodselsdato: ISODateString): AlderType =>
+    erOverTolv(isoDateStringFodselsdato) ? AlderEnum.OVER12 : AlderEnum.UNDER12;
 
 export const validatedBarnInfoToBarn = (barnInfo: ValidBarnInfo): Barn => {
     return {
@@ -53,24 +75,116 @@ export function toValueOrUndefined<T>(eitherErrorOrValue: EitherErrorOr<T>): T |
     )(eitherErrorOrValue);
 }
 
+export function isSomeValue<T>(eitherValue: Either<FeiloppsummeringFeil, Option<T>>): boolean {
+    return pipe(eitherValue, fromEither, flattenOption, isSome);
+}
+export function isEmptyValue<T>(eitherValue: Either<FeiloppsummeringFeil, Option<T>>): boolean {
+    return pipe(eitherValue, fromEither, flattenOption, isNone);
+}
+
+// Rules:
+export const barnetErOverAtten = (fodselsdato: EitherErrorOr<string>): boolean =>
+    fold(
+        () => false,
+        (fodselsdato: ISODateString) => erOverAtten(fodselsdato)
+    )(fodselsdato);
+
+export const barnetErOverTolvOgIkkeKroniskSykt = (
+    fodselsdato: EitherErrorOr<string>,
+    kroniskSykt: EitherErrorOr<Option<boolean>>
+): boolean => {
+    const maybeFodselsdato = fromEither(fodselsdato);
+    const maybeKroniskSykt = flattenOption(fromEither(kroniskSykt));
+    const optionalIsTrue: Option<boolean> = pipe(
+        maybeFodselsdato,
+        mapOption((fodselsdato) => erOverTolv(fodselsdato)),
+        andThen((merEnnTolv: boolean) =>
+            mapOption((kroniskSykt: boolean) => !kroniskSykt && merEnnTolv)(maybeKroniskSykt)
+        )
+    );
+
+    return foldOption(
+        () => false,
+        (value: boolean) => value
+    )(optionalIsTrue);
+};
+
+export const borIkkeSammen = (barnInfo: BarnInfo): boolean =>
+    fold(
+        () => false,
+        (optionalBorSammen: Option<boolean>) =>
+            foldOption(
+                () => false,
+                (borSammen: boolean) => !borSammen
+            )(optionalBorSammen)
+    )(barnInfo.borSammen.value);
+
+export const shouldViewKroniskSyktQuestion = (barnInfo: BarnInfo): boolean =>
+    pipe(
+        barnInfo.fodselsdato.value,
+        fromEither,
+        foldOption(
+            () => false,
+            (fodselsdato: string) => !erOverAtten(fodselsdato)
+        )
+    );
+
+export const shouldViewBorSammenQuestion = (barnInfo: BarnInfo): boolean =>
+    !barnetErOverAtten(barnInfo.fodselsdato.value) &&
+    !barnetErOverTolvOgIkkeKroniskSykt(barnInfo.fodselsdato.value, barnInfo.kroniskSykt.value) &&
+    isSomeValue(barnInfo.kroniskSykt.value);
+
+export const shouldViewAleneOmOmsorgenQuestion = (barnInfo: BarnInfo): boolean =>
+    pipe(
+        barnInfo.borSammen.value,
+        fromEither,
+        flattenOption,
+        foldOption(
+            () => false,
+            (borSammen: boolean) => borSammen
+        )
+    );
+
 export function getListOfError<T>(input: Either<FeiloppsummeringFeil, T>): FeiloppsummeringFeil[] {
     return getOrElse((): FeiloppsummeringFeil[] => [])(map((e: FeiloppsummeringFeil) => [e])(swap(input)));
 }
 
 export const isValidBarnInfo = (barnInfo: BarnInfo): boolean => isRight(validateBarnInfo(barnInfo));
 
+export function mapFromOptionalToValueOrUndefined<T>(optionalValue: Option<T>): T | undefined {
+    return foldOption(
+        () => undefined,
+        (value: T) => value
+    )(optionalValue);
+}
+
 export const validateBarnInfo = (barnInfo: BarnInfo): Either<FeiloppsummeringFeil[], ValidBarnInfo> => {
-    const { value: eitherF, id: idF } = barnInfo.fodselsdato;
-    const { value: eitherK, id: idK } = barnInfo.kroniskSykt;
-    const { value: eitherB, id: idB } = barnInfo.borSammen;
-    const { value: eitherA, id: idA } = barnInfo.aleneOmOmsorgen;
+    const { value: eitherFodselsdato, id: fodselsdatoId } = barnInfo.fodselsdato;
+    const { value: eitherKroniskSykt, id: kroniskSyktId } = barnInfo.kroniskSykt;
+    const { value: eitherBorSammen, id: borSammenId } = barnInfo.borSammen;
+    const { value: eitherAleneOmOmsorgen, id: aleneOmOmsorgenId } = barnInfo.aleneOmOmsorgen;
 
     const result: Either<FeiloppsummeringFeil, ValidBarnInfo> = pipe(
-        eitherF,
-        map((fodselsdato: ISODateString) => ({ fodselsdato: { id: idF, value: fodselsdato } })),
-        chain((a) => map((value: boolean) => ({ ...a, kroniskSykt: { id: idK, value } }))(eitherK)),
-        chain((a) => map((value: boolean) => ({ ...a, borSammen: { id: idB, value } }))(eitherB)),
-        chain((a) => map((value: boolean) => ({ ...a, aleneOmOmsorgen: { id: idA, value } }))(eitherA)),
+        eitherFodselsdato,
+        map((fodselsdato: ISODateString) => ({ fodselsdato: { id: fodselsdatoId, value: fodselsdato } })),
+        chain((partialValidBarnInfo) =>
+            map((value: Option<boolean>) => ({
+                ...partialValidBarnInfo,
+                kroniskSykt: { id: kroniskSyktId, value: mapFromOptionalToValueOrUndefined(value) },
+            }))(eitherKroniskSykt)
+        ),
+        chain((partialValidBarnInfo) =>
+            map((value: Option<boolean>) => ({
+                ...partialValidBarnInfo,
+                borSammen: { id: borSammenId, value: mapFromOptionalToValueOrUndefined(value) },
+            }))(eitherBorSammen)
+        ),
+        chain((partialValidBarnInfo) =>
+            map((value: Option<boolean>) => ({
+                ...partialValidBarnInfo,
+                aleneOmOmsorgen: { id: aleneOmOmsorgenId, value: mapFromOptionalToValueOrUndefined(value) },
+            }))(eitherAleneOmOmsorgen)
+        ),
         chain((a) => map((id: string) => ({ ...a, id }))(right(barnInfo.id)))
     );
 
@@ -79,10 +193,10 @@ export const validateBarnInfo = (barnInfo: BarnInfo): Either<FeiloppsummeringFei
         fold(
             (e) =>
                 left([
-                    ...getListOfError(eitherF),
-                    ...getListOfError(eitherK),
-                    ...getListOfError(eitherB),
-                    ...getListOfError(eitherA),
+                    ...getListOfError(eitherFodselsdato),
+                    ...getListOfError(eitherKroniskSykt),
+                    ...getListOfError(eitherBorSammen),
+                    ...getListOfError(eitherAleneOmOmsorgen),
                 ]),
             (validBarnInfo: ValidBarnInfo) => right(validBarnInfo)
         )
@@ -116,3 +230,8 @@ export const validateListOfBarnInfo = (
     );
     return extractEitherFromList(listOfEitherErrorOrValidBarnInfo);
 };
+
+// export const validateAndIfValidCalculate = (state: State): State => {
+//     const validatedListOfBarnInfo = validateListOfBarnInfo(state.barn, state.nBarn.id);
+//     omsorgsdager();
+// };

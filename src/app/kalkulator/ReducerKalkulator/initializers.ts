@@ -2,6 +2,7 @@ import { left, right } from 'fp-ts/lib/Either';
 import { FeiloppsummeringFeil } from 'nav-frontend-skjema';
 import { uuidv4 } from '@navikt/omsorgspenger-kalkulator/lib/utils';
 import { BarnInfo, Value } from './types';
+import { none, Option } from 'fp-ts/lib/Option';
 
 export const createFeiloppsummeringFeil = (id: string, feilmelding: string): FeiloppsummeringFeil => ({
     skjemaelementId: id,
@@ -33,10 +34,20 @@ export function initializeNotAnswered<T>(): Value<T> {
     };
 }
 
+export function initializeWithOptionalValueNone<T>(): Value<Option<T>> {
+    const uuid = uuidv4();
+    return {
+        id: uuid,
+        value: right(none),
+    };
+}
+
 export const createInitialBarnInformasjon = (): BarnInfo => ({
     id: uuidv4(),
     fodselsdato: initializeNotAnswered(),
-    kroniskSykt: initializeNotAnswered(),
-    borSammen: initializeNotAnswered(),
-    aleneOmOmsorgen: initializeNotAnswered(),
+    kroniskSykt: initializeWithOptionalValueNone(),
+    borSammen: initializeWithOptionalValueNone(),
+    aleneOmOmsorgen: initializeWithOptionalValueNone(),
 });
+
+export const initializeNBarn = (n: number) => Array.from({ length: n }, (_, i) => createInitialBarnInformasjon());

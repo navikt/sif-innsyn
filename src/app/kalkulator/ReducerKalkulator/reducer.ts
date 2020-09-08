@@ -1,21 +1,30 @@
 import { State } from './state';
 import { Action, ActionType } from './actions';
-import { createFeiloppsummeringFeilZeroChildren, createInitialBarnInformasjon } from './initializers';
+import {
+    createFeiloppsummeringFeilNotAnswered,
+    createFeiloppsummeringFeilZeroChildren,
+    initializeNBarn,
+} from './initializers';
 import { BarnInfo, ValidBarnInfo } from './types';
 import { Either, left, right } from 'fp-ts/lib/Either';
 import { FeiloppsummeringFeil } from 'nav-frontend-skjema';
 import { validateListOfBarnInfo } from './utils';
+import { some } from 'fp-ts/lib/Option';
+import { setFodselsdatoOgOppdaterDataForBarnet } from './reducerUtils';
 
 export type KalkulatorReducer = (state: State, action: Action) => State;
 
 export const reducer: KalkulatorReducer = (state: State, action: Action): State => {
     switch (action.type) {
         case ActionType.SetNBarn: {
-            return {
+            const updatedState = {
                 ...state,
                 nBarn: { ...state.nBarn, value: right(action.nBarn) },
-                barn: Array.from({ length: action.nBarn }, (_, i) => createInitialBarnInformasjon()),
+                barn: initializeNBarn(action.nBarn),
                 showErrors: false,
+            };
+            return {
+                ...updatedState,
             };
         }
         case ActionType.SetNBarnInvalid: {
@@ -33,9 +42,21 @@ export const reducer: KalkulatorReducer = (state: State, action: Action): State 
         case ActionType.SetFodselsdatoForBarnInfo: {
             return {
                 ...state,
+                barn: state.barn.map(setFodselsdatoOgOppdaterDataForBarnet(action)),
+            };
+        }
+        case ActionType.FjernFodselsdatoForBarnInfo: {
+            return {
+                ...state,
                 barn: state.barn.map((barn: BarnInfo) =>
                     barn.id === action.barnInfoId
-                        ? { ...barn, fodselsdato: { ...barn.fodselsdato, value: right(action.isoDateString) } }
+                        ? {
+                              ...barn,
+                              fodselsdato: {
+                                  ...barn.fodselsdato,
+                                  value: left(createFeiloppsummeringFeilNotAnswered(barn.fodselsdato.id)),
+                              },
+                          }
                         : barn
                 ),
             };
@@ -46,7 +67,7 @@ export const reducer: KalkulatorReducer = (state: State, action: Action): State 
                 ...state,
                 barn: state.barn.map((barn: BarnInfo) =>
                     barn.id === action.barnInfoId
-                        ? { ...barn, kroniskSykt: { ...barn.kroniskSykt, value: right(action.value) } }
+                        ? { ...barn, kroniskSykt: { ...barn.kroniskSykt, value: right(some(action.value)) } }
                         : barn
                 ),
             };
@@ -56,7 +77,7 @@ export const reducer: KalkulatorReducer = (state: State, action: Action): State 
                 ...state,
                 barn: state.barn.map((barn: BarnInfo) =>
                     barn.id === action.barnInfoId
-                        ? { ...barn, borSammen: { ...barn.borSammen, value: right(action.value) } }
+                        ? { ...barn, borSammen: { ...barn.borSammen, value: right(some(action.value)) } }
                         : barn
                 ),
             };
@@ -66,7 +87,7 @@ export const reducer: KalkulatorReducer = (state: State, action: Action): State 
                 ...state,
                 barn: state.barn.map((barn: BarnInfo) =>
                     barn.id === action.barnInfoId
-                        ? { ...barn, aleneOmOmsorgen: { ...barn.aleneOmOmsorgen, value: right(action.value) } }
+                        ? { ...barn, aleneOmOmsorgen: { ...barn.aleneOmOmsorgen, value: right(some(action.value)) } }
                         : barn
                 ),
             };
