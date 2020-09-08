@@ -43,57 +43,54 @@ export const hideValidationErrorSummary: HideValidationErrorSummary = {
 
 export interface SetFodselsdatoForBarnInfo {
     type: ActionType.SetFodselsdatoForBarnInfo;
-    isoDateString: ISODateString;
-    barnInfoId: string;
+    barnId: string;
+    fodselsdato: ISODateString;
 }
 // TODO: Typeguard ISODateString
-export const setFodselsdatoForBarnInfo = (
-    isoDateString: ISODateString,
-    barnInfoId: string
-): SetFodselsdatoForBarnInfo => ({
+export const setFodselsdatoForBarnInfo = (fodselsdato: ISODateString, barnId: string): SetFodselsdatoForBarnInfo => ({
     type: ActionType.SetFodselsdatoForBarnInfo,
-    isoDateString,
-    barnInfoId,
+    fodselsdato,
+    barnId,
 });
 
 export interface FjernFodselsdatoForBarnInfo {
     type: ActionType.FjernFodselsdatoForBarnInfo;
-    barnInfoId: string;
+    barnId: string;
 }
-export const fjernFodselsdatoForBarnInfo = (barnInfoId: string): FjernFodselsdatoForBarnInfo => ({
+export const fjernFodselsdatoForBarnInfo = (barnId: string): FjernFodselsdatoForBarnInfo => ({
     type: ActionType.FjernFodselsdatoForBarnInfo,
-    barnInfoId,
+    barnId,
 });
 
 export interface SetKroniskSykt {
     type: ActionType.SetKroniskSykt;
     value: boolean;
-    barnInfoId: string;
+    barnId: string;
 }
-export const setKroniskSykt = (value: boolean, barnInfoId: string): SetKroniskSykt => ({
+export const setKroniskSykt = (value: boolean, barnId: string): SetKroniskSykt => ({
     type: ActionType.SetKroniskSykt,
     value,
-    barnInfoId,
+    barnId,
 });
 export interface SetBorSammen {
     type: ActionType.SetBorSammen;
     value: boolean;
-    barnInfoId: string;
+    barnId: string;
 }
-export const setBorSammen = (value: boolean, barnInfoId: string): SetBorSammen => ({
+export const setBorSammen = (value: boolean, barnId: string): SetBorSammen => ({
     type: ActionType.SetBorSammen,
     value,
-    barnInfoId,
+    barnId,
 });
 export interface SetAleneOmOmsorgen {
     type: ActionType.SetAleneOmOmsorgen;
     value: boolean;
-    barnInfoId: string;
+    barnId: string;
 }
-export const setAleneOmOmsorgen = (value: boolean, barnInfoId: string): SetAleneOmOmsorgen => ({
+export const setAleneOmOmsorgen = (value: boolean, barnId: string): SetAleneOmOmsorgen => ({
     type: ActionType.SetAleneOmOmsorgen,
     value,
-    barnInfoId,
+    barnId,
 });
 
 export interface Beregn {

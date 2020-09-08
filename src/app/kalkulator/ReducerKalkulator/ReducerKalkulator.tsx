@@ -16,25 +16,24 @@ import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import SvgSuccessCircle from '../svgs/SvgSuccessCircle';
 import ValidationSummary from '@navikt/sif-common-formik/lib/components/helpers/ValidationSummary';
 import FormBlock from '@navikt/sif-common-core/lib/components/form-block/FormBlock';
-import { BarnInfo, ValidBarnInfo } from './types';
+import { BarnApi, BarnInfo } from './types';
 import { FeiloppsummeringFeil, RadioPanelGruppe, Select } from 'nav-frontend-skjema';
 import { Datovelger, ISODateString } from 'nav-datovelger';
 import {
     barnetErOverTolvOgIkkeKroniskSykt,
     borIkkeSammen,
-    isValidBarnInfo,
-    mapValueOptionBoolToRadioValue,
+    optionalFodselsdatoErOverAtten,
     shouldViewAleneOmOmsorgenQuestion,
     shouldViewBorSammenQuestion,
     shouldViewKroniskSyktQuestion,
-    toISODateStringOrUndefined,
-    toValueOrUndefined,
-    barnetErOverAtten,
+    toFodselsdatoOrUndefined,
+    toRadioValue,
+    validateBarnInfo,
     yesOrNoRadios,
     YesOrNoToBool,
 } from './utils';
 import { isNumber, isYesOrNo } from './typeguards';
-import { fold, isLeft } from 'fp-ts/lib/Either';
+import { fold, isRight } from 'fp-ts/lib/Either';
 import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
 import { AlertStripeAdvarsel, AlertStripeInfo } from 'nav-frontend-alertstriper';
 import { Element } from 'nav-frontend-typografi';
@@ -76,9 +75,9 @@ const ReducerKalkulator = () => {
                     <FormBlock paddingBottom={'l'}>
                         <Select
                             id={state.nBarn.id}
-                            value={toValueOrUndefined(state.nBarn.value)}
+                            value={state.nBarn.value}
                             bredde={'xs'}
-                            feil={isLeft(state.nBarn.value) && state.showErrors ? <span>asdf</span> : false}
+                            feil={state.nBarn.errors.length > 0 && state.showErrors ? <span>asdf</span> : false}
                             onChange={(event) => {
                                 const maybeNumber: number = parseInt(event.target.value, 10);
                                 if (isNumber(maybeNumber) && maybeNumber > 0) {
@@ -114,7 +113,7 @@ const ReducerKalkulator = () => {
                                         <div className={'omsorgsdagerkalkulator--ekspanderbarnpanel-tittel-left'}>
                                             Barn {index + 1}
                                         </div>
-                                        {isValidBarnInfo(barnInfo) && (
+                                        {isRight(validateBarnInfo(barnInfo)) && (
                                             <div className={'omsorgsdagerkalkulator--ekspanderbarnpanel-tittel-right'}>
                                                 <SvgSuccessCircle />
                                             </div>
@@ -132,8 +131,9 @@ const ReducerKalkulator = () => {
                                     </ExpandableInfo>
                                     <Datovelger
                                         id={barnInfo.fodselsdato.id}
-                                        valgtDato={toISODateStringOrUndefined(barnInfo.fodselsdato.value)}
+                                        valgtDato={toFodselsdatoOrUndefined(barnInfo.fodselsdato.value)}
                                         onChange={(maybeISODateString: ISODateString | undefined) => {
+                                            console.info('onchange: ' + maybeISODateString);
                                             if (maybeISODateString) {
                                                 dispatch(setFodselsdatoForBarnInfo(maybeISODateString, barnInfo.id));
                                             } else {
@@ -146,7 +146,7 @@ const ReducerKalkulator = () => {
                                     />
                                 </FormBlock>
 
-                                {barnetErOverAtten(barnInfo.fodselsdato.value) && (
+                                {optionalFodselsdatoErOverAtten(barnInfo.fodselsdato.value) && (
                                     <FormBlock>
                                         <AlertStripeAdvarsel>
                                             Du kan kun ha omsorgsdager ut kalenderåret barnet er 18 år.
@@ -178,7 +178,7 @@ const ReducerKalkulator = () => {
                                                     dispatch(setKroniskSykt(YesOrNoToBool(value), barnInfo.id));
                                                 }
                                             }}
-                                            checked={mapValueOptionBoolToRadioValue(barnInfo.kroniskSykt)}
+                                            checked={toRadioValue(barnInfo.kroniskSykt.value)}
                                             radios={yesOrNoRadios(barnInfo.kroniskSykt.id)}
                                             className={'twoColumnPanelGruppe'}
                                         />
@@ -218,7 +218,7 @@ const ReducerKalkulator = () => {
                                                     dispatch(setBorSammen(YesOrNoToBool(value), barnInfo.id));
                                                 }
                                             }}
-                                            checked={mapValueOptionBoolToRadioValue(barnInfo.borSammen)}
+                                            checked={toRadioValue(barnInfo.borSammen.value)}
                                             radios={yesOrNoRadios(barnInfo.borSammen.id)}
                                             className={'twoColumnPanelGruppe'}
                                         />
@@ -268,7 +268,7 @@ const ReducerKalkulator = () => {
                                                     dispatch(setAleneOmOmsorgen(YesOrNoToBool(value), barnInfo.id));
                                                 }
                                             }}
-                                            checked={mapValueOptionBoolToRadioValue(barnInfo.aleneOmOmsorgen)}
+                                            checked={toRadioValue(barnInfo.aleneOmOmsorgen.value)}
                                             radios={yesOrNoRadios(barnInfo.aleneOmOmsorgen.id)}
                                             className={'twoColumnPanelGruppe'}
                                         />
@@ -299,7 +299,7 @@ const ReducerKalkulator = () => {
                             </FormBlock>
                         );
                     },
-                    (resultat: ValidBarnInfo[]) => {
+                    (resultat: BarnApi[]) => {
                         return <div>All info er riktig inputet, og resultatet kan vises her</div>;
                     }
                 )(state.validationResult)}

@@ -1,9 +1,9 @@
-import { BarnInfo, ValidBarnInfo, Value } from './types';
-import { initializeNotAnswered, initializeWithValue } from './initializers';
+import { BarnInfo, BarnApi, Value } from './types';
+import { initializeValue } from './initializers';
 import { FeiloppsummeringFeil } from 'nav-frontend-skjema';
 import Omsorgsprinsipper from '@navikt/omsorgspenger-kalkulator/lib/types/Omsorgsprinsipper';
 import { Either } from 'fp-ts/lib/Either';
-import { validateListOfBarnInfo } from './utils';
+import { validateInputData } from './utils';
 import { none, Option } from 'fp-ts/lib/Option';
 
 export interface State {
@@ -11,20 +11,22 @@ export interface State {
     nBarn: Value<number>;
     barn: BarnInfo[];
     showErrors: boolean;
-    validationResult: Either<FeiloppsummeringFeil[], ValidBarnInfo[]>;
+    validationResult: Either<FeiloppsummeringFeil[], BarnApi[]>;
     resultat: Option<Omsorgsprinsipper>;
 }
 
-export const createInitialState = (listeAvBarnInfo: BarnInfo[]): State => {
-    const listeAvBarnLength = listeAvBarnInfo.length;
-    const nBarnInitially =
-        listeAvBarnLength > 0 ? initializeWithValue(listeAvBarnLength) : initializeNotAnswered<number>();
+export const createInitialState = (listeAvBarnInfo?: BarnInfo[]): State => {
+    const listeAvBarnLength = listeAvBarnInfo?.length;
+    const nBarnInitially: Value<number> =
+        listeAvBarnLength && listeAvBarnLength > 0
+            ? initializeValue<number>(listeAvBarnLength)
+            : initializeValue<number>(0, ['error.unanswered']);
     return {
         nBarnMaks: 20,
         nBarn: nBarnInitially,
-        barn: listeAvBarnInfo,
+        barn: listeAvBarnInfo || [],
         showErrors: false,
-        validationResult: validateListOfBarnInfo(listeAvBarnInfo, nBarnInitially.id),
+        validationResult: validateInputData(nBarnInitially.id, listeAvBarnInfo),
         resultat: none,
     };
 };

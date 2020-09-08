@@ -1,88 +1,97 @@
 import { State } from './state';
 import { Action, ActionType } from './actions';
-import { createFeiloppsummeringFeilZeroChildren, initializeNBarn } from './initializers';
-import { BarnInfo, ValidBarnInfo } from './types';
-import { Either, left, right } from 'fp-ts/lib/Either';
+import { initializeNBarn } from './initializers';
+import { BarnApi, BarnInfo } from './types';
+import { Either } from 'fp-ts/lib/Either';
 import { FeiloppsummeringFeil } from 'nav-frontend-skjema';
-import { validateListOfBarnInfo } from './utils';
-import { some } from 'fp-ts/lib/Option';
-import { fjernFodselsdatoOgOppdaterDataForBarnet, setFodselsdatoOgOppdaterDataForBarnet } from './reducerUtils';
+import { validateInputData } from './utils';
+import {
+    fjernFodselsdatoOgOppdaterDataForBarnet,
+    setAleneOmOmsorgenOgOppdaterDataForBarnet,
+    setBorSammenOgOppdaterDataForBarnet,
+    setFodselsdatoOgOppdaterDataForBarnet,
+    setKroniskSyktOgOppdaterDataForBarnet,
+} from './reducerUtils';
 
 export type KalkulatorReducer = (state: State, action: Action) => State;
 
 export const reducer: KalkulatorReducer = (state: State, action: Action): State => {
     switch (action.type) {
         case ActionType.SetNBarn: {
-            const updatedState = {
+            return {
                 ...state,
-                nBarn: { ...state.nBarn, value: right(action.nBarn) },
+                nBarn: { ...state.nBarn, value: action.nBarn, errors: [] },
                 barn: initializeNBarn(action.nBarn),
                 showErrors: false,
             };
-            return {
-                ...updatedState,
-            };
         }
-        case ActionType.SetNBarnInvalid: {
-            return {
-                ...state,
-                nBarn: { ...state.nBarn, value: left(createFeiloppsummeringFeilZeroChildren(state.nBarn.id)) },
-                barn: [],
-            };
-        }
+        // case ActionType.SetNBarnInvalid: {
+        //     return {
+        //         ...state,
+        //         nBarn: { ...state.nBarn, value: left(createFeiloppsummeringFeilZeroChildren(state.nBarn.id)) },
+        //         barn: [],
+        //     };
+        // }
         case ActionType.ShowValidationErrorSummary:
             return { ...state, showErrors: true };
         case ActionType.HideValidationErrorSummary:
             return { ...state, showErrors: false };
 
         case ActionType.SetFodselsdatoForBarnInfo: {
+            const listeAvBarnUpdated: BarnInfo[] = state.barn.map((barn: BarnInfo) =>
+                barn.id === action.barnId ? setFodselsdatoOgOppdaterDataForBarnet(action.fodselsdato, barn) : barn
+            );
             return {
                 ...state,
-                barn: state.barn.map(setFodselsdatoOgOppdaterDataForBarnet(action)),
+                barn: listeAvBarnUpdated,
+                validationResult: validateInputData(state.nBarn.id, listeAvBarnUpdated),
             };
         }
         case ActionType.FjernFodselsdatoForBarnInfo: {
+            const listeAvBarnUpdated: BarnInfo[] = state.barn.map((barn: BarnInfo) =>
+                barn.id === action.barnId ? fjernFodselsdatoOgOppdaterDataForBarnet(barn) : barn
+            );
             return {
                 ...state,
-                barn: state.barn.map(fjernFodselsdatoOgOppdaterDataForBarnet(action)),
+                barn: listeAvBarnUpdated,
+                validationResult: validateInputData(state.nBarn.id, listeAvBarnUpdated),
             };
         }
-
         case ActionType.SetKroniskSykt: {
+            const listeAvBarnUpdated: BarnInfo[] = state.barn.map((barn: BarnInfo) =>
+                barn.id === action.barnId ? setKroniskSyktOgOppdaterDataForBarnet(action.value, barn) : barn
+            );
             return {
                 ...state,
-                barn: state.barn.map((barn: BarnInfo) =>
-                    barn.id === action.barnInfoId
-                        ? { ...barn, kroniskSykt: { ...barn.kroniskSykt, value: right(some(action.value)) } }
-                        : barn
-                ),
+                barn: listeAvBarnUpdated,
+                validationResult: validateInputData(state.nBarn.id, listeAvBarnUpdated),
             };
         }
         case ActionType.SetBorSammen: {
+            const listeAvBarnUpdated: BarnInfo[] = state.barn.map((barn: BarnInfo) =>
+                barn.id === action.barnId ? setBorSammenOgOppdaterDataForBarnet(action.value, barn) : barn
+            );
             return {
                 ...state,
-                barn: state.barn.map((barn: BarnInfo) =>
-                    barn.id === action.barnInfoId
-                        ? { ...barn, borSammen: { ...barn.borSammen, value: right(some(action.value)) } }
-                        : barn
-                ),
+                barn: listeAvBarnUpdated,
+                validationResult: validateInputData(state.nBarn.id, listeAvBarnUpdated),
             };
         }
         case ActionType.SetAleneOmOmsorgen: {
+            const listeAvBarnUpdated: BarnInfo[] = state.barn.map((barn: BarnInfo) =>
+                barn.id === action.barnId ? setAleneOmOmsorgenOgOppdaterDataForBarnet(action.value, barn) : barn
+            );
             return {
                 ...state,
-                barn: state.barn.map((barn: BarnInfo) =>
-                    barn.id === action.barnInfoId
-                        ? { ...barn, aleneOmOmsorgen: { ...barn.aleneOmOmsorgen, value: right(some(action.value)) } }
-                        : barn
-                ),
+                barn: listeAvBarnUpdated,
+                validationResult: validateInputData(state.nBarn.id, listeAvBarnUpdated),
             };
         }
 
         case ActionType.Beregn: {
-            const validationResult: Either<FeiloppsummeringFeil[], ValidBarnInfo[]> = validateListOfBarnInfo(
-                state.barn,
-                state.nBarn.id
+            const validationResult: Either<FeiloppsummeringFeil[], BarnApi[]> = validateInputData(
+                state.nBarn.id,
+                state.barn
             );
 
             return {

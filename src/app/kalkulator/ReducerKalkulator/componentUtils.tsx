@@ -1,29 +1,19 @@
 import { Value } from './types';
 import * as React from 'react';
-import { pipe } from 'fp-ts/lib/pipeable';
-import { fold, isRight } from 'fp-ts/lib/Either';
 import { ISODateString } from 'nav-datovelger';
+import { isSome, Option } from 'fp-ts/lib/Option';
 
 export function valueToFeilProps<T>(value: Value<T>, showErrors: boolean): React.ReactNode | boolean {
     if (!showErrors) {
         return false;
     }
-    return pipe(
-        value.value,
-        fold(
-            (error) => {
-                return <span>{error.feilmelding}</span>;
-            },
-            () => {
-                return undefined;
-            }
-        )
-    );
+    // TODO: Fix!
+    return value.errors.length > 0 ? <span>{value.errors[0]}</span> : undefined;
 }
 
-export const evaluateDatoErGyldigProp = (datoValue: Value<ISODateString>, showErrors: boolean): boolean => {
+export const evaluateDatoErGyldigProp = (datoValue: Value<Option<ISODateString>>, showErrors: boolean): boolean => {
     if (!showErrors) {
         return true;
     }
-    return isRight(datoValue.value);
+    return isSome(datoValue.value);
 };
