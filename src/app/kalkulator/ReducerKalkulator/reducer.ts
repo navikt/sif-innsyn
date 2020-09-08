@@ -1,16 +1,12 @@
 import { State } from './state';
 import { Action, ActionType } from './actions';
-import {
-    createFeiloppsummeringFeilNotAnswered,
-    createFeiloppsummeringFeilZeroChildren,
-    initializeNBarn,
-} from './initializers';
+import { createFeiloppsummeringFeilZeroChildren, initializeNBarn } from './initializers';
 import { BarnInfo, ValidBarnInfo } from './types';
 import { Either, left, right } from 'fp-ts/lib/Either';
 import { FeiloppsummeringFeil } from 'nav-frontend-skjema';
 import { validateListOfBarnInfo } from './utils';
 import { some } from 'fp-ts/lib/Option';
-import { setFodselsdatoOgOppdaterDataForBarnet } from './reducerUtils';
+import { fjernFodselsdatoOgOppdaterDataForBarnet, setFodselsdatoOgOppdaterDataForBarnet } from './reducerUtils';
 
 export type KalkulatorReducer = (state: State, action: Action) => State;
 
@@ -48,17 +44,7 @@ export const reducer: KalkulatorReducer = (state: State, action: Action): State 
         case ActionType.FjernFodselsdatoForBarnInfo: {
             return {
                 ...state,
-                barn: state.barn.map((barn: BarnInfo) =>
-                    barn.id === action.barnInfoId
-                        ? {
-                              ...barn,
-                              fodselsdato: {
-                                  ...barn.fodselsdato,
-                                  value: left(createFeiloppsummeringFeilNotAnswered(barn.fodselsdato.id)),
-                              },
-                          }
-                        : barn
-                ),
+                barn: state.barn.map(fjernFodselsdatoOgOppdaterDataForBarnet(action)),
             };
         }
 
