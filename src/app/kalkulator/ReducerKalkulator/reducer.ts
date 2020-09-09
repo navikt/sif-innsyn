@@ -1,4 +1,4 @@
-import { State } from './state';
+import { createInitialState, State } from './state';
 import { Action, ActionType } from './actions';
 import { initializeNBarn } from './initializers';
 import { BarnInfo } from './types';
@@ -23,13 +23,9 @@ export const reducer: KalkulatorReducer = (state: State, action: Action): State 
                 showErrors: false,
             };
         }
-        // case ActionType.SetNBarnInvalid: {
-        //     return {
-        //         ...state,
-        //         nBarn: { ...state.nBarn, value: left(createFeiloppsummeringFeilZeroChildren(state.nBarn.id)) },
-        //         barn: [],
-        //     };
-        // }
+        case ActionType.SetNBarnInvalid: {
+            return createInitialState();
+        }
         case ActionType.ShowValidationErrorSummary:
             return { ...state, showErrors: true };
         case ActionType.HideValidationErrorSummary:
