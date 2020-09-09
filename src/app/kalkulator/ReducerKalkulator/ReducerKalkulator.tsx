@@ -3,7 +3,6 @@ import { useReducer } from 'react';
 import { KalkulatorReducer, reducer } from './reducer';
 import { createInitialState, State } from './state';
 import {
-    beregn,
     fjernFodselsdatoForBarnInfo,
     setAleneOmOmsorgen,
     setBorSammen,
@@ -14,10 +13,9 @@ import {
 } from './actions';
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import SvgSuccessCircle from '../svgs/SvgSuccessCircle';
-import ValidationSummary from '@navikt/sif-common-formik/lib/components/helpers/ValidationSummary';
 import FormBlock from '@navikt/sif-common-core/lib/components/form-block/FormBlock';
 import { BarnInfo } from './types';
-import { FeiloppsummeringFeil, RadioPanelGruppe, Select } from 'nav-frontend-skjema';
+import { RadioPanelGruppe, Select } from 'nav-frontend-skjema';
 import { Datovelger, ISODateString } from 'nav-datovelger';
 import {
     barnetErOverTolvOgIkkeKroniskSykt,
@@ -34,8 +32,8 @@ import {
     YesOrNoToBool,
 } from './utils';
 import { isNumber, isYesOrNo } from './typeguards';
-import { fold, isRight } from 'fp-ts/lib/Either';
-import { Hovedknapp, Knapp } from 'nav-frontend-knapper';
+import { isRight } from 'fp-ts/lib/Either';
+import { Knapp } from 'nav-frontend-knapper';
 import { AlertStripeAdvarsel, AlertStripeInfo } from 'nav-frontend-alertstriper';
 import { Element } from 'nav-frontend-typografi';
 import './reducerKalkulator.less';
@@ -45,8 +43,7 @@ import { evaluateDatoErGyldigProp, valueToFeilProps } from './componentUtils';
 import KalkulatorLogoAndTitle from './components/KalkulatorLogoAndTitle';
 import Box from '@navikt/sif-common-core/lib/components/box/Box';
 import Lenke from 'nav-frontend-lenker';
-import ResultBox from './components/ResultBox';
-import Omsorgsprinsipper from '@navikt/omsorgspenger-kalkulator/lib/types/Omsorgsprinsipper';
+import ResultatArea from './components/ResultatArea';
 
 const ReducerKalkulator = () => {
     const [state, dispatch] = useReducer<KalkulatorReducer>(reducer, createInitialState([]));
@@ -285,25 +282,7 @@ const ReducerKalkulator = () => {
                     );
                 })}
             </FormBlock>
-            <FormBlock>
-                {fold(
-                    (errors: FeiloppsummeringFeil[]) => (
-                        <FormBlock>
-                            <FormBlock>
-                                <Hovedknapp id={'beregn-knapp'} onClick={() => dispatch(beregn)}>
-                                    Beregn
-                                </Hovedknapp>
-                            </FormBlock>
-                            <FormBlock>
-                                {state.showErrors && (
-                                    <ValidationSummary title={'Validation summary tittel'} errorMessages={errors} />
-                                )}
-                            </FormBlock>
-                        </FormBlock>
-                    ),
-                    (resultat: Omsorgsprinsipper) => <ResultBox resultat={resultat} />
-                )(state.validationResult)}
-            </FormBlock>
+            <ResultatArea state={state} dispatch={dispatch} />
         </div>
     );
 };

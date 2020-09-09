@@ -43,7 +43,7 @@ export const reducer: KalkulatorReducer = (state: State, action: Action): State 
                 ...state,
                 barn: listeAvBarnUpdated,
                 showErrors: false,
-                validationResult: validateAndCalculateIfValid(state.nBarn.id, listeAvBarnUpdated),
+                result: validateAndCalculateIfValid(state.nBarn.id, listeAvBarnUpdated),
             };
         }
         case ActionType.FjernFodselsdatoForBarnInfo: {
@@ -53,7 +53,7 @@ export const reducer: KalkulatorReducer = (state: State, action: Action): State 
             return {
                 ...state,
                 barn: listeAvBarnUpdated,
-                validationResult: validateAndCalculateIfValid(state.nBarn.id, listeAvBarnUpdated),
+                result: validateAndCalculateIfValid(state.nBarn.id, listeAvBarnUpdated),
             };
         }
         case ActionType.SetKroniskSykt: {
@@ -64,7 +64,7 @@ export const reducer: KalkulatorReducer = (state: State, action: Action): State 
                 ...state,
                 barn: listeAvBarnUpdated,
                 showErrors: false,
-                validationResult: validateAndCalculateIfValid(state.nBarn.id, listeAvBarnUpdated),
+                result: validateAndCalculateIfValid(state.nBarn.id, listeAvBarnUpdated),
             };
         }
         case ActionType.SetBorSammen: {
@@ -75,7 +75,7 @@ export const reducer: KalkulatorReducer = (state: State, action: Action): State 
                 ...state,
                 barn: listeAvBarnUpdated,
                 showErrors: false,
-                validationResult: validateAndCalculateIfValid(state.nBarn.id, listeAvBarnUpdated),
+                result: validateAndCalculateIfValid(state.nBarn.id, listeAvBarnUpdated),
             };
         }
         case ActionType.SetAleneOmOmsorgen: {
@@ -85,7 +85,7 @@ export const reducer: KalkulatorReducer = (state: State, action: Action): State 
             return {
                 ...state,
                 barn: listeAvBarnUpdated,
-                validationResult: validateAndCalculateIfValid(state.nBarn.id, listeAvBarnUpdated),
+                result: validateAndCalculateIfValid(state.nBarn.id, listeAvBarnUpdated),
             };
         }
 
@@ -93,7 +93,8 @@ export const reducer: KalkulatorReducer = (state: State, action: Action): State 
             return {
                 ...state,
                 showErrors: true,
-                validationResult: validateAndCalculateIfValid(state.nBarn.id, state.barn),
+                showResult: true,
+                result: validateAndCalculateIfValid(state.nBarn.id, state.barn),
             };
         }
         default:

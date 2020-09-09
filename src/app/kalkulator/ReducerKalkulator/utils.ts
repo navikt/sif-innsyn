@@ -7,17 +7,7 @@ import moment from 'moment';
 import { FeiloppsummeringFeil } from 'nav-frontend-skjema';
 import { pipe } from 'fp-ts/lib/pipeable';
 import { Separated } from 'fp-ts/lib/Compactable';
-import { createFeiloppsummeringFeilNotAnswered } from './initializers';
-import {
-    chain as andThen,
-    flatten as flattenOption,
-    fold as foldOption,
-    fromEither,
-    isNone,
-    isSome,
-    map as mapOption,
-    Option,
-} from 'fp-ts/lib/Option';
+import { flatten as flattenOption, fold as foldOption, fromEither, isNone, isSome, Option } from 'fp-ts/lib/Option';
 import Omsorgsprinsipper from '@navikt/omsorgspenger-kalkulator/lib/types/Omsorgsprinsipper';
 import { omsorgsdager } from '@navikt/omsorgspenger-kalkulator/lib/components/kalkulerOmsorgsdager';
 
@@ -91,18 +81,25 @@ export const barnetErOverTolvOgIkkeKroniskSykt = (
     maybeFodselsdato: Option<string>,
     maybeKroniskSykt: Option<boolean>
 ): boolean => {
-    const optionalIsTrue: Option<boolean> = pipe(
-        maybeFodselsdato,
-        mapOption((fodselsdato) => erOverTolv(fodselsdato)),
-        andThen((merEnnTolv: boolean) =>
-            mapOption((kroniskSykt: boolean) => !kroniskSykt && merEnnTolv)(maybeKroniskSykt)
-        )
+    return (
+        isSome(maybeFodselsdato) &&
+        erOverTolv(maybeFodselsdato.value) &&
+        isSome(maybeKroniskSykt) &&
+        !maybeKroniskSykt.value
     );
-
-    return foldOption(
-        () => false,
-        (value: boolean) => value
-    )(optionalIsTrue);
+    // TODO: Fjern det under, hvis det over er riktig
+    // const optionalIsTrue: Option<boolean> = pipe(
+    //     maybeFodselsdato,
+    //     mapOption((fodselsdato) => erOverTolv(fodselsdato)),
+    //     andThen((merEnnTolv: boolean) =>
+    //         mapOption((kroniskSykt: boolean) => !kroniskSykt && merEnnTolv)(maybeKroniskSykt)
+    //     )
+    // );
+    //
+    // return foldOption(
+    //     () => false,
+    //     (value: boolean) => value
+    // )(optionalIsTrue);
 };
 
 export const borIkkeSammen = (barnInfo: BarnInfo): boolean =>
@@ -151,6 +148,16 @@ export const toFeiloppsummeringsFeil = (id: string, error: string): Feiloppsumme
 
 export const erFerdigUtfylt = (barnInfo: BarnInfo): boolean => isRight(validateBarnInfo(barnInfo));
 
+export const outInvalidChildren = (barnInfo: BarnInfo): boolean => {
+    if (barnetErOverTolvOgIkkeKroniskSykt(barnInfo.fodselsdato.value, barnInfo.kroniskSykt.value)) {
+        return false;
+    }
+    if (borIkkeSammen(barnInfo)) {
+        return false;
+    }
+    return true;
+};
+
 export const validateBarnInfo = (barnInfo: BarnInfo): Either<FeiloppsummeringFeil[], BarnApi> => {
     const { fodselsdato, kroniskSykt, borSammen, aleneOmOmsorgen }: BarnInfo = barnInfo;
     const samletListeAvFeil: FeiloppsummeringFeil[] = [
@@ -179,20 +186,28 @@ export const extractEitherFromList = (
 
 export const validateInputData = (
     nBarnSelectId: string,
-    listeAvBarnInfo?: BarnInfo[]
+    listeAvBarnInfo: BarnInfo[]
 ): Either<FeiloppsummeringFeil[], BarnApi[]> => {
-    if (!listeAvBarnInfo || listeAvBarnInfo.length === 0) {
-        return left([createFeiloppsummeringFeilNotAnswered(nBarnSelectId)]);
+    const filteredListeAvBarnInfo = listeAvBarnInfo.filter(outInvalidChildren);
+    if (filteredListeAvBarnInfo.length === 0) {
+        return left([
+            toFeiloppsummeringsFeil('noid', 'Du har ikke spesifisert noen barn som gir rett til omsorgsdager.'),
+        ]);
     }
-    const listOfEitherErrorOrBarnApi: Either<FeiloppsummeringFeil[], BarnApi>[] = listeAvBarnInfo.map(validateBarnInfo);
+    const listOfEitherErrorOrBarnApi: Either<FeiloppsummeringFeil[], BarnApi>[] = filteredListeAvBarnInfo.map(
+        validateBarnInfo
+    );
     return extractEitherFromList(listOfEitherErrorOrBarnApi);
 };
 
 export const validateAndCalculateIfValid = (
     nBarnSelectId: string,
-    listeAvBarnInfo?: BarnInfo[]
+    listeAvBarnInfo: BarnInfo[]
 ): Either<FeiloppsummeringFeil[], Omsorgsprinsipper> => {
-    const validationResult = validateInputData(nBarnSelectId, listeAvBarnInfo);
+    const validationResult: Either<FeiloppsummeringFeil[], BarnApi[]> = validateInputData(
+        nBarnSelectId,
+        listeAvBarnInfo
+    );
     return pipe(
         validationResult,
         map((barnApiListe: BarnApi[]) => omsorgsdager(barnApiListe, false))

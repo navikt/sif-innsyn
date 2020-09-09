@@ -4,15 +4,14 @@ import { FeiloppsummeringFeil } from 'nav-frontend-skjema';
 import Omsorgsprinsipper from '@navikt/omsorgspenger-kalkulator/lib/types/Omsorgsprinsipper';
 import { Either } from 'fp-ts/lib/Either';
 import { validateAndCalculateIfValid } from './utils';
-import { none, Option } from 'fp-ts/lib/Option';
 
 export interface State {
     readonly nBarnMaks: number;
     nBarn: Value<number>;
     barn: BarnInfo[];
     showErrors: boolean;
-    validationResult: Either<FeiloppsummeringFeil[], Omsorgsprinsipper>;
-    resultat: Option<Omsorgsprinsipper>;
+    showResult: boolean;
+    result: Either<FeiloppsummeringFeil[], Omsorgsprinsipper>;
 }
 
 export const createInitialState = (listeAvBarnInfo?: BarnInfo[]): State => {
@@ -26,7 +25,7 @@ export const createInitialState = (listeAvBarnInfo?: BarnInfo[]): State => {
         nBarn: nBarnInitially,
         barn: listeAvBarnInfo || [],
         showErrors: false,
-        validationResult: validateAndCalculateIfValid(nBarnInitially.id, listeAvBarnInfo),
-        resultat: none,
+        showResult: false,
+        result: validateAndCalculateIfValid(nBarnInitially.id, listeAvBarnInfo || []),
     };
 };
