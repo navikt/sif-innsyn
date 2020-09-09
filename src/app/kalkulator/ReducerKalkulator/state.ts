@@ -26,6 +26,6 @@ export const createInitialState = (listeAvBarnInfo?: BarnInfo[]): State => {
         barn: listeAvBarnInfo || [],
         showErrors: false,
         showResult: false,
-        result: validateAndCalculateIfValid(nBarnInitially.id, listeAvBarnInfo || []),
+        result: validateAndCalculateIfValid(listeAvBarnInfo || []),
     };
 };

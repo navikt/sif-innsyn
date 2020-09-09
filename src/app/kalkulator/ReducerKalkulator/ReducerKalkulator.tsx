@@ -18,10 +18,9 @@ import { BarnInfo } from './types';
 import { RadioPanelGruppe, Select } from 'nav-frontend-skjema';
 import { Datovelger, ISODateString } from 'nav-datovelger';
 import {
+    barnetErOverAtten,
     barnetErOverTolvOgIkkeKroniskSykt,
     borIkkeSammen,
-    erFerdigUtfylt,
-    optionalFodselsdatoErOverAtten,
     shouldViewAleneOmOmsorgenQuestion,
     shouldViewBorSammenQuestion,
     shouldViewKroniskSyktQuestion,
@@ -44,19 +43,12 @@ import KalkulatorLogoAndTitle from './components/KalkulatorLogoAndTitle';
 import Box from '@navikt/sif-common-core/lib/components/box/Box';
 import Lenke from 'nav-frontend-lenker';
 import ResultatArea from './components/ResultatArea';
+import { barnInfoPanelIdBody } from './constants';
+import { skalViseGåTilNesteBarnKnapp } from './viewUtils';
 
 const ReducerKalkulator = () => {
     const [state, dispatch] = useReducer<KalkulatorReducer>(reducer, createInitialState([]));
     const { nBarnMaks, barn }: State = state;
-
-    // useMemo<Omsorgsprinsipper>(
-    //     () =>
-    //         omsorgsdager(
-    //             barn.map((barn: BarnInfo, index: number) => barnInfoToBarn(barn, index)),
-    //             false
-    //         ),
-    //     [barn, inkluderKoronadager]
-    // );
 
     return (
         <div>
@@ -107,6 +99,7 @@ const ReducerKalkulator = () => {
                     return (
                         <FormBlock key={index}>
                             <Ekspanderbartpanel
+                                id={barnInfoPanelIdBody + index}
                                 tittel={
                                     <div className={'omsorgsdagerkalkulator--ekspanderbarnpanel-tittel-wrapper'}>
                                         <div className={'omsorgsdagerkalkulator--ekspanderbarnpanel-tittel-left'}>
@@ -145,7 +138,7 @@ const ReducerKalkulator = () => {
                                     />
                                 </FormBlock>
 
-                                {optionalFodselsdatoErOverAtten(barnInfo.fodselsdato.value) && (
+                                {barnetErOverAtten(barnInfo) && (
                                     <FormBlock>
                                         <AlertStripeAdvarsel>
                                             Du kan kun ha omsorgsdager ut kalenderåret barnet er 18 år.
@@ -184,10 +177,7 @@ const ReducerKalkulator = () => {
                                     </FormBlock>
                                 )}
 
-                                {barnetErOverTolvOgIkkeKroniskSykt(
-                                    barnInfo.fodselsdato.value,
-                                    barnInfo.kroniskSykt.value
-                                ) && (
+                                {barnetErOverTolvOgIkkeKroniskSykt(barnInfo) && (
                                     <FormBlock>
                                         <AlertStripeAdvarsel>
                                             For å få omsorgsdager for barn som er 13 år eller eldre, må du ha søkt og
@@ -274,8 +264,10 @@ const ReducerKalkulator = () => {
                                     </FormBlock>
                                 )}
 
-                                {erFerdigUtfylt(barnInfo) && (
-                                    <Knapp onChange={() => console.info('Gå til neste barn.')}>Neste barn</Knapp>
+                                {skalViseGåTilNesteBarnKnapp(barnInfo, index, state.barn.length) && (
+                                    <FormBlock>
+                                        <Knapp onChange={() => console.info('Gå til neste barn.')}>Neste barn</Knapp>
+                                    </FormBlock>
                                 )}
                             </Ekspanderbartpanel>
                         </FormBlock>

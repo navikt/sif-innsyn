@@ -71,36 +71,14 @@ export function isEmptyValue<T>(eitherValue: Either<FeiloppsummeringFeil, Option
     return pipe(eitherValue, fromEither, flattenOption, isNone);
 }
 
-export const optionalFodselsdatoErOverAtten = (fodselsdato: Option<string>): boolean =>
-    foldOption(
-        () => false,
-        (fodselsdato: ISODateString) => erOverAtten(fodselsdato)
-    )(fodselsdato);
+export const barnetErOverAtten = (barnInfo: BarnInfo): boolean =>
+    isSome(barnInfo.fodselsdato.value) && erOverAtten(barnInfo.fodselsdato.value.value);
 
-export const barnetErOverTolvOgIkkeKroniskSykt = (
-    maybeFodselsdato: Option<string>,
-    maybeKroniskSykt: Option<boolean>
-): boolean => {
-    return (
-        isSome(maybeFodselsdato) &&
-        erOverTolv(maybeFodselsdato.value) &&
-        isSome(maybeKroniskSykt) &&
-        !maybeKroniskSykt.value
-    );
-    // TODO: Fjern det under, hvis det over er riktig
-    // const optionalIsTrue: Option<boolean> = pipe(
-    //     maybeFodselsdato,
-    //     mapOption((fodselsdato) => erOverTolv(fodselsdato)),
-    //     andThen((merEnnTolv: boolean) =>
-    //         mapOption((kroniskSykt: boolean) => !kroniskSykt && merEnnTolv)(maybeKroniskSykt)
-    //     )
-    // );
-    //
-    // return foldOption(
-    //     () => false,
-    //     (value: boolean) => value
-    // )(optionalIsTrue);
-};
+export const barnetErOverTolvOgIkkeKroniskSykt = (barnInfo: BarnInfo): boolean =>
+    isSome(barnInfo.fodselsdato.value) &&
+    erOverTolv(barnInfo.fodselsdato.value.value) &&
+    isSome(barnInfo.kroniskSykt.value) &&
+    !barnInfo.kroniskSykt.value.value;
 
 export const borIkkeSammen = (barnInfo: BarnInfo): boolean =>
     isSome(barnInfo.borSammen.value) && !barnInfo.borSammen.value.value;
@@ -115,9 +93,7 @@ export const shouldViewKroniskSyktQuestion = (barnInfo: BarnInfo): boolean =>
     );
 
 export const shouldViewBorSammenQuestion = (barnInfo: BarnInfo): boolean =>
-    !optionalFodselsdatoErOverAtten(barnInfo.fodselsdato.value) &&
-    !barnetErOverTolvOgIkkeKroniskSykt(barnInfo.fodselsdato.value, barnInfo.kroniskSykt.value) &&
-    isSome(barnInfo.kroniskSykt.value);
+    !barnetErOverAtten(barnInfo) && !barnetErOverTolvOgIkkeKroniskSykt(barnInfo) && isSome(barnInfo.kroniskSykt.value);
 
 export const shouldViewAleneOmOmsorgenQuestion = (barnInfo: BarnInfo): boolean =>
     pipe(
@@ -146,10 +122,11 @@ export const toFeiloppsummeringsFeil = (id: string, error: string): Feiloppsumme
     feilmelding: error,
 });
 
-export const erFerdigUtfylt = (barnInfo: BarnInfo): boolean => isRight(validateBarnInfo(barnInfo));
-
 export const outInvalidChildren = (barnInfo: BarnInfo): boolean => {
-    if (barnetErOverTolvOgIkkeKroniskSykt(barnInfo.fodselsdato.value, barnInfo.kroniskSykt.value)) {
+    if (barnetErOverAtten(barnInfo)) {
+        return false;
+    }
+    if (barnetErOverTolvOgIkkeKroniskSykt(barnInfo)) {
         return false;
     }
     if (borIkkeSammen(barnInfo)) {
@@ -184,10 +161,7 @@ export const extractEitherFromList = (
         )
     );
 
-export const validateInputData = (
-    nBarnSelectId: string,
-    listeAvBarnInfo: BarnInfo[]
-): Either<FeiloppsummeringFeil[], BarnApi[]> => {
+export const validateListeAvBarnInfo = (listeAvBarnInfo: BarnInfo[]): Either<FeiloppsummeringFeil[], BarnApi[]> => {
     const filteredListeAvBarnInfo = listeAvBarnInfo.filter(outInvalidChildren);
     if (filteredListeAvBarnInfo.length === 0) {
         return left([
@@ -201,20 +175,11 @@ export const validateInputData = (
 };
 
 export const validateAndCalculateIfValid = (
-    nBarnSelectId: string,
     listeAvBarnInfo: BarnInfo[]
 ): Either<FeiloppsummeringFeil[], Omsorgsprinsipper> => {
-    const validationResult: Either<FeiloppsummeringFeil[], BarnApi[]> = validateInputData(
-        nBarnSelectId,
-        listeAvBarnInfo
-    );
+    const validationResult: Either<FeiloppsummeringFeil[], BarnApi[]> = validateListeAvBarnInfo(listeAvBarnInfo);
     return pipe(
         validationResult,
         map((barnApiListe: BarnApi[]) => omsorgsdager(barnApiListe, false))
     );
 };
-
-// export const validateAndIfValidCalculate = (state: State): State => {
-//     const validatedListOfBarnInfo = validateListOfBarnInfo(state.barn, state.nBarn.id);
-//     omsorgsdager();
-// };
