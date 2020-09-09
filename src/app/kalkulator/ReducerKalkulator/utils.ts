@@ -18,6 +18,8 @@ import {
     map as mapOption,
     Option,
 } from 'fp-ts/lib/Option';
+import Omsorgsprinsipper from '@navikt/omsorgspenger-kalkulator/lib/types/Omsorgsprinsipper';
+import { omsorgsdager } from '@navikt/omsorgspenger-kalkulator/lib/components/kalkulerOmsorgsdager';
 
 export type RadioValue = YesOrNo | undefined;
 
@@ -103,7 +105,8 @@ export const barnetErOverTolvOgIkkeKroniskSykt = (
     )(optionalIsTrue);
 };
 
-export const borIkkeSammen = (barnInfo: BarnInfo): boolean => !shouldViewAleneOmOmsorgenQuestion(barnInfo);
+export const borIkkeSammen = (barnInfo: BarnInfo): boolean =>
+    isSome(barnInfo.borSammen.value) && !barnInfo.borSammen.value.value;
 
 export const shouldViewKroniskSyktQuestion = (barnInfo: BarnInfo): boolean =>
     pipe(
@@ -146,6 +149,8 @@ export const toFeiloppsummeringsFeil = (id: string, error: string): Feiloppsumme
     feilmelding: error,
 });
 
+export const erFerdigUtfylt = (barnInfo: BarnInfo): boolean => isRight(validateBarnInfo(barnInfo));
+
 export const validateBarnInfo = (barnInfo: BarnInfo): Either<FeiloppsummeringFeil[], BarnApi> => {
     const { fodselsdato, kroniskSykt, borSammen, aleneOmOmsorgen }: BarnInfo = barnInfo;
     const samletListeAvFeil: FeiloppsummeringFeil[] = [
@@ -181,6 +186,17 @@ export const validateInputData = (
     }
     const listOfEitherErrorOrBarnApi: Either<FeiloppsummeringFeil[], BarnApi>[] = listeAvBarnInfo.map(validateBarnInfo);
     return extractEitherFromList(listOfEitherErrorOrBarnApi);
+};
+
+export const validateAndCalculateIfValid = (
+    nBarnSelectId: string,
+    listeAvBarnInfo?: BarnInfo[]
+): Either<FeiloppsummeringFeil[], Omsorgsprinsipper> => {
+    const validationResult = validateInputData(nBarnSelectId, listeAvBarnInfo);
+    return pipe(
+        validationResult,
+        map((barnApiListe: BarnApi[]) => omsorgsdager(barnApiListe, false))
+    );
 };
 
 // export const validateAndIfValidCalculate = (state: State): State => {

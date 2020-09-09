@@ -16,12 +16,13 @@ import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import SvgSuccessCircle from '../svgs/SvgSuccessCircle';
 import ValidationSummary from '@navikt/sif-common-formik/lib/components/helpers/ValidationSummary';
 import FormBlock from '@navikt/sif-common-core/lib/components/form-block/FormBlock';
-import { BarnApi, BarnInfo } from './types';
+import { BarnInfo } from './types';
 import { FeiloppsummeringFeil, RadioPanelGruppe, Select } from 'nav-frontend-skjema';
 import { Datovelger, ISODateString } from 'nav-datovelger';
 import {
     barnetErOverTolvOgIkkeKroniskSykt,
     borIkkeSammen,
+    erFerdigUtfylt,
     optionalFodselsdatoErOverAtten,
     shouldViewAleneOmOmsorgenQuestion,
     shouldViewBorSammenQuestion,
@@ -45,6 +46,7 @@ import KalkulatorLogoAndTitle from './components/KalkulatorLogoAndTitle';
 import Box from '@navikt/sif-common-core/lib/components/box/Box';
 import Lenke from 'nav-frontend-lenker';
 import ResultBox from './components/ResultBox';
+import Omsorgsprinsipper from '@navikt/omsorgspenger-kalkulator/lib/types/Omsorgsprinsipper';
 
 const ReducerKalkulator = () => {
     const [state, dispatch] = useReducer<KalkulatorReducer>(reducer, createInitialState([]));
@@ -212,7 +214,7 @@ const ReducerKalkulator = () => {
                                                     </ExpandableInfo>
                                                 </div>
                                             }
-                                            feil={valueToFeilProps(barnInfo.kroniskSykt, state.showErrors)}
+                                            feil={valueToFeilProps(barnInfo.borSammen, state.showErrors)}
                                             onChange={(evt, value) => {
                                                 if (isYesOrNo(value)) {
                                                     dispatch(setBorSammen(YesOrNoToBool(value), barnInfo.id));
@@ -262,7 +264,7 @@ const ReducerKalkulator = () => {
                                                     </ExpandableInfo>
                                                 </div>
                                             }
-                                            feil={valueToFeilProps(barnInfo.kroniskSykt, state.showErrors)}
+                                            feil={valueToFeilProps(barnInfo.aleneOmOmsorgen, state.showErrors)}
                                             onChange={(evt, value) => {
                                                 if (isYesOrNo(value)) {
                                                     dispatch(setAleneOmOmsorgen(YesOrNoToBool(value), barnInfo.id));
@@ -275,36 +277,33 @@ const ReducerKalkulator = () => {
                                     </FormBlock>
                                 )}
 
-                                <Knapp onChange={() => console.info('Gå til neste barn.')}>Neste barn</Knapp>
+                                {erFerdigUtfylt(barnInfo) && (
+                                    <Knapp onChange={() => console.info('Gå til neste barn.')}>Neste barn</Knapp>
+                                )}
                             </Ekspanderbartpanel>
                         </FormBlock>
                     );
                 })}
             </FormBlock>
             <FormBlock>
-                <FormBlock>
-                    <Hovedknapp id={'beregn-knapp'} onClick={() => dispatch(beregn)}>
-                        Beregn
-                    </Hovedknapp>
-                </FormBlock>
                 {fold(
-                    (errors: FeiloppsummeringFeil[]) => {
-                        return (
+                    (errors: FeiloppsummeringFeil[]) => (
+                        <FormBlock>
                             <FormBlock>
-                                <FormBlock>
-                                    {state.showErrors && (
-                                        <ValidationSummary title={'Validation summary tittel'} errorMessages={errors} />
-                                    )}
-                                </FormBlock>
+                                <Hovedknapp id={'beregn-knapp'} onClick={() => dispatch(beregn)}>
+                                    Beregn
+                                </Hovedknapp>
                             </FormBlock>
-                        );
-                    },
-                    (resultat: BarnApi[]) => {
-                        return <div>All info er riktig inputet, og resultatet kan vises her</div>;
-                    }
+                            <FormBlock>
+                                {state.showErrors && (
+                                    <ValidationSummary title={'Validation summary tittel'} errorMessages={errors} />
+                                )}
+                            </FormBlock>
+                        </FormBlock>
+                    ),
+                    (resultat: Omsorgsprinsipper) => <ResultBox resultat={resultat} />
                 )(state.validationResult)}
             </FormBlock>
-            <ResultBox />
         </div>
     );
 };

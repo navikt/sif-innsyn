@@ -3,14 +3,15 @@ import SvgChild from '../../svgs/SvgChild';
 import FormBlock from '@navikt/sif-common-core/lib/components/form-block/FormBlock';
 import './ResultBox.less';
 import bemUtils from '@navikt/sif-common-core/lib/utils/bemUtils';
+import Omsorgsprinsipper from '@navikt/omsorgspenger-kalkulator/lib/types/Omsorgsprinsipper';
 
 export const bem = bemUtils('OmsCalcResultBox');
 
 interface Props {
-    putPropsHere?: string;
+    resultat: Omsorgsprinsipper;
 }
 
-const ResultBox: React.FC<Props> = (props: Props) => {
+const ResultBox: React.FC<Props> = ({ resultat }: Props) => {
     return (
         <FormBlock>
             <div className={bem.element('result-wrapper')}>
@@ -37,6 +38,10 @@ const ResultBox: React.FC<Props> = (props: Props) => {
                             Hvis du etter 1. juli 2020 har brukt omsorgsdager, eller delt dager med en annen, må du
                             trekke fra disse dagene selv.
                         </div>
+                        <div>grunnrett: {resultat.grunnrett.normaldager}</div>
+                        <div>kroniskSykt: {resultat.kroniskSykt.normaldager}</div>
+                        <div>aleneomsorgKroniskSyke: {resultat.aleneomsorgKroniskSyke.normaldager}</div>
+                        <div>aleneomsorg: {resultat.aleneomsorg.normaldager}</div>
                     </div>
                 </div>
             </div>

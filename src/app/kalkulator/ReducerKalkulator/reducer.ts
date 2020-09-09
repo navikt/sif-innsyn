@@ -1,10 +1,8 @@
 import { State } from './state';
 import { Action, ActionType } from './actions';
 import { initializeNBarn } from './initializers';
-import { BarnApi, BarnInfo } from './types';
-import { Either } from 'fp-ts/lib/Either';
-import { FeiloppsummeringFeil } from 'nav-frontend-skjema';
-import { validateInputData } from './utils';
+import { BarnInfo } from './types';
+import { validateAndCalculateIfValid } from './utils';
 import {
     fjernFodselsdatoOgOppdaterDataForBarnet,
     setAleneOmOmsorgenOgOppdaterDataForBarnet,
@@ -44,7 +42,8 @@ export const reducer: KalkulatorReducer = (state: State, action: Action): State 
             return {
                 ...state,
                 barn: listeAvBarnUpdated,
-                validationResult: validateInputData(state.nBarn.id, listeAvBarnUpdated),
+                showErrors: false,
+                validationResult: validateAndCalculateIfValid(state.nBarn.id, listeAvBarnUpdated),
             };
         }
         case ActionType.FjernFodselsdatoForBarnInfo: {
@@ -54,7 +53,7 @@ export const reducer: KalkulatorReducer = (state: State, action: Action): State 
             return {
                 ...state,
                 barn: listeAvBarnUpdated,
-                validationResult: validateInputData(state.nBarn.id, listeAvBarnUpdated),
+                validationResult: validateAndCalculateIfValid(state.nBarn.id, listeAvBarnUpdated),
             };
         }
         case ActionType.SetKroniskSykt: {
@@ -64,7 +63,8 @@ export const reducer: KalkulatorReducer = (state: State, action: Action): State 
             return {
                 ...state,
                 barn: listeAvBarnUpdated,
-                validationResult: validateInputData(state.nBarn.id, listeAvBarnUpdated),
+                showErrors: false,
+                validationResult: validateAndCalculateIfValid(state.nBarn.id, listeAvBarnUpdated),
             };
         }
         case ActionType.SetBorSammen: {
@@ -74,7 +74,8 @@ export const reducer: KalkulatorReducer = (state: State, action: Action): State 
             return {
                 ...state,
                 barn: listeAvBarnUpdated,
-                validationResult: validateInputData(state.nBarn.id, listeAvBarnUpdated),
+                showErrors: false,
+                validationResult: validateAndCalculateIfValid(state.nBarn.id, listeAvBarnUpdated),
             };
         }
         case ActionType.SetAleneOmOmsorgen: {
@@ -84,20 +85,15 @@ export const reducer: KalkulatorReducer = (state: State, action: Action): State 
             return {
                 ...state,
                 barn: listeAvBarnUpdated,
-                validationResult: validateInputData(state.nBarn.id, listeAvBarnUpdated),
+                validationResult: validateAndCalculateIfValid(state.nBarn.id, listeAvBarnUpdated),
             };
         }
 
         case ActionType.Beregn: {
-            const validationResult: Either<FeiloppsummeringFeil[], BarnApi[]> = validateInputData(
-                state.nBarn.id,
-                state.barn
-            );
-
             return {
                 ...state,
                 showErrors: true,
-                validationResult: validationResult,
+                validationResult: validateAndCalculateIfValid(state.nBarn.id, state.barn),
             };
         }
         default:

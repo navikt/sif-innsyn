@@ -1,52 +1,52 @@
 import { BarnInfo, Value } from './types';
 import { barnetErOverTolvOgIkkeKroniskSykt, optionalFodselsdatoErOverAtten } from './utils';
-import { none, Option, some } from 'fp-ts/lib/Option';
+import { isNone, isSome, none, Option, some } from 'fp-ts/lib/Option';
 import { ISODateString } from 'nav-datovelger';
 import { errorNotAnswered } from './validationUtils';
 
-// const updateKroniskSyk = (
-//     updatedFodselsdato: Option<string>,
-//     kroniskSyk: Value<Option<boolean>>
-// ): Value<Option<boolean>> => {
-//     if (optionalFodselsdatoErOverAtten(updatedFodselsdato)) {
-//         return { ...kroniskSyk, value: none, errors: [] };
-//     }
-// };
-//
-// const updateBorSammenMed = (
-//     borSammenMed: Value<Option<boolean>>,
-//     fodselsdato: EitherErrorOr<string>,
-//     kroniskSyk: EitherErrorOr<Option<boolean>>
-// ) => {
-//     if (optionalFodselsdatoErOverAtten(fodselsdato)) {
-//         return right(none);
-//     }
-//     if (barnetErOverTolvOgIkkeKroniskSykt(fodselsdato, kroniskSyk)) {
-//         return right(none);
-//     }
-//     if (isSomeValue(kroniskSyk) && isEmptyValue(borSammenMed.value)) {
-//         return left(createFeiloppsummeringFeilNotAnswered(borSammenMed.id));
-//     }
-//     return borSammenMed.value;
-// };
-//
-// const updateAleneOmOmsorgen = (
-//     aleneOmOmsorgen: Value<Option<boolean>>,
-//     fodselsdato: EitherErrorOr<string>,
-//     kroniskSykt: EitherErrorOr<Option<boolean>>,
-//     borSammenMed: EitherErrorOr<Option<boolean>>
-// ) => {
-//     if (optionalFodselsdatoErOverAtten(fodselsdato)) {
-//         return right(none);
-//     }
-//     if (barnetErOverTolvOgIkkeKroniskSykt(fodselsdato, kroniskSykt)) {
-//         return right(none);
-//     }
-//     if (isSomeValue(borSammenMed) && isEmptyValue(aleneOmOmsorgen.value)) {
-//         return left(createFeiloppsummeringFeilNotAnswered(aleneOmOmsorgen.id));
-//     }
-//     return aleneOmOmsorgen.value;
-// };
+export function isNoneAndNoErrors<T>(value: Value<Option<T>>): boolean {
+    return isNone(value.value) && value.errors.length === 0;
+}
+
+const updateKroniskSykt = (
+    updatedFodselsdato: Option<string>,
+    kroniskSykt: Value<Option<boolean>>
+): Value<Option<boolean>> => {
+    if (optionalFodselsdatoErOverAtten(updatedFodselsdato)) {
+        return { ...kroniskSykt, value: none, errors: [] };
+    }
+    if (isNoneAndNoErrors(kroniskSykt)) {
+        return { ...kroniskSykt, value: none, errors: [errorNotAnswered] };
+    }
+    return kroniskSykt;
+};
+
+const updateBorSammenMed = (
+    borSammenMed: Value<Option<boolean>>,
+    fodselsdato: Option<ISODateString>,
+    kroniskSyk: Option<boolean>
+): Value<Option<boolean>> => {
+    if (optionalFodselsdatoErOverAtten(fodselsdato) || barnetErOverTolvOgIkkeKroniskSykt(fodselsdato, kroniskSyk)) {
+        return { ...borSammenMed, value: none, errors: [] };
+    }
+    if (isNoneAndNoErrors(borSammenMed)) {
+        return { ...borSammenMed, value: none, errors: [errorNotAnswered] };
+    }
+    return borSammenMed;
+};
+
+const updateAleneOmOmsorgen = (
+    aleneOmOmsorgen: Value<Option<boolean>>,
+    borSammenMed: Option<boolean>
+): Value<Option<boolean>> => {
+    if (isSome(borSammenMed) && !borSammenMed.value) {
+        return { ...aleneOmOmsorgen, value: none, errors: [] };
+    }
+    if (isNoneAndNoErrors(aleneOmOmsorgen)) {
+        return { ...aleneOmOmsorgen, value: none, errors: [errorNotAnswered] };
+    }
+    return aleneOmOmsorgen;
+};
 
 export const setFodselsdatoOgOppdaterDataForBarnet = (newFodselsdato: ISODateString, barn: BarnInfo): BarnInfo => {
     const { fodselsdato, kroniskSykt, borSammen, aleneOmOmsorgen } = barn;
@@ -57,12 +57,12 @@ export const setFodselsdatoOgOppdaterDataForBarnet = (newFodselsdato: ISODateStr
         errors: [],
     };
 
+    const updatedKroniskSykt: Value<Option<boolean>> = updateKroniskSykt(updatedFodselsdato.value, kroniskSykt);
+
     return {
         ...barn,
         fodselsdato: updatedFodselsdato,
-        kroniskSykt: optionalFodselsdatoErOverAtten(updatedFodselsdato.value)
-            ? { ...kroniskSykt, value: none, errors: [] }
-            : kroniskSykt,
+        kroniskSykt: updatedKroniskSykt,
         borSammen:
             optionalFodselsdatoErOverAtten(updatedFodselsdato.value) ||
             barnetErOverTolvOgIkkeKroniskSykt(updatedFodselsdato.value, kroniskSykt.value)
@@ -92,11 +92,7 @@ export const setKroniskSyktOgOppdaterDataForBarnet = (value: boolean, barn: Barn
     return {
         ...barn,
         kroniskSykt: { ...kroniskSykt, value: some(value), errors: [] },
-        borSammen:
-            optionalFodselsdatoErOverAtten(fodselsdato.value) ||
-            barnetErOverTolvOgIkkeKroniskSykt(fodselsdato.value, kroniskSykt.value)
-                ? { ...borSammen, value: none, errors: [] }
-                : borSammen,
+        borSammen: updateBorSammenMed(borSammen, fodselsdato.value, kroniskSykt.value),
         aleneOmOmsorgen:
             optionalFodselsdatoErOverAtten(fodselsdato.value) ||
             barnetErOverTolvOgIkkeKroniskSykt(fodselsdato.value, kroniskSykt.value)
@@ -107,10 +103,13 @@ export const setKroniskSyktOgOppdaterDataForBarnet = (value: boolean, barn: Barn
 
 export const setBorSammenOgOppdaterDataForBarnet = (value: boolean, barn: BarnInfo): BarnInfo => {
     const { borSammen, aleneOmOmsorgen } = barn;
+
+    const updatedAleneOmOmsorgen = updateAleneOmOmsorgen(aleneOmOmsorgen, borSammen.value);
+
     return {
         ...barn,
         borSammen: { ...borSammen, value: some(value), errors: [] },
-        aleneOmOmsorgen: !value ? { ...aleneOmOmsorgen, value: none, errors: [] } : aleneOmOmsorgen,
+        aleneOmOmsorgen: updatedAleneOmOmsorgen,
     };
 };
 

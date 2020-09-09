@@ -1,9 +1,9 @@
-import { BarnInfo, BarnApi, Value } from './types';
+import { BarnInfo, Value } from './types';
 import { initializeValue } from './initializers';
 import { FeiloppsummeringFeil } from 'nav-frontend-skjema';
 import Omsorgsprinsipper from '@navikt/omsorgspenger-kalkulator/lib/types/Omsorgsprinsipper';
 import { Either } from 'fp-ts/lib/Either';
-import { validateInputData } from './utils';
+import { validateAndCalculateIfValid } from './utils';
 import { none, Option } from 'fp-ts/lib/Option';
 
 export interface State {
@@ -11,7 +11,7 @@ export interface State {
     nBarn: Value<number>;
     barn: BarnInfo[];
     showErrors: boolean;
-    validationResult: Either<FeiloppsummeringFeil[], BarnApi[]>;
+    validationResult: Either<FeiloppsummeringFeil[], Omsorgsprinsipper>;
     resultat: Option<Omsorgsprinsipper>;
 }
 
@@ -26,7 +26,7 @@ export const createInitialState = (listeAvBarnInfo?: BarnInfo[]): State => {
         nBarn: nBarnInitially,
         barn: listeAvBarnInfo || [],
         showErrors: false,
-        validationResult: validateInputData(nBarnInitially.id, listeAvBarnInfo),
+        validationResult: validateAndCalculateIfValid(nBarnInitially.id, listeAvBarnInfo),
         resultat: none,
     };
 };
