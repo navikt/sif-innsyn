@@ -1,8 +1,6 @@
 import * as React from 'react';
 import InnsynPage from '../components/innsyn-page/InnsynPage';
 import ReducerKalkulator from './ReducerKalkulator/ReducerKalkulator';
-// import FormikKalkulator from './FormikKalkulator';
-// import KalkulatorInput from 'omsorgspenger-kalkulator/lib/components/KalkulatorInput';
 
 const KalkulatorRoute: React.FC = () => {
     return (
