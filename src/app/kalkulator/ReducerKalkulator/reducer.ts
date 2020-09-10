@@ -10,6 +10,7 @@ import {
     setFodselsdatoOgOppdaterDataForBarnet,
     setKroniskSyktOgOppdaterDataForBarnet,
 } from './reducerUtils';
+import { isLeft } from 'fp-ts/lib/Either';
 
 export type KalkulatorReducer = (state: State, action: Action) => State;
 
@@ -86,11 +87,13 @@ export const reducer: KalkulatorReducer = (state: State, action: Action): State 
         }
 
         case ActionType.Beregn: {
+            const resultUpdated = validateAndCalculateIfValid(state.barn);
             return {
                 ...state,
                 showErrors: true,
                 showResult: true,
-                result: validateAndCalculateIfValid(state.barn),
+                isInitial: state.isInitial && isLeft(resultUpdated),
+                result: resultUpdated,
             };
         }
         default:

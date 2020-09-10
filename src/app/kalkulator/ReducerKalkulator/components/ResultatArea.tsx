@@ -20,7 +20,7 @@ const ResultatArea: React.FC<Props> = ({ state, dispatch }: Props) => {
         return null;
     }
 
-    if (!state.showResult) {
+    if (!state.showResult || state.isInitial) {
         return (
             <FormBlock margin={'xxl'}>
                 <Hovedknapp id={'beregn-knapp'} onClick={() => dispatch(beregn)}>

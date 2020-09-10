@@ -11,6 +11,7 @@ export interface State {
     barn: BarnInfo[];
     showErrors: boolean;
     showResult: boolean;
+    isInitial: boolean;
     result: Either<FeiloppsummeringFeil[], Omsorgsprinsipper>;
 }
 
@@ -26,6 +27,7 @@ export const createInitialState = (listeAvBarnInfo?: BarnInfo[]): State => {
         barn: listeAvBarnInfo || [],
         showErrors: false,
         showResult: false,
+        isInitial: true,
         result: validateAndCalculateIfValid(listeAvBarnInfo || []),
     };
 };

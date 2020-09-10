@@ -15,18 +15,7 @@ import FormBlock from '@navikt/sif-common-core/lib/components/form-block/FormBlo
 import { BarnInfo } from './types';
 import { RadioPanelGruppe, Select } from 'nav-frontend-skjema';
 import { Datovelger, ISODateString } from 'nav-datovelger';
-import {
-    barnetErOverAtten,
-    barnetErOverTolvOgIkkeKroniskSykt,
-    borIkkeSammen,
-    shouldViewAleneOmOmsorgenQuestion,
-    shouldViewBorSammenQuestion,
-    shouldViewKroniskSyktQuestion,
-    toFodselsdatoOrUndefined,
-    toRadioValue,
-    yesOrNoRadios,
-    YesOrNoToBool,
-} from './utils';
+import { barnetErOverAtten, barnetErOverTolvOgIkkeKroniskSykt, borIkkeSammen } from './utils';
 import { isNumber, isYesOrNo } from './typeguards';
 import { Knapp } from 'nav-frontend-knapper';
 import { AlertStripeAdvarsel, AlertStripeInfo } from 'nav-frontend-alertstriper';
@@ -39,7 +28,16 @@ import KalkulatorLogoAndTitle from './components/KalkulatorLogoAndTitle';
 import Box from '@navikt/sif-common-core/lib/components/box/Box';
 import Lenke from 'nav-frontend-lenker';
 import ResultatArea from './components/ResultatArea';
-import { skalViseGåTilNesteBarnKnapp } from './viewUtils';
+import {
+    shouldViewAleneOmOmsorgenQuestion,
+    shouldViewBorSammenQuestion,
+    shouldViewKroniskSyktQuestion,
+    skalViseGåTilNesteBarnKnapp,
+    toFodselsdatoOrUndefined,
+    toRadioValue,
+    yesOrNoRadios,
+    YesOrNoToBool,
+} from './viewUtils';
 import BarnPanelView from './components/BarnPanelView';
 import bemUtils from '@navikt/sif-common-core/lib/utils/bemUtils';
 
