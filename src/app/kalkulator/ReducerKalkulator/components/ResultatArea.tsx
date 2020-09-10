@@ -22,7 +22,7 @@ const ResultatArea: React.FC<Props> = ({ state, dispatch }: Props) => {
 
     if (!state.showResult) {
         return (
-            <FormBlock>
+            <FormBlock margin={'xxl'}>
                 <Hovedknapp id={'beregn-knapp'} onClick={() => dispatch(beregn)}>
                     Beregn
                 </Hovedknapp>
@@ -32,7 +32,7 @@ const ResultatArea: React.FC<Props> = ({ state, dispatch }: Props) => {
 
     return fold(
         (errors: FeiloppsummeringFeil[]) => (
-            <FormBlock>
+            <FormBlock margin={'xxl'}>
                 <FormBlock>
                     <Hovedknapp id={'beregn-knapp'} onClick={() => dispatch(beregn)}>
                         Beregn

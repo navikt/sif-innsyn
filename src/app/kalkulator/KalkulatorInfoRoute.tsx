@@ -6,13 +6,16 @@ import Knappelenke from '@navikt/sif-common-core/lib/components/knappelenke/Knap
 import InnsynPage from '../components/innsyn-page/InnsynPage';
 import FormBlock from '@navikt/sif-common-core/lib/components/form-block/FormBlock';
 import { Element } from 'nav-frontend-typografi';
+import bemUtils from '@navikt/sif-common-core/lib/utils/bemUtils';
+
+const bem = bemUtils('omsorgsdagerkalkulator');
 
 const KalkulatorInfoRoute = () => {
     return (
         <InnsynPage>
             <KalkulatorLogoAndTitle />
             <FormBlock paddingBottom={'l'} margin={'m'}>
-                <div className={'omsorgsdagerkalkulator--flex-center'}>
+                <div className={bem.element('flex-center')}>
                     <Element>Her kan du regne ut hvor mange omsorgsdager du har rett på fra 1. juli 2020</Element>
                 </div>
             </FormBlock>
@@ -34,8 +37,8 @@ const KalkulatorInfoRoute = () => {
             <FormBlock>
                 Kalkulatoren vil ikke fungere for deg som er samværsforelder og ikke har egne barn som bor fast hos deg.
             </FormBlock>
-            <FormBlock>
-                <div className={'omsorgsdagerkalkulator--flex-center'}>
+            <FormBlock margin={'l'}>
+                <div className={bem.element('flex-center')}>
                     <Knappelenke type={'hoved'} href={getRouteUrl(RouteConfig.KALKULATOR)}>
                         <FormattedMessage id="gotoApplicationLink.lenketekst" />
                     </Knappelenke>

@@ -11,8 +11,6 @@ import {
     setNBarn,
     setNBarnInvalid,
 } from './actions';
-import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
-import SvgSuccessCircle from '../svgs/SvgSuccessCircle';
 import FormBlock from '@navikt/sif-common-core/lib/components/form-block/FormBlock';
 import { BarnInfo } from './types';
 import { RadioPanelGruppe, Select } from 'nav-frontend-skjema';
@@ -26,12 +24,10 @@ import {
     shouldViewKroniskSyktQuestion,
     toFodselsdatoOrUndefined,
     toRadioValue,
-    validateBarnInfo,
     yesOrNoRadios,
     YesOrNoToBool,
 } from './utils';
 import { isNumber, isYesOrNo } from './typeguards';
-import { isRight } from 'fp-ts/lib/Either';
 import { Knapp } from 'nav-frontend-knapper';
 import { AlertStripeAdvarsel, AlertStripeInfo } from 'nav-frontend-alertstriper';
 import { Element } from 'nav-frontend-typografi';
@@ -43,8 +39,11 @@ import KalkulatorLogoAndTitle from './components/KalkulatorLogoAndTitle';
 import Box from '@navikt/sif-common-core/lib/components/box/Box';
 import Lenke from 'nav-frontend-lenker';
 import ResultatArea from './components/ResultatArea';
-import { barnInfoPanelIdBody } from './constants';
 import { skalViseGåTilNesteBarnKnapp } from './viewUtils';
+import BarnPanelView from './components/BarnPanelView';
+import bemUtils from '@navikt/sif-common-core/lib/utils/bemUtils';
+
+const bem = bemUtils('omsorgsdagerkalkulator');
 
 const ReducerKalkulator = () => {
     const [state, dispatch] = useReducer<KalkulatorReducer>(reducer, createInitialState([]));
@@ -59,7 +58,7 @@ const ReducerKalkulator = () => {
                     resultat er avhengig av at du gir riktige opplysninger. Kalkulatoren er ment som et hjelpeverktøy
                     for deg, og er ikke et vedtak fra NAV.
                 </FormBlock>
-                <div className={'omsorgsdagerkalkulator--align-content-centre'}>
+                <div className={bem.element('align-content-centre')}>
                     <FormBlock>
                         <Element>Hvor mange barn er det i husstanden?</Element>
                     </FormBlock>
@@ -98,22 +97,7 @@ const ReducerKalkulator = () => {
                 {barn.map((barnInfo: BarnInfo, index: number) => {
                     return (
                         <FormBlock key={index}>
-                            <Ekspanderbartpanel
-                                id={barnInfoPanelIdBody + index}
-                                tittel={
-                                    <div className={'omsorgsdagerkalkulator--ekspanderbarnpanel-tittel-wrapper'}>
-                                        <div className={'omsorgsdagerkalkulator--ekspanderbarnpanel-tittel-left'}>
-                                            Barn {index + 1}
-                                        </div>
-                                        {isRight(validateBarnInfo(barnInfo)) && (
-                                            <div className={'omsorgsdagerkalkulator--ekspanderbarnpanel-tittel-right'}>
-                                                <SvgSuccessCircle />
-                                            </div>
-                                        )}
-                                    </div>
-                                }
-                                apen={true}
-                                key={index}>
+                            <BarnPanelView index={index} length={state.barn.length} barnInfo={barnInfo}>
                                 <FormBlock>
                                     <Element>Når er barnet født?</Element>
                                     <ExpandableInfo title="Hvorfor spør vi om det?">
@@ -269,7 +253,7 @@ const ReducerKalkulator = () => {
                                         <Knapp onChange={() => console.info('Gå til neste barn.')}>Neste barn</Knapp>
                                     </FormBlock>
                                 )}
-                            </Ekspanderbartpanel>
+                            </BarnPanelView>
                         </FormBlock>
                     );
                 })}

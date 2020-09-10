@@ -6,6 +6,10 @@ import SvgSuccessCircle from '../../svgs/SvgSuccessCircle';
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import { BarnInfo } from '../types';
 import { PropsWithChildren } from 'react';
+import FormBlock from '@navikt/sif-common-core/lib/components/form-block/FormBlock';
+import bemUtils from '@navikt/sif-common-core/lib/utils/bemUtils';
+
+const bem = bemUtils('BarnPanelView');
 
 interface Props {
     index: number;
@@ -13,24 +17,23 @@ interface Props {
     barnInfo: BarnInfo;
 }
 
-const EkspanderbartPanelForListeAvBarn: React.FC<Props> = ({
-    index,
-    length,
-    barnInfo,
-    children,
-}: PropsWithChildren<Props>) => {
+const BarnPanelView: React.FC<Props> = ({ index, length, barnInfo, children }: PropsWithChildren<Props>) => {
     if (length === 1) {
-        return <div>children</div>;
+        return (
+            <div className={bem.element('border-top')}>
+                <FormBlock>{children}</FormBlock>
+            </div>
+        );
     }
 
     return (
         <Ekspanderbartpanel
             id={barnInfoPanelIdBody + index}
             tittel={
-                <div className={'omsorgsdagerkalkulator--ekspanderbarnpanel-tittel-wrapper'}>
-                    <div className={'omsorgsdagerkalkulator--ekspanderbarnpanel-tittel-left'}>Barn {index + 1}</div>
+                <div className={bem.element('ekspanderbarnpanel-tittel-wrapper')}>
+                    <div>Barn {index + 1}</div>
                     {isRight(validateBarnInfo(barnInfo)) && (
-                        <div className={'omsorgsdagerkalkulator--ekspanderbarnpanel-tittel-right'}>
+                        <div>
                             <SvgSuccessCircle />
                         </div>
                     )}
@@ -43,4 +46,4 @@ const EkspanderbartPanelForListeAvBarn: React.FC<Props> = ({
     );
 };
 
-export default EkspanderbartPanelForListeAvBarn;
+export default BarnPanelView;
