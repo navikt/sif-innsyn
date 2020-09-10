@@ -1,3 +1,8 @@
+// Override banner style
+.banner {
+  padding-bottom: 0;
+}
+
 .innsynPage {
 
   &__bannerWrapper {
@@ -10,5 +15,14 @@
     justify-content: space-between;
     align-items: center;
     width: 40rem;
+  }
+
+  &__svgWrapper {
+    overflow: hidden;
+  }
+
+  &__svgInnerWrapper {
+    transform: translateY(8px);
+
   }
 }

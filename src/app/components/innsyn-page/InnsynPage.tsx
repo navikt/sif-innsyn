@@ -20,12 +20,16 @@ const InnsynPage: React.FC = (props): JSX.Element => {
             topContentRenderer={(): JSX.Element => {
                 return (
                     <Banner size="small">
-                        <div className={'innsynPage__bannerWrapper'}>
-                            <div className={'innsynPage__bannerContentWrapper'}>
-                                <div className={'innsynPage__title'}>
+                        <div className={bem.element('bannerWrapper')}>
+                            <div className={bem.element('bannerContentWrapper')}>
+                                <div className={bem.element('title')}>
                                     <Systemtittel>Sykdom i familien - Innsyn</Systemtittel>
                                 </div>
-                                <SvgSykdomIFamilien />
+                                <div className={bem.element('svgWrapper')}>
+                                    <div className={bem.element('svgInnerWrapper')}>
+                                        <SvgSykdomIFamilien />
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </Banner>
