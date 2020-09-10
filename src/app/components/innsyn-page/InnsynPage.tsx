@@ -19,7 +19,7 @@ const InnsynPage: React.FC = (props): JSX.Element => {
             title={intlHelper(intl, 'innsyn.root.tittel')}
             topContentRenderer={(): JSX.Element => {
                 return (
-                    <Banner size="small">
+                    <Banner size="small" className={'innsynPage__bannerPadding'}>
                         <div className={'innsynPage__bannerWrapper'}>
                             <div className={'innsynPage__bannerContentWrapper'}>
                                 <div className={'innsynPage__title'}>

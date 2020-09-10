@@ -1,65 +1,50 @@
 import * as React from 'react';
-import { SøkerApiResponse } from '../../types/apiTypes/søkerTypes';
-import ReactJson from 'react-json-view';
 import { SøknadApiResponse } from '../../types/apiTypes/søknadTypes';
-import InnsynPage from '../../components/innsyn-page/InnsynPage';
 import Lesmerpanel from 'nav-frontend-lesmerpanel';
 import './OmsorgspengerView.less';
 import SoknadstatusinfoComponent from 'app/components/soknadstatusinfoComponent/SoknadstatusinfoComponent';
-import { Sidetittel } from 'nav-frontend-typografi';
-import { erOmsorgspenger } from '../../utils/SøknadUtils';
-import BackLink from '../../components/backlink/BackLink';
+import { Ingress, Sidetittel, Undertittel } from 'nav-frontend-typografi';
+import { RouteConfig } from '../../config/routeConfig';
+import { Tilbakeknapp } from 'nav-frontend-ikonknapper';
+import { useHistory } from 'react-router-dom';
 
 interface Props {
-    bruker?: SøkerApiResponse;
-    søknader?: SøknadApiResponse;
+    søknader: SøknadApiResponse;
 }
 
-const OmsorgspengerView: React.FC<Props> = ({ bruker, søknader }: Props) => {
+const OmsorgspengerView: React.FC<Props> = ({ søknader }: Props) => {
+    const history = useHistory();
     return (
-        <InnsynPage>
-            {bruker && (
-                <div>
-                    Innsyn logged in. Hi {bruker.fornavn} {bruker.etternavn} :)
-                    <div>
-                        <ReactJson src={bruker} />
-                    </div>
-                </div>
-            )}
-            <BackLink href={'/'} tittel={'Tilbake til oversikt'} />
-
+        <>
+            <Tilbakeknapp onClick={() => history.push(RouteConfig.ROOT)}>Tilbake til oversikt</Tilbakeknapp>
             {søknader && (
                 <div>
                     <Sidetittel>Dine Omsorgspenger</Sidetittel>
 
-                    <Lesmerpanel intro={<span>Dette kan du forvente av saksgangen</span>} border>
+                    <Lesmerpanel intro={<Ingress>Dette kan du forvente av saksgangen</Ingress>} border>
                         <div>
-                            <p style={{ marginTop: 0 }}>
+                            <Ingress style={{ marginTop: 0 }}>
                                 Du bestemmer selv om du vil bruke sykmeldingen eller avbryte den. Du kan også jobbe i
                                 kombinasjon med sykmelding. Det kommer an på hva sykdommen din tillater og hva det er
                                 praktisk mulig å få til på arbeidsplassen.
-                            </p>
-                            <p>
+                            </Ingress>
+                            <Ingress>
                                 Greit å vite: Arbeidsgiveren har plikt til å legge til rette for at du kan jobbe helt
                                 eller delvis selv om du er syk.
-                            </p>
+                            </Ingress>
                         </div>
                     </Lesmerpanel>
 
-                    <h3>Dine søknader</h3>
+                    <Undertittel>Dine søknader</Undertittel>
                     <div>
-                        {søknader
-                            ?.filter((søknad) => erOmsorgspenger(søknad))
-                            .map((søknad, index) => {
-                                return (
-                                    <SoknadstatusinfoComponent key={index} søknad={søknad}></SoknadstatusinfoComponent>
-                                );
-                            })}
+                        {søknader.map((søknad, index) => {
+                            return <SoknadstatusinfoComponent key={index} søknad={søknad}></SoknadstatusinfoComponent>;
+                        })}
                     </div>
                 </div>
             )}
-            <BackLink href={'/'} tittel={'Tilbake til oversikt'} />
-        </InnsynPage>
+            <Tilbakeknapp onClick={() => history.push(RouteConfig.ROOT)}>Tilbake til oversikt</Tilbakeknapp>
+        </>
     );
 };
 

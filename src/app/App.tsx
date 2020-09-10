@@ -1,25 +1,20 @@
 import * as React from 'react';
 import { render } from 'react-dom';
-import { Route, Switch } from 'react-router-dom';
 import moment from 'moment';
 import Modal from 'nav-frontend-modal';
 import ApplicationWrapper from './components/application-wrapper/ApplicationWrapper';
-import RootPageRoute from './components/pages/root-page/RootPage';
 import UnavailablePage from './components/pages/unavailable-page/UnavailablePage';
 import { Feature, isFeatureEnabled } from './utils/featureToggleUtils';
 import { getLocaleFromSessionStorage, setLocaleInSessionStorage } from './utils/localeUtils';
+import { Route, Switch } from 'react-router-dom';
+
 import { Locale } from '@navikt/sif-common-core/lib/types/Locale';
-import InnsynRoute from './innsyn/InnsynRoute';
-import KalkulatorRoute from './kalkulator/KalkulatorRoute';
-import NotFoundRoute from './components/pages/not-found-route/NotFoundRoute';
 import '@navikt/sif-common-core/lib/styles/globalStyles.less';
 import './app.less';
+import InnloggetRoute from './oversikt/OversiktRoute';
+import InnsynPage from './components/innsyn-page/InnsynPage';
+import KalkulatorInput from 'omsorgspenger-kalkulator/lib/components/KalkulatorInput';
 import { RouteConfig } from './config/routeConfig';
-import OversiktRoute from './oversikt/OversiktRoute';
-import PleiepengerRoute from './oversikt/pleiepenger/PleiepengerRoute';
-import OmsorgspengerRoute from './oversikt/omsorgspenger/OmsorgspengerRoute';
-import '@navikt/sif-common-core/lib/styles/globalStyles.less';
-import './app.less';
 
 const localeFromSessionStorage = getLocaleFromSessionStorage();
 moment.locale(localeFromSessionStorage);
@@ -37,15 +32,29 @@ const App: React.FunctionComponent = () => {
                 {isFeatureEnabled(Feature.UTILGJENGELIG) ? (
                     <UnavailablePage />
                 ) : (
-                    <Switch>
-                        <Route exact={true} path={RouteConfig.ROOT} component={RootPageRoute} />
-                        <Route exact={true} path={RouteConfig.BRUKER} component={InnsynRoute} />
-                        <Route exact={true} path={RouteConfig.OVERSIKT} component={OversiktRoute} />
-                        <Route exact={true} path={RouteConfig.DINE_PLEIEPENGER} component={PleiepengerRoute} />
-                        <Route exact={true} path={RouteConfig.DINE_OMSORGSPENGER} component={OmsorgspengerRoute} />
-                        <Route exact={true} path={RouteConfig.KALKULATOR} component={KalkulatorRoute} />
-                        <Route exact={false} path={RouteConfig.ROOT} component={NotFoundRoute} />
-                    </Switch>
+                    <InnsynPage>
+                        <Switch>
+                            <Route
+                                path={'/kalkulator'}
+                                exact={true}
+                                component={() => {
+                                    return <KalkulatorInput />;
+                                }}
+                            />
+                            <Route
+                                path={RouteConfig.ROOT}
+                                component={() => {
+                                    return <InnloggetRoute />;
+                                }}
+                            />
+                            <Route
+                                path={'/'}
+                                component={() => {
+                                    return <div>Root path. ikke innlogget.</div>;
+                                }}
+                            />
+                        </Switch>
+                    </InnsynPage>
                 )}
             </div>
         </ApplicationWrapper>

@@ -28,7 +28,7 @@ export interface Søknad {
     søknadstype: Søknadstype;
     status: Søknadsstatus;
     søknad: any; // TODO: Lag søknadstyper for hver av søknadene
-    saksId: string;
+    saksId: string | null;
     journalpostId: string;
     opprettet: string | null; // LocalDateTime e.g. 2007-12-03T10:15:30.948652
     endret: string | null; // LocalDateTime e.g. 2020-06-23T09:11:21.948652
@@ -38,7 +38,7 @@ export interface Søknad {
 export type SøknadApiResponse = Søknad[];
 
 export const isSøknad = (input: any): input is Søknad => {
-    if (input && input.søknadstype && input.status && input.saksId && input.journalpostId) {
+    if (input && input.søknadstype && input.status && input.journalpostId) {
         return true;
     } else {
         return false;
