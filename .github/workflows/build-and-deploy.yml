@@ -70,6 +70,19 @@ jobs:
           CLUSTER: dev-gcp
           RESOURCE: nais/dev-sbs.yml
 
+  deploy-labs-gcp:
+    name: Deploy to labs-gcp
+    if: startsWith(github.ref, 'refs/heads/labs-') # Build and push docker if branch is labs-*
+    needs: build-code-and-push-docker # Depends on build-code-and-push-docker job
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: nais/deploy/actions/deploy@v1
+        env:
+          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
+          CLUSTER: labs-gcp
+          RESOURCE: nais/labs-gcp.yml
+
 #  deploy-prod:
 #    name: deploy-prod
 #    if: startsWith(github.ref, 'refs/heads/master')
