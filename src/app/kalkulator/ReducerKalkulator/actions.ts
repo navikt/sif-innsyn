@@ -3,8 +3,6 @@ import { ISODateString } from 'nav-datovelger/lib/types';
 export enum ActionType {
     SetNBarn = 'SetNBarn',
     SetNBarnInvalid = 'SetNBarnInvalid',
-    ShowValidationErrorSummary = 'ShowValidationErrorSummary',
-    HideValidationErrorSummary = 'HideValidationErrorSummary',
     SetFodselsdatoForBarnInfo = 'SetFodselsdatoForBarnInfo',
     FjernFodselsdatoForBarnInfo = 'FjernFodselsdatoForBarnInfo',
     SetKroniskSykt = 'SetKroniskSykt',
@@ -27,19 +25,6 @@ export interface SetNBarnInvalid {
 export const setNBarnInvalid = (): SetNBarnInvalid => ({
     type: ActionType.SetNBarnInvalid,
 });
-
-export interface ShowValidationErrorSummary {
-    type: ActionType.ShowValidationErrorSummary;
-}
-export const showValidationErrorSummary: ShowValidationErrorSummary = {
-    type: ActionType.ShowValidationErrorSummary,
-};
-export interface HideValidationErrorSummary {
-    type: ActionType.HideValidationErrorSummary;
-}
-export const hideValidationErrorSummary: HideValidationErrorSummary = {
-    type: ActionType.HideValidationErrorSummary,
-};
 
 export interface SetFodselsdatoForBarnInfo {
     type: ActionType.SetFodselsdatoForBarnInfo;
@@ -103,8 +88,6 @@ export const beregn: Beregn = {
 export type Action =
     | SetNBarn
     | SetNBarnInvalid
-    | ShowValidationErrorSummary
-    | HideValidationErrorSummary
     | SetFodselsdatoForBarnInfo
     | FjernFodselsdatoForBarnInfo
     | SetKroniskSykt

@@ -1,6 +1,5 @@
 import * as React from 'react';
-import { State } from '../state';
-import { fold } from 'fp-ts/lib/Either';
+import { Dispatch } from 'react';
 import { FeiloppsummeringFeil } from 'nav-frontend-skjema';
 import FormBlock from '@navikt/sif-common-core/lib/components/form-block/FormBlock';
 import ValidationSummary from '@navikt/sif-common-formik/lib/components/helpers/ValidationSummary';
@@ -8,29 +7,23 @@ import Omsorgsprinsipper from '@navikt/omsorgspenger-kalkulator/lib/types/Omsorg
 import ResultBox from './ResultBox';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { Action, beregn } from '../actions';
-import { Dispatch } from 'react';
+import { caseResultViewOf, ResultView } from '../types/ResultView';
 
 interface Props {
-    state: State;
+    resultView: ResultView<FeiloppsummeringFeil[], Omsorgsprinsipper>;
     dispatch: Dispatch<Action>;
 }
 
-const ResultatArea: React.FC<Props> = ({ state, dispatch }: Props) => {
-    if (state.barn.length === 0) {
-        return null;
-    }
-
-    if (!state.showResult || state.isInitial) {
-        return (
+const ResultatArea: React.FC<Props> = ({ resultView, dispatch }: Props) =>
+    caseResultViewOf(
+        () => null,
+        () => (
             <FormBlock margin={'xxl'}>
                 <Hovedknapp id={'beregn-knapp'} onClick={() => dispatch(beregn)}>
                     Beregn
                 </Hovedknapp>
             </FormBlock>
-        );
-    }
-
-    return fold(
+        ),
         (errors: FeiloppsummeringFeil[]) => (
             <FormBlock margin={'xxl'}>
                 <FormBlock>
@@ -38,15 +31,17 @@ const ResultatArea: React.FC<Props> = ({ state, dispatch }: Props) => {
                         Beregn
                     </Hovedknapp>
                 </FormBlock>
-                {state.showErrors && (
-                    <FormBlock>
-                        <ValidationSummary title={'Validation summary tittel'} errorMessages={errors} />
-                    </FormBlock>
-                )}
+                <FormBlock>
+                    <ValidationSummary title={'Validation summary tittel'} errorMessages={errors} />
+                </FormBlock>
             </FormBlock>
         ),
-        (resultat: Omsorgsprinsipper) => <ResultBox resultat={resultat} />
-    )(state.result);
-};
+        () => (
+            <FormBlock>
+                <div>View orange box with "No valid children" message</div>
+            </FormBlock>
+        ),
+        (result: Omsorgsprinsipper) => <ResultBox resultat={result} />
+    )(resultView);
 
 export default ResultatArea;

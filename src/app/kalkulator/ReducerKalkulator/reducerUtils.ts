@@ -1,112 +1,50 @@
-import { BarnInfo, Value } from './types';
-import { barnetErOverAtten, barnetErOverTolvOgIkkeKroniskSykt } from './utils';
-import { isNone, isSome, none, Option, some } from 'fp-ts/lib/Option';
+import { BarnInfo } from './types';
+import { none, some } from 'fp-ts/lib/Option';
 import { ISODateString } from 'nav-datovelger';
-import { errorNotAnswered } from './validationUtils';
 
-export function isNoneAndNoErrors<T>(value: Value<Option<T>>): boolean {
-    return isNone(value.value) && value.errors.length === 0;
-}
-
-const updateKroniskSykt = (barnInfo: BarnInfo, kroniskSykt: Value<Option<boolean>>): Value<Option<boolean>> => {
-    if (barnetErOverAtten(barnInfo)) {
-        return { ...kroniskSykt, value: none, errors: [] };
-    }
-    if (isNoneAndNoErrors(kroniskSykt)) {
-        return { ...kroniskSykt, value: none, errors: [errorNotAnswered] };
-    }
-    return kroniskSykt;
-};
-
-const updateBorSammenMed = (borSammenMed: Value<Option<boolean>>, barnInfo: BarnInfo): Value<Option<boolean>> => {
-    if (barnetErOverAtten(barnInfo) || barnetErOverTolvOgIkkeKroniskSykt(barnInfo)) {
-        return { ...borSammenMed, value: none, errors: [] };
-    }
-    if (isNoneAndNoErrors(borSammenMed)) {
-        return { ...borSammenMed, value: none, errors: [errorNotAnswered] };
-    }
-    return borSammenMed;
-};
-
-const updateAleneOmOmsorgen = (
-    aleneOmOmsorgen: Value<Option<boolean>>,
-    borSammenMed: Option<boolean>
-): Value<Option<boolean>> => {
-    if (isSome(borSammenMed) && !borSammenMed.value) {
-        return { ...aleneOmOmsorgen, value: none, errors: [] };
-    }
-    if (isNoneAndNoErrors(aleneOmOmsorgen)) {
-        return { ...aleneOmOmsorgen, value: none, errors: [errorNotAnswered] };
-    }
-    return aleneOmOmsorgen;
-};
-
-export const setFodselsdatoOgOppdaterDataForBarnet = (newFodselsdato: ISODateString, barnInfo: BarnInfo): BarnInfo => {
-    const { fodselsdato, kroniskSykt, borSammen, aleneOmOmsorgen } = barnInfo;
-
-    const updatedFodselsdato: Value<Option<ISODateString>> = {
-        ...fodselsdato,
-        value: some(newFodselsdato),
-        errors: [],
-    };
-
-    const updatedKroniskSykt: Value<Option<boolean>> = updateKroniskSykt(barnInfo, kroniskSykt);
+export const setFodselsdato = (newFodselsdato: ISODateString, barnInfo: BarnInfo): BarnInfo => {
+    const { fodselsdato } = barnInfo;
 
     return {
         ...barnInfo,
-        fodselsdato: updatedFodselsdato,
-        kroniskSykt: updatedKroniskSykt,
-        borSammen:
-            barnetErOverAtten(barnInfo) || barnetErOverTolvOgIkkeKroniskSykt(barnInfo)
-                ? { ...borSammen, value: none, errors: [] }
-                : borSammen,
-        aleneOmOmsorgen:
-            barnetErOverAtten(barnInfo) || barnetErOverTolvOgIkkeKroniskSykt(barnInfo)
-                ? { ...aleneOmOmsorgen, value: none, errors: [] }
-                : aleneOmOmsorgen,
+        fodselsdato: {
+            ...fodselsdato,
+            value: some(newFodselsdato),
+        },
     };
 };
 
-export const fjernFodselsdatoOgOppdaterDataForBarnet = (barn: BarnInfo): BarnInfo => {
+export const fjernFodselsdato = (barn: BarnInfo): BarnInfo => {
     return {
         ...barn,
         fodselsdato: {
             ...barn.fodselsdato,
             value: none,
-            errors: [errorNotAnswered],
         },
     };
 };
 
-export const setKroniskSyktOgOppdaterDataForBarnet = (value: boolean, barnInfo: BarnInfo): BarnInfo => {
-    const { kroniskSykt, borSammen, aleneOmOmsorgen } = barnInfo;
+export const setKroniskSykt = (value: boolean, barnInfo: BarnInfo): BarnInfo => {
+    const { kroniskSykt } = barnInfo;
     return {
         ...barnInfo,
-        kroniskSykt: { ...kroniskSykt, value: some(value), errors: [] },
-        borSammen: updateBorSammenMed(borSammen, barnInfo),
-        aleneOmOmsorgen:
-            barnetErOverAtten(barnInfo) || barnetErOverTolvOgIkkeKroniskSykt(barnInfo)
-                ? { ...aleneOmOmsorgen, value: none, errors: [] }
-                : aleneOmOmsorgen,
+        kroniskSykt: { ...kroniskSykt, value: some(value) },
     };
 };
 
-export const setBorSammenOgOppdaterDataForBarnet = (value: boolean, barn: BarnInfo): BarnInfo => {
-    const { borSammen, aleneOmOmsorgen } = barn;
-
-    const updatedAleneOmOmsorgen = updateAleneOmOmsorgen(aleneOmOmsorgen, borSammen.value);
+export const setBorSammen = (value: boolean, barn: BarnInfo): BarnInfo => {
+    const { borSammen } = barn;
 
     return {
         ...barn,
-        borSammen: { ...borSammen, value: some(value), errors: [] },
-        aleneOmOmsorgen: updatedAleneOmOmsorgen,
+        borSammen: { ...borSammen, value: some(value) },
     };
 };
 
-export const setAleneOmOmsorgenOgOppdaterDataForBarnet = (value: boolean, barn: BarnInfo): BarnInfo => {
+export const setAleneOmOmsorgen = (value: boolean, barn: BarnInfo): BarnInfo => {
     const { aleneOmOmsorgen } = barn;
     return {
         ...barn,
-        aleneOmOmsorgen: { ...aleneOmOmsorgen, value: some(value), errors: [] },
+        aleneOmOmsorgen: { ...aleneOmOmsorgen, value: some(value) },
     };
 };

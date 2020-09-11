@@ -23,7 +23,7 @@ import { Element } from 'nav-frontend-typografi';
 import './reducerKalkulator.less';
 import '@navikt/sif-common-formik/lib/styles/nav-frontend-skjema-extension.less';
 import ExpandableInfo from '@navikt/sif-common-core/lib/components/expandable-content/ExpandableInfo';
-import { evaluateDatoErGyldigProp, valueToFeilProps } from './componentUtils';
+import { valueToFeilProps } from './componentUtils';
 import KalkulatorLogoAndTitle from './components/KalkulatorLogoAndTitle';
 import Box from '@navikt/sif-common-core/lib/components/box/Box';
 import Lenke from 'nav-frontend-lenker';
@@ -40,6 +40,8 @@ import {
 } from './viewUtils';
 import BarnPanelView from './components/BarnPanelView';
 import bemUtils from '@navikt/sif-common-core/lib/utils/bemUtils';
+import { isNone } from 'fp-ts/lib/Option';
+import { isBeregnButtonAndErrorSummary } from './types/ResultView';
 
 const bem = bemUtils('omsorgsdagerkalkulator');
 
@@ -65,7 +67,7 @@ const ReducerKalkulator = () => {
                             id={state.nBarn.id}
                             value={state.nBarn.value}
                             bredde={'xs'}
-                            feil={state.nBarn.errors.length > 0 && state.showErrors ? <span>asdf</span> : false}
+                            feil={undefined}
                             onChange={(event) => {
                                 const maybeNumber: number = parseInt(event.target.value, 10);
                                 if (isNumber(maybeNumber) && maybeNumber > 0) {
@@ -107,6 +109,7 @@ const ReducerKalkulator = () => {
                                         id={barnInfo.fodselsdato.id}
                                         valgtDato={toFodselsdatoOrUndefined(barnInfo.fodselsdato.value)}
                                         onChange={(maybeISODateString: ISODateString | undefined) => {
+                                            // TODO: Fix
                                             console.info('onchange: ' + maybeISODateString);
                                             if (maybeISODateString) {
                                                 dispatch(setFodselsdatoForBarnInfo(maybeISODateString, barnInfo.id));
@@ -115,7 +118,13 @@ const ReducerKalkulator = () => {
                                             }
                                         }}
                                         kanVelgeUgyldigDato={true}
-                                        datoErGyldig={evaluateDatoErGyldigProp(barnInfo.fodselsdato, state.showErrors)}
+                                        // datoErGyldig={evaluateDatoErGyldigProp(barnInfo.fodselsdato, state.showErrors)}
+                                        datoErGyldig={
+                                            !(
+                                                isNone(barnInfo.fodselsdato.value) &&
+                                                isBeregnButtonAndErrorSummary(state.resultViewData)
+                                            )
+                                        }
                                         visÅrVelger={true}
                                     />
                                 </FormBlock>
@@ -146,7 +155,7 @@ const ReducerKalkulator = () => {
                                                     </ExpandableInfo>
                                                 </div>
                                             }
-                                            feil={valueToFeilProps(barnInfo.kroniskSykt, state.showErrors)}
+                                            feil={valueToFeilProps(barnInfo.kroniskSykt, state.resultViewData)}
                                             onChange={(evt, value) => {
                                                 if (isYesOrNo(value)) {
                                                     dispatch(setKroniskSykt(YesOrNoToBool(value), barnInfo.id));
@@ -183,7 +192,7 @@ const ReducerKalkulator = () => {
                                                     </ExpandableInfo>
                                                 </div>
                                             }
-                                            feil={valueToFeilProps(barnInfo.borSammen, state.showErrors)}
+                                            feil={valueToFeilProps(barnInfo.borSammen, state.resultViewData)}
                                             onChange={(evt, value) => {
                                                 if (isYesOrNo(value)) {
                                                     dispatch(setBorSammen(YesOrNoToBool(value), barnInfo.id));
@@ -233,7 +242,7 @@ const ReducerKalkulator = () => {
                                                     </ExpandableInfo>
                                                 </div>
                                             }
-                                            feil={valueToFeilProps(barnInfo.aleneOmOmsorgen, state.showErrors)}
+                                            feil={valueToFeilProps(barnInfo.aleneOmOmsorgen, state.resultViewData)}
                                             onChange={(evt, value) => {
                                                 if (isYesOrNo(value)) {
                                                     dispatch(setAleneOmOmsorgen(YesOrNoToBool(value), barnInfo.id));
@@ -256,7 +265,7 @@ const ReducerKalkulator = () => {
                     );
                 })}
             </FormBlock>
-            <ResultatArea state={state} dispatch={dispatch} />
+            <ResultatArea resultView={state.resultViewData} dispatch={dispatch} />
         </div>
     );
 };

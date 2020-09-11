@@ -10,7 +10,6 @@ export enum YesOrNo {
 export interface Value<T> {
     id: string;
     value: T;
-    errors: string[];
 }
 
 export interface BarnInfo {
