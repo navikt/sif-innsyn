@@ -6,7 +6,8 @@ import intlHelper from '@navikt/sif-common-core/lib/utils/intlUtils';
 import Banner from '@navikt/sif-common-core/lib/components/banner/Banner';
 import SvgSykdomIFamilien from '../../svg/SvgSykdomIFamilien';
 import './innsynPage.less';
-import { Systemtittel } from 'nav-frontend-typografi';
+import { Systemtittel, Undertittel } from 'nav-frontend-typografi';
+import Lenke from 'nav-frontend-lenker';
 
 const bem = bemUtils('innsynPage');
 
@@ -32,6 +33,27 @@ const InnsynPage: React.FC = (props): JSX.Element => {
                 );
             }}>
             {props.children}
+
+            <div className={'innsyn-footer'}>
+                <span>
+                    <Undertittel>Du vil kanskje vite mer om</Undertittel>
+                </span>
+                <hr />
+                <ul>
+                    <li>
+                        <Lenke href="#">Sykdom i familien</Lenke>
+                    </li>
+                    <li>
+                        <Lenke href="#">Behandlingsdato</Lenke>
+                    </li>
+                    <li>
+                        <Lenke href="#">Regelverk</Lenke>
+                    </li>
+                    <li>
+                        <Lenke href="#">Klage</Lenke>
+                    </li>
+                </ul>
+            </div>
         </Page>
     );
 };
