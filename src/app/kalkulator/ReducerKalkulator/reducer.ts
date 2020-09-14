@@ -11,11 +11,13 @@ export type KalkulatorReducer = (state: State, action: Action) => State;
 export const reducer: KalkulatorReducer = (state: State, action: Action): State => {
     switch (action.type) {
         case ActionType.SetNBarn: {
+            const initializedBarnListe = initializeNBarn(action.nBarn);
             return {
                 ...state,
                 nBarn: { ...state.nBarn, value: action.nBarn },
-                barn: initializeNBarn(action.nBarn),
+                barn: initializedBarnListe,
                 resultViewData: beregnButton,
+                aktivtBarnPanel: initializedBarnListe[0].id,
             };
         }
         case ActionType.SetNBarnInvalid: {
@@ -76,6 +78,13 @@ export const reducer: KalkulatorReducer = (state: State, action: Action): State 
             return {
                 ...state,
                 resultViewData: doItAll(state.barn, state.resultViewData, true),
+            };
+        }
+
+        case ActionType.SetAktivtBarnPanel: {
+            return {
+                ...state,
+                aktivtBarnPanel: action.id,
             };
         }
         default:

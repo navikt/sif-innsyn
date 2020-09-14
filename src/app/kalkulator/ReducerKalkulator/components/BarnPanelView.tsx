@@ -15,9 +15,10 @@ interface Props {
     index: number;
     length: number;
     barnInfo: BarnInfo;
+    apen: boolean;
 }
 
-const BarnPanelView: React.FC<Props> = ({ index, length, barnInfo, children }: PropsWithChildren<Props>) => {
+const BarnPanelView: React.FC<Props> = ({ index, length, barnInfo, children, apen }: PropsWithChildren<Props>) => {
     if (length === 1) {
         return (
             <div className={bem.element('border-top')}>
@@ -26,7 +27,7 @@ const BarnPanelView: React.FC<Props> = ({ index, length, barnInfo, children }: P
         );
     }
 
-    return (
+    const content = (
         <Ekspanderbartpanel
             id={barnInfoPanelIdBody + index}
             tittel={
@@ -39,11 +40,14 @@ const BarnPanelView: React.FC<Props> = ({ index, length, barnInfo, children }: P
                     )}
                 </div>
             }
-            apen={true}
+            apen={apen}
             key={index}>
             {children}
         </Ekspanderbartpanel>
     );
+
+    // Triks for å få ekspanderbart panel til å rerendre, slik at det åpner seg når det skal.
+    return apen ? <div>{content}</div> : content;
 };
 
 export default BarnPanelView;

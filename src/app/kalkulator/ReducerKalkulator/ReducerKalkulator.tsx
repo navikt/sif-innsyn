@@ -4,6 +4,7 @@ import { KalkulatorReducer, reducer } from './reducer';
 import { createInitialState, State } from './state';
 import {
     fjernFodselsdatoForBarnInfo,
+    setAktivtBarnPanel,
     setAleneOmOmsorgen,
     setBorSammen,
     setFodselsdatoForBarnInfo,
@@ -17,7 +18,6 @@ import { RadioPanelGruppe, Select } from 'nav-frontend-skjema';
 import { Datovelger, ISODateString } from 'nav-datovelger';
 import { barnetErOverAtten, barnetErOverTolvOgIkkeKroniskSykt, borIkkeSammen } from './utils';
 import { isNumber, isYesOrNo } from './typeguards';
-import { Knapp } from 'nav-frontend-knapper';
 import { AlertStripeAdvarsel, AlertStripeInfo } from 'nav-frontend-alertstriper';
 import { Element } from 'nav-frontend-typografi';
 import './reducerKalkulator.less';
@@ -29,6 +29,7 @@ import Box from '@navikt/sif-common-core/lib/components/box/Box';
 import Lenke from 'nav-frontend-lenker';
 import ResultatArea from './components/ResultatArea';
 import {
+    panelSkalVæreÅpent,
     shouldViewAleneOmOmsorgenQuestion,
     shouldViewBorSammenQuestion,
     shouldViewKroniskSyktQuestion,
@@ -43,6 +44,7 @@ import bemUtils from '@navikt/sif-common-core/lib/utils/bemUtils';
 import { isNone } from 'fp-ts/lib/Option';
 import { isBeregnButtonAndErrorSummary } from './types/ResultView';
 import { validateAleneOmOmsorgen, validateBorSammen, validateKroniskSykt } from './validationUtils';
+import { Knapp } from 'nav-frontend-knapper';
 
 const bem = bemUtils('omsorgsdagerkalkulator');
 
@@ -54,11 +56,13 @@ const ReducerKalkulator = () => {
         <FormBlock paddingBottom={'xxl'}>
             <FormBlock>
                 <KalkulatorLogoAndTitle />
-                <FormBlock>
-                    Kalkulatoren beregner hvor mange omsorgsdager du har ut fra svarene du oppgir. Det betyr at riktig
-                    resultat er avhengig av at du gir riktige opplysninger. Kalkulatoren er ment som et hjelpeverktøy
-                    for deg, og er ikke et vedtak fra NAV.
-                </FormBlock>
+                {state.barn.length === 0 && (
+                    <FormBlock>
+                        Kalkulatoren beregner hvor mange omsorgsdager du har ut fra svarene du oppgir. Det betyr at
+                        riktig resultat er avhengig av at du gir riktige opplysninger. Kalkulatoren er ment som et
+                        hjelpeverktøy for deg, og er ikke et vedtak fra NAV.
+                    </FormBlock>
+                )}
                 <div className={bem.element('align-content-centre')}>
                     <FormBlock>
                         <Element>Hvor mange barn er det i husstanden?</Element>
@@ -95,10 +99,14 @@ const ReducerKalkulator = () => {
                 </FormBlock>
             )}
             <FormBlock>
-                {barn.map((barnInfo: BarnInfo, index: number) => {
+                {barn.map((barnInfo: BarnInfo, index: number, listeAvBarn: BarnInfo[]) => {
                     return (
                         <FormBlock key={index}>
-                            <BarnPanelView index={index} length={state.barn.length} barnInfo={barnInfo}>
+                            <BarnPanelView
+                                index={index}
+                                length={state.barn.length}
+                                barnInfo={barnInfo}
+                                apen={panelSkalVæreÅpent(barnInfo, state)}>
                                 <FormBlock>
                                     <Element>Når er barnet født?</Element>
                                     <ExpandableInfo title="Hvorfor spør vi om det?">
@@ -119,7 +127,6 @@ const ReducerKalkulator = () => {
                                             }
                                         }}
                                         kanVelgeUgyldigDato={true}
-                                        // datoErGyldig={evaluateDatoErGyldigProp(barnInfo.fodselsdato, state.showErrors)}
                                         datoErGyldig={
                                             !(
                                                 isNone(barnInfo.fodselsdato.value) &&
@@ -270,7 +277,15 @@ const ReducerKalkulator = () => {
 
                                 {skalViseGåTilNesteBarnKnapp(barnInfo, index, state.barn.length) && (
                                     <FormBlock>
-                                        <Knapp onChange={() => console.info('Gå til neste barn.')}>Neste barn</Knapp>
+                                        <Knapp
+                                            onClick={() => {
+                                                const maybeNesteBarnInfo: BarnInfo | undefined = listeAvBarn[index + 1];
+                                                if (maybeNesteBarnInfo) {
+                                                    dispatch(setAktivtBarnPanel(maybeNesteBarnInfo.id));
+                                                }
+                                            }}>
+                                            Neste barn
+                                        </Knapp>
                                     </FormBlock>
                                 )}
                             </BarnPanelView>

@@ -68,6 +68,7 @@ export const toFeiloppsummeringsFeil = (id: string, error: string): Feiloppsumme
 export const isInvalidChild = (barnInfo: BarnInfo): boolean =>
     barnetErOverAtten(barnInfo) || barnetErOverTolvOgIkkeKroniskSykt(barnInfo) || borIkkeSammen(barnInfo);
 
+// TODO: Rename, pga misvisende. Det er ikke sikkert det er ferdig utfylt selv om denne returnerer true
 export const isValidChild = (barnInfo: BarnInfo): boolean => !isInvalidChild(barnInfo);
 
 export const validateBarnInfo = (barnInfo: BarnInfo): Either<FeiloppsummeringFeil, BarnApi> => {

@@ -9,6 +9,7 @@ export interface State {
     nBarn: ValueWithId<number>;
     barn: BarnInfo[];
     resultViewData: ResultView<FeiloppsummeringFeil[], Omsorgsprinsipper>;
+    aktivtBarnPanel: string | undefined;
 }
 
 export const createInitialState = (listeAvBarnInfo?: BarnInfo[]): State => {
@@ -22,5 +23,6 @@ export const createInitialState = (listeAvBarnInfo?: BarnInfo[]): State => {
         nBarn: nBarnInitially,
         barn: listeAvBarnInfo || [],
         resultViewData: empty,
+        aktivtBarnPanel: listeAvBarnInfo && listeAvBarnInfo[0] ? listeAvBarnInfo[0].id : undefined,
     };
 };

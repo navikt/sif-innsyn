@@ -3,13 +3,16 @@ import {
     barnetErOverTolvOgIkkeKroniskSykt,
     borIkkeSammen,
     erOverAtten,
+    isInvalidChild,
     validateBarnInfo,
 } from './utils';
-import { BarnInfo, YesOrNo } from './types';
-import { isRight } from 'fp-ts/lib/Either';
+import { BarnApi, BarnInfo, YesOrNo } from './types';
+import { Either, isLeft, isRight } from 'fp-ts/lib/Either';
 import { fold as foldOption, isSome, Option } from 'fp-ts/lib/Option';
 import { ISODateString } from 'nav-datovelger';
-import { pipe } from 'fp-ts/lib/pipeable';
+import { State } from './state';
+import { isBeregnButtonAndErrorSummary } from './types/ResultView';
+import { FeiloppsummeringFeil } from 'nav-frontend-skjema';
 
 export const isNotLastChild = (index: number, listLength: number) => index + 1 < listLength;
 
@@ -42,19 +45,28 @@ export const toRadioValue = (optionValue: Option<boolean>): RadioValue =>
     )(optionValue);
 
 export const shouldViewKroniskSyktQuestion = (barnInfo: BarnInfo): boolean =>
-    pipe(
-        barnInfo.fodselsdato.value,
-        foldOption(
-            () => false,
-            (fodselsdato: string) => !erOverAtten(fodselsdato)
-        )
-    );
+    isSome(barnInfo.fodselsdato.value) && !erOverAtten(barnInfo.fodselsdato.value.value);
 
 export const shouldViewBorSammenQuestion = (barnInfo: BarnInfo): boolean =>
-    !barnetErOverAtten(barnInfo) && !barnetErOverTolvOgIkkeKroniskSykt(barnInfo) && isSome(barnInfo.kroniskSykt.value);
+    !barnetErOverAtten(barnInfo) &&
+    !barnetErOverTolvOgIkkeKroniskSykt(barnInfo) &&
+    shouldViewKroniskSyktQuestion(barnInfo) &&
+    isSome(barnInfo.kroniskSykt.value);
 
 export const shouldViewAleneOmOmsorgenQuestion = (barnInfo: BarnInfo): boolean =>
     !barnetErOverAtten(barnInfo) &&
     !barnetErOverTolvOgIkkeKroniskSykt(barnInfo) &&
     !borIkkeSammen(barnInfo) &&
+    shouldViewBorSammenQuestion(barnInfo) &&
     isSome(barnInfo.borSammen.value);
+
+export const panelSkalVæreÅpent = (barnInfo: BarnInfo, state: State): boolean => {
+    if (barnInfo.id === state.aktivtBarnPanel) {
+        return true;
+    }
+    if (isInvalidChild(barnInfo)) {
+        return false;
+    }
+    const validBarnOrError: Either<FeiloppsummeringFeil, BarnApi> = validateBarnInfo(barnInfo);
+    return isLeft(validBarnOrError) && isBeregnButtonAndErrorSummary(state.resultViewData);
+};
