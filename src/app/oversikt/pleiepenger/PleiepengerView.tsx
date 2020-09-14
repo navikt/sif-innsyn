@@ -7,6 +7,7 @@ import { Ingress, Sidetittel, Undertittel } from 'nav-frontend-typografi';
 import { Tilbakeknapp } from 'nav-frontend-ikonknapper';
 import { useHistory } from 'react-router-dom';
 import { RouteConfig } from '../../config/routeConfig';
+import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 
 interface Props {
     søknader: SøknadApiResponse;
@@ -41,6 +42,11 @@ const PleiepengerView: React.FC<Props> = ({ søknader }: Props) => {
                             return <SoknadstatusinfoComponent key={index} søknad={søknad}></SoknadstatusinfoComponent>;
                         })}
                     </div>
+
+                    <Undertittel>Nyttig informasjon</Undertittel>
+                    <Ekspanderbartpanel tittel="Dette kan du forvente deg etter at du har sendt søknad">
+                        todo
+                    </Ekspanderbartpanel>
                 </div>
             )}
             <Tilbakeknapp onClick={() => history.push(RouteConfig.ROOT)}>Tilbake til oversikt</Tilbakeknapp>
