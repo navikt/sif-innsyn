@@ -18,7 +18,9 @@
         "snyk-protect": "snyk protect",
         "eslint": "eslint --fix \"src/app/**/*.{js,jsx,ts,tsx}\"",
         "prettier:check": "prettier --check \"src/**/*.js\"",
-        "prettier:run": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\""
+        "prettier:run": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\"",
+        "storybook": "start-storybook -p 6006",
+        "build-storybook": "build-storybook"
     },
     "jest": {
         "testEnvironment": "node"
@@ -106,6 +108,12 @@
         "@babel/plugin-transform-modules-commonjs": "^7.10.1",
         "@babel/preset-env": "^7.10.2",
         "@babel/preset-react": "^7.10.1",
+        "@storybook/addon-actions": "^6.0.21",
+        "@storybook/addon-essentials": "^6.0.21",
+        "@storybook/addon-links": "^6.0.21",
+        "@storybook/node-logger": "^6.0.21",
+        "@storybook/preset-create-react-app": "^3.1.4",
+        "@storybook/react": "^6.0.21",
         "@svgr/webpack": "^5.4.0",
         "@types/classnames": "^2.2.10",
         "@types/enzyme": "^3.10.5",
@@ -127,6 +135,7 @@
         "awesome-typescript-loader": "^5.2.1",
         "babel-core": "^7.0.0-bridge.0",
         "babel-jest": "^26.0.1",
+        "babel-loader": "^8.1.0",
         "babel-polyfill": "^6.26.0",
         "case-sensitive-paths-webpack-plugin": "^2.3.0",
         "css-loader": "^3.5.3",
@@ -167,6 +176,7 @@
         "postcss-loader": "^3.0.0",
         "prettier": "^2.0.5",
         "pretty-quick": "^2.0.1",
+        "react-is": "^16.13.1",
         "regenerator-runtime": "^0.13.5",
         "source-map-loader": "^1.0.0",
         "style-loader": "^1.2.1",
