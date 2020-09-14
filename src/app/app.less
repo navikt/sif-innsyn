@@ -1,5 +1,6 @@
 body {
   margin: 0;
+  background: #EFEFEF;
 }
 
 #sif-innsyn-container {
@@ -9,27 +10,43 @@ body {
 
 @media screen and (min-width: 1025px) {
   #sif-innsyn-container--content-wrapper {
-    padding-bottom: 80px;    /* Footer height */
+    padding-bottom: 80px; /* Footer height */
   }
+
   #sif-innsyn-container--footer {
     position: absolute;
     bottom: 0;
     width: 100%;
-    height: 80px;             /* Footer height */
+    height: 80px; /* Footer height */
   }
 }
 
 @media screen and (max-width: 1024px) {
   #sif-innsyn-container--content-wrapper {
-    padding-bottom: 160px;    /* Footer height */
+    padding-bottom: 160px; /* Footer height */
   }
+
   #sif-innsyn-container--footer {
     position: absolute;
     bottom: 0;
     width: 100%;
-    height: 160px;            /* Footer height */
+    height: 160px; /* Footer height */
   }
 }
 
+.innsyn-footer {
+  margin-top: 5rem;
+  margin-bottom: 1rem;
+  text-align: center;
+
+  ul {
+    list-style: none;
+  }
+
+  li {
+    display: inline;
+    padding-left: 2rem;
+  }
+}
 
 
