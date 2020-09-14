@@ -2,16 +2,10 @@ import React from 'react';
 import './SoknadstatusinfoComponent.module.less';
 import { Søknad, Søknadsstatus, Søknadstype } from '../../types/apiTypes/søknadTypes';
 import moment from 'moment';
-import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
-import { Ingress, Systemtittel, Undertittel } from 'nav-frontend-typografi';
+import { Systemtittel, Undertekst } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
-import { AttachmentIkon } from '../../svg/FellesIkoner';
-import { axiosGetSøknadDocument } from '../../api/api';
-import { AxiosResponse } from 'axios';
-import Lenke from 'nav-frontend-lenker';
-import { ResourceType } from '../../types/resourceTypes';
-
-const fileDownload = require('js-file-download');
+import { FilIkon } from '../../svg/FellesIkoner';
+import Panel from 'nav-frontend-paneler';
 
 interface Props {
     søknad: Søknad;
@@ -20,86 +14,45 @@ interface Props {
 const SoknadstatusinfoComponent: React.FC<Props> = ({ søknad }: Props) => {
     return (
         <div>
-            <Ekspanderbartpanel
-                //key={index}
-                tittel={
-                    <Undertittel>
-                        {formaterSøknadType(søknad)}, {formaterStatus(søknad)}: {formaterDateTime(søknad.opprettet)}
-                    </Undertittel>
-                }
-                className={`mb-1 ${statusFarge(søknad)}`}
-                border>
+            <Panel border className={`mb-1 ${statusFarge(søknad)}`}>
                 <Row className={'lp-1'}>
-                    <Column md={'8'}>
-                        <Row>
-                            <Systemtittel>{formaterSøknadType(søknad)}</Systemtittel>
-                            <Ingress>Vi har mottatt søknaden din.</Ingress>
-                            <br />
-                            <Ingress>
-                                Grunnet svært mange søknader inn til NAV kan det dessverre ta lang tid før en
-                                saksbehandler ser på søknaden din. Du kan likevel være trygg på at du rykker fremover i
-                                køen og blir kontaktet hvis det er behov for mer dokumentasjon.
-                            </Ingress>
-                        </Row>
-                        <Row className={'mt-2-5'}>
-                            <Undertittel>Søknad mottatt: {formaterDateTime(søknad.søknad.mottatt)}</Undertittel>
-                            <Ingress>
-                                Søker om periode: {formaterDateTime(søknad.søknad.fraOgMed)} -{' '}
-                                {formaterDateTime(søknad.søknad.tilOgMed)}
-                            </Ingress>
-                        </Row>
+                    <Column md={'1'}>
+                        <div className={'mt-1'}>
+                            <FilIkon />
+                        </div>
                     </Column>
-                    <Column md={'4'}>
-                        <Ingress className={'mb-1 mt-1'}>
-                            <Lenke href={'#'} onClick={() => hentDokument(søknad)}>
-                                <AttachmentIkon />
-                                <span>Søknad</span>
-                            </Lenke>
-                        </Ingress>
+                    <Column md={'11'}>
+                        <Systemtittel>{formaterSøknadType(søknad)}</Systemtittel>
+                        <Undertekst>
+                            Gjelder perioden {formaterDateTime(søknad.søknad.fraOgMed)} -{' '}
+                            {formaterDateTime(søknad.søknad.tilOgMed)}
+                        </Undertekst>
+                        <Undertekst>Mottatt {formaterDateTime(søknad.søknad.mottatt)}</Undertekst>
                     </Column>
                 </Row>
-            </Ekspanderbartpanel>
+            </Panel>
         </div>
     );
-};
-
-const hentDokument = (søknad: Søknad): Promise<void | AxiosResponse<Blob>> => {
-    return axiosGetSøknadDocument<Blob>(ResourceType.SØKNAD, søknad.søknadId, ResourceType.DOKUMENT)
-        .then((response) => {
-            fileDownload(response.data, 'søknad.pdf');
-        })
-        .catch((reason) => console.log(reason));
 };
 
 function formaterSøknadType(søknad: Søknad) {
     switch (søknad.søknadstype) {
         case Søknadstype.PP_SYKT_BARN:
-            return 'Pleiepenger - Sykt barn';
+            return 'Søknad om Pleiepenger for Sykt barn';
         case Søknadstype.PP_ETTERSENDING:
-            return 'Pleiepenger - Ettersending';
+            return 'Søknad om ettersending for pleiepenger';
         case Søknadstype.OMD_OVERFØRING:
-            return 'Omsorgsdager - Overføring';
+            return 'Søknad om overføring av omsorgsdager';
         case Søknadstype.OMP_UTBETALING_SNF:
-            return 'Omsorgspengerutbetaling - Selvstendig næringsdrivende og frilans';
+            return 'Søknad om utbetaling av omsorgspenger for selvstendig næringsdrivende og frilans';
         case Søknadstype.OMP_UTBETALING_ARBEIDSTAKER:
-            return 'Omsorgspengerutbetaling - Arbeidstaker';
+            return 'Søknad om utbetaling av omsorgspenger for arbeidstakere';
         case Søknadstype.OMP_ETTERSENDING:
-            return 'Omsorgspenger - Ettersending';
+            return 'Søknad om ettersending for omsorgspenger';
         case Søknadstype.OMP_UTVIDET_RETT:
-            return 'Omsorgspenger - Utvidet rett';
+            return 'Søknad om utvidet rett av omsorgspenger';
     }
 }
-
-const formaterStatus = (søknad: Søknad) => {
-    switch (søknad.status) {
-        case Søknadsstatus.MOTTATT:
-            return 'Mottatt';
-        case Søknadsstatus.UNDER_BEHANDLING:
-            return 'Under behandling';
-        case Søknadsstatus.FERDIG_BEHANDLET:
-            return 'Ferdig behandlet';
-    }
-};
 
 const statusFarge = (søknad: Søknad) => {
     switch (søknad.status) {
@@ -113,7 +66,8 @@ const statusFarge = (søknad: Søknad) => {
 };
 
 function formaterDateTime(dateTime: string | null) {
-    return dateTime == null ? '' : moment(dateTime).format('DD.MM.YYYY');
+    moment.locale('NO');
+    return dateTime == null ? '' : moment(dateTime).format('LLLL');
 }
 
 export default SoknadstatusinfoComponent;
