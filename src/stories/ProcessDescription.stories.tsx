@@ -7,9 +7,7 @@ export default {
     component: ProcessDescription,
 } as Meta;
 
-const Template: Story<ProcessDescriptionProps> = (args) => <ProcessDescription {...args} />;
-
-export const Hmmm = Template.bind({});
-Hmmm.args = {
+export const Pleiepenger: Story<ProcessDescriptionProps> = (args) => <ProcessDescription {...args} />;
+Pleiepenger.args = {
     wat: () => {},
 };
