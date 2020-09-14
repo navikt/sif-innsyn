@@ -8,7 +8,7 @@ import './expandableInfo.less';
 export interface ExpandableInfoProps {
     title: string;
     children: React.ReactNode;
-    defaultExpanded: boolean | undefined;
+    defaultExpanded?: boolean;
 }
 
 const ExpandableInfo: React.FC<ExpandableInfoProps> = ({ title, children, defaultExpanded = false }) => {
