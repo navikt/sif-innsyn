@@ -42,6 +42,7 @@ import BarnPanelView from './components/BarnPanelView';
 import bemUtils from '@navikt/sif-common-core/lib/utils/bemUtils';
 import { isNone } from 'fp-ts/lib/Option';
 import { isBeregnButtonAndErrorSummary } from './types/ResultView';
+import { validateAleneOmOmsorgen, validateBorSammen, validateKroniskSykt } from './validationUtils';
 
 const bem = bemUtils('omsorgsdagerkalkulator');
 
@@ -50,7 +51,7 @@ const ReducerKalkulator = () => {
     const { nBarnMaks, barn }: State = state;
 
     return (
-        <div>
+        <FormBlock paddingBottom={'xxl'}>
             <FormBlock>
                 <KalkulatorLogoAndTitle />
                 <FormBlock>
@@ -155,7 +156,11 @@ const ReducerKalkulator = () => {
                                                     </ExpandableInfo>
                                                 </div>
                                             }
-                                            feil={valueToFeilProps(barnInfo.kroniskSykt, state.resultViewData)}
+                                            feil={valueToFeilProps(
+                                                barnInfo.kroniskSykt,
+                                                state.resultViewData,
+                                                validateKroniskSykt
+                                            )}
                                             onChange={(evt, value) => {
                                                 if (isYesOrNo(value)) {
                                                     dispatch(setKroniskSykt(YesOrNoToBool(value), barnInfo.id));
@@ -192,7 +197,11 @@ const ReducerKalkulator = () => {
                                                     </ExpandableInfo>
                                                 </div>
                                             }
-                                            feil={valueToFeilProps(barnInfo.borSammen, state.resultViewData)}
+                                            feil={valueToFeilProps(
+                                                barnInfo.borSammen,
+                                                state.resultViewData,
+                                                validateBorSammen
+                                            )}
                                             onChange={(evt, value) => {
                                                 if (isYesOrNo(value)) {
                                                     dispatch(setBorSammen(YesOrNoToBool(value), barnInfo.id));
@@ -242,7 +251,11 @@ const ReducerKalkulator = () => {
                                                     </ExpandableInfo>
                                                 </div>
                                             }
-                                            feil={valueToFeilProps(barnInfo.aleneOmOmsorgen, state.resultViewData)}
+                                            feil={valueToFeilProps(
+                                                barnInfo.aleneOmOmsorgen,
+                                                state.resultViewData,
+                                                validateAleneOmOmsorgen
+                                            )}
                                             onChange={(evt, value) => {
                                                 if (isYesOrNo(value)) {
                                                     dispatch(setAleneOmOmsorgen(YesOrNoToBool(value), barnInfo.id));
@@ -266,7 +279,7 @@ const ReducerKalkulator = () => {
                 })}
             </FormBlock>
             <ResultatArea resultView={state.resultViewData} dispatch={dispatch} />
-        </div>
+        </FormBlock>
     );
 };
 

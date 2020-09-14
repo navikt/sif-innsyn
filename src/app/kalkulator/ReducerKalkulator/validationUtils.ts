@@ -1,20 +1,36 @@
-import { isSome, none, Option, some } from 'fp-ts/lib/Option';
+import { isSome, Option } from 'fp-ts/lib/Option';
 import { ISODateString } from 'nav-datovelger';
-import { Value } from './types';
+import { ValueWithId } from './types';
 import { isISODateString } from './typeguards';
 import { FeiloppsummeringFeil } from 'nav-frontend-skjema';
 import { toFeiloppsummeringsFeil } from './utils';
+import { Either, isRight, left, right } from 'fp-ts/lib/Either';
 
 export const errorNotAnswered = 'Feltet er påkrevd';
 export const errorNBarnIsZero = 'Antall barn må være satt til et eller flere.';
 
-export const fodselsdatoIsValid = (value: Value<Option<ISODateString>>): Option<FeiloppsummeringFeil> =>
-    isSome(value.value) && isISODateString(value.value)
-        ? none
-        : some(toFeiloppsummeringsFeil(value.id, errorNotAnswered));
-export const kroniskSyktIsValid = (value: Value<Option<boolean>>): Option<FeiloppsummeringFeil> =>
-    isSome(value.value) ? none : some(toFeiloppsummeringsFeil(value.id, errorNotAnswered));
-export const borSammenIsValid = (value: Value<Option<boolean>>): Option<FeiloppsummeringFeil> =>
-    isSome(value.value) ? none : some(toFeiloppsummeringsFeil(value.id, errorNotAnswered));
-export const aleneOmOmsorgenIsValid = (value: Value<Option<boolean>>): Option<FeiloppsummeringFeil> =>
-    isSome(value.value) ? none : some(toFeiloppsummeringsFeil(value.id, errorNotAnswered));
+export const validateMaybeBooleanValueWithId = ({
+    id,
+    value,
+}: ValueWithId<Option<boolean>>): Either<FeiloppsummeringFeil, boolean> =>
+    isSome(value) ? right(value.value) : left(toFeiloppsummeringsFeil(id, errorNotAnswered));
+
+export const validateFodselsdato = ({
+    id,
+    value,
+}: ValueWithId<Option<ISODateString>>): Either<FeiloppsummeringFeil, ISODateString> =>
+    isSome(value) && isISODateString(value.value)
+        ? right(value.value)
+        : left(toFeiloppsummeringsFeil(id, errorNotAnswered));
+
+export const validateKroniskSykt = (value: ValueWithId<Option<boolean>>): Either<FeiloppsummeringFeil, boolean> =>
+    validateMaybeBooleanValueWithId(value);
+export const kroniskSyktIsValid = (value: ValueWithId<Option<boolean>>) => isRight(validateKroniskSykt(value));
+
+export const validateBorSammen = (value: ValueWithId<Option<boolean>>): Either<FeiloppsummeringFeil, boolean> =>
+    validateMaybeBooleanValueWithId(value);
+export const borSammenIsValid = (value: ValueWithId<Option<boolean>>) => isRight(validateBorSammen(value));
+
+export const validateAleneOmOmsorgen = (value: ValueWithId<Option<boolean>>): Either<FeiloppsummeringFeil, boolean> =>
+    validateMaybeBooleanValueWithId(value);
+export const aleneOmOmsorgenIsValid = (value: ValueWithId<Option<boolean>>) => isRight(validateAleneOmOmsorgen(value));

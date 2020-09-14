@@ -1,8 +1,8 @@
 import { uuidv4 } from '@navikt/omsorgspenger-kalkulator/lib/utils';
-import { BarnInfo, Value } from './types';
+import { BarnInfo, ValueWithId } from './types';
 import { none } from 'fp-ts/lib/Option';
 
-export function initializeValue<T>(value: T): Value<T> {
+export function initializeValue<T>(value: T): ValueWithId<T> {
     const uuid = uuidv4();
     return {
         id: uuid,

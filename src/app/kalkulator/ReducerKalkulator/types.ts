@@ -7,17 +7,17 @@ export enum YesOrNo {
     No = 'No',
 }
 
-export interface Value<T> {
+export interface ValueWithId<T> {
     id: string;
     value: T;
 }
 
 export interface BarnInfo {
     id: string;
-    fodselsdato: Value<Option<ISODateString>>;
-    kroniskSykt: Value<Option<boolean>>;
-    borSammen: Value<Option<boolean>>;
-    aleneOmOmsorgen: Value<Option<boolean>>;
+    fodselsdato: ValueWithId<Option<ISODateString>>;
+    kroniskSykt: ValueWithId<Option<boolean>>;
+    borSammen: ValueWithId<Option<boolean>>;
+    aleneOmOmsorgen: ValueWithId<Option<boolean>>;
 }
 
 export type BarnApi = Barn;

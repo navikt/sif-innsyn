@@ -8,6 +8,8 @@ import ResultBox from './ResultBox';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { Action, beregn } from '../actions';
 import { caseResultViewOf, ResultView } from '../types/ResultView';
+import { Element } from 'nav-frontend-typografi';
+import ExpandableInfo from '@navikt/sif-common-core/lib/components/expandable-content/ExpandableInfo';
 
 interface Props {
     resultView: ResultView<FeiloppsummeringFeil[], Omsorgsprinsipper>;
@@ -38,10 +40,55 @@ const ResultatArea: React.FC<Props> = ({ resultView, dispatch }: Props) =>
         ),
         () => (
             <FormBlock>
-                <div>View orange box with "No valid children" message</div>
+                <ResultBox type={'WARNING'}>
+                    <FormBlock margin={'none'}>
+                        Beregningen baserer seg på svarene du har lagt inn i kalkulatoren. Det betyr at resultatet er
+                        avhengig av at du har gitt riktige opplysninger. Ut fra opplysningene du har gitt, har du
+                    </FormBlock>
+                    <FormBlock>
+                        <Element>0 omsorgsdager fra 1. juli 2020 – 31.12.2020</Element>
+                    </FormBlock>
+                    <FormBlock>Du har ikke rett på noen dager fordi ..</FormBlock>
+                </ResultBox>
             </FormBlock>
         ),
-        (result: Omsorgsprinsipper) => <ResultBox resultat={result} />
+        (result: Omsorgsprinsipper) => {
+            const { grunnrett, kroniskSykt, aleneomsorg, aleneomsorgKroniskSyke } = result;
+            const sumDager: number =
+                grunnrett.normaldager +
+                kroniskSykt.normaldager +
+                aleneomsorg.normaldager +
+                aleneomsorgKroniskSyke.normaldager;
+
+            return (
+                <ResultBox type={'SUCCESS'}>
+                    <FormBlock margin={'none'}>
+                        Beregningen baserer seg på svarene du har lagt inn i kalkulatoren. Det betyr at resultatet er
+                        avhengig av at du har gitt riktige opplysninger. Ut fra opplysningene du har gitt, har du
+                    </FormBlock>
+                    <FormBlock>
+                        <Element>{sumDager} omsorgsdager fra 1. juli 2020 – 31.12.2020</Element>
+                    </FormBlock>
+
+                    <FormBlock>
+                        <ExpandableInfo title="Vis detaljer for utregning" closeTitle={'Skjul detaljer for utregning'}>
+                            <div>grunnrett: {result.grunnrett.normaldager}</div>
+                            <div>kroniskSykt: {result.kroniskSykt.normaldager}</div>
+                            <div>aleneomsorgKroniskSyke: {result.aleneomsorgKroniskSyke.normaldager}</div>
+                            <div>aleneomsorg: {result.aleneomsorg.normaldager}</div>
+                        </ExpandableInfo>
+                    </FormBlock>
+
+                    <FormBlock>
+                        Du får 20 dager fordi du er alene om omsorgen for ett barn Du får 15 dager fordi du har to barn
+                    </FormBlock>
+                    <FormBlock>
+                        Hvis du etter 1. juli 2020 har brukt omsorgsdager, eller delt dager med en annen, må du trekke
+                        fra disse dagene selv.
+                    </FormBlock>
+                </ResultBox>
+            );
+        }
     )(resultView);
 
 export default ResultatArea;

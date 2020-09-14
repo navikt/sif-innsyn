@@ -1,13 +1,12 @@
 import { BarnApi, BarnInfo } from './types';
-import { Either, either, fold, left, right } from 'fp-ts/lib/Either';
-import { compact, flatten, separate, sequence } from 'fp-ts/lib/Array';
+import { chain as andThen, either, Either, fold, left, map, right } from 'fp-ts/lib/Either';
+import { separate, sequence } from 'fp-ts/lib/Array';
 import { ISODateString } from 'nav-datovelger';
 import { AlderEnum, AlderType } from '@navikt/omsorgspenger-kalkulator/lib/types/Barn';
 import moment from 'moment';
 import { FeiloppsummeringFeil } from 'nav-frontend-skjema';
 import { pipe } from 'fp-ts/lib/pipeable';
-import { Separated } from 'fp-ts/lib/Compactable';
-import { fold as foldOption, isNone, isSome, Option } from 'fp-ts/lib/Option';
+import { fold as foldOption, isSome, Option } from 'fp-ts/lib/Option';
 import Omsorgsprinsipper from '@navikt/omsorgspenger-kalkulator/lib/types/Omsorgsprinsipper';
 import { omsorgsdager } from '@navikt/omsorgspenger-kalkulator/lib/components/kalkulerOmsorgsdager';
 import {
@@ -19,7 +18,12 @@ import {
     resultBox,
     ResultView,
 } from './types/ResultView';
-import { aleneOmOmsorgenIsValid, borSammenIsValid, fodselsdatoIsValid, kroniskSyktIsValid } from './validationUtils';
+import {
+    validateAleneOmOmsorgen,
+    validateBorSammen,
+    validateFodselsdato,
+    validateKroniskSykt,
+} from './validationUtils';
 
 export function doOrUndefined<A, B>(f: (x: A) => B, optionValue: Option<A>): B | undefined {
     return foldOption(
@@ -61,58 +65,47 @@ export const toFeiloppsummeringsFeil = (id: string, error: string): Feiloppsumme
     feilmelding: error,
 });
 
-export const outInvalidChildren = (barnInfo: BarnInfo): boolean =>
-    !(barnetErOverAtten(barnInfo) || barnetErOverTolvOgIkkeKroniskSykt(barnInfo) || borIkkeSammen(barnInfo));
+export const isInvalidChild = (barnInfo: BarnInfo): boolean =>
+    barnetErOverAtten(barnInfo) || barnetErOverTolvOgIkkeKroniskSykt(barnInfo) || borIkkeSammen(barnInfo);
 
-// TODO: Implementasjon av validateBarnInfo burde forbedres. Den gir ingen garanti for at listOfFeiloppsummeringFeil ikke er tom, som den burde.
-export const validateBarnInfo = (barnInfo: BarnInfo): Either<FeiloppsummeringFeil[], BarnApi> => {
-    const { fodselsdato, kroniskSykt, borSammen, aleneOmOmsorgen }: BarnInfo = barnInfo;
+export const isValidChild = (barnInfo: BarnInfo): boolean => !isInvalidChild(barnInfo);
 
-    const maybeErrorInFodselsdato: Option<FeiloppsummeringFeil> = fodselsdatoIsValid(fodselsdato);
-    const maybeErrorInKroniskSykt: Option<FeiloppsummeringFeil> = kroniskSyktIsValid(kroniskSykt);
-    const maybeErrorInBorSammen: Option<FeiloppsummeringFeil> = borSammenIsValid(borSammen);
-    const maybeErrorInAleneOmOmsorgen: Option<FeiloppsummeringFeil> = aleneOmOmsorgenIsValid(aleneOmOmsorgen);
+export const validateBarnInfo = (barnInfo: BarnInfo): Either<FeiloppsummeringFeil, BarnApi> => {
+    const { id, fodselsdato, kroniskSykt, borSammen, aleneOmOmsorgen }: BarnInfo = barnInfo;
+    const fodselsdatoOrError: Either<FeiloppsummeringFeil, ISODateString> = validateFodselsdato(fodselsdato);
+    const kroniskSyktOrError: Either<FeiloppsummeringFeil, boolean> = validateKroniskSykt(kroniskSykt);
+    const borSammenOrError: Either<FeiloppsummeringFeil, boolean> = validateBorSammen(borSammen);
+    const aleneOrError: Either<FeiloppsummeringFeil, boolean> = validateAleneOmOmsorgen(aleneOmOmsorgen);
 
-    if (
-        isNone(maybeErrorInFodselsdato) &&
-        isNone(maybeErrorInKroniskSykt) &&
-        isNone(maybeErrorInBorSammen) &&
-        isNone(maybeErrorInAleneOmOmsorgen)
-    ) {
-        return right(mapBarnInfoToBarnApi(barnInfo));
-    } else {
-        const listOfFeiloppsummeringFeil: FeiloppsummeringFeil[] = compact([
-            maybeErrorInFodselsdato,
-            maybeErrorInKroniskSykt,
-            maybeErrorInBorSammen,
-            maybeErrorInAleneOmOmsorgen,
-        ]);
-        return left(listOfFeiloppsummeringFeil);
-    }
+    return pipe(
+        fodselsdatoOrError,
+        map((fodselsdato: string) => ({ alder: fodselsdatoToAlderType(fodselsdato) })),
+        andThen((partial) => map((kroniskSykt: boolean) => ({ ...partial, kroniskSykt }))(kroniskSyktOrError)),
+        andThen((partial) => map((borSammen: boolean) => ({ ...partial, borSammen }))(borSammenOrError)),
+        andThen((partial) => map((alene: boolean) => ({ ...partial, søkerHarAleneomsorgFor: alene }))(aleneOrError)),
+        andThen((partial) => map((id: string) => ({ ...partial, id }))(right(id)))
+    );
 };
 
 export const extractEitherFromList = (
-    list: Either<FeiloppsummeringFeil[], BarnApi>[]
+    list: Either<FeiloppsummeringFeil, BarnApi>[]
 ): Either<FeiloppsummeringFeil[], BarnApi[]> =>
     pipe(
         sequence(either)(list),
         fold(
-            () => {
-                const separated: Separated<Array<Array<FeiloppsummeringFeil>>, BarnApi[]> = separate(list);
-                const errors: Array<Array<FeiloppsummeringFeil>> = separated.left;
-                return left(flatten(errors));
-            },
+            () => left(separate(list).left),
             (r) => right(r)
         )
     );
 
+// TODO: Rename
 export const doItAll = (
     listeAvBarnInfo: BarnInfo[],
     previousResultView: ResultView<FeiloppsummeringFeil[], Omsorgsprinsipper>,
     didClickBeregn: boolean
 ): ResultView<FeiloppsummeringFeil[], Omsorgsprinsipper> => {
-    const listeAvBarnUtenInvalids: BarnInfo[] = listeAvBarnInfo.filter(outInvalidChildren);
-    const listOfEitherErrorOrBarnApi: Either<FeiloppsummeringFeil[], BarnApi>[] = listeAvBarnUtenInvalids.map(
+    const listeAvBarnUtenInvalids: BarnInfo[] = listeAvBarnInfo.filter(isValidChild);
+    const listOfEitherErrorOrBarnApi: Either<FeiloppsummeringFeil, BarnApi>[] = listeAvBarnUtenInvalids.map(
         validateBarnInfo
     );
     // TODO: tom liste => Right<[]> ? Verifiser at stemmer.
@@ -137,15 +130,9 @@ export const doItAll = (
 
     return caseResultViewOf(
         () => empty,
-        () => {
-            if (didClickBeregn) {
-                return updatedResultView;
-            } else {
-                return beregnButton;
-            }
-        },
-        () => (didClickBeregn ? updatedResultView : previousResultView),
-        () => updatedResultView,
+        () => (didClickBeregn ? updatedResultView : beregnButton),
+        () => (didClickBeregn ? updatedResultView : beregnButton),
+        () => beregnButton,
         () => updatedResultView
     )(previousResultView);
 };
