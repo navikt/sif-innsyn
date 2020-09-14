@@ -1,0 +1,37 @@
+@gap: 0.5em;
+@circle-size: 26px;
+@circle-distance: 20px;
+
+.processDescription {
+    padding-left: 4em;
+    display: grid;
+    grid-gap: @gap;
+
+    .processDescription__step {
+        position: relative;
+
+        &:not(:last-child)::before {
+            content: '';
+            display: block;
+            position: absolute;
+            top: 0;
+            left: -(@circle-distance + (@circle-size / 2));
+            height: calc(100% + @gap);
+            border-left: 1px solid black;
+        }
+
+        &::after {
+            box-sizing: border-box;
+            content: '';
+            display: block;
+            position: absolute;
+            top: 0;
+            left: -(@circle-distance + @circle-size);
+            width: @circle-size;
+            height: @circle-size;
+            border: 1px solid black;
+            border-radius: 50%;
+            background-color: white;
+        }
+    }
+}
