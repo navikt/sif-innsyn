@@ -10,8 +10,10 @@ const cls = bemUtils('processDescription');
 
 const ProcessDescription: React.FC<ProcessDescriptionProps> = ({ steps }) => (
     <div className={cls.block}>
-        {steps.map((step) => (
-            <div className={cls.element('step')}>{step}</div>
+        {steps.map((step, index) => (
+            <div key={index} className={cls.element('step')}>
+                {step}
+            </div>
         ))}
     </div>
 );
