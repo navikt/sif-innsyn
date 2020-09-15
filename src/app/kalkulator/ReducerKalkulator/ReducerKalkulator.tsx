@@ -41,15 +41,24 @@ import {
 } from './viewUtils';
 import BarnPanelView from './components/BarnPanelView';
 import bemUtils from '@navikt/sif-common-core/lib/utils/bemUtils';
-import { isNone } from 'fp-ts/lib/Option';
+import { isNone, some } from 'fp-ts/lib/Option';
 import { isBeregnButtonAndErrorSummary } from './types/ResultView';
 import { validateAleneOmOmsorgen, validateBorSammen, validateKroniskSykt } from './validationUtils';
 import { Knapp } from 'nav-frontend-knapper';
+import { initializeValue } from './initializers';
 
 const bem = bemUtils('omsorgsdagerkalkulator');
 
+const testBarn: BarnInfo = {
+    id: 'asdkjnaksjd',
+    fodselsdato: initializeValue(some('20200720')),
+    kroniskSykt: initializeValue(some(true)),
+    borSammen: initializeValue(some(true)),
+    aleneOmOmsorgen: initializeValue(some(true)),
+};
+
 const ReducerKalkulator = () => {
-    const [state, dispatch] = useReducer<KalkulatorReducer>(reducer, createInitialState([]));
+    const [state, dispatch] = useReducer<KalkulatorReducer>(reducer, createInitialState([testBarn]));
     const { nBarnMaks, barn }: State = state;
 
     return (
@@ -60,12 +69,12 @@ const ReducerKalkulator = () => {
                     <FormBlock>
                         Kalkulatoren beregner hvor mange omsorgsdager du har ut fra svarene du oppgir. Det betyr at
                         riktig resultat er avhengig av at du gir riktige opplysninger. Kalkulatoren er ment som et
-                        hjelpeverktøy for deg, og er ikke et vedtak fra NAV.
+                        hjelpeverktøy for deg, og det er ikke et vedtak eller en bekreftelse fra NAV.
                     </FormBlock>
                 )}
                 <div className={bem.element('align-content-centre')}>
                     <FormBlock>
-                        <Element>Hvor mange barn er det i husstanden?</Element>
+                        <Element>Hvor mange egne barn har du i husstanden?</Element>
                     </FormBlock>
                     <FormBlock paddingBottom={'l'}>
                         <Select
@@ -155,7 +164,7 @@ const ReducerKalkulator = () => {
                                                         Har du fått ekstra omsorgsdager fordi barnet har en kronisk
                                                         sykdom eller en funksjonshemning?
                                                     </Element>
-                                                    <ExpandableInfo title="Hvorfor spør vi om det?">
+                                                    <ExpandableInfo title="Hva betyr dette?">
                                                         Hvis barnet har en kronisk sykdom eller en funksjonshemning kan
                                                         du ha rett på ekstra omsorgsdager. Du kan svare ja på dette
                                                         spørsmålet dersom du har søkt og fått svar fra NAV om at du har
@@ -197,7 +206,7 @@ const ReducerKalkulator = () => {
                                             legend={
                                                 <div>
                                                     <Element>Bor barnet fast hos deg?</Element>
-                                                    <ExpandableInfo title="Hvorfor spør vi om det?">
+                                                    <ExpandableInfo title="Hva betyr dette?">
                                                         Barnet bor fast der barnet har folkeregistrert adresse. Hvis
                                                         foreldrene ikke bor sammen, men har en avtale om delt bosted bor
                                                         barnet fast hos begge foreldrene. Du kan svare ja hvis..
@@ -221,10 +230,19 @@ const ReducerKalkulator = () => {
                                     </FormBlock>
                                 )}
 
-                                {borIkkeSammen(barnInfo) && (
+                                {/* TODO: Rydd opp det under.*/}
+                                {state.barn.length === 1 && borIkkeSammen(barnInfo) && (
                                     <FormBlock>
                                         <AlertStripeAdvarsel>
                                             For å ha rett på omsorgsdager må barnet bo fast hos deg.
+                                        </AlertStripeAdvarsel>
+                                    </FormBlock>
+                                )}
+
+                                {state.barn.length > 1 && borIkkeSammen(barnInfo) && (
+                                    <FormBlock>
+                                        <AlertStripeAdvarsel>
+                                            For å ha rett på omsorgsdager for dette barnet, må barnet bo fast hos deg.
                                         </AlertStripeAdvarsel>
                                     </FormBlock>
                                 )}
@@ -236,7 +254,7 @@ const ReducerKalkulator = () => {
                                             legend={
                                                 <div>
                                                     <Element>Er du alene om omsorgen med barnet?</Element>
-                                                    <ExpandableInfo title="Hvorfor spør vi om det?">
+                                                    <ExpandableInfo title="Hva betyr det å være alene om omsorgen?">
                                                         <Box>
                                                             Når det gjelder omsorgspenger, er du regnet som alene om
                                                             omsorgen hvis du ikke bor sammen med den andre forelderen,
@@ -244,14 +262,18 @@ const ReducerKalkulator = () => {
                                                             får ny samboer eller ektefelle.
                                                         </Box>
 
-                                                        <Box>
+                                                        <Box padBottom={'l'}>
                                                             Hvis du og den andre forelderen har en avtale om delt
                                                             bosted, hvor barnet bor fast hos dere begge, vil ingen av
                                                             dere bli regnet som alene om omsorgen.
                                                         </Box>
 
                                                         <Box>
-                                                            <Lenke href={'TODO'}>
+                                                            {/* TODO: Legg inn at denne åpnes i ny fane*/}
+                                                            <Lenke
+                                                                href={
+                                                                    'https://www.regjeringen.no/no/tema/familie-og-barn/innsiktsartikler/bosted-og-samvar/samvar/id749587/'
+                                                                }>
                                                                 Les mer om fast bosted og samvær
                                                             </Lenke>
                                                         </Box>

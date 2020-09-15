@@ -7,6 +7,7 @@ import InnsynPage from '../components/innsyn-page/InnsynPage';
 import FormBlock from '@navikt/sif-common-core/lib/components/form-block/FormBlock';
 import { Element } from 'nav-frontend-typografi';
 import bemUtils from '@navikt/sif-common-core/lib/utils/bemUtils';
+import Box from '@navikt/sif-common-core/lib/components/box/Box';
 
 const bem = bemUtils('omsorgsdagerkalkulator');
 
@@ -16,7 +17,18 @@ const KalkulatorInfoRoute = () => {
             <KalkulatorLogoAndTitle />
             <FormBlock paddingBottom={'l'} margin={'m'}>
                 <div className={bem.element('flex-center')}>
-                    <Element>Her kan du regne ut hvor mange omsorgsdager du har rett på fra 1. juli 2020</Element>
+                    <div>
+                        <Box padBottom={'l'}>
+                            <Element>
+                                Her kan du regne ut hvor mange omsorgsdager du kan ha rett på fra 1. juli 2020 –
+                                31.12.20
+                            </Element>
+                        </Box>
+                        <div>
+                            <strong>NB!</strong> Kalkulatoren tar <strong>ikke</strong> hensyn til midlertidige
+                            omsorgsdager du eventuelt har fått på grunn av koronasituasjonen.
+                        </div>
+                    </div>
                 </div>
             </FormBlock>
             <FormBlock>

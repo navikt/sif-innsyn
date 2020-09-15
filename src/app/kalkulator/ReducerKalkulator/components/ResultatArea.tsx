@@ -34,7 +34,7 @@ const ResultatArea: React.FC<Props> = ({ resultView, dispatch }: Props) =>
                     </Hovedknapp>
                 </FormBlock>
                 <FormBlock>
-                    <ValidationSummary title={'Validation summary tittel'} errorMessages={errors} />
+                    <ValidationSummary title={'Feil i skjema'} errorMessages={errors} />
                 </FormBlock>
             </FormBlock>
         ),
@@ -48,7 +48,10 @@ const ResultatArea: React.FC<Props> = ({ resultView, dispatch }: Props) =>
                     <FormBlock>
                         <Element>0 omsorgsdager fra 1. juli 2020 – 31.12.2020</Element>
                     </FormBlock>
-                    <FormBlock>Du har ikke rett på noen dager fordi ..</FormBlock>
+                    <FormBlock>
+                        Du har 0 omsorgsdager fordi opplysningene du har lagt inn i kalkulatoren gir ikke rett til
+                        omsorgdager.
+                    </FormBlock>
                 </ResultBox>
             </FormBlock>
         ),
