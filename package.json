@@ -18,9 +18,7 @@
         "snyk-protect": "snyk protect",
         "eslint": "eslint --fix \"src/app/**/*.{js,jsx,ts,tsx}\"",
         "prettier:check": "prettier --check \"src/**/*.js\"",
-        "prettier:run": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\"",
-        "storybook": "start-storybook -p 6006",
-        "build-storybook": "build-storybook"
+        "prettier:run": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\""
     },
     "jest": {
         "testEnvironment": "node"
@@ -108,12 +106,6 @@
         "@babel/plugin-transform-modules-commonjs": "^7.10.1",
         "@babel/preset-env": "^7.10.2",
         "@babel/preset-react": "^7.10.1",
-        "@storybook/addon-actions": "^6.0.21",
-        "@storybook/addon-essentials": "^6.0.21",
-        "@storybook/addon-links": "^6.0.21",
-        "@storybook/node-logger": "^6.0.21",
-        "@storybook/preset-create-react-app": "^3.1.4",
-        "@storybook/react": "^6.0.21",
         "@svgr/webpack": "^5.4.0",
         "@types/classnames": "^2.2.10",
         "@types/enzyme": "^3.10.5",
