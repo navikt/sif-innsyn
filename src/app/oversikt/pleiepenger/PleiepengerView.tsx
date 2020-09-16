@@ -2,7 +2,7 @@ import * as React from 'react';
 import { SøknadApiResponse } from '../../types/apiTypes/søknadTypes';
 import './PleiepengerView.less';
 import SoknadstatusinfoComponent from 'app/components/soknadstatusinfoComponent/SoknadstatusinfoComponent';
-import { Ingress, Normaltekst, Undertittel } from 'nav-frontend-typografi';
+import { Ingress, Normaltekst, Systemtittel, Undertittel } from 'nav-frontend-typografi';
 import { Tilbakeknapp } from 'nav-frontend-ikonknapper';
 import { useHistory } from 'react-router-dom';
 import { RouteConfig } from '../../config/routeConfig';
@@ -12,6 +12,7 @@ import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import ProcessDescription from 'app/components/process-description/ProcessDescription';
 import ExpandableInfo from 'app/components/expandable-info/ExpandableInfo';
 import Lenke from 'nav-frontend-lenker';
+import { Hovedknapp } from 'nav-frontend-knapper';
 
 interface Props {
     søknader: SøknadApiResponse;
@@ -32,7 +33,7 @@ const PleiepengerView: React.FC<Props> = ({ søknader }: Props) => {
             {søknader && (
                 <div>
                     <Panel className={'mt-1'}>
-                        <Undertittel>Dine søknader</Undertittel>
+                        <Systemtittel tag={'h3'}>Dine søknader</Systemtittel>
                         <div>
                             {søknader.map((søknad, index) => {
                                 return (
@@ -148,6 +149,16 @@ const PleiepengerView: React.FC<Props> = ({ søknader }: Props) => {
                                 ]}
                             />
                         </Ekspanderbartpanel>
+                        <div className={'mt-1 knapp-gruppe'}>
+                            <ul>
+                                <li>
+                                    <Hovedknapp mini>Ettersend dokumentasjon</Hovedknapp>
+                                </li>
+                                <li>
+                                    <Hovedknapp mini>Send en ny søknad</Hovedknapp>
+                                </li>
+                            </ul>
+                        </div>
                     </Panel>
                 </div>
             )}
