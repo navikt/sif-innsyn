@@ -6,7 +6,7 @@ import { AlderEnum, AlderType } from '@navikt/omsorgspenger-kalkulator/lib/types
 import moment from 'moment';
 import { FeiloppsummeringFeil } from 'nav-frontend-skjema';
 import { pipe } from 'fp-ts/lib/pipeable';
-import { fold as foldOption, isSome, Option } from 'fp-ts/lib/Option';
+import { isSome } from 'fp-ts/lib/Option';
 import Omsorgsprinsipper from '@navikt/omsorgspenger-kalkulator/lib/types/Omsorgsprinsipper';
 import { omsorgsdager } from '@navikt/omsorgspenger-kalkulator/lib/components/kalkulerOmsorgsdager';
 import {
@@ -27,28 +27,12 @@ import {
     validateKroniskSykt,
 } from './validationUtils';
 
-export function doOrUndefined<A, B>(f: (x: A) => B, optionValue: Option<A>): B | undefined {
-    return foldOption(
-        () => undefined,
-        (value: A) => f(value)
-    )(optionValue);
-}
-
 export const erOver = (fodselsdato: ISODateString, aar: number): boolean => moment().diff(fodselsdato, 'years') >= aar;
 export const erOverTolv = (fodselsdato: ISODateString): boolean => erOver(fodselsdato, 12);
 export const erOverAtten = (fodselsdato: ISODateString): boolean => erOver(fodselsdato, 18);
 
 export const fodselsdatoToAlderType = (isoDateStringFodselsdato: ISODateString): AlderType =>
     erOverTolv(isoDateStringFodselsdato) ? AlderEnum.OVER12 : AlderEnum.UNDER12;
-
-export const mapBarnInfoToBarnApi = (barnInfo: BarnInfo): BarnApi => {
-    return {
-        id: barnInfo.id,
-        alder: doOrUndefined(fodselsdatoToAlderType, barnInfo.fodselsdato.value),
-        kroniskSykt: doOrUndefined((value: boolean) => value, barnInfo.kroniskSykt.value),
-        søkerHarAleneomsorgFor: doOrUndefined((value: boolean) => value, barnInfo.aleneOmOmsorgen.value),
-    };
-};
 
 export const barnetErOverAtten = (barnInfo: BarnInfo): boolean =>
     isSome(barnInfo.fodselsdato.value) && erOverAtten(barnInfo.fodselsdato.value.value);
