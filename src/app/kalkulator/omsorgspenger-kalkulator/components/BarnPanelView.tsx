@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { PropsWithChildren } from 'react';
 import { isRight } from 'fp-ts/lib/Either';
-import { validateBarnInfo } from '../utils';
-import SvgSuccessCircle from '../../svgs/SvgSuccessCircle';
+import { validateBarnInfo } from '../utils/utils';
+import SvgSuccessCircle from '../svgs/SvgSuccessCircle';
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
-import { BarnInfo } from '../types';
+import { BarnInfo } from '../utils/types';
 import FormBlock from '@navikt/sif-common-core/lib/components/form-block/FormBlock';
 import bemUtils from '@navikt/sif-common-core/lib/utils/bemUtils';
 

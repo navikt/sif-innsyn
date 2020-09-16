@@ -10,7 +10,7 @@ import {
     setFodselsdatoAndMaybeWipeValues,
     setKroniskSyktAndMaybeWipeValues,
 } from './reducerUtils';
-import { beregnButton } from './types/ResultView';
+import { beregnButton } from '../types/ResultView';
 
 export type KalkulatorReducer = (state: State, action: Action) => State;
 

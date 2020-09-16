@@ -10,17 +10,15 @@ import { Feature, isFeatureEnabled } from './utils/featureToggleUtils';
 import { getLocaleFromSessionStorage, setLocaleInSessionStorage } from './utils/localeUtils';
 import { Locale } from '@navikt/sif-common-core/lib/types/Locale';
 import InnsynRoute from './innsyn/InnsynRoute';
-import KalkulatorRoute from './kalkulator/KalkulatorRoute';
 import NotFoundRoute from './components/pages/not-found-route/NotFoundRoute';
 import '@navikt/sif-common-core/lib/styles/globalStyles.less';
 import './app.less';
-import { RouteConfig } from './config/routeConfig';
+import { getRouteUrl, RouteConfig } from './config/routeConfig';
 import OversiktRoute from './oversikt/OversiktRoute';
 import PleiepengerRoute from './oversikt/pleiepenger/PleiepengerRoute';
 import OmsorgspengerRoute from './oversikt/omsorgspenger/OmsorgspengerRoute';
-import '@navikt/sif-common-core/lib/styles/globalStyles.less';
-import './app.less';
-import KalkulatorInfoRoute from './kalkulator/KalkulatorInfoRoute';
+import OmsorgspengerKalkulatorInfo from './kalkulator/omsorgspenger-kalkulator/OmsorgspengerKalkulatorInfo';
+import OmsorgspengerKalkulator from './kalkulator/omsorgspenger-kalkulator/OmsorgspengerKalkulator';
 
 const localeFromSessionStorage = getLocaleFromSessionStorage();
 moment.locale(localeFromSessionStorage);
@@ -44,8 +42,14 @@ const App: React.FunctionComponent = () => {
                         <Route exact={true} path={RouteConfig.OVERSIKT} component={OversiktRoute} />
                         <Route exact={true} path={RouteConfig.DINE_PLEIEPENGER} component={PleiepengerRoute} />
                         <Route exact={true} path={RouteConfig.DINE_OMSORGSPENGER} component={OmsorgspengerRoute} />
-                        <Route exact={true} path={RouteConfig.KALKULATOR_INFO} component={KalkulatorInfoRoute} />
-                        <Route exact={true} path={RouteConfig.KALKULATOR} component={KalkulatorRoute} />
+                        <Route
+                            exact={true}
+                            path={RouteConfig.KALKULATOR_INFO}
+                            component={() => (
+                                <OmsorgspengerKalkulatorInfo kalkulatorHref={getRouteUrl(RouteConfig.KALKULATOR)} />
+                            )}
+                        />
+                        <Route exact={true} path={RouteConfig.KALKULATOR} component={OmsorgspengerKalkulator} />
                         <Route exact={false} path={RouteConfig.ROOT} component={NotFoundRoute} />
                     </Switch>
                 )}

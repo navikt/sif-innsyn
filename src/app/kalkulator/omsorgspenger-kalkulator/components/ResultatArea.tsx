@@ -6,7 +6,7 @@ import ValidationSummary from '@navikt/sif-common-formik/lib/components/helpers/
 import Omsorgsprinsipper from '@navikt/omsorgspenger-kalkulator/lib/types/Omsorgsprinsipper';
 import ResultBox from './ResultBox';
 import { Hovedknapp } from 'nav-frontend-knapper';
-import { Action, beregn } from '../actions';
+import { Action, beregn } from '../utils/actions';
 import { caseResultViewOf, ResultView } from '../types/ResultView';
 import { Element } from 'nav-frontend-typografi';
 
@@ -69,6 +69,7 @@ const ResultatArea: React.FC<Props> = ({ resultView, dispatch }: Props) =>
                         <Element>{sumDager} omsorgsdager fra 1. juli 2020 – 31.12.2020</Element>
                     </FormBlock>
 
+                    {/* TODO: Implementer når skisser er klare. */}
                     {/*<FormBlock>*/}
                     {/*    <ExpandableInfo title="Vis detaljer for utregning" closeTitle={'Skjul detaljer for utregning'}>*/}
                     {/*        <div>grunnrett: {result.grunnrett.normaldager}</div>*/}

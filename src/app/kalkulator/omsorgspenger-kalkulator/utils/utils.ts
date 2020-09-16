@@ -17,7 +17,7 @@ import {
     noValidChildrenOrange,
     resultBox,
     ResultView,
-} from './types/ResultView';
+} from '../types/ResultView';
 import {
     fodselsdatoIsValid,
     kroniskSyktIsValid,

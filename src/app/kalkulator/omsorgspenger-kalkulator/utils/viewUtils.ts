@@ -11,7 +11,7 @@ import { Either, isLeft, isRight } from 'fp-ts/lib/Either';
 import { fold as foldOption, isSome, Option } from 'fp-ts/lib/Option';
 import { ISODateString } from 'nav-datovelger';
 import { State } from './state';
-import { isBeregnButtonAndErrorSummary } from './types/ResultView';
+import { isBeregnButtonAndErrorSummary } from '../types/ResultView';
 import { FeiloppsummeringFeil } from 'nav-frontend-skjema';
 
 export const isNotLastChild = (index: number, listLength: number) => index + 1 < listLength;

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { isBeregnButtonAndErrorSummary, ResultView } from './types/ResultView';
+import { isBeregnButtonAndErrorSummary, ResultView } from '../types/ResultView';
 import { FeiloppsummeringFeil } from 'nav-frontend-skjema';
 import Omsorgsprinsipper from '@navikt/omsorgspenger-kalkulator/lib/types/Omsorgsprinsipper';
 import { Either, isLeft } from 'fp-ts/lib/Either';
