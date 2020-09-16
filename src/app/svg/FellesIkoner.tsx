@@ -3,7 +3,7 @@ import React from 'react';
 export const FilIkon = () => (
     <svg width="26" height="34" viewBox="0 0 26 34" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path
-            fill-rule="evenodd"
+            fillRule="evenodd"
             clipRule="evenodd"
             d="M24.6516 32.7688H1V0.769531H16.304L24.6516 9.11716V32.7688V32.7688Z"
             stroke="#3E3832"
