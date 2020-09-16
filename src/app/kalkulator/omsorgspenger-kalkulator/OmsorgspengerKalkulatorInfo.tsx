@@ -49,7 +49,7 @@ const OmsorgspengerKalkulatorInfo = ({ kalkulatorHref }: Props) => (
         <FormBlock>
             Kalkulatoren vil ikke fungere for deg som er samværsforelder og ikke har egne barn som bor fast hos deg.
         </FormBlock>
-        <FormBlock margin={'l'}>
+        <FormBlock margin={'xxxl'}>
             <div className={bem.element('flex-center')}>
                 <Knappelenke type={'hoved'} href={kalkulatorHref}>
                     Start kalkulator
