@@ -23,7 +23,7 @@ export const ArrowBack = () => (
     </svg>
 );
 
-export const søknadsIkon = () => (
+export const SøknadsIkon = () => (
     <svg width="83" height="79" viewBox="0 0 83 79" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path
             d="M0.136719 3.45996C0.136719 1.80311 1.47986 0.459961 3.13672 0.459961H82.1367V78.46H3.13672C1.47987 78.46 0.136719 77.1168 0.136719 75.46V3.45996Z"

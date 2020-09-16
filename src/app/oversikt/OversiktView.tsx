@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { SøknadApiResponse, Søknadstype } from '../types/apiTypes/søknadTypes';
 import { getEnvironmentVariable } from '../utils/envUtils';
-import { søknadsIkon } from '../svg/FellesIkoner';
+import { SøknadsIkon } from '../svg/FellesIkoner';
 import { LenkepanelBase } from 'nav-frontend-lenkepanel/lib';
 import { Undertittel, Ingress } from 'nav-frontend-typografi';
 import './OversiktView.less';
@@ -116,7 +116,7 @@ const genererLenkeBase = (href: string, tittel: string) => (
             <Link to={href} {...props}>
                 <div style={{ display: 'flex', alignItems: 'center' }}>
                     <div>
-                        <søknadsIkon></søknadsIkon>
+                        <SøknadsIkon></SøknadsIkon>
                     </div>
                     <div>
                         <Undertittel className="lenkepanel_heading ml-1 ">{tittel}</Undertittel>
