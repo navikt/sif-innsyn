@@ -2,7 +2,7 @@ import React from 'react';
 import './SoknadstatusinfoComponent.module.less';
 import { Søknad, Søknadsstatus, Søknadstype } from '../../types/apiTypes/søknadTypes';
 import moment from 'moment';
-import { Systemtittel, Undertekst } from 'nav-frontend-typografi';
+import { Undertekst, Undertittel } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
 import { FilIkon } from '../../svg/FellesIkoner';
 import Panel from 'nav-frontend-paneler';
@@ -22,12 +22,12 @@ const SoknadstatusinfoComponent: React.FC<Props> = ({ søknad }: Props) => {
                         </div>
                     </Column>
                     <Column md={'11'}>
-                        <Systemtittel>{formaterSøknadType(søknad)}</Systemtittel>
+                        <Undertittel tag={'h4'}>{formaterSøknadType(søknad)}</Undertittel>
                         <Undertekst>
                             Gjelder perioden {formaterDate(søknad.søknad.fraOgMed)} -{' '}
                             {formaterDate(søknad.søknad.tilOgMed)}
                         </Undertekst>
-                        <Undertekst>Mottatt {formaterDateTime(søknad.søknad.mottatt)}</Undertekst>
+                        <Undertekst>Mottatt {formaterDateTime(søknad.opprettet)}</Undertekst>
                     </Column>
                 </Row>
             </Panel>
