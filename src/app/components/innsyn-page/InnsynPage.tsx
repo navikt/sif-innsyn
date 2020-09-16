@@ -65,9 +65,7 @@ const InnsynPage: React.FC = (props): JSX.Element => {
 const sideTittel = (location: any) => {
     const path = location.pathname.split('/').pop();
     const pleiepengerSyktBarnPath = RouteConfig.DINE_PLEIEPENGER.split('/').pop();
-    const omsorgspengerPath = RouteConfig.DINE_PLEIEPENGER.split('/').pop();
-    const pleiepengerPath = RouteConfig.DINE_PLEIEPENGER.split('/').pop();
-    console.log('urlpath = ', pleiepengerPath);
+    const omsorgspengerPath = RouteConfig.DINE_OMSORGSPENGER.split('/').pop();
     switch (path) {
         case '':
             return 'din oversikt';
