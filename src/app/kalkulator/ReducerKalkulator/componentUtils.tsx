@@ -11,7 +11,6 @@ export function valueToFeilProps<T>(
     resultView: ResultView<FeiloppsummeringFeil[], Omsorgsprinsipper>,
     validationFunc: (value: ValueWithId<Option<T>>) => Either<FeiloppsummeringFeil, T>
 ): React.ReactNode | boolean {
-    // TODO: Fix visning av riktige errors.
     const ma = validationFunc(value);
     return isBeregnButtonAndErrorSummary(resultView) && isLeft(ma) ? <span>{ma.left.feilmelding}</span> : undefined;
 }

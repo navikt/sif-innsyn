@@ -32,7 +32,6 @@ export interface SetFodselsdatoForBarnInfo {
     barnId: string;
     fodselsdato: ISODateString;
 }
-// TODO: Typeguard ISODateString
 export const setFodselsdatoForBarnInfo = (fodselsdato: ISODateString, barnId: string): SetFodselsdatoForBarnInfo => ({
     type: ActionType.SetFodselsdatoForBarnInfo,
     fodselsdato,

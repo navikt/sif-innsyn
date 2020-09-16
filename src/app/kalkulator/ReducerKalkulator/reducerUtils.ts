@@ -21,6 +21,18 @@ export const fjernFodselsdato = (barn: BarnInfo): BarnInfo => {
             ...barn.fodselsdato,
             value: none,
         },
+        kroniskSykt: {
+            ...barn.kroniskSykt,
+            value: none,
+        },
+        borSammen: {
+            ...barn.borSammen,
+            value: none,
+        },
+        aleneOmOmsorgen: {
+            ...barn.aleneOmOmsorgen,
+            value: none,
+        },
     };
 };
 

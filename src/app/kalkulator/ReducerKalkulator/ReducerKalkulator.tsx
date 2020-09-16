@@ -17,7 +17,7 @@ import { BarnInfo } from './types';
 import { RadioPanelGruppe, Select } from 'nav-frontend-skjema';
 import { Datovelger } from 'nav-datovelger';
 import { barnetErOverAtten, barnetErOverTolvOgIkkeKroniskSykt, isVisibleAndBorIkkeSammen } from './utils';
-import { isISODateString, isNumber, isYesOrNo } from './typeguards';
+import { isNumber, isYesOrNo } from './typeguards';
 import { AlertStripeAdvarsel, AlertStripeInfo } from 'nav-frontend-alertstriper';
 import { Element } from 'nav-frontend-typografi';
 import './reducerKalkulator.less';
@@ -45,6 +45,7 @@ import { isNone } from 'fp-ts/lib/Option';
 import { isBeregnButtonAndErrorSummary } from './types/ResultView';
 import { validateAleneOmOmsorgen, validateBorSammen, validateKroniskSykt } from './validationUtils';
 import { Knapp } from 'nav-frontend-knapper';
+import { isISODateString } from 'nav-datovelger/lib/types/typeGuards';
 
 const bem = bemUtils('omsorgsdagerkalkulator');
 
@@ -144,6 +145,9 @@ const ReducerKalkulator = ({ initialBarnListe }: Props) => {
                                             )
                                         }
                                         visÅrVelger={true}
+                                        input={{
+                                            placeholder: 'dd.mm.åååå',
+                                        }}
                                     />
                                 </FormBlock>
 
@@ -231,19 +235,12 @@ const ReducerKalkulator = ({ initialBarnListe }: Props) => {
                                     </FormBlock>
                                 )}
 
-                                {/* TODO: Rydd opp det under.*/}
-                                {state.barn.length === 1 && isVisibleAndBorIkkeSammen(barnInfo) && (
+                                {isVisibleAndBorIkkeSammen(barnInfo) && (
                                     <FormBlock>
                                         <AlertStripeAdvarsel>
-                                            For å ha rett på omsorgsdager må barnet bo fast hos deg.
-                                        </AlertStripeAdvarsel>
-                                    </FormBlock>
-                                )}
-
-                                {state.barn.length > 1 && isVisibleAndBorIkkeSammen(barnInfo) && (
-                                    <FormBlock>
-                                        <AlertStripeAdvarsel>
-                                            For å ha rett på omsorgsdager for dette barnet, må barnet bo fast hos deg.
+                                            {state.barn.length === 1
+                                                ? ' For å ha rett på omsorgsdager må barnet bo fast hos deg.'
+                                                : 'For å ha rett på omsorgsdager for dette barnet, må barnet bo fast hos deg.'}
                                         </AlertStripeAdvarsel>
                                     </FormBlock>
                                 )}
@@ -270,11 +267,12 @@ const ReducerKalkulator = ({ initialBarnListe }: Props) => {
                                                         </Box>
 
                                                         <Box>
-                                                            {/* TODO: Legg inn at denne åpnes i ny fane*/}
                                                             <Lenke
                                                                 href={
                                                                     'https://www.regjeringen.no/no/tema/familie-og-barn/innsiktsartikler/bosted-og-samvar/samvar/id749587/'
-                                                                }>
+                                                                }
+                                                                target={'_blank'}
+                                                                rel={'noopener noreferer'}>
                                                                 Les mer om fast bosted og samvær
                                                             </Lenke>
                                                         </Box>

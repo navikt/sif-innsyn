@@ -112,7 +112,6 @@ export const updateResultView = (
     const listOfEitherErrorOrBarnApi: Either<FeiloppsummeringFeil, BarnApi>[] = listeAvBarnUtenInvalids.map(
         validateBarnInfo
     );
-    // TODO: tom liste => Right<[]> ? Verifiser at stemmer.
     const validationResult: Either<FeiloppsummeringFeil[], BarnApi[]> = extractEitherFromList(
         listOfEitherErrorOrBarnApi
     );
@@ -137,6 +136,6 @@ export const updateResultView = (
         () => (didClickBeregn ? updatedResultView : beregnButton),
         () => (didClickBeregn ? updatedResultView : beregnButton),
         () => beregnButton,
-        () => updatedResultView
+        () => (didClickBeregn ? updatedResultView : beregnButton)
     )(previousResultView);
 };
