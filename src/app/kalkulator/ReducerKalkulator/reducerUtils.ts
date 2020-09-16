@@ -1,8 +1,13 @@
 import { BarnInfo } from './types';
 import { none, some } from 'fp-ts/lib/Option';
 import { ISODateString } from 'nav-datovelger';
+import {
+    shouldViewAleneOmOmsorgenQuestion,
+    shouldViewBorSammenQuestion,
+    shouldViewKroniskSyktQuestion,
+} from './viewUtils';
 
-export const setFodselsdato = (newFodselsdato: ISODateString, barnInfo: BarnInfo): BarnInfo => {
+export const setFodselsdatoAndMaybeWipeValues = (newFodselsdato: ISODateString, barnInfo: BarnInfo): BarnInfo => {
     const { fodselsdato } = barnInfo;
 
     return {
@@ -11,10 +16,17 @@ export const setFodselsdato = (newFodselsdato: ISODateString, barnInfo: BarnInfo
             ...fodselsdato,
             value: some(newFodselsdato),
         },
+        kroniskSykt: shouldViewKroniskSyktQuestion(barnInfo)
+            ? barnInfo.kroniskSykt
+            : { ...barnInfo.kroniskSykt, value: none },
+        borSammen: shouldViewBorSammenQuestion(barnInfo) ? barnInfo.borSammen : { ...barnInfo.borSammen, value: none },
+        aleneOmOmsorgen: shouldViewAleneOmOmsorgenQuestion(barnInfo)
+            ? barnInfo.aleneOmOmsorgen
+            : { ...barnInfo.aleneOmOmsorgen, value: none },
     };
 };
 
-export const fjernFodselsdato = (barn: BarnInfo): BarnInfo => {
+export const fjernFodselsdatoAndWipeValues = (barn: BarnInfo): BarnInfo => {
     return {
         ...barn,
         fodselsdato: {
@@ -36,20 +48,27 @@ export const fjernFodselsdato = (barn: BarnInfo): BarnInfo => {
     };
 };
 
-export const setKroniskSykt = (value: boolean, barnInfo: BarnInfo): BarnInfo => {
+export const setKroniskSyktAndMaybeWipeValues = (value: boolean, barnInfo: BarnInfo): BarnInfo => {
     const { kroniskSykt } = barnInfo;
     return {
         ...barnInfo,
         kroniskSykt: { ...kroniskSykt, value: some(value) },
+        borSammen: shouldViewBorSammenQuestion(barnInfo) ? barnInfo.borSammen : { ...barnInfo, value: none },
+        aleneOmOmsorgen: shouldViewAleneOmOmsorgenQuestion(barnInfo)
+            ? barnInfo.aleneOmOmsorgen
+            : { ...barnInfo, value: none },
     };
 };
 
-export const setBorSammen = (value: boolean, barn: BarnInfo): BarnInfo => {
+export const setBorSammenAndMaybeWipeValues = (value: boolean, barn: BarnInfo): BarnInfo => {
     const { borSammen } = barn;
 
     return {
         ...barn,
         borSammen: { ...borSammen, value: some(value) },
+        aleneOmOmsorgen: shouldViewAleneOmOmsorgenQuestion(barn)
+            ? barn.aleneOmOmsorgen
+            : { ...barn.aleneOmOmsorgen, value: none },
     };
 };
 

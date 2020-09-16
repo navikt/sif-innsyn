@@ -3,7 +3,13 @@ import { Action, ActionType } from './actions';
 import { initializeNBarn } from './initializers';
 import { BarnInfo } from './types';
 import { updateResultView } from './utils';
-import { fjernFodselsdato, setAleneOmOmsorgen, setBorSammen, setFodselsdato, setKroniskSykt } from './reducerUtils';
+import {
+    fjernFodselsdatoAndWipeValues,
+    setAleneOmOmsorgen,
+    setBorSammenAndMaybeWipeValues,
+    setFodselsdatoAndMaybeWipeValues,
+    setKroniskSyktAndMaybeWipeValues,
+} from './reducerUtils';
 import { beregnButton } from './types/ResultView';
 
 export type KalkulatorReducer = (state: State, action: Action) => State;
@@ -25,7 +31,7 @@ export const reducer: KalkulatorReducer = (state: State, action: Action): State 
         }
         case ActionType.SetFodselsdatoForBarnInfo: {
             const listeAvBarnUpdated: BarnInfo[] = state.barn.map((barn: BarnInfo) =>
-                barn.id === action.barnId ? setFodselsdato(action.fodselsdato, barn) : barn
+                barn.id === action.barnId ? setFodselsdatoAndMaybeWipeValues(action.fodselsdato, barn) : barn
             );
             return {
                 ...state,
@@ -35,7 +41,7 @@ export const reducer: KalkulatorReducer = (state: State, action: Action): State 
         }
         case ActionType.FjernFodselsdatoForBarnInfo: {
             const listeAvBarnUpdated: BarnInfo[] = state.barn.map((barn: BarnInfo) =>
-                barn.id === action.barnId ? fjernFodselsdato(barn) : barn
+                barn.id === action.barnId ? fjernFodselsdatoAndWipeValues(barn) : barn
             );
             return {
                 ...state,
@@ -45,7 +51,7 @@ export const reducer: KalkulatorReducer = (state: State, action: Action): State 
         }
         case ActionType.SetKroniskSykt: {
             const listeAvBarnUpdated: BarnInfo[] = state.barn.map((barn: BarnInfo) =>
-                barn.id === action.barnId ? setKroniskSykt(action.value, barn) : barn
+                barn.id === action.barnId ? setKroniskSyktAndMaybeWipeValues(action.value, barn) : barn
             );
             return {
                 ...state,
@@ -55,7 +61,7 @@ export const reducer: KalkulatorReducer = (state: State, action: Action): State 
         }
         case ActionType.SetBorSammen: {
             const listeAvBarnUpdated: BarnInfo[] = state.barn.map((barn: BarnInfo) =>
-                barn.id === action.barnId ? setBorSammen(action.value, barn) : barn
+                barn.id === action.barnId ? setBorSammenAndMaybeWipeValues(action.value, barn) : barn
             );
             return {
                 ...state,
