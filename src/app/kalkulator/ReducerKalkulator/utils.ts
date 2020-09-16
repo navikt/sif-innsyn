@@ -19,6 +19,8 @@ import {
     ResultView,
 } from './types/ResultView';
 import {
+    fodselsdatoIsValid,
+    kroniskSyktIsValid,
     validateAleneOmOmsorgen,
     validateBorSammen,
     validateFodselsdato,
@@ -60,16 +62,18 @@ export const barnetErOverTolvOgIkkeKroniskSykt = (barnInfo: BarnInfo): boolean =
 export const borIkkeSammen = (barnInfo: BarnInfo): boolean =>
     isSome(barnInfo.borSammen.value) && !barnInfo.borSammen.value.value;
 
+export const isVisibleAndBorIkkeSammen = (barnInfo: BarnInfo): boolean =>
+    fodselsdatoIsValid(barnInfo.fodselsdato) && kroniskSyktIsValid(barnInfo.kroniskSykt) && borIkkeSammen(barnInfo);
+
 export const toFeiloppsummeringsFeil = (id: string, error: string): FeiloppsummeringFeil => ({
     skjemaelementId: id,
     feilmelding: error,
 });
 
-export const isInvalidChild = (barnInfo: BarnInfo): boolean =>
-    barnetErOverAtten(barnInfo) || barnetErOverTolvOgIkkeKroniskSykt(barnInfo) || borIkkeSammen(barnInfo);
+export const excludeChild = (barnInfo: BarnInfo): boolean =>
+    barnetErOverAtten(barnInfo) || barnetErOverTolvOgIkkeKroniskSykt(barnInfo) || isVisibleAndBorIkkeSammen(barnInfo);
 
-// TODO: Rename, pga misvisende. Det er ikke sikkert det er ferdig utfylt selv om denne returnerer true
-export const isValidChild = (barnInfo: BarnInfo): boolean => !isInvalidChild(barnInfo);
+export const includeChild = (barnInfo: BarnInfo): boolean => !excludeChild(barnInfo);
 
 export const validateBarnInfo = (barnInfo: BarnInfo): Either<FeiloppsummeringFeil, BarnApi> => {
     const { id, fodselsdato, kroniskSykt, borSammen, aleneOmOmsorgen }: BarnInfo = barnInfo;
@@ -99,13 +103,12 @@ export const extractEitherFromList = (
         )
     );
 
-// TODO: Rename
-export const doItAll = (
+export const updateResultView = (
     listeAvBarnInfo: BarnInfo[],
     previousResultView: ResultView<FeiloppsummeringFeil[], Omsorgsprinsipper>,
     didClickBeregn: boolean
 ): ResultView<FeiloppsummeringFeil[], Omsorgsprinsipper> => {
-    const listeAvBarnUtenInvalids: BarnInfo[] = listeAvBarnInfo.filter(isValidChild);
+    const listeAvBarnUtenInvalids: BarnInfo[] = listeAvBarnInfo.filter(includeChild);
     const listOfEitherErrorOrBarnApi: Either<FeiloppsummeringFeil, BarnApi>[] = listeAvBarnUtenInvalids.map(
         validateBarnInfo
     );

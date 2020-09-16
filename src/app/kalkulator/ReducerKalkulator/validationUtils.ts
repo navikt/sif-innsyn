@@ -22,6 +22,8 @@ export const validateFodselsdato = ({
     isSome(value) && isISODateString(value.value)
         ? right(value.value)
         : left(toFeiloppsummeringsFeil(id, errorNotAnswered));
+export const fodselsdatoIsValid = (value: ValueWithId<Option<ISODateString>>): boolean =>
+    isRight(validateFodselsdato(value));
 
 export const validateKroniskSykt = (value: ValueWithId<Option<boolean>>): Either<FeiloppsummeringFeil, boolean> =>
     validateMaybeBooleanValueWithId(value);

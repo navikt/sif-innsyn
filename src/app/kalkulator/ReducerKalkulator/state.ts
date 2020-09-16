@@ -2,7 +2,7 @@ import { BarnInfo, ValueWithId } from './types';
 import { initializeValue } from './initializers';
 import { FeiloppsummeringFeil } from 'nav-frontend-skjema';
 import Omsorgsprinsipper from '@navikt/omsorgspenger-kalkulator/lib/types/Omsorgsprinsipper';
-import { empty, ResultView } from './types/ResultView';
+import { beregnButton, empty, ResultView } from './types/ResultView';
 
 export interface State {
     readonly nBarnMaks: number;
@@ -12,7 +12,7 @@ export interface State {
     aktivtBarnPanel: string | undefined;
 }
 
-export const createInitialState = (listeAvBarnInfo?: BarnInfo[]): State => {
+export const createInitialState = (listeAvBarnInfo: BarnInfo[]): State => {
     const listeAvBarnLength = listeAvBarnInfo?.length;
     const nBarnInitially: ValueWithId<number> =
         listeAvBarnLength && listeAvBarnLength > 0
@@ -22,7 +22,7 @@ export const createInitialState = (listeAvBarnInfo?: BarnInfo[]): State => {
         nBarnMaks: 20,
         nBarn: nBarnInitially,
         barn: listeAvBarnInfo || [],
-        resultViewData: empty,
+        resultViewData: listeAvBarnInfo && listeAvBarnInfo.length > 0 ? beregnButton : empty,
         aktivtBarnPanel: listeAvBarnInfo && listeAvBarnInfo[0] ? listeAvBarnInfo[0].id : undefined,
     };
 };

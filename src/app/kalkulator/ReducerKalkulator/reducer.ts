@@ -2,7 +2,7 @@ import { createInitialState, State } from './state';
 import { Action, ActionType } from './actions';
 import { initializeNBarn } from './initializers';
 import { BarnInfo } from './types';
-import { doItAll } from './utils';
+import { updateResultView } from './utils';
 import { fjernFodselsdato, setAleneOmOmsorgen, setBorSammen, setFodselsdato, setKroniskSykt } from './reducerUtils';
 import { beregnButton } from './types/ResultView';
 
@@ -21,7 +21,7 @@ export const reducer: KalkulatorReducer = (state: State, action: Action): State 
             };
         }
         case ActionType.SetNBarnInvalid: {
-            return createInitialState();
+            return createInitialState([]);
         }
         case ActionType.SetFodselsdatoForBarnInfo: {
             const listeAvBarnUpdated: BarnInfo[] = state.barn.map((barn: BarnInfo) =>
@@ -30,7 +30,7 @@ export const reducer: KalkulatorReducer = (state: State, action: Action): State 
             return {
                 ...state,
                 barn: listeAvBarnUpdated,
-                resultViewData: doItAll(listeAvBarnUpdated, state.resultViewData, false),
+                resultViewData: updateResultView(listeAvBarnUpdated, state.resultViewData, false),
             };
         }
         case ActionType.FjernFodselsdatoForBarnInfo: {
@@ -40,7 +40,7 @@ export const reducer: KalkulatorReducer = (state: State, action: Action): State 
             return {
                 ...state,
                 barn: listeAvBarnUpdated,
-                resultViewData: doItAll(listeAvBarnUpdated, state.resultViewData, false),
+                resultViewData: updateResultView(listeAvBarnUpdated, state.resultViewData, false),
             };
         }
         case ActionType.SetKroniskSykt: {
@@ -50,7 +50,7 @@ export const reducer: KalkulatorReducer = (state: State, action: Action): State 
             return {
                 ...state,
                 barn: listeAvBarnUpdated,
-                resultViewData: doItAll(listeAvBarnUpdated, state.resultViewData, false),
+                resultViewData: updateResultView(listeAvBarnUpdated, state.resultViewData, false),
             };
         }
         case ActionType.SetBorSammen: {
@@ -60,7 +60,7 @@ export const reducer: KalkulatorReducer = (state: State, action: Action): State 
             return {
                 ...state,
                 barn: listeAvBarnUpdated,
-                resultViewData: doItAll(listeAvBarnUpdated, state.resultViewData, false),
+                resultViewData: updateResultView(listeAvBarnUpdated, state.resultViewData, false),
             };
         }
         case ActionType.SetAleneOmOmsorgen: {
@@ -70,14 +70,14 @@ export const reducer: KalkulatorReducer = (state: State, action: Action): State 
             return {
                 ...state,
                 barn: listeAvBarnUpdated,
-                resultViewData: doItAll(listeAvBarnUpdated, state.resultViewData, false),
+                resultViewData: updateResultView(listeAvBarnUpdated, state.resultViewData, false),
             };
         }
 
         case ActionType.Beregn: {
             return {
                 ...state,
-                resultViewData: doItAll(state.barn, state.resultViewData, true),
+                resultViewData: updateResultView(state.barn, state.resultViewData, true),
             };
         }
 

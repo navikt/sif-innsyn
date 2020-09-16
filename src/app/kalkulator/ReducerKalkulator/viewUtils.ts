@@ -3,7 +3,7 @@ import {
     barnetErOverTolvOgIkkeKroniskSykt,
     borIkkeSammen,
     erOverAtten,
-    isInvalidChild,
+    excludeChild,
     validateBarnInfo,
 } from './utils';
 import { BarnApi, BarnInfo, YesOrNo } from './types';
@@ -30,13 +30,11 @@ export const yesOrNoRadios = (id: string) => [
     { label: 'Nei', value: YesOrNo.No },
 ];
 
-export const toFodselsdatoOrUndefined = (
-    eitherErrorOrIsoDateString: Option<ISODateString>
-): ISODateString | undefined =>
+export const toFodselsdatoOrUndefined = (maybeISODate: Option<ISODateString>): ISODateString | undefined =>
     foldOption(
         () => undefined,
         (isoDateString: ISODateString) => isoDateString
-    )(eitherErrorOrIsoDateString);
+    )(maybeISODate);
 
 export const toRadioValue = (optionValue: Option<boolean>): RadioValue =>
     foldOption(
@@ -64,7 +62,7 @@ export const panelSkalVæreÅpent = (barnInfo: BarnInfo, state: State): boolean 
     if (barnInfo.id === state.aktivtBarnPanel) {
         return true;
     }
-    if (isInvalidChild(barnInfo)) {
+    if (excludeChild(barnInfo)) {
         return false;
     }
     const validBarnOrError: Either<FeiloppsummeringFeil, BarnApi> = validateBarnInfo(barnInfo);
