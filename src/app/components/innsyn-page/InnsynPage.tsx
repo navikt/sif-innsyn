@@ -44,7 +44,7 @@ const InnsynPage: React.FC = (props): JSX.Element => {
                         <Lenke href="#">Sykdom i familien</Lenke>
                     </li>
                     <li>
-                        <Lenke href="#">Behandlingsdato</Lenke>
+                        <Lenke href="#">Sakbehandlingstid</Lenke>
                     </li>
                     <li>
                         <Lenke href="#">Regelverk</Lenke>

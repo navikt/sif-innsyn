@@ -24,8 +24,8 @@ const SoknadstatusinfoComponent: React.FC<Props> = ({ søknad }: Props) => {
                     <Column md={'11'}>
                         <Systemtittel>{formaterSøknadType(søknad)}</Systemtittel>
                         <Undertekst>
-                            Gjelder perioden {formaterDateTime(søknad.søknad.fraOgMed)} -{' '}
-                            {formaterDateTime(søknad.søknad.tilOgMed)}
+                            Gjelder perioden {formaterDate(søknad.søknad.fraOgMed)} -{' '}
+                            {formaterDate(søknad.søknad.tilOgMed)}
                         </Undertekst>
                         <Undertekst>Mottatt {formaterDateTime(søknad.søknad.mottatt)}</Undertekst>
                     </Column>
@@ -64,6 +64,11 @@ const statusFarge = (søknad: Søknad) => {
             return 'status-ferdig-behandlet';
     }
 };
+
+function formaterDate(dateTime: string | null) {
+    moment.locale('NO');
+    return dateTime == null ? '' : moment(dateTime).format('LL');
+}
 
 function formaterDateTime(dateTime: string | null) {
     moment.locale('NO');

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { SøknadApiResponse, Søknadstype } from '../types/apiTypes/søknadTypes';
 import { getEnvironmentVariable } from '../utils/envUtils';
-import { PleiepengerIkon } from '../svg/FellesIkoner';
+import { søknadsIkon } from '../svg/FellesIkoner';
 import { LenkepanelBase } from 'nav-frontend-lenkepanel/lib';
 import { Undertittel, Ingress } from 'nav-frontend-typografi';
 import './OversiktView.less';
@@ -18,6 +18,7 @@ import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
 import Panel from 'nav-frontend-paneler';
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
+import Chevron from 'nav-datovelger/lib/elementer/ChevronSvg';
 
 const uniq = require('lodash.uniq');
 
@@ -77,7 +78,8 @@ const OversiktView: React.FC<Props> = ({ søknad }: Props) => {
                         <Undertittel>Dine saker</Undertittel>
                         <br />
                         {søknad.length == 0 && <Ingress>Vi finner ingen saker fra deg</Ingress>}
-                        {harPleiepenger && genererLenkeBase(`${RouteConfig.DINE_PLEIEPENGER}`, ' Dine Pleiepenger')}
+                        {harPleiepenger &&
+                            genererLenkeBase(`${RouteConfig.DINE_PLEIEPENGER}`, ' Pleiepenger for sykt barn')}
                         {harOmsorgspenger &&
                             genererLenkeBase(`${RouteConfig.DINE_OMSORGSPENGER}`, ' Dine Omsorgspenger')}
                         {harOpplæringspenger &&
@@ -109,16 +111,18 @@ const genererLenkeBase = (href: string, tittel: string) => (
     <LenkepanelBase
         href={'#'}
         border
+        className={'p0'}
         linkCreator={(props: React.AnchorHTMLAttributes<HTMLAnchorElement>) => (
             <Link to={href} {...props}>
                 <div style={{ display: 'flex', alignItems: 'center' }}>
                     <div>
-                        <PleiepengerIkon></PleiepengerIkon>
+                        <søknadsIkon></søknadsIkon>
                     </div>
                     <div>
                         <Undertittel className="lenkepanel_heading ml-1 ">{tittel}</Undertittel>
                     </div>
                 </div>
+                <Chevron retning={'høyre'} />
             </Link>
         )}>
         <div></div>
