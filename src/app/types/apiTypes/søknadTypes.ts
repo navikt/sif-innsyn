@@ -30,7 +30,7 @@ export interface Søknad {
     søknad: any; // TODO: Lag søknadstyper for hver av søknadene
     saksId: string | null;
     journalpostId: string;
-    opprettet: string | null; // LocalDateTime e.g. 2007-12-03T10:15:30.948652
+    opprettet: string; // LocalDateTime e.g. 2007-12-03T10:15:30.948652
     endret: string | null; // LocalDateTime e.g. 2020-06-23T09:11:21.948652
     behandlingsdato: string | null; // LocalDate e.g. 2007-12-03
 }

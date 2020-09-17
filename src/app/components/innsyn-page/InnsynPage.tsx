@@ -6,14 +6,16 @@ import intlHelper from '@navikt/sif-common-core/lib/utils/intlUtils';
 import Banner from '@navikt/sif-common-core/lib/components/banner/Banner';
 import SvgSykdomIFamilien from '../../svg/SvgSykdomIFamilien';
 import './innsynPage.less';
-import { Systemtittel, Undertittel } from 'nav-frontend-typografi';
+import { Innholdstittel, Undertittel } from 'nav-frontend-typografi';
 import Lenke from 'nav-frontend-lenker';
+import { useLocation } from 'react-router-dom';
+import { RouteConfig } from '../../config/routeConfig';
 
 const bem = bemUtils('innsynPage');
 
 const InnsynPage: React.FC = (props): JSX.Element => {
     const intl = useIntl();
-
+    const location = useLocation();
     return (
         <Page
             className={bem.block}
@@ -24,7 +26,9 @@ const InnsynPage: React.FC = (props): JSX.Element => {
                         <div className={'innsynPage__bannerWrapper'}>
                             <div className={'innsynPage__bannerContentWrapper'}>
                                 <div className={'innsynPage__title'}>
-                                    <Systemtittel>Sykdom i familien - Innsyn</Systemtittel>
+                                    <Innholdstittel tag={'h2'}>
+                                        Sykdom i familien <br /> - {sideTittel(location)}
+                                    </Innholdstittel>
                                 </div>
                                 <SvgSykdomIFamilien />
                             </div>
@@ -44,7 +48,7 @@ const InnsynPage: React.FC = (props): JSX.Element => {
                         <Lenke href="#">Sykdom i familien</Lenke>
                     </li>
                     <li>
-                        <Lenke href="#">Behandlingsdato</Lenke>
+                        <Lenke href="#">Sakbehandlingstid</Lenke>
                     </li>
                     <li>
                         <Lenke href="#">Regelverk</Lenke>
@@ -56,6 +60,22 @@ const InnsynPage: React.FC = (props): JSX.Element => {
             </div>
         </Page>
     );
+};
+
+const sideTittel = (location: any) => {
+    const path = location.pathname.split('/').pop();
+    const pleiepengerSyktBarnPath = RouteConfig.DINE_PLEIEPENGER.split('/').pop();
+    const omsorgspengerPath = RouteConfig.DINE_OMSORGSPENGER.split('/').pop();
+    switch (path) {
+        case '':
+            return 'din oversikt';
+        case pleiepengerSyktBarnPath:
+            return 'Pleiepenger for sykt barn';
+        case omsorgspengerPath:
+            return 'Utvidet rett om omsorgspenger';
+        default:
+            return path;
+    }
 };
 
 export default InnsynPage;

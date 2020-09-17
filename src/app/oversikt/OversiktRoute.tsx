@@ -30,27 +30,28 @@ const OversiktRoute: React.FC = (): JSX.Element => (
             />
         )}
         success={([søknadApiResponse]: [SøknadApiResponse]) => {
+            const søknader = søknadApiResponse.sort((a, b) => {
+                const dateA: Date = new Date(a.opprettet);
+                const dateB: Date = new Date(b.opprettet);
+                if (dateA < dateB) return 1;
+                else return -1;
+            });
+            console.log(søknader);
             return (
                 <Switch>
-                    <Route
-                        exact={true}
-                        path={RouteConfig.ROOT}
-                        component={() => <OversiktView søknad={søknadApiResponse} />}
-                    />
+                    <Route exact={true} path={RouteConfig.ROOT} component={() => <OversiktView søknad={søknader} />} />
                     <Route
                         exact={true}
                         path={RouteConfig.DINE_PLEIEPENGER}
                         component={() => (
-                            <PleiepengerView søknader={søknadApiResponse.filter((søknad) => erPleiepenger(søknad))} />
+                            <PleiepengerView søknader={søknader.filter((søknad) => erPleiepenger(søknad))} />
                         )}
                     />
                     <Route
                         exact={true}
                         path={RouteConfig.DINE_OMSORGSPENGER}
                         component={() => (
-                            <OmsorgspengerView
-                                søknader={søknadApiResponse.filter((søknad) => erOmsorgspenger(søknad))}
-                            />
+                            <OmsorgspengerView søknader={søknader.filter((søknad) => erOmsorgspenger(søknad))} />
                         )}
                     />
                     <Route

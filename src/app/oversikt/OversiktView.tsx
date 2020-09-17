@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { SøknadApiResponse, Søknadstype } from '../types/apiTypes/søknadTypes';
 import { getEnvironmentVariable } from '../utils/envUtils';
-import { PleiepengerIkon } from '../svg/FellesIkoner';
+import { SøknadsIkon } from '../svg/FellesIkoner';
 import { LenkepanelBase } from 'nav-frontend-lenkepanel/lib';
-import { Undertittel, Ingress } from 'nav-frontend-typografi';
+import { Undertittel, Ingress, Systemtittel } from 'nav-frontend-typografi';
 import './OversiktView.less';
 import {
     søknadTypeErOmsorgspenger,
@@ -18,6 +18,7 @@ import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
 import Panel from 'nav-frontend-paneler';
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
+import Chevron from 'nav-datovelger/lib/elementer/ChevronSvg';
 
 const uniq = require('lodash.uniq');
 
@@ -74,12 +75,13 @@ const OversiktView: React.FC<Props> = ({ søknad }: Props) => {
                     </div>
 
                     <Panel>
-                        <Undertittel>Dine saker</Undertittel>
+                        <Systemtittel tag={'h3'}>Dine saker</Systemtittel>
                         <br />
                         {søknad.length == 0 && <Ingress>Vi finner ingen saker fra deg</Ingress>}
-                        {harPleiepenger && genererLenkeBase(`${RouteConfig.DINE_PLEIEPENGER}`, ' Dine Pleiepenger')}
+                        {harPleiepenger &&
+                            genererLenkeBase(`${RouteConfig.DINE_PLEIEPENGER}`, ' Pleiepenger for sykt barn')}
                         {harOmsorgspenger &&
-                            genererLenkeBase(`${RouteConfig.DINE_OMSORGSPENGER}`, ' Dine Omsorgspenger')}
+                            genererLenkeBase(`${RouteConfig.DINE_OMSORGSPENGER}`, ' Utvidet rett om omsorgspenger')}
                         {harOpplæringspenger &&
                             genererLenkeBase(`${publicPath}/dine-opplæringspenger`, ' Dine Opplæringspenger')}
                         {harPleiepengerNærstående &&
@@ -109,16 +111,20 @@ const genererLenkeBase = (href: string, tittel: string) => (
     <LenkepanelBase
         href={'#'}
         border
+        className={'p0'}
         linkCreator={(props: React.AnchorHTMLAttributes<HTMLAnchorElement>) => (
             <Link to={href} {...props}>
                 <div style={{ display: 'flex', alignItems: 'center' }}>
                     <div>
-                        <PleiepengerIkon></PleiepengerIkon>
+                        <SøknadsIkon></SøknadsIkon>
                     </div>
                     <div>
-                        <Undertittel className="lenkepanel_heading ml-1 ">{tittel}</Undertittel>
+                        <Undertittel tag={'h4'} className="lenkepanel_heading ml-1 ">
+                            {tittel}
+                        </Undertittel>
                     </div>
                 </div>
+                <Chevron retning={'høyre'} />
             </Link>
         )}>
         <div></div>
