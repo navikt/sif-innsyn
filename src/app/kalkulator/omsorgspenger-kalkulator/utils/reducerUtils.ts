@@ -48,30 +48,42 @@ export const fjernFodselsdatoAndWipeValues = (barn: BarnInfo): BarnInfo => {
 
 export const setKroniskSyktAndMaybeWipeValues = (value: boolean, barnInfo: BarnInfo): BarnInfo => {
     const { kroniskSykt, borSammen, aleneOmOmsorgen } = barnInfo;
-    return {
-        ...barnInfo,
-        kroniskSykt: { ...kroniskSykt, value: some(value) },
-        borSammen: shouldViewBorSammenQuestion(barnInfo) ? borSammen : { ...borSammen, value: none },
-        aleneOmOmsorgen: shouldViewAleneOmOmsorgenQuestion(barnInfo)
+
+    const updatedKroniskSykt = { ...barnInfo, kroniskSykt: { ...kroniskSykt, value: some(value) } };
+
+    const updatedWithMaybeWipedBorSammen = {
+        ...updatedKroniskSykt,
+        borSammen: shouldViewBorSammenQuestion(updatedKroniskSykt) ? borSammen : { ...borSammen, value: none },
+    };
+
+    const updatedWithMaybeWipedAleneOmOmsorgen = {
+        ...updatedWithMaybeWipedBorSammen,
+        aleneOmOmsorgen: shouldViewAleneOmOmsorgenQuestion(updatedWithMaybeWipedBorSammen)
             ? aleneOmOmsorgen
             : { ...aleneOmOmsorgen, value: none },
     };
+
+    return updatedWithMaybeWipedAleneOmOmsorgen;
 };
 
-export const setBorSammenAndMaybeWipeValues = (value: boolean, barn: BarnInfo): BarnInfo => {
-    const { borSammen } = barn;
+export const setBorSammenAndMaybeWipeValues = (value: boolean, barnInfo: BarnInfo): BarnInfo => {
+    const { borSammen, aleneOmOmsorgen } = barnInfo;
 
-    return {
-        ...barn,
-        borSammen: { ...borSammen, value: some(value) },
-        aleneOmOmsorgen: shouldViewAleneOmOmsorgenQuestion(barn)
-            ? barn.aleneOmOmsorgen
-            : { ...barn.aleneOmOmsorgen, value: none },
+    const updatedWithBorSammen = { ...barnInfo, borSammen: { ...borSammen, value: some(value) } };
+
+    const updatedWithMaybeWipedAleneOmOmsorgen = {
+        ...updatedWithBorSammen,
+        aleneOmOmsorgen: shouldViewAleneOmOmsorgenQuestion(updatedWithBorSammen)
+            ? aleneOmOmsorgen
+            : { ...aleneOmOmsorgen, value: none },
     };
+
+    return updatedWithMaybeWipedAleneOmOmsorgen;
 };
 
 export const setAleneOmOmsorgen = (value: boolean, barn: BarnInfo): BarnInfo => {
     const { aleneOmOmsorgen } = barn;
+
     return {
         ...barn,
         aleneOmOmsorgen: { ...aleneOmOmsorgen, value: some(value) },

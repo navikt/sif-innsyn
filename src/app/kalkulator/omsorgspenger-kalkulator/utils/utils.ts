@@ -43,6 +43,9 @@ export const barnetErOverTolvOgIkkeKroniskSykt = (barnInfo: BarnInfo): boolean =
     isSome(barnInfo.kroniskSykt.value) &&
     !barnInfo.kroniskSykt.value.value;
 
+export const borSammen = (barnInfo: BarnInfo): boolean =>
+    isSome(barnInfo.borSammen.value) && barnInfo.borSammen.value.value;
+
 export const borIkkeSammen = (barnInfo: BarnInfo): boolean =>
     isSome(barnInfo.borSammen.value) && !barnInfo.borSammen.value.value;
 
