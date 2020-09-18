@@ -1,11 +1,10 @@
 import { State } from '../utils/state';
+import * as React from 'react';
 import { Dispatch } from 'react';
 import { Action, setNBarn, setNBarnInvalid } from '../utils/actions';
 import FormBlock from '@navikt/sif-common-core/lib/components/form-block/FormBlock';
-import { Element } from 'nav-frontend-typografi';
 import { Select } from 'nav-frontend-skjema';
 import { isNumber } from '../utils/typeguards';
-import * as React from 'react';
 import bemUtils from '@navikt/sif-common-core/lib/utils/bemUtils';
 
 const bem = bemUtils('omsorgsdagerkalkulator');
@@ -18,11 +17,9 @@ interface Props {
 
 const NbarnSelectView = ({ state, dispatch, nBarnMaks }: Props) => (
     <div className={bem.element('align-content-centre')}>
-        <FormBlock>
-            <Element>Hvor mange egne barn har du i husstanden?</Element>
-        </FormBlock>
         <FormBlock paddingBottom={'l'}>
             <Select
+                label={'Hvor mange egne barn har du i husstanden?'}
                 id={state.nBarn.id}
                 value={state.nBarn.value}
                 bredde={'xs'}

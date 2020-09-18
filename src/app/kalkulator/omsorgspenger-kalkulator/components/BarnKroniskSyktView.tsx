@@ -25,7 +25,7 @@ const BarnKroniskSyktView = ({ dispatch, barnInfo, state }: Props) => (
         {shouldViewKroniskSyktQuestion(barnInfo) && (
             <FormBlock>
                 <RadioPanelGruppe
-                    name={barnInfo.kroniskSykt.id}
+                    name={`radio-panel-gruppe-name-${barnInfo.kroniskSykt.id}`}
                     legend={
                         <div>
                             <Element>

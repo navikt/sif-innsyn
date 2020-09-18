@@ -8,7 +8,7 @@ import {
 } from './viewUtils';
 
 export const setFodselsdatoAndMaybeWipeValues = (newFodselsdato: ISODateString, barnInfo: BarnInfo): BarnInfo => {
-    const { fodselsdato } = barnInfo;
+    const { fodselsdato, kroniskSykt, borSammen, aleneOmOmsorgen } = barnInfo;
 
     return {
         ...barnInfo,
@@ -16,13 +16,11 @@ export const setFodselsdatoAndMaybeWipeValues = (newFodselsdato: ISODateString, 
             ...fodselsdato,
             value: some(newFodselsdato),
         },
-        kroniskSykt: shouldViewKroniskSyktQuestion(barnInfo)
-            ? barnInfo.kroniskSykt
-            : { ...barnInfo.kroniskSykt, value: none },
-        borSammen: shouldViewBorSammenQuestion(barnInfo) ? barnInfo.borSammen : { ...barnInfo.borSammen, value: none },
+        kroniskSykt: shouldViewKroniskSyktQuestion(barnInfo) ? kroniskSykt : { ...kroniskSykt, value: none },
+        borSammen: shouldViewBorSammenQuestion(barnInfo) ? borSammen : { ...borSammen, value: none },
         aleneOmOmsorgen: shouldViewAleneOmOmsorgenQuestion(barnInfo)
-            ? barnInfo.aleneOmOmsorgen
-            : { ...barnInfo.aleneOmOmsorgen, value: none },
+            ? aleneOmOmsorgen
+            : { ...aleneOmOmsorgen, value: none },
     };
 };
 
@@ -49,14 +47,14 @@ export const fjernFodselsdatoAndWipeValues = (barn: BarnInfo): BarnInfo => {
 };
 
 export const setKroniskSyktAndMaybeWipeValues = (value: boolean, barnInfo: BarnInfo): BarnInfo => {
-    const { kroniskSykt } = barnInfo;
+    const { kroniskSykt, borSammen, aleneOmOmsorgen } = barnInfo;
     return {
         ...barnInfo,
         kroniskSykt: { ...kroniskSykt, value: some(value) },
-        borSammen: shouldViewBorSammenQuestion(barnInfo) ? barnInfo.borSammen : { ...barnInfo, value: none },
+        borSammen: shouldViewBorSammenQuestion(barnInfo) ? borSammen : { ...borSammen, value: none },
         aleneOmOmsorgen: shouldViewAleneOmOmsorgenQuestion(barnInfo)
-            ? barnInfo.aleneOmOmsorgen
-            : { ...barnInfo, value: none },
+            ? aleneOmOmsorgen
+            : { ...aleneOmOmsorgen, value: none },
     };
 };
 

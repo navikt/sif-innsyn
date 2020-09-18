@@ -25,7 +25,7 @@ const BarnBorSammenView = ({ state, dispatch, barnInfo }: Props) => (
         {shouldViewBorSammenQuestion(barnInfo) && (
             <FormBlock>
                 <RadioPanelGruppe
-                    name={barnInfo.borSammen.id}
+                    name={`radio-panel-gruppe-name-${barnInfo.borSammen.id}`}
                     legend={
                         <div>
                             <Element>Bor barnet fast hos deg?</Element>

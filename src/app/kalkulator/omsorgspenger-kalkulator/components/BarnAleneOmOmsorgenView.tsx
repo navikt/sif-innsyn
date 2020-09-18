@@ -25,7 +25,7 @@ const BarnAleneOmOmsorgenView = ({ state, dispatch, barnInfo }: Props) => (
         {shouldViewAleneOmOmsorgenQuestion(barnInfo) && (
             <FormBlock>
                 <RadioPanelGruppe
-                    name={barnInfo.aleneOmOmsorgen.id}
+                    name={`radio-panel-gruppe-name-${barnInfo.aleneOmOmsorgen.id}`}
                     legend={
                         <div>
                             <Element>Er du alene om omsorgen med barnet?</Element>
@@ -35,12 +35,10 @@ const BarnAleneOmOmsorgenView = ({ state, dispatch, barnInfo }: Props) => (
                                     sammen med den andre forelderen, og barnet bor fast bare hos deg. Dette gjelder også
                                     hvis du får ny samboer eller ektefelle.
                                 </Box>
-
                                 <Box padBottom={'l'}>
                                     Hvis du og den andre forelderen har en avtale om delt bosted, hvor barnet bor fast
                                     hos dere begge, vil ingen av dere bli regnet som alene om omsorgen.
                                 </Box>
-
                                 <Box>
                                     <Lenke
                                         href={
