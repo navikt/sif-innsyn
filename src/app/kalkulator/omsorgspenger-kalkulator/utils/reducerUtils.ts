@@ -8,84 +8,80 @@ import {
 } from './viewUtils';
 
 export const setFodselsdatoAndMaybeWipeValues = (newFodselsdato: ISODateString, barnInfo: BarnInfo): BarnInfo => {
-    const { fodselsdato, kroniskSykt, borSammen, aleneOmOmsorgen } = barnInfo;
-
-    return {
+    const { fodselsdato } = barnInfo;
+    const fodselsdatoUpdated = {
         ...barnInfo,
         fodselsdato: {
             ...fodselsdato,
             value: some(newFodselsdato),
         },
-        kroniskSykt: shouldViewKroniskSyktQuestion(barnInfo) ? kroniskSykt : { ...kroniskSykt, value: none },
-        borSammen: shouldViewBorSammenQuestion(barnInfo) ? borSammen : { ...borSammen, value: none },
-        aleneOmOmsorgen: shouldViewAleneOmOmsorgenQuestion(barnInfo)
-            ? aleneOmOmsorgen
-            : { ...aleneOmOmsorgen, value: none },
     };
+    return evaluateDependantValue(fodselsdatoUpdated, ValueCheckAction.CHECK_KRONISKT_SYK);
 };
 
-export const fjernFodselsdatoAndWipeValues = (barn: BarnInfo): BarnInfo => {
-    return {
-        ...barn,
+export const fjernFodselsdatoAndWipeValues = (barnInfo: BarnInfo): BarnInfo => {
+    const { fodselsdato } = barnInfo;
+    const fodselsdatoUpdated = {
+        ...barnInfo,
         fodselsdato: {
-            ...barn.fodselsdato,
-            value: none,
-        },
-        kroniskSykt: {
-            ...barn.kroniskSykt,
-            value: none,
-        },
-        borSammen: {
-            ...barn.borSammen,
-            value: none,
-        },
-        aleneOmOmsorgen: {
-            ...barn.aleneOmOmsorgen,
+            ...fodselsdato,
             value: none,
         },
     };
+    return evaluateDependantValue(fodselsdatoUpdated, ValueCheckAction.CHECK_KRONISKT_SYK);
 };
 
 export const setKroniskSyktAndMaybeWipeValues = (value: boolean, barnInfo: BarnInfo): BarnInfo => {
-    const { kroniskSykt, borSammen, aleneOmOmsorgen } = barnInfo;
-
+    const { kroniskSykt } = barnInfo;
     const updatedKroniskSykt = { ...barnInfo, kroniskSykt: { ...kroniskSykt, value: some(value) } };
-
-    const updatedWithMaybeWipedBorSammen = {
-        ...updatedKroniskSykt,
-        borSammen: shouldViewBorSammenQuestion(updatedKroniskSykt) ? borSammen : { ...borSammen, value: none },
-    };
-
-    const updatedWithMaybeWipedAleneOmOmsorgen = {
-        ...updatedWithMaybeWipedBorSammen,
-        aleneOmOmsorgen: shouldViewAleneOmOmsorgenQuestion(updatedWithMaybeWipedBorSammen)
-            ? aleneOmOmsorgen
-            : { ...aleneOmOmsorgen, value: none },
-    };
-
-    return updatedWithMaybeWipedAleneOmOmsorgen;
+    return evaluateDependantValue(updatedKroniskSykt, ValueCheckAction.CHECK_BOR_SAMMEN);
 };
 
 export const setBorSammenAndMaybeWipeValues = (value: boolean, barnInfo: BarnInfo): BarnInfo => {
-    const { borSammen, aleneOmOmsorgen } = barnInfo;
-
+    const { borSammen } = barnInfo;
     const updatedWithBorSammen = { ...barnInfo, borSammen: { ...borSammen, value: some(value) } };
-
-    const updatedWithMaybeWipedAleneOmOmsorgen = {
-        ...updatedWithBorSammen,
-        aleneOmOmsorgen: shouldViewAleneOmOmsorgenQuestion(updatedWithBorSammen)
-            ? aleneOmOmsorgen
-            : { ...aleneOmOmsorgen, value: none },
-    };
-
-    return updatedWithMaybeWipedAleneOmOmsorgen;
+    return evaluateDependantValue(updatedWithBorSammen, ValueCheckAction.CHECK_ALENE_OM_OMSORGEN);
 };
 
 export const setAleneOmOmsorgen = (value: boolean, barn: BarnInfo): BarnInfo => {
     const { aleneOmOmsorgen } = barn;
-
     return {
         ...barn,
         aleneOmOmsorgen: { ...aleneOmOmsorgen, value: some(value) },
     };
+};
+
+export enum ValueCheckAction {
+    CHECK_KRONISKT_SYK = 'CHECK_KRONISKT_SYK',
+    CHECK_BOR_SAMMEN = 'CHECK_BOR_SAMMEN',
+    CHECK_ALENE_OM_OMSORGEN = 'CHECK_ALENE_OM_OMSORGEN',
+}
+
+export const evaluateDependantValue = (barnInfo: BarnInfo, nextValueToCheckAction: ValueCheckAction): BarnInfo => {
+    const { kroniskSykt, borSammen, aleneOmOmsorgen } = barnInfo;
+    switch (nextValueToCheckAction) {
+        case ValueCheckAction.CHECK_KRONISKT_SYK: {
+            const kroniskSyktEvaluated = {
+                ...barnInfo,
+                kroniskSykt: shouldViewKroniskSyktQuestion(barnInfo) ? kroniskSykt : { ...kroniskSykt, value: none },
+            };
+            return evaluateDependantValue(kroniskSyktEvaluated, ValueCheckAction.CHECK_BOR_SAMMEN);
+        }
+        case ValueCheckAction.CHECK_BOR_SAMMEN: {
+            const updatedWithMaybeWipedBorSammen = {
+                ...barnInfo,
+                borSammen: shouldViewBorSammenQuestion(barnInfo) ? borSammen : { ...borSammen, value: none },
+            };
+            return evaluateDependantValue(updatedWithMaybeWipedBorSammen, ValueCheckAction.CHECK_ALENE_OM_OMSORGEN);
+        }
+        case ValueCheckAction.CHECK_ALENE_OM_OMSORGEN: {
+            const updatedWithMaybeWipedAleneOmOmsorgen = {
+                ...barnInfo,
+                aleneOmOmsorgen: shouldViewAleneOmOmsorgenQuestion(barnInfo)
+                    ? aleneOmOmsorgen
+                    : { ...aleneOmOmsorgen, value: none },
+            };
+            return updatedWithMaybeWipedAleneOmOmsorgen;
+        }
+    }
 };
