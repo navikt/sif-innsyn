@@ -1,16 +1,16 @@
 import * as React from 'react';
 import { useIntl } from 'react-intl';
-import bemUtils from '@navikt/sif-common-core/lib/utils/bemUtils';
-import Page from '@navikt/sif-common-core/lib/components/page/Page';
-import intlHelper from '@navikt/sif-common-core/lib/utils/intlUtils';
-import Banner from '@navikt/sif-common-core/lib/components/banner/Banner';
-import SvgSykdomIFamilien from '../../svg/SvgSykdomIFamilien';
-import './innsynPage.less';
-import { Innholdstittel, Undertittel } from 'nav-frontend-typografi';
-import Lenke from 'nav-frontend-lenker';
 import { useLocation } from 'react-router-dom';
+import Lenke from 'nav-frontend-lenker';
+import { Innholdstittel, Undertittel } from 'nav-frontend-typografi';
 import { RouteConfig } from '../../config/routeConfig';
+import SvgSykdomIFamilien from '../../svg/SvgSykdomIFamilien';
+import bemUtils from '../../utils/bemUtils';
 import { getEnvironmentVariable } from '../../utils/envUtils';
+import intlHelper from '../../utils/intlUtils';
+import Banner from '../banner/Banner';
+import Page from '../page/Page';
+import './innsynPage.less';
 
 const bem = bemUtils('innsynPage');
 

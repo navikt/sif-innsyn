@@ -1,9 +1,9 @@
-import { isString } from '@navikt/sif-common-core/lib/utils/typeGuardUtils';
-import { allValuesInArrayAreTrue } from '../../utils/utilityFunctions';
 import * as IoTs from 'io-ts/lib';
-import { getApiUrlByResourceType } from '../../utils/apiUtils';
-import { ResourceType } from '../resourceTypes';
 import { FetchRecipe } from '../../functional/fetcher/types';
+import { getApiUrlByResourceType } from '../../utils/apiUtils';
+import { isString } from '../../utils/typeGuardUtils';
+import { allValuesInArrayAreTrue } from '../../utils/utilityFunctions';
+import { ResourceType } from '../resourceTypes';
 
 export interface Arbeidsgiver {
     navn: string;

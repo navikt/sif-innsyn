@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { AlertStripeAdvarsel } from 'nav-frontend-alertstriper';
 import Lenke from 'nav-frontend-lenker';
+import bemUtils from '../../../utils/bemUtils';
+import Box from '../../box/Box';
+import Page from '../../page/Page';
+import StepBanner from '../../step-banner/StepBanner';
 import './unavailablePage.less';
-import bemUtils from '@navikt/sif-common-core/lib/utils/bemUtils';
-import Page from '@navikt/sif-common-core/lib/components/page/Page';
-import StepBanner from '@navikt/sif-common-core/lib/components/step-banner/StepBanner';
-import Box from '@navikt/sif-common-core/lib/components/box/Box';
 
 const bem = bemUtils('introPage');
 

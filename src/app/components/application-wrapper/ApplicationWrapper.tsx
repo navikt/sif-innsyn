@@ -3,7 +3,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { getEnvironmentVariable } from '../../utils/envUtils';
 import IntlProvider from '../intl-provider/IntlProvider';
-import { Locale } from '@navikt/sif-common-core/lib/types/Locale';
+import { Locale } from '../../types/Locale';
 
 interface ApplicationWrapperProps {
     locale: Locale;

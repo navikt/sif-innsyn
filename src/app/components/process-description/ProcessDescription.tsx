@@ -1,5 +1,5 @@
 import React from 'react';
-import bemUtils from '@navikt/sif-common-core/lib/utils/bemUtils';
+import bemUtils from '../../utils/bemUtils';
 import './processDescription.less';
 
 export interface ProcessDescriptionProps {

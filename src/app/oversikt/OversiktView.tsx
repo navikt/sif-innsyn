@@ -1,24 +1,23 @@
 import * as React from 'react';
+import { Link } from 'react-router-dom';
+import Chevron from 'nav-datovelger/lib/elementer/ChevronSvg';
+import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
+import { LenkepanelBase } from 'nav-frontend-lenkepanel/lib';
+import Panel from 'nav-frontend-paneler';
+import { Ingress, Systemtittel, Undertittel } from 'nav-frontend-typografi';
+import Box from '../components/box/Box';
+import InformationPoster from '../components/information-poster/InformationPoster';
+import { RouteConfig } from '../config/routeConfig';
+import { SøknadsIkon } from '../svg/FellesIkoner';
 import { SøknadApiResponse, Søknadstype } from '../types/apiTypes/søknadTypes';
 import { getEnvironmentVariable } from '../utils/envUtils';
-import { SøknadsIkon } from '../svg/FellesIkoner';
-import { LenkepanelBase } from 'nav-frontend-lenkepanel/lib';
-import { Undertittel, Ingress, Systemtittel } from 'nav-frontend-typografi';
-import './OversiktView.less';
 import {
     søknadTypeErOmsorgspenger,
     søknadTypeErOpplæringspenger,
     søknadTypeErPleiepenger,
     søknadTypeErPleiepengerNærstående,
 } from '../utils/SøknadUtils';
-import Box from '@navikt/sif-common-core/lib/components/box/Box';
-import InformationPoster from '@navikt/sif-common-core/lib/components/information-poster/InformationPoster';
-import { RouteConfig } from '../config/routeConfig';
-import { Link } from 'react-router-dom';
-import { useEffect } from 'react';
-import Panel from 'nav-frontend-paneler';
-import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
-import Chevron from 'nav-datovelger/lib/elementer/ChevronSvg';
+import './OversiktView.less';
 
 const uniq = require('lodash.uniq');
 
@@ -35,7 +34,7 @@ const OversiktView: React.FC<Props> = ({ søknad }: Props) => {
         søknadTyper?.filter((type) => søknadTypeErPleiepengerNærstående(type)).length !== 0;
     const harOpplæringspenger = søknadTyper?.filter((type) => søknadTypeErOpplæringspenger(type)).length !== 0;
 
-    useEffect(() => {
+    React.useEffect(() => {
         console.warn(JSON.stringify(window.location.href, null, 4));
     });
 

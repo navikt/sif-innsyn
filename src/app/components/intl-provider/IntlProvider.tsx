@@ -1,15 +1,13 @@
 import * as React from 'react';
 import { IntlProvider as Provider } from 'react-intl';
-import { Locale } from '@navikt/sif-common-core/lib/types/Locale';
-import { allCommonMessages } from '@navikt/sif-common-core/lib/i18n/allCommonMessages';
 import '@formatjs/intl-pluralrules/dist/locale-data/nb';
 import '@formatjs/intl-pluralrules/dist/locale-data/nn';
 import '@formatjs/intl-pluralrules/polyfill';
+import { Locale } from '../../types/Locale';
 
 const appBokmålstekster = require('../../i18n/nb.json');
 
 const bokmålstekster = {
-    ...allCommonMessages.nb,
     ...appBokmålstekster,
 };
 

@@ -26,7 +26,6 @@
     "dependencies": {
         "@formatjs/intl-pluralrules": "^2.2.6",
         "@formatjs/intl-relativetimeformat": "^5.2.6",
-        "@navikt/sif-common-core": "^4.0.8",
         "@navikt/sif-common-sentry": "0.0.8",
         "@sentry/browser": "^5.17.0",
         "@testing-library/react": "^10.2.1",
