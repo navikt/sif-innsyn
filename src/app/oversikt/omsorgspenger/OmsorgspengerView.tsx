@@ -1,21 +1,23 @@
 import * as React from 'react';
-import { SøknadApiResponse } from '../../types/apiTypes/søknadTypes';
-import Lesmerpanel from 'nav-frontend-lesmerpanel';
-import './OmsorgspengerView.less';
-import SoknadstatusinfoComponent from 'app/components/soknadstatusinfoComponent/SoknadstatusinfoComponent';
-import { Ingress, Sidetittel, Undertittel } from 'nav-frontend-typografi';
-import { RouteConfig } from '../../config/routeConfig';
-import { Tilbakeknapp } from 'nav-frontend-ikonknapper';
 import { useHistory } from 'react-router-dom';
+import { Tilbakeknapp } from 'nav-frontend-ikonknapper';
+import Lesmerpanel from 'nav-frontend-lesmerpanel';
+import { Ingress, Sidetittel, Undertittel } from 'nav-frontend-typografi';
+import Soknadstatus from 'app/components/soknadstatus/Soknadstatus';
+import { RouteConfig } from '../../config/routeConfig';
+import { Søknad } from '../../types/apiTypes/søknadTypes';
+import InnsynPage from '../../components/innsyn-page/InnsynPage';
+import PageBannerCompact from '../../components/page-banner_compact/PageBannerCompact';
 
 interface Props {
-    søknader: SøknadApiResponse;
+    søknader: Søknad[];
 }
 
 const OmsorgspengerView: React.FC<Props> = ({ søknader }: Props) => {
     const history = useHistory();
+    const title = 'Utvidet rett om omsorgspenger';
     return (
-        <>
+        <InnsynPage title={title} topContentRenderer={() => <PageBannerCompact title={title} />}>
             <Tilbakeknapp onClick={() => history.push(RouteConfig.ROOT)}>Tilbake til oversikt</Tilbakeknapp>
             {søknader && (
                 <div>
@@ -38,13 +40,13 @@ const OmsorgspengerView: React.FC<Props> = ({ søknader }: Props) => {
                     <Undertittel>Dine søknader</Undertittel>
                     <div>
                         {søknader.map((søknad, index) => {
-                            return <SoknadstatusinfoComponent key={index} søknad={søknad}></SoknadstatusinfoComponent>;
+                            return <Soknadstatus key={index} søknad={søknad}></Soknadstatus>;
                         })}
                     </div>
                 </div>
             )}
             <Tilbakeknapp onClick={() => history.push(RouteConfig.ROOT)}>Tilbake til oversikt</Tilbakeknapp>
-        </>
+        </InnsynPage>
     );
 };
 

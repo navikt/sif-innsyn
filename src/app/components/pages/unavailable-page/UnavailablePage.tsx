@@ -2,9 +2,9 @@ import * as React from 'react';
 import { AlertStripeAdvarsel } from 'nav-frontend-alertstriper';
 import Lenke from 'nav-frontend-lenker';
 import bemUtils from '../../../utils/bemUtils';
-import Box from '../../box/Box';
+import Box from '../../elements/box/Box';
+import PageBannerCompact from '../../page-banner_compact/PageBannerCompact';
 import Page from '../../page/Page';
-import StepBanner from '../../step-banner/StepBanner';
 import './unavailablePage.less';
 
 const bem = bemUtils('introPage');
@@ -12,10 +12,10 @@ const bem = bemUtils('introPage');
 const link =
     'https://www.nav.no/no/Person/Skjemaer-for-privatpersoner/skjemaveileder/vedlegg?key=333802&languagecode=53&veiledertype=privatperson';
 
-const UnavailablePage: React.FC = (): JSX.Element => {
+const UnavailablePage = () => {
     const title = 'Søknad om ekstra omsorgsdager';
     return (
-        <Page className={bem.block} title={title} topContentRenderer={(): JSX.Element => <StepBanner text={title} />}>
+        <Page className={bem.block} title={title} topContentRenderer={() => <PageBannerCompact title={title} />}>
             <Box margin="xxxl">
                 <AlertStripeAdvarsel>
                     <p>

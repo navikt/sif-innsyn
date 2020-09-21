@@ -5,14 +5,13 @@ import './page.less';
 interface PageProps {
     className?: string;
     title: string;
-    topContentRenderer?: () => React.ReactElement<any>;
+    topContentRenderer?: () => React.ReactNode;
 }
 
 class Page extends React.Component<PageProps> {
     componentDidMount() {
         window.scrollTo(0, 0);
     }
-
     render() {
         const { className, title, topContentRenderer, children } = this.props;
         return (

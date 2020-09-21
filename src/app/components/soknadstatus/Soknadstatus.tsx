@@ -1,10 +1,10 @@
 import React from 'react';
-import moment from 'moment';
-import { Column, Row } from 'nav-frontend-grid';
 import Panel from 'nav-frontend-paneler';
-import { Undertekst, Undertittel } from 'nav-frontend-typografi';
-import { FilIkon } from '../../svg/FellesIkoner';
+import { Undertittel } from 'nav-frontend-typografi';
 import { Søknad, Søknadsstatus, Søknadstype } from '../../types/apiTypes/søknadTypes';
+import bemUtils from '../../utils/bemUtils';
+import PrettyDate from '../pretty-date/PrettyDate';
+import './soknadstatus.less';
 import './SoknadstatusinfoComponent.module.less';
 
 const statusFarge = (søknad: Søknad) => {
@@ -18,15 +18,15 @@ const statusFarge = (søknad: Søknad) => {
     }
 };
 
-function formaterDate(dateTime: string | null) {
-    return dateTime == null ? '' : moment(dateTime).format('LL');
-}
+// function formaterDate(dateTime: string | null) {
+//     return dateTime == null ? '' : moment(dateTime).format('LL');
+// }
 
-function formaterDateTime(dateTime: string | null) {
-    return dateTime == null ? '' : moment(dateTime).format('LLLL');
-}
+// function formaterDateTime(dateTime: string | null) {
+//     return dateTime == null ? '' : moment(dateTime).format('LLLL');
+// }
 
-function formaterSøknadType(søknad: Søknad) {
+function getSøknadTitle(søknad: Søknad) {
     switch (søknad.søknadstype) {
         case Søknadstype.PP_SYKT_BARN:
             return 'Søknad om Pleiepenger for Sykt barn';
@@ -52,28 +52,22 @@ interface Props {
     søknad: Søknad;
 }
 
-const SoknadstatusinfoComponent: React.FC<Props> = ({ søknad }: Props) => {
+const bem = bemUtils('soknadstatus');
+
+const Soknadstatus: React.FC<Props> = ({ søknad }: Props) => {
     return (
-        <div>
-            <Panel border className={`mb-1 ${statusFarge(søknad)}`}>
-                <Row className={'lp-1'}>
-                    <Column md={'1'}>
-                        <div className={'mt-1'}>
-                            <FilIkon />
-                        </div>
-                    </Column>
-                    <Column md={'11'}>
-                        <Undertittel tag={'h4'}>{formaterSøknadType(søknad)}</Undertittel>
-                        <Undertekst>
-                            Gjelder perioden {formaterDate(søknad.søknad.fraOgMed)} -{' '}
-                            {formaterDate(søknad.søknad.tilOgMed)}
-                        </Undertekst>
-                        <Undertekst>Mottatt {formaterDateTime(søknad.opprettet)}</Undertekst>
-                    </Column>
-                </Row>
-            </Panel>
-        </div>
+        <Panel border className={bem.classNames(bem.block, bem.modifier(statusFarge(søknad)))}>
+            <div className={bem.element('content')}>
+                <Undertittel tag="h3">{getSøknadTitle(søknad)}</Undertittel>
+                <div style={{ marginTop: '.25rem' }}>
+                    Mottatt <PrettyDate date={søknad.opprettet} format="dateAndTime" />
+                    <br />
+                    Gjelder perioden <PrettyDate date={søknad.søknad.fraOgMed} /> -{' '}
+                    <PrettyDate date={søknad.søknad.tilOgMed} />
+                </div>
+            </div>
+        </Panel>
     );
 };
 
-export default SoknadstatusinfoComponent;
+export default Soknadstatus;

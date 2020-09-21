@@ -4,17 +4,16 @@ import { Route, Switch } from 'react-router-dom';
 import moment from 'moment';
 import KalkulatorInput from 'omsorgspenger-kalkulator/lib/components/KalkulatorInput';
 import ApplicationWrapper from './components/application-wrapper/ApplicationWrapper';
-import InnsynPage from './components/innsyn-page/InnsynPage';
 import UnavailablePage from './components/pages/unavailable-page/UnavailablePage';
 import { RouteConfig } from './config/routeConfig';
 import InnloggetRoute from './oversikt/OversiktRoute';
+import { Locale } from './types/Locale';
 import { Feature, isFeatureEnabled } from './utils/featureToggleUtils';
 import { getLocaleFromSessionStorage, setLocaleInSessionStorage } from './utils/localeUtils';
-import { Locale } from './types/Locale';
-import './app.less';
+import './styles/app.less';
 
 const localeFromSessionStorage = getLocaleFromSessionStorage();
-moment.locale('NO');
+moment.locale('nb');
 
 const App: React.FunctionComponent = () => {
     const [locale, setLocale] = React.useState<Locale>(localeFromSessionStorage);
@@ -25,35 +24,33 @@ const App: React.FunctionComponent = () => {
                 setLocaleInSessionStorage(activeLocale);
                 setLocale(activeLocale);
             }}>
-            <div id={'app-content-wrapper'}>
+            <>
                 {isFeatureEnabled(Feature.UTILGJENGELIG) ? (
                     <UnavailablePage />
                 ) : (
-                    <InnsynPage>
-                        <Switch>
-                            <Route
-                                path={'/kalkulator'}
-                                exact={true}
-                                component={() => {
-                                    return <KalkulatorInput />;
-                                }}
-                            />
-                            <Route
-                                path={RouteConfig.ROOT}
-                                component={() => {
-                                    return <InnloggetRoute />;
-                                }}
-                            />
-                            <Route
-                                path={'/'}
-                                component={() => {
-                                    return <div>Root path. ikke innlogget.</div>;
-                                }}
-                            />
-                        </Switch>
-                    </InnsynPage>
+                    <Switch>
+                        <Route
+                            path={RouteConfig.KALKULATOR}
+                            exact={true}
+                            component={() => {
+                                return <KalkulatorInput />;
+                            }}
+                        />
+                        <Route
+                            path={RouteConfig.ROOT}
+                            component={() => {
+                                return <InnloggetRoute />;
+                            }}
+                        />
+                        <Route
+                            path={'/'}
+                            component={() => {
+                                return <div>Root path. ikke innlogget.</div>;
+                            }}
+                        />
+                    </Switch>
                 )}
-            </div>
+            </>
         </ApplicationWrapper>
     );
 };

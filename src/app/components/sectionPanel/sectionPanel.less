@@ -1,0 +1,56 @@
+@import '../../styles/assets.less';
+
+.sectionPanel {
+    margin-bottom: 2rem;
+    &:focus {
+        outline: none;
+    }
+    &__illustration {
+        margin-bottom: 1rem;
+        @media (min-width: @mobile-breakpoint) {
+            margin-top: -1rem;
+        }
+        @media (min-width: @tablet-breakpoint) {
+            margin-top: -2rem;
+        }
+    }
+    &__title {
+        margin-bottom: 1rem;
+    }
+
+    &__panel {
+        width: 100%;
+        .sectionPanelPadding();
+    }
+
+    &--illustrationOutside {
+        .sectionPanel {
+            &__panel {
+                padding-top: 0;
+            }
+            &__illustration {
+                margin-top: 4rem;
+                margin-bottom: -1rem;
+                transform: translateY(calc(-50%));
+                @media (min-width: @tablet-breakpoint) {
+                    margin-bottom: -2rem;
+                }
+                @media (min-width: @desktop-breakpoint) {
+                    margin-bottom: -1rem;
+                }
+            }
+        }
+    }
+
+    @media print {
+        &__panel {
+            padding: 0 1rem;
+        }
+        &__illustration {
+            display: none;
+        }
+        h3 {
+            margin-bottom: 0.5rem;
+        }
+    }
+}

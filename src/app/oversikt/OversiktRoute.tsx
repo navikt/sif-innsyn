@@ -10,8 +10,9 @@ import PleiepengerView from './pleiepenger/PleiepengerView';
 import OmsorgspengerView from './omsorgspenger/OmsorgspengerView';
 import { erOmsorgspenger, erPleiepenger } from '../utils/SøknadUtils';
 import AlertStripe from 'nav-frontend-alertstriper';
+import { sortSoknad } from '../utils/sortSoknader';
 
-const OversiktRoute: React.FC = (): JSX.Element => (
+const OversiktRoute = () => (
     <Fetcher<SøknadApiResponse>
         recipies={[søknadRecipe]}
         loading={() => <LoadingPage />}
@@ -19,8 +20,7 @@ const OversiktRoute: React.FC = (): JSX.Element => (
             <HandleUnauthorized
                 error={e}
                 onWillRedirect={() => <LoadingPage />}
-                handleError={(error) => {
-                    console.error(error);
+                handleError={() => {
                     return (
                         <AlertStripe type="feil">
                             Vi opplever ustablitet med våre søknadstjenester. Vennligst prøv igjen senere.
@@ -30,33 +30,30 @@ const OversiktRoute: React.FC = (): JSX.Element => (
             />
         )}
         success={([søknadApiResponse]: [SøknadApiResponse]) => {
-            const søknader = søknadApiResponse.sort((a, b) => {
-                const dateA: Date = new Date(a.opprettet);
-                const dateB: Date = new Date(b.opprettet);
-                if (dateA < dateB) return 1;
-                else return -1;
-            });
-            console.log(søknader);
+            const alleSøknader = søknadApiResponse.sort(sortSoknad);
+            const pleiepengesoknader = alleSøknader.filter((søknad) => erPleiepenger(søknad));
+            const omsorgspengesoknader = alleSøknader.filter((søknad) => erOmsorgspenger(søknad));
             return (
                 <Switch>
-                    <Route exact={true} path={RouteConfig.ROOT} component={() => <OversiktView søknad={søknader} />} />
+                    <Route
+                        exact={true}
+                        path={RouteConfig.ROOT}
+                        component={() => <OversiktView søknader={alleSøknader} />}
+                    />
                     <Route
                         exact={true}
                         path={RouteConfig.DINE_PLEIEPENGER}
-                        component={() => (
-                            <PleiepengerView søknader={søknader.filter((søknad) => erPleiepenger(søknad))} />
-                        )}
+                        component={() => <PleiepengerView søknader={pleiepengesoknader} />}
                     />
                     <Route
                         exact={true}
                         path={RouteConfig.DINE_OMSORGSPENGER}
-                        component={() => (
-                            <OmsorgspengerView søknader={søknader.filter((søknad) => erOmsorgspenger(søknad))} />
-                        )}
+                        component={() => <OmsorgspengerView søknader={omsorgspengesoknader} />}
                     />
                     <Route
                         path={'/innlogget'}
                         component={() => {
+                            // TODO - hva skjer her?
                             return <div>skal nå redirecte tilbake der bruker var.</div>;
                         }}
                     />
