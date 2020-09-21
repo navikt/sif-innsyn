@@ -1,4 +1,4 @@
-import { Locale } from '@navikt/sif-common-core/lib/types/Locale';
+import { Locale } from '../types/Locale';
 
 const LocaleSessionKey = 'selectedLocale';
 

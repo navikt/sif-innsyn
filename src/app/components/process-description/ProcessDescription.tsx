@@ -1,14 +1,14 @@
 import React from 'react';
-import bemUtils from '@navikt/sif-common-core/lib/utils/bemUtils';
+import bemUtils from '../../utils/bemUtils';
 import './processDescription.less';
 
-export interface ProcessDescriptionProps {
+interface Props {
     steps: React.ReactNode[];
 }
 
 const cls = bemUtils('processDescription');
 
-const ProcessDescription: React.FC<ProcessDescriptionProps> = ({ steps }) => (
+const ProcessDescription: React.FC<Props> = ({ steps }: Props) => (
     <div className={cls.block}>
         {steps.map((step, index) => (
             <div key={index} className={cls.element('step')}>

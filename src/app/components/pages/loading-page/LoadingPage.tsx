@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { useIntl } from 'react-intl';
-import Page from '@navikt/sif-common-core/lib/components/page/Page';
-import intlHelper from '@navikt/sif-common-core/lib/utils/intlUtils';
-import LoadingSpinner from '@navikt/sif-common-core/lib/components/loading-spinner/LoadingSpinner';
+import intlHelper from '../../../utils/intlUtils';
+import LoadingSpinner from '../../loading-spinner/LoadingSpinner';
+import Page from '../../page/Page';
 
 const LoadingPage: React.FunctionComponent = (): React.ReactElement => {
     const intl = useIntl();

@@ -1,18 +1,18 @@
 import * as React from 'react';
-import { SøknadApiResponse } from '../../types/apiTypes/søknadTypes';
-import './PleiepengerView.less';
-import SoknadstatusinfoComponent from 'app/components/soknadstatusinfoComponent/SoknadstatusinfoComponent';
-import { Ingress, Normaltekst, Systemtittel, Undertittel } from 'nav-frontend-typografi';
-import { Tilbakeknapp } from 'nav-frontend-ikonknapper';
 import { useHistory } from 'react-router-dom';
-import { RouteConfig } from '../../config/routeConfig';
-import Panel from 'nav-frontend-paneler';
 import AlertStripe from 'nav-frontend-alertstriper';
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
-import ProcessDescription from 'app/components/process-description/ProcessDescription';
-import ExpandableInfo from 'app/components/expandable-info/ExpandableInfo';
-import Lenke from 'nav-frontend-lenker';
+import { Tilbakeknapp } from 'nav-frontend-ikonknapper';
 import { Hovedknapp } from 'nav-frontend-knapper';
+import Lenke from 'nav-frontend-lenker';
+import Panel from 'nav-frontend-paneler';
+import { Ingress, Normaltekst, Systemtittel, Undertittel } from 'nav-frontend-typografi';
+import ExpandableInfo from 'app/components/expandable-info/ExpandableInfo';
+import ProcessDescription from 'app/components/process-description/ProcessDescription';
+import SoknadstatusinfoComponent from 'app/components/soknadstatusinfoComponent/SoknadstatusinfoComponent';
+import { RouteConfig } from '../../config/routeConfig';
+import { SøknadApiResponse } from '../../types/apiTypes/søknadTypes';
+import './PleiepengerView.less';
 
 interface Props {
     søknader: SøknadApiResponse;
@@ -62,14 +62,14 @@ const PleiepengerView: React.FC<Props> = ({ søknader }: Props) => {
                         <Ekspanderbartpanel tittel="Dette kan du forvente deg etter at du har sendt søknad">
                             <ProcessDescription
                                 steps={[
-                                    <>
+                                    <div key={'legeerklæring'}>
                                         <Undertittel>Du har sendt søknad med legeerklæring</Undertittel>
                                         <Normaltekst>
                                             Hvis du ikke har sendt legeerklæring med søknaden din, må du{' '}
                                             <Lenke href="#TODO">ettersende denne</Lenke> så snart du kan
                                         </Normaltekst>
-                                    </>,
-                                    <>
+                                    </div>,
+                                    <div key="inntektsmelding">
                                         <Undertittel>Arbeidsgiveren din sender inntektsmelding til oss</Undertittel>
                                         <ExpandableInfo title="Hva betyr dette?">
                                             <Normaltekst>
@@ -78,15 +78,13 @@ const PleiepengerView: React.FC<Props> = ({ søknader }: Props) => {
                                                 informasjon om lønna di, og om arbeidsgiver vil ha refusjon eller ei.
                                             </Normaltekst>
                                         </ExpandableInfo>
-                                    </>,
-                                    <div style={{ display: 'grid', gridGap: '0.5em' }}>
+                                    </div>,
+                                    <div key="behandling" style={{ display: 'grid', gridGap: '0.5em' }}>
                                         <div>
                                             <Undertittel>Vi ser på søknaden din og behandler den</Undertittel>
                                             <Lenke href="#TODO">Se saksbehandlingstider der du bor</Lenke>
                                         </div>
-
                                         <Undertittel>Vi kontakter deg hvis vi trenger mer informasjon</Undertittel>
-
                                         <div>
                                             <Undertittel>
                                                 Hvis noe i situasjonen din endrer seg må du si fra til oss
@@ -97,7 +95,6 @@ const PleiepengerView: React.FC<Props> = ({ søknader }: Props) => {
                                                 </Normaltekst>
                                                 <ul>
                                                     <li>
-                                                        {' '}
                                                         barnet ikke lenger har behov for kontinuerlig omsorg og pleie.
                                                     </li>
                                                     <li>barnet begynner eller øker tiden i et omsorgstilbud.</li>
@@ -116,7 +113,7 @@ const PleiepengerView: React.FC<Props> = ({ søknader }: Props) => {
                                             </ExpandableInfo>
                                         </div>
                                     </div>,
-                                    <>
+                                    <div key="svar">
                                         <Undertittel>
                                             Når søknaden er ferdig behandlet får du tilsendt svar i saksoversikten på
                                             Ditt NAV og i posten.
@@ -127,8 +124,8 @@ const PleiepengerView: React.FC<Props> = ({ søknader }: Props) => {
                                                 svaret vil det stå om du har fått innvilget det du har søkt om.
                                             </Normaltekst>
                                         </ExpandableInfo>
-                                    </>,
-                                    <>
+                                    </div>,
+                                    <div key="saksoversikt">
                                         <Undertittel>
                                             Hvis du får innvilget pleiepenger vil det registreres i saksoversikten din
                                             at du skal ha utbetaling
@@ -145,7 +142,7 @@ const PleiepengerView: React.FC<Props> = ({ søknader }: Props) => {
                                                 er noe du lurer på angående lønnen din.
                                             </Normaltekst>
                                         </ExpandableInfo>
-                                    </>,
+                                    </div>,
                                 ]}
                             />
                         </Ekspanderbartpanel>

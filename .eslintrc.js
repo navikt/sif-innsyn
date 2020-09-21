@@ -1,18 +1,29 @@
 module.exports = {
-    root: true,
-    parser: '@typescript-eslint/parser',
-    plugins: ['@typescript-eslint'],
-    extends: ['plugin:@typescript-eslint/recommended', 'prettier/@typescript-eslint', 'plugin:prettier/recommended'],
+    parser: '@typescript-eslint/parser', // Specifies the ESLint parser
+    extends: [
+        'plugin:react/recommended', // Uses the recommended rules from @eslint-plugin-react
+        'plugin:@typescript-eslint/recommended',
+        'prettier/@typescript-eslint', // Uses eslint-config-prettier to disable ESLint rules from @typescript-eslint/eslint-plugin that would conflict with prettier
+        'plugin:prettier/recommended', // Uses the recommended rules from @typescript-eslint/eslint-plugin,
+        'plugin:jsx-a11y/recommended',
+    ],
     parserOptions: {
-        ecmaVersion: 2018,
-        sourceType: 'module',
+        ecmaFeatures: {
+            jsx: true, // Allows for the parsing of JSX
+        },
     },
     rules: {
-        '@typescript-eslint/no-unused-vars': 'off',
-        '@typescript-eslint/no-explicit-any': 'off',
+        // Place to specify ESLint rules. Can be used to overwrite rules specified from the extended configs
+        '@typescript-eslint/explicit-function-return-type': 'off',
         '@typescript-eslint/no-var-requires': 'off',
-        '@typescript-eslint/explicit-module-boundary-types': 'off',
-        '@typescript-eslint/no-empty-function': 'off',
-        '@typescript-eslint/ban-ts-comment': 'off',
+        '@typescript-eslint/no-explicit-any': 'off',
+        'react-hooks/rules-of-hooks': 'error',
+        'react-hooks/exhaustive-deps': 'warn',
+    },
+    plugins: ['jsx-a11y', 'react-hooks'],
+    settings: {
+        react: {
+            version: 'detect', // Tells eslint-plugin-react to automatically detect the version of React to use
+        },
     },
 };

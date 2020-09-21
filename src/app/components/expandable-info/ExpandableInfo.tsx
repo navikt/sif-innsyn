@@ -1,17 +1,21 @@
-import React, { useState, useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { Collapse } from 'react-collapse';
 import Chevron from 'nav-frontend-chevron';
 import { guid } from 'nav-frontend-js-utils';
-import bemUtils from '@navikt/sif-common-core/lib/utils/bemUtils';
+import bemUtils from '../../utils/bemUtils';
 import './expandableInfo.less';
 
-export interface ExpandableInfoProps {
+interface ExpandableInfoProps {
     title: string;
     children: React.ReactNode;
     defaultExpanded?: boolean;
 }
 
-const ExpandableInfo: React.FC<ExpandableInfoProps> = ({ title, children, defaultExpanded = false }) => {
+const ExpandableInfo: React.FC<ExpandableInfoProps> = ({
+    title,
+    children,
+    defaultExpanded = false,
+}: ExpandableInfoProps) => {
     const [isExpanded, setIsExpanded] = useState<boolean>(defaultExpanded);
     const id = useRef(guid()).current;
 
