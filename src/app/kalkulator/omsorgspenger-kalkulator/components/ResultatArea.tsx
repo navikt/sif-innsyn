@@ -8,7 +8,10 @@ import ResultBox from './ResultBox';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { Action, beregn } from '../utils/actions';
 import { caseResultViewOf, ResultView } from '../types/ResultView';
-import { Element } from 'nav-frontend-typografi';
+import { Element, Normaltekst } from 'nav-frontend-typografi';
+import bemUtils from '@navikt/sif-common-core/lib/utils/bemUtils';
+
+const bem = bemUtils('omsorgsdagerkalkulator');
 
 interface Props {
     resultView: ResultView<FeiloppsummeringFeil[], Omsorgsprinsipper>;
@@ -66,7 +69,9 @@ const ResultatArea: React.FC<Props> = ({ resultView, dispatch }: Props) =>
                         avhengig av at du har gitt riktige opplysninger. Ut fra opplysningene du har gitt, har du
                     </FormBlock>
                     <FormBlock>
-                        <Element>{sumDager} omsorgsdager fra 1. juli 2020 – 31.12.2020</Element>
+                        <Normaltekst className={bem.element('large-normal-tekst')}>
+                            {sumDager} omsorgsdager fra 1. juli 2020 – 31.12.2020
+                        </Normaltekst>
                     </FormBlock>
 
                     {/* TODO: Implementer når skisser er klare. */}

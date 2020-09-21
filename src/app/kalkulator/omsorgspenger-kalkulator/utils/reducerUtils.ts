@@ -16,7 +16,7 @@ export const setFodselsdatoAndMaybeWipeValues = (newFodselsdato: ISODateString, 
             value: some(newFodselsdato),
         },
     };
-    return evaluateDependantValue(fodselsdatoUpdated, ValueCheckAction.CHECK_KRONISKT_SYK);
+    return evaluateDependantValues(fodselsdatoUpdated, ValueCheckAction.CHECK_KRONISKT_SYK);
 };
 
 export const fjernFodselsdatoAndWipeValues = (barnInfo: BarnInfo): BarnInfo => {
@@ -28,19 +28,19 @@ export const fjernFodselsdatoAndWipeValues = (barnInfo: BarnInfo): BarnInfo => {
             value: none,
         },
     };
-    return evaluateDependantValue(fodselsdatoUpdated, ValueCheckAction.CHECK_KRONISKT_SYK);
+    return evaluateDependantValues(fodselsdatoUpdated, ValueCheckAction.CHECK_KRONISKT_SYK);
 };
 
 export const setKroniskSyktAndMaybeWipeValues = (value: boolean, barnInfo: BarnInfo): BarnInfo => {
     const { kroniskSykt } = barnInfo;
     const updatedKroniskSykt = { ...barnInfo, kroniskSykt: { ...kroniskSykt, value: some(value) } };
-    return evaluateDependantValue(updatedKroniskSykt, ValueCheckAction.CHECK_BOR_SAMMEN);
+    return evaluateDependantValues(updatedKroniskSykt, ValueCheckAction.CHECK_BOR_SAMMEN);
 };
 
 export const setBorSammenAndMaybeWipeValues = (value: boolean, barnInfo: BarnInfo): BarnInfo => {
     const { borSammen } = barnInfo;
     const updatedWithBorSammen = { ...barnInfo, borSammen: { ...borSammen, value: some(value) } };
-    return evaluateDependantValue(updatedWithBorSammen, ValueCheckAction.CHECK_ALENE_OM_OMSORGEN);
+    return evaluateDependantValues(updatedWithBorSammen, ValueCheckAction.CHECK_ALENE_OM_OMSORGEN);
 };
 
 export const setAleneOmOmsorgen = (value: boolean, barn: BarnInfo): BarnInfo => {
@@ -57,22 +57,22 @@ export enum ValueCheckAction {
     CHECK_ALENE_OM_OMSORGEN = 'CHECK_ALENE_OM_OMSORGEN',
 }
 
-export const evaluateDependantValue = (barnInfo: BarnInfo, nextValueToCheckAction: ValueCheckAction): BarnInfo => {
+export const evaluateDependantValues = (barnInfo: BarnInfo, nextValueToCheck: ValueCheckAction): BarnInfo => {
     const { kroniskSykt, borSammen, aleneOmOmsorgen } = barnInfo;
-    switch (nextValueToCheckAction) {
+    switch (nextValueToCheck) {
         case ValueCheckAction.CHECK_KRONISKT_SYK: {
             const kroniskSyktEvaluated = {
                 ...barnInfo,
                 kroniskSykt: shouldViewKroniskSyktQuestion(barnInfo) ? kroniskSykt : { ...kroniskSykt, value: none },
             };
-            return evaluateDependantValue(kroniskSyktEvaluated, ValueCheckAction.CHECK_BOR_SAMMEN);
+            return evaluateDependantValues(kroniskSyktEvaluated, ValueCheckAction.CHECK_BOR_SAMMEN);
         }
         case ValueCheckAction.CHECK_BOR_SAMMEN: {
             const updatedWithMaybeWipedBorSammen = {
                 ...barnInfo,
                 borSammen: shouldViewBorSammenQuestion(barnInfo) ? borSammen : { ...borSammen, value: none },
             };
-            return evaluateDependantValue(updatedWithMaybeWipedBorSammen, ValueCheckAction.CHECK_ALENE_OM_OMSORGEN);
+            return evaluateDependantValues(updatedWithMaybeWipedBorSammen, ValueCheckAction.CHECK_ALENE_OM_OMSORGEN);
         }
         case ValueCheckAction.CHECK_ALENE_OM_OMSORGEN: {
             const updatedWithMaybeWipedAleneOmOmsorgen = {
