@@ -1,8 +1,8 @@
 import React from 'react';
 import Lenke from 'nav-frontend-lenker';
+import bemUtils from '../../utils/bemUtils';
 import DittNavnIconSvg from './DittNavnIconSvg';
 import './dittNavBreadcrumbs.less';
-import bemUtils from '../../utils/bemUtils';
 
 const bem = bemUtils('dittNavBreadcrumbs');
 

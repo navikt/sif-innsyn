@@ -11,7 +11,7 @@ const SoknadList = ({ søknader }: Props) => (
     <>
         {søknader.map((søknad, index) => {
             return (
-                <Box padBottom="m" key={index}>
+                <Box padBottom="l" key={index}>
                     <Soknadstatus søknad={søknad}></Soknadstatus>
                 </Box>
             );

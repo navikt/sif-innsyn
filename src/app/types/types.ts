@@ -14,3 +14,8 @@ export interface Essentials {
     arbeidsgiver: ArbeidsgiverApiResponse;
     barn: BarnApiResponse;
 }
+
+export enum Sakstype {
+    DINE_PLEIEPENGER = 'pleiepenger',
+    DINE_OMSORGSPENGER = 'omsorgspenger',
+}

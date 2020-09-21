@@ -23,11 +23,15 @@ export enum Søknadstype {
     OPPLÆRINGSPENGER = 'OPPLÆRINGSPENGER',
 }
 
+export enum SupportedSøknadstype {
+    PP_SYKT_BARN = 'PP_SYKT_BARN',
+}
+
 export interface Søknad {
     søknadId: UUID;
     søknadstype: Søknadstype;
     status: Søknadsstatus;
-    søknad: { fraOgMed: string; tilOgMed: string }; // TODO: Lag søknadstyper for hver av søknadene
+    søknad: { fraOgMed?: string; tilOgMed?: string; beskrivelse?: string }; // TODO: Lag søknadstyper for hver av søknadene
     saksId: string | null;
     journalpostId: string;
     opprettet: string; // LocalDateTime e.g. 2007-12-03T10:15:30.948652

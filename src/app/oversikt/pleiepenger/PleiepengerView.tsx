@@ -5,6 +5,7 @@ import { Hovedknapp } from 'nav-frontend-knapper';
 import Lenke from 'nav-frontend-lenker';
 import ExpandableInfo from 'app/components/expandable-info/ExpandableInfo';
 import ProcessDescription from 'app/components/process-description/ProcessDescription';
+import Breadcrumbs from '../../components/breadcrumbs/Breadcrumbs';
 import Box from '../../components/elements/box/Box';
 import Title from '../../components/elements/title/Title';
 import InfoManglendeSøknad from '../../components/info-manglende-søknad/InfoManglendeSøknad';
@@ -14,7 +15,6 @@ import SectionPanel from '../../components/sectionPanel/SectionPanel';
 import SoknadList from '../../components/soknad-list/SoknadList';
 import { SøknadApiResponse } from '../../types/apiTypes/søknadTypes';
 import './PleiepengerView.less';
-import Breadcrumbs from '../../components/breadcrumbs/Breadcrumbs';
 
 interface Props {
     søknader: SøknadApiResponse;
@@ -28,12 +28,18 @@ const PleiepengerView: React.FC<Props> = ({ søknader }: Props) => {
             topContentRenderer={() => <PageBannerCompact title={title} />}
             breadcrumbsRenderer={() => <Breadcrumbs title={title} />}>
             <AlertStripe type="info">
+                <p>
+                    <code>
+                        Må denne meldingen være her? Holder det ikke at dette nevnes på forsiden? Nå lager den mest støy
+                        (FH)
+                    </code>
+                </p>
                 Denne siden er under utvikling. Foreløpig kan du se søknader du har sendt inn om Pleiepenger for sykt
                 barn. Etterhvert vil du kunne se mer informasjon om saken din.
             </AlertStripe>
 
             <Box margin="xl">
-                <SectionPanel title="Dine søknader">
+                <SectionPanel title="Dine pleiepengesaker">
                     <SoknadList søknader={søknader} />
                     <Box margin="l">
                         <InfoManglendeSøknad />
@@ -123,7 +129,7 @@ const PleiepengerView: React.FC<Props> = ({ søknader }: Props) => {
                     />
                 </Ekspanderbartpanel>
                 <Box margin="xl" className="knapp-gruppe">
-                    <code>Dersom dette er lenker, bør det ikke være knapper</code>
+                    <code>Dersom dette er lenker, bør det ikke være knapper (FH)</code>
                     <ul>
                         <li>
                             <Hovedknapp>Ettersend dokumentasjon</Hovedknapp>

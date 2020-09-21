@@ -7,6 +7,7 @@ import Lenke from 'nav-frontend-lenker';
 import { getEnvironmentVariable } from '../../utils/envUtils';
 import getLenker from '../../lenker';
 import DittNavnIconSvg from '../ditt-nav-breadcrumbs/DittNavnIconSvg';
+import { Link } from 'react-router-dom';
 
 const cls = bemUtils('breadcrumbs');
 
@@ -52,9 +53,7 @@ const Breadcrumbs = (props: Props) => {
         );
         crumbs.push(
             <div key="oversikt" className={cls.element('item')}>
-                <Lenke href={frontpageUrl} title="Gå til din oversikt under sykdom i familien">
-                    Sykdom i familien
-                </Lenke>
+                <Link to="/">Sykdom i familien</Link>
             </div>
         );
         crumbs.push(
