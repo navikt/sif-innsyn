@@ -36,7 +36,6 @@ const OversiktRoute: React.FC = (): JSX.Element => (
                 if (dateA < dateB) return 1;
                 else return -1;
             });
-            console.log(søknader);
             return (
                 <Switch>
                     <Route exact={true} path={RouteConfig.ROOT} component={() => <OversiktView søknad={søknader} />} />
