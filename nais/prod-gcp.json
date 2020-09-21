@@ -14,6 +14,10 @@
     "PUBLIC_PATH": "/familie/sykdom-i-familien/soknad/innsyn",
     "LOGIN_URL": "https://loginservice.nav.no/login?redirect=https://www.nav.no/familie/sykdom-i-familien/soknad/innsyn",
     "UTILGJENGELIG": "off",
-    "MELLOMLAGRING": "on"
+    "MELLOMLAGRING": "on",
+    "SYKDOM_I_FAMILIEN_INFO_URL": "https://www.nav.no/familie/sykdom-i-familien/nb/",
+    "SAKBEHANDLINGSTID_INFO_URL": "https://www.nav.no/no/nav-og-samfunn/om-nav/saksbehandlingstider-i-nav",
+    "REGELVERK_INFO_URL": "https://lovdata.no/nav/folketrygdloven/kap9",
+    "KLAGE_INFO_URL": "https://www.nav.no/person/kontakt-oss/nb/tilbakemeldinger"
   }
 }

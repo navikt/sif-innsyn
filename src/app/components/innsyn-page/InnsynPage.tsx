@@ -10,12 +10,19 @@ import { Innholdstittel, Undertittel } from 'nav-frontend-typografi';
 import Lenke from 'nav-frontend-lenker';
 import { useLocation } from 'react-router-dom';
 import { RouteConfig } from '../../config/routeConfig';
+import { getEnvironmentVariable } from '../../utils/envUtils';
 
 const bem = bemUtils('innsynPage');
 
 const InnsynPage: React.FC = (props): JSX.Element => {
     const intl = useIntl();
     const location = useLocation();
+
+    const sykdomIFamilienInfoUrl = getEnvironmentVariable('SYKDOM_I_FAMILIEN_INFO_URL');
+    const sakBehandlingstidInfoUrl = getEnvironmentVariable('SAKBEHANDLINGSTID_INFO_URL');
+    const regelverkInfoInfoUrl = getEnvironmentVariable('REGELVERK_INFO_URL');
+    const klageInfoUrl = getEnvironmentVariable('KLAGE_INFO_URL');
+
     return (
         <Page
             className={bem.block}
@@ -45,16 +52,24 @@ const InnsynPage: React.FC = (props): JSX.Element => {
                 <hr />
                 <ul>
                     <li>
-                        <Lenke href="#">Sykdom i familien</Lenke>
+                        <Lenke target="_blank" href={sykdomIFamilienInfoUrl}>
+                            Sykdom i familien
+                        </Lenke>
                     </li>
                     <li>
-                        <Lenke href="#">Sakbehandlingstid</Lenke>
+                        <Lenke target="_blank" href={sakBehandlingstidInfoUrl}>
+                            Sakbehandlingstid
+                        </Lenke>
                     </li>
                     <li>
-                        <Lenke href="#">Regelverk</Lenke>
+                        <Lenke target="_blank" href={regelverkInfoInfoUrl}>
+                            Regelverk
+                        </Lenke>
                     </li>
                     <li>
-                        <Lenke href="#">Klage</Lenke>
+                        <Lenke target="_blank" href={klageInfoUrl}>
+                            Klage
+                        </Lenke>
                     </li>
                 </ul>
             </div>
