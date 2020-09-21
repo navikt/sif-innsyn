@@ -30,6 +30,7 @@ const OversiktRoute = () => (
             />
         )}
         success={([søknadApiResponse]: [SøknadApiResponse]) => {
+            // change
             const alleSøknader = søknadApiResponse.sort(sortSoknad);
             const pleiepengesoknader = alleSøknader.filter((søknad) => erPleiepenger(søknad));
             const omsorgspengesoknader = alleSøknader.filter((søknad) => erOmsorgspenger(søknad));
