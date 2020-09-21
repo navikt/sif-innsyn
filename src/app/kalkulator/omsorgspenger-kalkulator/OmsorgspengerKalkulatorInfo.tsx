@@ -6,6 +6,7 @@ import Knappelenke from '@navikt/sif-common-core/lib/components/knappelenke/Knap
 import * as React from 'react';
 import bemUtils from '@navikt/sif-common-core/lib/utils/bemUtils';
 import Page from '@navikt/sif-common-core/lib/components/page/Page';
+import ExpandableInfo from '@navikt/sif-common-core/lib/components/expandable-content/ExpandableInfo';
 
 const bem = bemUtils('omsorgsdagerkalkulator');
 
@@ -16,7 +17,7 @@ interface Props {
 const OmsorgspengerKalkulatorInfo = ({ kalkulatorHref }: Props) => (
     <Page title={'Omsorgspenger kalkulator intro side'}>
         <KalkulatorLogoAndTitle />
-        <FormBlock paddingBottom={'l'} margin={'m'}>
+        <FormBlock margin={'m'}>
             <div className={bem.element('flex-center')}>
                 <div>
                     <Box padBottom={'l'}>
@@ -36,15 +37,14 @@ const OmsorgspengerKalkulatorInfo = ({ kalkulatorHref }: Props) => (
             foreldrene ikke bor sammen, men har en avtale om delt bosted, bor barnet fast hos begge.
         </FormBlock>
         <FormBlock>
-            <div>Hvis du er samværsforelder som har</div>
-            <ul>
-                <li>fått omsorgsdager fra den andre forelderen</li>
-                <li>egne barn som bor fast hos deg</li>
-            </ul>
-            <div>
-                beregner kalkulatoren hvor mange omsorgsdager du har for egne barn som bor fast hos deg. Du plusser selv
-                på antall omsorgsdager du har fått fra den andre forelderen.
-            </div>
+            <ExpandableInfo title="Er du samværsforelder?">
+                <Box>
+                    Hvis du er samværsforelder som har fått omsorgsdager fra den andre forelderen og i tillegg har egne
+                    barn som bor fast hos deg, beregner kalkulatoren hvor mange omsorgsdager du har for de egne barna
+                    som bor fast hos deg. Du plusser selv på antall omsorgsdager du har fått fra den andre forelderen.
+                </Box>
+                Kalkulatoren vil ikke fungere for deg som er samværsforelder og ikke har egne barn som bor fast hos deg.
+            </ExpandableInfo>
         </FormBlock>
         <FormBlock>
             Kalkulatoren vil ikke fungere for deg som er samværsforelder og ikke har egne barn som bor fast hos deg.
