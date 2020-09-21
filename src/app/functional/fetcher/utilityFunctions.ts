@@ -22,7 +22,7 @@ export async function fetchType<P>(
         return pipe(
             result,
             E.fold<IoTs.Errors, P, E.Either<Error, P>>(
-                (errors: IoTs.Errors) =>
+                () =>
                     E.left<Error, P>({
                         name: 'TypeGuardError',
                         message: reporter(result).join('\n'),

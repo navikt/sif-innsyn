@@ -7,11 +7,9 @@ interface OwnProps {
     blockTitle?: string;
 }
 
-const LoadingSpinner: React.FunctionComponent<OwnProps & NavFrontendSpinnerBaseProps> = ({
-    type,
-    style = 'inline',
-    blockTitle,
-}) => {
+type Props = OwnProps & NavFrontendSpinnerBaseProps;
+
+const LoadingSpinner: React.FunctionComponent<Props> = ({ type, style = 'inline', blockTitle }: Props) => {
     const spinner = <NavFrontendSpinner type={type} data-testid="spinner-element" />;
     if (style === 'inline') {
         return spinner;

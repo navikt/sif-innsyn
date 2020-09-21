@@ -4,9 +4,10 @@ import useDocumentTitle from './useDocumentTitle';
 
 interface DocumentTitleProps {
     title: string;
+    children: React.ReactNode;
 }
 
-const DocumentTitle: React.FunctionComponent<DocumentTitleProps> = ({ title, children }) => {
+const DocumentTitle: React.FunctionComponent<DocumentTitleProps> = ({ title, children }: DocumentTitleProps) => {
     useDocumentTitle(title);
     return <>{children}</>;
 };

@@ -14,7 +14,27 @@ import './innsynPage.less';
 
 const bem = bemUtils('innsynPage');
 
-const InnsynPage: React.FC = (props): JSX.Element => {
+interface Props {
+    children?: React.ReactNode;
+}
+
+const sideTittel = (location: any) => {
+    const path = location.pathname.split('/').pop();
+    const pleiepengerSyktBarnPath = RouteConfig.DINE_PLEIEPENGER.split('/').pop();
+    const omsorgspengerPath = RouteConfig.DINE_OMSORGSPENGER.split('/').pop();
+    switch (path) {
+        case '':
+            return 'din oversikt';
+        case pleiepengerSyktBarnPath:
+            return 'Pleiepenger for sykt barn';
+        case omsorgspengerPath:
+            return 'Utvidet rett om omsorgspenger';
+        default:
+            return path;
+    }
+};
+
+const InnsynPage: React.FC = (props: Props): JSX.Element => {
     const intl = useIntl();
     const location = useLocation();
 
@@ -75,22 +95,6 @@ const InnsynPage: React.FC = (props): JSX.Element => {
             </div>
         </Page>
     );
-};
-
-const sideTittel = (location: any) => {
-    const path = location.pathname.split('/').pop();
-    const pleiepengerSyktBarnPath = RouteConfig.DINE_PLEIEPENGER.split('/').pop();
-    const omsorgspengerPath = RouteConfig.DINE_OMSORGSPENGER.split('/').pop();
-    switch (path) {
-        case '':
-            return 'din oversikt';
-        case pleiepengerSyktBarnPath:
-            return 'Pleiepenger for sykt barn';
-        case omsorgspengerPath:
-            return 'Utvidet rett om omsorgspenger';
-        default:
-            return path;
-    }
 };
 
 export default InnsynPage;

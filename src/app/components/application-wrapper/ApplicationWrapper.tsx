@@ -8,9 +8,13 @@ import { Locale } from '../../types/Locale';
 interface ApplicationWrapperProps {
     locale: Locale;
     onChangeLocale: (locale: Locale) => void;
+    children: React.ReactNode;
 }
 
-const ApplicationWrapper: React.FunctionComponent<ApplicationWrapperProps> = ({ locale, onChangeLocale, children }) => {
+const ApplicationWrapper: React.FunctionComponent<ApplicationWrapperProps> = ({
+    locale,
+    children,
+}: ApplicationWrapperProps) => {
     return (
         <IntlProvider locale={locale}>
             <Normaltekst tag="div">

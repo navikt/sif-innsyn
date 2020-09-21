@@ -9,11 +9,18 @@ interface BoxProps {
     padBottom?: BoxMargin;
     textAlignCenter?: boolean;
     className?: string;
+    children: React.ReactNode;
 }
 
 const bem = bemHelper('box');
 
-const Box: React.FunctionComponent<BoxProps> = ({ margin, padBottom, className, textAlignCenter, children }) => {
+const Box: React.FunctionComponent<BoxProps> = ({
+    margin,
+    padBottom,
+    className,
+    textAlignCenter,
+    children,
+}: BoxProps) => {
     const classNames = bem.classNames(
         bem.block,
         bem.modifierConditional(margin, margin !== undefined),

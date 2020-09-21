@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-import Chevron from 'nav-datovelger/lib/elementer/ChevronSvg';
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import { LenkepanelBase } from 'nav-frontend-lenkepanel/lib';
 import Panel from 'nav-frontend-paneler';
@@ -18,6 +17,7 @@ import {
     søknadTypeErPleiepengerNærstående,
 } from '../utils/SøknadUtils';
 import './OversiktView.less';
+import { HoyreChevron } from 'nav-frontend-chevron';
 
 const uniq = require('lodash.uniq');
 
@@ -25,6 +25,29 @@ interface Props {
     søknad: SøknadApiResponse;
 }
 
+const genererLenkeBase = (href: string, tittel: string) => (
+    <LenkepanelBase
+        href={'#'}
+        border
+        className={'p0'}
+        linkCreator={(props: React.AnchorHTMLAttributes<HTMLAnchorElement>) => (
+            <Link to={href} {...props}>
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <div>
+                        <SøknadsIkon></SøknadsIkon>
+                    </div>
+                    <div>
+                        <Undertittel tag={'h4'} className="lenkepanel_heading ml-1 ">
+                            {tittel}
+                        </Undertittel>
+                    </div>
+                </div>
+                <HoyreChevron />
+            </Link>
+        )}>
+        <div></div>
+    </LenkepanelBase>
+);
 const OversiktView: React.FC<Props> = ({ søknad }: Props) => {
     const publicPath = getEnvironmentVariable('PUBLIC_PATH');
     const søknadTyper: Søknadstype[] | undefined = uniq(søknad.map((value) => value.søknadstype));
@@ -105,29 +128,5 @@ const OversiktView: React.FC<Props> = ({ søknad }: Props) => {
         </>
     );
 };
-
-const genererLenkeBase = (href: string, tittel: string) => (
-    <LenkepanelBase
-        href={'#'}
-        border
-        className={'p0'}
-        linkCreator={(props: React.AnchorHTMLAttributes<HTMLAnchorElement>) => (
-            <Link to={href} {...props}>
-                <div style={{ display: 'flex', alignItems: 'center' }}>
-                    <div>
-                        <SøknadsIkon></SøknadsIkon>
-                    </div>
-                    <div>
-                        <Undertittel tag={'h4'} className="lenkepanel_heading ml-1 ">
-                            {tittel}
-                        </Undertittel>
-                    </div>
-                </div>
-                <Chevron retning={'høyre'} />
-            </Link>
-        )}>
-        <div></div>
-    </LenkepanelBase>
-);
 
 export default OversiktView;
