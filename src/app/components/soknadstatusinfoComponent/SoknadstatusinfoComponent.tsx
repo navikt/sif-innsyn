@@ -1,11 +1,11 @@
 import React from 'react';
-import './SoknadstatusinfoComponent.module.less';
-import { Søknad, Søknadsstatus, Søknadstype } from '../../types/apiTypes/søknadTypes';
 import moment from 'moment';
-import { Undertekst, Undertittel } from 'nav-frontend-typografi';
 import { Column, Row } from 'nav-frontend-grid';
-import { FilIkon } from '../../svg/FellesIkoner';
 import Panel from 'nav-frontend-paneler';
+import { Undertekst, Undertittel } from 'nav-frontend-typografi';
+import { FilIkon } from '../../svg/FellesIkoner';
+import { Søknad, Søknadsstatus, Søknadstype } from '../../types/apiTypes/søknadTypes';
+import './SoknadstatusinfoComponent.module.less';
 
 interface Props {
     søknad: Søknad;
@@ -66,12 +66,10 @@ const statusFarge = (søknad: Søknad) => {
 };
 
 function formaterDate(dateTime: string | null) {
-    moment.locale('NO');
     return dateTime == null ? '' : moment(dateTime).format('LL');
 }
 
 function formaterDateTime(dateTime: string | null) {
-    moment.locale('NO');
     return dateTime == null ? '' : moment(dateTime).format('LLLL');
 }
 

@@ -3,7 +3,6 @@ import { render } from 'react-dom';
 import { Route, Switch } from 'react-router-dom';
 import moment from 'moment';
 import KalkulatorInput from 'omsorgspenger-kalkulator/lib/components/KalkulatorInput';
-import Modal from 'nav-frontend-modal';
 import ApplicationWrapper from './components/application-wrapper/ApplicationWrapper';
 import InnsynPage from './components/innsyn-page/InnsynPage';
 import UnavailablePage from './components/pages/unavailable-page/UnavailablePage';
@@ -15,7 +14,7 @@ import { Locale } from './types/Locale';
 import './app.less';
 
 const localeFromSessionStorage = getLocaleFromSessionStorage();
-moment.locale(localeFromSessionStorage);
+moment.locale('NO');
 
 const App: React.FunctionComponent = () => {
     const [locale, setLocale] = React.useState<Locale>(localeFromSessionStorage);
@@ -60,5 +59,4 @@ const App: React.FunctionComponent = () => {
 };
 
 const root = document.getElementById('app');
-Modal.setAppElement('#app');
 render(<App />, root);
