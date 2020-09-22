@@ -59,8 +59,6 @@ const SøknadEtikett = ({ søknad }: { søknad: Søknad }) => {
 };
 
 const Soknadstatus = ({ søknad }: Props) => {
-    console.log(søknad);
-
     return (
         <Panel border className={bem.classNames(bem.block)}>
             <div className={bem.element('content')}>
