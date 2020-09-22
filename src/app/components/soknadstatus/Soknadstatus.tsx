@@ -58,6 +58,8 @@ const SøknadEtikett = ({ søknad }: { søknad: Søknad }) => {
     }
 };
 
+const showStatus = false;
+
 const Soknadstatus = ({ søknad }: Props) => {
     return (
         <Panel border className={bem.classNames(bem.block)}>
@@ -78,9 +80,11 @@ const Soknadstatus = ({ søknad }: Props) => {
                     </div>
                 )}
             </div>
-            <div className={bem.element('status')}>
-                <SøknadEtikett søknad={søknad} />
-            </div>
+            {showStatus && (
+                <div className={bem.element('status')}>
+                    <SøknadEtikett søknad={søknad} />
+                </div>
+            )}
         </Panel>
     );
 };
