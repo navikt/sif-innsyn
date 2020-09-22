@@ -6,7 +6,7 @@
   "minReplicas": "1",
   "maxReplicas": "1",
   "ingresses": [
-    ""
+    "https://sif-innsyn.dev.nav.no"
   ],
   "env": {
     "APPRES_CMS_URL": "https://appres.nav.no",
