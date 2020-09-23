@@ -4,8 +4,8 @@ import Breadcrumbs, { Breadcrumb } from '../../components/breadcrumbs/Breadcrumb
 import Box from '../../components/elements/box/Box';
 import InfoManglendeSøknad from '../../components/info-manglende-søknad/InfoManglendeSøknad';
 import InnsynPage from '../../components/innsyn-page/InnsynPage';
-import PageBannerCompact from '../../components/page-banner_compact/PageBannerCompact';
-import SectionPanel from '../../components/sectionPanel/SectionPanel';
+import PageBannerCompact from '../../components/page-banner-compact/PageBannerCompact';
+import SectionPanel from '../../components/section-panel/SectionPanel';
 import SoknadList from '../../components/soknad-list/SoknadList';
 import { RouteConfig } from '../../config/routeConfig';
 import { SøknadApiResponse } from '../../types/apiTypes/søknadTypes';

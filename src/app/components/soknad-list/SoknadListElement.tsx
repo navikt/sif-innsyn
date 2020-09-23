@@ -1,15 +1,15 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { HoyreChevron } from 'nav-frontend-chevron';
 import Etikett from 'nav-frontend-etiketter';
 import { LenkepanelBase } from 'nav-frontend-lenkepanel';
 import { Undertittel } from 'nav-frontend-typografi';
+import { RouteConfig } from '../../config/routeConfig';
 import { Søknad, Søknadsstatus } from '../../types/apiTypes/søknadTypes';
 import bemUtils from '../../utils/bemUtils';
 import { getSøknadTitle } from '../../utils/soknadUtils';
-import PrettyDate from '../pretty-date/PrettyDate';
+import SoknadInfo from '../soknad-info/SoknadInfo';
 import './soknadListElement.less';
-import { HoyreChevron } from 'nav-frontend-chevron';
-import { Link } from 'react-router-dom';
-import { RouteConfig } from '../../config/routeConfig';
 
 interface Props {
     søknad: Søknad;
@@ -53,26 +53,13 @@ const Soknadstatus = ({ søknad }: Props) => {
                 <Link to={href} {...props}>
                     <div className={bem.element('content')}>
                         <Undertittel tag="h3">{getSøknadTitle(søknad)}</Undertittel>
-                        <div className={bem.element('mottatt')}>
-                            Mottatt <PrettyDate date={søknad.opprettet} format="dateAndTime" />
-                        </div>
-                        {søknad.søknad.fraOgMed && søknad.søknad.tilOgMed && (
-                            <div className={bem.element('detaljer')}>
-                                Gjelder perioden <PrettyDate date={søknad.søknad.fraOgMed} /> -{' '}
-                                <PrettyDate date={søknad.søknad.tilOgMed} />
-                            </div>
-                        )}
-                        {søknad.søknad.beskrivelse && (
-                            <div className={bem.element('detaljer')}>
-                                Ettersending gjelder: <q>{søknad.søknad.beskrivelse}</q> ...
-                            </div>
-                        )}
+                        <SoknadInfo søknad={søknad} />
                     </div>
                     {showStatus && (
                         <div className={bem.element('status')}>
                             <SøknadEtikett søknad={søknad} />
                         </div>
-                    )}{' '}
+                    )}
                     <HoyreChevron />
                 </Link>
             )}>

@@ -7,7 +7,7 @@ import Title from '../../components/elements/title/Title';
 import ExpandableInfo from '../../components/expandable-info/ExpandableInfo';
 import Knapperad from '../../components/knapperad/Knapperad';
 import ProcessDescription from '../../components/process-description/ProcessDescription';
-import SectionPanel from '../../components/sectionPanel/SectionPanel';
+import SectionPanel from '../../components/section-panel/SectionPanel';
 import getLenker from '../../lenker';
 
 const NyttigInforPanel = () => (

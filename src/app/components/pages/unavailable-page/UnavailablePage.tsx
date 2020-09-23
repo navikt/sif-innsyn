@@ -3,7 +3,7 @@ import { AlertStripeAdvarsel } from 'nav-frontend-alertstriper';
 import Lenke from 'nav-frontend-lenker';
 import bemUtils from '../../../utils/bemUtils';
 import Box from '../../elements/box/Box';
-import PageBannerCompact from '../../page-banner_compact/PageBannerCompact';
+import PageBannerCompact from '../../page-banner-compact/PageBannerCompact';
 import Page from '../../page/Page';
 import './unavailablePage.less';
 

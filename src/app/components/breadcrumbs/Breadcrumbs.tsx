@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import NavFrontendChevron from 'nav-frontend-chevron';
-// import NavFrontendChevron from 'nav-frontend-chevron';
 import Lenke from 'nav-frontend-lenker';
 import { RouteConfig } from '../../config/routeConfig';
 import getLenker from '../../lenker';
