@@ -29,8 +29,9 @@ const LenkepanelMedIkon = ({ tittel, href, ikon }: Props) => (
                 </div>
                 <HoyreChevron />
             </Link>
-        )}
-    />
+        )}>
+        {' '}
+    </LenkepanelBase>
 );
 
 export default LenkepanelMedIkon;
