@@ -68,7 +68,6 @@
         "nav-frontend-typografi": "^2.0.26",
         "nav-frontend-veileder": "^2.0.17",
         "nav-frontend-veilederpanel": "^0.1.25",
-        "omsorgspenger-kalkulator": "^0.2.4",
         "promise": "^8.1.0",
         "react": "^16.13.1",
         "react-collapse": "^5.0.1",
