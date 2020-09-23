@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { RouteComponentProps, withRouter } from 'react-router-dom';
 import Breadcrumbs from '../../components/breadcrumbs/Breadcrumbs';
 import Box from '../../components/elements/box/Box';
 import InfoManglendeSøknad from '../../components/info-manglende-søknad/InfoManglendeSøknad';
@@ -7,12 +8,22 @@ import PageBannerCompact from '../../components/page-banner_compact/PageBannerCo
 import SectionPanel from '../../components/sectionPanel/SectionPanel';
 import SoknadList from '../../components/soknad-list/SoknadList';
 import { SøknadApiResponse } from '../../types/apiTypes/søknadTypes';
+import Pleiepengesak from './Pleiepengesak';
 
-interface Props {
+interface OwnProps {
     søknader: SøknadApiResponse;
 }
 
-const PleiepengerPage: React.FC<Props> = ({ søknader }: Props) => {
+export type PleiepengerSakProps = RouteComponentProps<{ id: string }>;
+
+type Props = OwnProps & PleiepengerSakProps;
+
+const PleiepengerPage: React.FC<Props> = ({ søknader, match: { params } }: Props) => {
+    const saksid = params.id;
+    // Todo - rewrite herfra og innover i sak/liste
+    if (saksid) {
+        return <Pleiepengesak id={saksid} />;
+    }
     const title = 'Pleiepenger for sykt barn';
     return (
         <InnsynPage
@@ -29,4 +40,4 @@ const PleiepengerPage: React.FC<Props> = ({ søknader }: Props) => {
     );
 };
 
-export default PleiepengerPage;
+export default withRouter(PleiepengerPage);

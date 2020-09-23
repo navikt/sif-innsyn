@@ -8,9 +8,9 @@ import HandleUnauthorized from '../functional/HandleUnauthorized';
 import { SøknadApiResponse, søknadRecipe } from '../types/apiTypes/søknadTypes';
 import { sortSoknad } from '../utils/sortSoknader';
 import { erOmsorgspenger, erPleiepenger } from '../utils/SøknadUtils';
-import OmsorgspengerPage from './omsorgspenger/OmsorgspengerPage';
+import OmsorgspengerPage from './omsorgspenger-page/OmsorgspengerPage';
 import OversiktView from './OversiktView';
-import PleiepengerPage from './pleiepenger/PleiepengerPage';
+import Pleiepenger from './pleiepenger-page/Pleiepenger';
 import { getRouteFromRedirectParam } from '../utils/navigationUtils';
 
 const OversiktRoute = ({ history }: RouteComponentProps) => {
@@ -48,21 +48,15 @@ const OversiktRoute = ({ history }: RouteComponentProps) => {
                             component={() => <OversiktView søknader={alleSøknader} />}
                         />
                         <Route
-                            exact={true}
-                            path={RouteConfig.DINE_PLEIEPENGER}
-                            component={() => <PleiepengerPage søknader={pleiepengesoknader} />}
+                            exact={false}
+                            path={`${RouteConfig.DINE_PLEIEPENGER}/:id?`}
+                            component={(routeProps: RouteComponentProps) => (
+                                <Pleiepenger søknader={pleiepengesoknader} {...routeProps} />
+                            )}
                         />
                         <Route
-                            exact={true}
                             path={RouteConfig.DINE_OMSORGSPENGER}
                             component={() => <OmsorgspengerPage søknader={omsorgspengesoknader} />}
-                        />
-                        <Route
-                            path={'/innlogget'}
-                            component={() => {
-                                // TODO - redirect ref André
-                                return <div>skal nå redirecte tilbake der bruker var.</div>;
-                            }}
                         />
                     </Switch>
                 );
