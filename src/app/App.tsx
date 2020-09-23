@@ -37,15 +37,21 @@ const App: React.FunctionComponent = () => {
                             }}
                         />
                         <Route
-                            path={RouteConfig.ROOT}
+                            path={RouteConfig.INNLOGGET}
                             component={() => {
                                 return <InnloggetRoute />;
                             }}
                         />
                         <Route
-                            path={'/'}
+                            path={RouteConfig.ROOT}
                             component={() => {
-                                return <div>Root path. ikke innlogget.</div>;
+                                return <div>Info om at en må logge inn</div>;
+                            }}
+                        />
+                        <Route
+                            path={'*'}
+                            component={() => {
+                                return <div>404 - Ukjent side</div>;
                             }}
                         />
                     </Switch>

@@ -18,7 +18,7 @@ const OmsorgspengerView: React.FC<Props> = ({ søknader }: Props) => {
     const title = 'Utvidet rett om omsorgspenger';
     return (
         <InnsynPage title={title} topContentRenderer={() => <PageBannerCompact title={title} />}>
-            <Tilbakeknapp onClick={() => history.push(RouteConfig.ROOT)}>Tilbake til oversikt</Tilbakeknapp>
+            <Tilbakeknapp onClick={() => history.push(RouteConfig.INNLOGGET)}>Tilbake til oversikt</Tilbakeknapp>
             {søknader && (
                 <div>
                     <Sidetittel>Dine Omsorgspenger</Sidetittel>
@@ -45,7 +45,7 @@ const OmsorgspengerView: React.FC<Props> = ({ søknader }: Props) => {
                     </div>
                 </div>
             )}
-            <Tilbakeknapp onClick={() => history.push(RouteConfig.ROOT)}>Tilbake til oversikt</Tilbakeknapp>
+            <Tilbakeknapp onClick={() => history.push(RouteConfig.INNLOGGET)}>Tilbake til oversikt</Tilbakeknapp>
         </InnsynPage>
     );
 };

@@ -15,6 +15,7 @@ import SectionPanel from '../../components/sectionPanel/SectionPanel';
 import SoknadList from '../../components/soknad-list/SoknadList';
 import { SøknadApiResponse } from '../../types/apiTypes/søknadTypes';
 import './PleiepengerView.less';
+import getLenker from '../../lenker';
 
 interface Props {
     søknader: SøknadApiResponse;
@@ -55,7 +56,7 @@ const PleiepengerView: React.FC<Props> = ({ søknader }: Props) => {
                                 <Title titleType="element">Du har sendt søknad med legeerklæring</Title>
                                 <p>
                                     Hvis du ikke har sendt legeerklæring med søknaden din, må du{' '}
-                                    <Lenke href="#TODO">ettersende denne</Lenke> så snart du kan
+                                    <Lenke href={getLenker().ettersending}>ettersende denne</Lenke> så snart du kan
                                 </p>
                             </div>,
                             <div key="inntektsmelding">
@@ -71,7 +72,9 @@ const PleiepengerView: React.FC<Props> = ({ søknader }: Props) => {
                             <div key="behandling" style={{ display: 'grid', gridGap: '0.5em' }}>
                                 <div>
                                     <Title titleType="element">Vi ser på søknaden din og behandler den</Title>
-                                    <Lenke href="#TODO">Se saksbehandlingstider der du bor</Lenke>
+                                    <Lenke href={getLenker().saksbehandlingstid}>
+                                        Se saksbehandlingstider der du bor
+                                    </Lenke>
                                 </div>
                                 <p>Vi kontakter deg hvis vi trenger mer informasjon</p>
                                 <div>

@@ -8,6 +8,7 @@ import { getEnvironmentVariable } from '../../utils/envUtils';
 import useWindowSize from '../../utils/useWindowSize';
 import DittNavnIconSvg from '../ditt-nav-breadcrumbs/DittNavnIconSvg';
 import './breadcrumbs.less';
+import { RouteConfig } from '../../config/routeConfig';
 
 const cls = bemUtils('breadcrumbs');
 
@@ -53,7 +54,7 @@ const Breadcrumbs = (props: Props) => {
         );
         crumbs.push(
             <div key="oversikt" className={cls.element('item')}>
-                <Link to="/">Sykdom i familien</Link>
+                <Link to={RouteConfig.INNLOGGET}>Din oversikt - Sykdom i familien</Link>
             </div>
         );
         crumbs.push(

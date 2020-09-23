@@ -38,7 +38,7 @@ const OversiktRoute = () => (
                 <Switch>
                     <Route
                         exact={true}
-                        path={RouteConfig.ROOT}
+                        path={RouteConfig.INNLOGGET}
                         component={() => <OversiktView søknader={alleSøknader} />}
                     />
                     <Route
