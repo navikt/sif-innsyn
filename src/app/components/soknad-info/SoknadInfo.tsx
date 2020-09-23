@@ -1,5 +1,5 @@
 import React from 'react';
-import { Søknad } from '../../types/apiTypes/søknadTypes';
+import { Søknad, Søknadstype } from '../../types/apiTypes/søknadTypes';
 import bemUtils from '../../utils/bemUtils';
 import PrettyDate from '../pretty-date/PrettyDate';
 import './soknadInfo.less';
@@ -15,13 +15,13 @@ const SoknadInfo = ({ søknad }: Props) => (
         <div className={bem.element('mottatt')}>
             Mottatt <PrettyDate date={søknad.opprettet} format="dateAndTime" />
         </div>
-        {søknad.søknad.fraOgMed && søknad.søknad.tilOgMed && (
+        {søknad.søknad.type === Søknadstype.PP_SYKT_BARN && (
             <div className={bem.element('detaljer')}>
                 Gjelder perioden <PrettyDate date={søknad.søknad.fraOgMed} /> -{' '}
                 <PrettyDate date={søknad.søknad.tilOgMed} />
             </div>
         )}
-        {søknad.søknad.beskrivelse && (
+        {søknad.søknad.type === Søknadstype.PP_ETTERSENDING && (
             <div className={bem.element('detaljer')}>
                 Ettersending gjelder: <q>{søknad.søknad.beskrivelse}</q> ...
             </div>

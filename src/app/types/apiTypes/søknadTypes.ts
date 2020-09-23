@@ -27,11 +27,21 @@ export enum SupportedSøknadstype {
     PP_SYKT_BARN = 'PP_SYKT_BARN',
 }
 
+interface PleiepengesøknadInfo {
+    type: Søknadstype.PP_SYKT_BARN;
+    fraOgMed: string;
+    tilOgMed: string;
+}
+interface EttersendingInfo {
+    type: Søknadstype.PP_ETTERSENDING;
+    beskrivelse: string;
+}
+
 export interface Søknad {
     søknadId: UUID;
     søknadstype: Søknadstype;
     status: Søknadsstatus;
-    søknad: { fraOgMed?: string; tilOgMed?: string; beskrivelse?: string }; // TODO: Lag søknadstyper for hver av søknadene
+    søknad: PleiepengesøknadInfo | EttersendingInfo;
     journalpostId: string;
     opprettet: string; // LocalDateTime e.g. 2007-12-03T10:15:30.948652
 }
