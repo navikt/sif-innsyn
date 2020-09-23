@@ -5,7 +5,7 @@ import Lenke from 'nav-frontend-lenker';
 import { RouteConfig } from '../../config/routeConfig';
 import getLenker from '../../lenker';
 import bemUtils from '../../utils/bemUtils';
-import { getEnvironmentVariable } from '../../utils/envUtils';
+// import { getEnvironmentVariable } from '../../utils/envUtils';
 import useWindowSize from '../../utils/useWindowSize';
 import DittNavnIconSvg from '../ditt-nav-breadcrumbs/DittNavnIconSvg';
 import './breadcrumbs.less';
@@ -27,9 +27,10 @@ type Props = OwnProps;
 const Breadcrumbs = (props: Props) => {
     const { width } = useWindowSize();
     const { currentPageTitle, crumbs = [] } = props;
-    const frontpageUrl = getEnvironmentVariable('PUBLIC_PATH');
+    const frontpageUrl = '/'; //getEnvironmentVariable('PUBLIC_PATH');
 
     const crumbsToRender: React.ReactNode[] = [];
+    const parentPageUrl = crumbs.length > 0 ? crumbs[crumbs.length - 1].route : frontpageUrl;
 
     if (width && width < 576) {
         crumbsToRender.push(
@@ -39,9 +40,7 @@ const Breadcrumbs = (props: Props) => {
         );
         crumbsToRender.push(
             <div key="forrige-side" className={cls.element('item')}>
-                <Lenke href={frontpageUrl} title="Gå til forrige side">
-                    Oversikt
-                </Lenke>
+                <Link to={parentPageUrl}>Tilbake</Link>
             </div>
         );
     } else {
