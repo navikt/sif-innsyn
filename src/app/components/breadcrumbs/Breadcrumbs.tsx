@@ -1,13 +1,13 @@
 import React from 'react';
-import NavFrontendChevron from 'nav-frontend-chevron';
-import './breadcrumbs.less';
-import useWindowSize from '../../utils/useWindowSize';
-import bemUtils from '../../utils/bemUtils';
-import Lenke from 'nav-frontend-lenker';
-import { getEnvironmentVariable } from '../../utils/envUtils';
-import getLenker from '../../lenker';
-import DittNavnIconSvg from '../ditt-nav-breadcrumbs/DittNavnIconSvg';
 import { Link } from 'react-router-dom';
+import NavFrontendChevron from 'nav-frontend-chevron';
+import Lenke from 'nav-frontend-lenker';
+import getLenker from '../../lenker';
+import bemUtils from '../../utils/bemUtils';
+import { getEnvironmentVariable } from '../../utils/envUtils';
+import useWindowSize from '../../utils/useWindowSize';
+import DittNavnIconSvg from '../ditt-nav-breadcrumbs/DittNavnIconSvg';
+import './breadcrumbs.less';
 
 const cls = bemUtils('breadcrumbs');
 
