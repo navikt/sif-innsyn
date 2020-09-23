@@ -26,7 +26,7 @@ const NbarnSelectView = ({ state, dispatch, nBarnMaks }: Props) => (
                         <Element>Hvor mange egne barn har du i husstanden?</Element>
                         <ExpandableInfo title="Hva menes med egne barn?">
                             <div className={bem.element('text-align-left')}>
-                                Egne barn kan være biologiske barn, adoptivbarn eller fosterbarn.
+                                Med egne barn menes biologiske barn, adoptivbarn og fosterbarn.
                             </div>
                         </ExpandableInfo>
                     </div>
