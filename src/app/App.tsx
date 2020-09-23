@@ -17,8 +17,8 @@ import { getRouteUrl, RouteConfig } from './config/routeConfig';
 import OversiktRoute from './oversikt/OversiktRoute';
 import PleiepengerRoute from './oversikt/pleiepenger/PleiepengerRoute';
 import OmsorgspengerRoute from './oversikt/omsorgspenger/OmsorgspengerRoute';
-import OmsorgspengerKalkulatorInfo from './kalkulator/omsorgspenger-kalkulator/OmsorgspengerKalkulatorInfo';
-import OmsorgspengerKalkulator from './kalkulator/omsorgspenger-kalkulator/OmsorgspengerKalkulator';
+import OmsorgsdagerKalkulatorInfo from '@navikt/omsorgsdager-kalkulator/lib/OmsorgsdagerKalkulatorInfo';
+import OmsorgsdagerKalkulator from '@navikt/omsorgsdager-kalkulator/lib/OmsorgsdagerKalkulator';
 
 const localeFromSessionStorage = getLocaleFromSessionStorage();
 moment.locale(localeFromSessionStorage);
@@ -46,10 +46,14 @@ const App: React.FunctionComponent = () => {
                             exact={true}
                             path={RouteConfig.KALKULATOR_INFO}
                             component={() => (
-                                <OmsorgspengerKalkulatorInfo kalkulatorHref={getRouteUrl(RouteConfig.KALKULATOR)} />
+                                <OmsorgsdagerKalkulatorInfo kalkulatorHref={getRouteUrl(RouteConfig.KALKULATOR)} />
                             )}
                         />
-                        <Route exact={true} path={RouteConfig.KALKULATOR} component={OmsorgspengerKalkulator} />
+                        <Route
+                            exact={true}
+                            path={RouteConfig.KALKULATOR}
+                            component={() => <OmsorgsdagerKalkulator initialBarnListe={[]} />}
+                        />
                         <Route exact={false} path={RouteConfig.ROOT} component={NotFoundRoute} />
                     </Switch>
                 )}
