@@ -9,7 +9,7 @@ interface RemoteProps<T> {
     success: (data: T) => JSX.Element;
 }
 
-export function ResponseHandler<T>({ data, error, loading, success }: RemoteProps<T>): JSX.Element {
+export function ResponseHandler<T>({ data, error, loading, success }: RemoteProps<T>) {
     return pipe(
         data,
         E.fold(

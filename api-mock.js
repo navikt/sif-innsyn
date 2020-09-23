@@ -51,7 +51,7 @@ const arbeidsgivereMock = {
 
 const soknadMock = [
     {
-        søknadId: '0f44f965-e3fb-489c-a757-b0ad46619e33',
+        søknadId: '0f44f965-e3fb-489c-a757-b0ad46619e33-4',
         søknadstype: 'OMP_UTVIDET_RETT',
         status: 'MOTTATT',
         søknad: {
@@ -84,7 +84,7 @@ const soknadMock = [
                 harNattevåk: true,
                 tilleggsinformasjon: 'Har Nattevåk',
             },
-            søknadId: 'cc644d91-4eff-4679-a7d3-fc57a0c6a1c2',
+            søknadId: 'cc644d91-4eff-4679-a7d3-fc57a0c6a1c2-5',
             medlemskap: {
                 skalBoIUtlandetNeste12Mnd: true,
                 harBoddIUtlandetSiste12Mnd: true,
@@ -182,7 +182,7 @@ const soknadMock = [
                 harNattevåk: true,
                 tilleggsinformasjon: 'Har Nattevåk',
             },
-            søknadId: 'cc644d91-4eff-4679-a7d3-fc57a0c6a1c2',
+            søknadId: 'cc644d91-4eff-4679-a7d3-fc57a0c6a1c2-a',
             medlemskap: {
                 skalBoIUtlandetNeste12Mnd: true,
                 harBoddIUtlandetSiste12Mnd: true,
@@ -248,9 +248,9 @@ const soknadMock = [
         behandlingsdato: null,
     },
     {
-        søknadId: '9c3a3ebf-e02a-4843-ad2c-9187e2f00cfa',
+        søknadId: '9c3a3ebf-e02a-4843-ad2c-9187e2f00cfa-x',
         søknadstype: 'PP_SYKT_BARN',
-        status: 'MOTTATT',
+        status: 'UNDER_BEHANDLING',
         søknad: {
             barn: {
                 navn: 'Kari',
@@ -281,7 +281,7 @@ const soknadMock = [
                 harNattevåk: true,
                 tilleggsinformasjon: 'Har Nattevåk',
             },
-            søknadId: 'cc644d91-4eff-4679-a7d3-fc57a0c6a1c2',
+            søknadId: 'cc644d91-4eff-4679-a7d3-fc57a0c6a1c2-y',
             medlemskap: {
                 skalBoIUtlandetNeste12Mnd: true,
                 harBoddIUtlandetSiste12Mnd: true,
@@ -347,7 +347,7 @@ const soknadMock = [
         behandlingsdato: null,
     },
     {
-        søknadId: '9c3a3ebf-e02a-4843-ad2c-9187e2f00cfa',
+        søknadId: '9c3a3ebf-e02a-4843-ad2c-9187e2f00cfa-b',
         søknadstype: 'PP_SYKT_BARN',
         status: 'MOTTATT',
         søknad: {
@@ -380,7 +380,7 @@ const soknadMock = [
                 harNattevåk: true,
                 tilleggsinformasjon: 'Har Nattevåk',
             },
-            søknadId: 'cc644d91-4eff-4679-a7d3-fc57a0c6a1c2',
+            søknadId: 'cc644d91-4eff-4679-a7d3-fc57a0c6a1c2-3',
             medlemskap: {
                 skalBoIUtlandetNeste12Mnd: true,
                 harBoddIUtlandetSiste12Mnd: true,
@@ -449,95 +449,10 @@ const soknadMock = [
         søknadstype: 'PP_ETTERSENDING',
         status: 'MOTTATT',
         søknad: {
-            barn: {
-                navn: 'Kari',
-                aktørId: null,
-                fødselsdato: null,
-                fødselsnummer: '2323',
-            },
-            språk: null,
-            søker: {
-                fornavn: 'Robust',
-                aktørId: '1157852636281',
-                etternavn: 'STAFFELI',
-                mellomnavn: '',
-                fødselsnummer: '27118921009',
-            },
-            frilans: {
-                startdato: '2018-02-01',
-                jobberFortsattSomFrilans: true,
-            },
-            mottatt: '2018-01-02T03:04:05',
-            fraOgMed: '2018-01-01',
-            tilOgMed: '2018-02-02',
-            beredskap: {
-                beredskap: true,
-                tilleggsinformasjon: 'I Beredskap',
-            },
-            nattevåk: {
-                harNattevåk: true,
-                tilleggsinformasjon: 'Har Nattevåk',
-            },
-            søknadId: 'cc644d91-4eff-4679-a7d3-fc57a0c6a1c2',
-            medlemskap: {
-                skalBoIUtlandetNeste12Mnd: true,
-                harBoddIUtlandetSiste12Mnd: true,
-                utenlandsoppholdNeste12Mnd: [],
-                utenlandsoppholdSiste12Mnd: [],
-            },
-            vedleggUrls: ['http://localhost:8080/1234', 'http://localhost:8080/12345'],
-            harMedsøker: true,
-            arbeidsgivere: {
-                organisasjoner: [
-                    {
-                        navn: 'Nei',
-                        skalJobbe: 'nei',
-                        skalJobbeProsent: 0.0,
-                        vetIkkeEkstrainfo: null,
-                        jobberNormaltTimer: 0.0,
-                        organisasjonsnummer: '1212',
-                    },
-                    {
-                        navn: 'Navn',
-                        skalJobbe: 'redusert',
-                        skalJobbeProsent: 22.512,
-                        vetIkkeEkstrainfo: null,
-                        jobberNormaltTimer: 0.0,
-                        organisasjonsnummer: '54321',
-                    },
-                ],
-            },
-            samtidigHjemme: null,
-            tilsynsordning: {
-                ja: {
-                    fredag: 'PT1H30M',
-                    mandag: 'PT5H',
-                    onsdag: 'PT3H45M',
-                    tirsdag: 'PT4H',
-                    torsdag: 'PT2H',
-                    tilleggsinformasjon: 'Litt tilleggsinformasjon.',
-                },
-                svar: 'ja',
-                vetIkke: null,
-            },
-            relasjonTilBarnet: 'Mor',
-            skalBekrefteOmsorg: true,
-            ferieuttakIPerioden: {
-                ferieuttak: [],
-                skalTaUtFerieIPerioden: false,
-            },
-            selvstendigVirksomheter: [],
-            beskrivelseOmsorgsrollen: 'En kort beskrivelse',
-            harBekreftetOpplysninger: true,
-            bekrefterPeriodeOver8Uker: true,
-            utenlandsoppholdIPerioden: {
-                opphold: [],
-                skalOppholdeSegIUtlandetIPerioden: false,
-            },
-            skalPassePaBarnetIHelePerioden: true,
-            harForståttRettigheterOgPlikter: true,
+            beskrivelse: 'Lorem ipsum doret salah et spurs',
         },
         saksId: 'sak-5674839201',
+        søknadId: 'asf',
         journalpostId: '68493021',
         opprettet: '2018-01-01T03:04:05',
         endret: '2020-06-23T09:11:21.948652',

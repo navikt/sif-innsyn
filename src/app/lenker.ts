@@ -1,42 +1,34 @@
+import { getEnvironmentVariable } from './utils/envUtils';
+
 interface Lenker {
-    medlemskap: string;
-    papirskjemaPrivat: string;
-    vilkårOmsorgspenger: string;
-    personvern: string;
-    rettOgPlikt: string;
-    saksbehandlingstider: string;
+    sykdomIFamilien: string;
+    saksbehandlingstid: string;
+    ettersending: string;
+    klageInfo: string;
+    regelverkFolketrygden: string;
     dittNAV: string;
 }
 
-const LenkerBokmål: Lenker = {
-    medlemskap:
-        'https://www.nav.no/no/Person/Flere+tema/Arbeid+og+opphold+i+Norge/Relatert+informasjon/medlemskap-i-folketrygden',
-    papirskjemaPrivat: 'https://www.nav.no/soknader/nb/person/familie/omsorgspenger/NAV%2009-06.05/brev',
-    vilkårOmsorgspenger: 'https://www.nav.no/familie/sykdom-i-familien/nb/omsorgspenger',
-    personvern:
-        'https://www.nav.no/no/NAV+og+samfunn/Om+NAV/personvern-i-arbeids-og-velferdsetaten/personvernerkl%C3%A6ring-for-arbeids-og-velferdsetaten',
-    rettOgPlikt: 'https://nav.no/rettOgPlikt',
-    saksbehandlingstider: 'https://www.nav.no/no/NAV+og+samfunn/Om+NAV/Saksbehandlingstider+i+NAV',
-    dittNAV: `https://www.nav.no/no/Ditt+NAV`,
+const lenkerBokmål: Lenker = {
+    saksbehandlingstid: getEnvironmentVariable('SAKBEHANDLINGSTID_INFO_URL'),
+    sykdomIFamilien: getEnvironmentVariable('SYKDOM_I_FAMILIEN_INFO_URL'),
+    ettersending: getEnvironmentVariable('ETTERSENDING_URL'),
+    klageInfo: getEnvironmentVariable('KLAGE_INFO_URL'),
+    regelverkFolketrygden: getEnvironmentVariable('REGELVERK_INFO_URL'),
+    dittNAV: getEnvironmentVariable('DITT_NAV_URL'),
 };
 
-const LenkerNynorsk: Partial<Lenker> = {
-    medlemskap: 'https://www.nav.no/no/Person/Flere+tema/Arbeid+og+opphold+i+Norge/Nynorsk/medlemskap-i-folketrygda',
-    papirskjemaPrivat: 'https://www.nav.no/soknader/nb/person/familie/omsorgspenger/NAV%2009-06.05/brev',
-    vilkårOmsorgspenger: 'https://www.nav.no/familie/sykdom-i-familien/nn/omsorgspenger',
-    rettOgPlikt:
-        'https://www.nav.no/no/NAV+og+samfunn/Om+NAV/Nynorsk/du-har-plikt-til-%C3%A5-gje-nav-riktige-opplysningar',
-};
+const lenkerNynorsk: Partial<Lenker> = {};
 
 const getLenker = (locale?: string): Lenker => {
     switch (locale) {
         case 'nn':
             return {
-                ...LenkerBokmål,
-                ...LenkerNynorsk,
+                ...lenkerBokmål,
+                ...lenkerNynorsk,
             };
         default:
-            return LenkerBokmål;
+            return lenkerBokmål;
     }
 };
 

@@ -12,28 +12,49 @@ export enum Søknadsstatus {
 }
 
 export enum Søknadstype {
-    OMP_UTVIDET_RETT = 'OMP_UTVIDET_RETT',
-    OMP_UTBETALING_SNF = 'OMP_UTBETALING_SNF',
-    OMP_UTBETALING_ARBEIDSTAKER = 'OMP_UTBETALING_ARBEIDSTAKER',
-    OMP_ETTERSENDING = 'OMP_ETTERSENDING',
     PP_ETTERSENDING = 'PP_ETTERSENDING',
     PP_SYKT_BARN = 'PP_SYKT_BARN',
-    PP_NÆRSTÅENDE = 'PP_NÆRSTÅENDE',
-    OMD_OVERFØRING = 'OMD_OVERFØRING',
-    OPPLÆRINGSPENGER = 'OPPLÆRINGSPENGER',
+    // OMP_UTVIDET_RETT = 'OMP_UTVIDET_RETT',
+    // OMP_UTBETALING_SNF = 'OMP_UTBETALING_SNF',
+    // OMP_UTBETALING_ARBEIDSTAKER = 'OMP_UTBETALING_ARBEIDSTAKER',
+    // OMP_ETTERSENDING = 'OMP_ETTERSENDING',
+    // PP_NÆRSTÅENDE = 'PP_NÆRSTÅENDE',
+    // OMD_OVERFØRING = 'OMD_OVERFØRING',
+    // OPPLÆRINGSPENGER = 'OPPLÆRINGSPENGER',
 }
 
-export interface Søknad {
+export enum SupportedSøknadstype {
+    PP_SYKT_BARN = 'PP_SYKT_BARN',
+}
+
+interface PleiepengesøknadInfo {
+    søknadstype: Søknadstype.PP_SYKT_BARN;
+    fraOgMed: Date;
+    tilOgMed: Date;
+}
+interface EttersendingInfo {
+    søknadstype: Søknadstype.PP_ETTERSENDING;
+    beskrivelse: string;
+}
+
+interface SøknadBase {
     søknadId: UUID;
     søknadstype: Søknadstype;
     status: Søknadsstatus;
-    søknad: any; // TODO: Lag søknadstyper for hver av søknadene
-    saksId: string | null;
+    søknad: PleiepengesøknadInfo | EttersendingInfo;
     journalpostId: string;
-    opprettet: string; // LocalDateTime e.g. 2007-12-03T10:15:30.948652
-    endret: string | null; // LocalDateTime e.g. 2020-06-23T09:11:21.948652
-    behandlingsdato: string | null; // LocalDate e.g. 2007-12-03
+    opprettet: Date; // LocalDateTime e.g. 2007-12-03T10:15:30.948652
 }
+export interface Pleiepengesøknad extends SøknadBase {
+    søknadstype: Søknadstype.PP_SYKT_BARN;
+    søknad: PleiepengesøknadInfo;
+}
+export interface PleiepengerEttersending extends SøknadBase {
+    søknadstype: Søknadstype.PP_ETTERSENDING;
+    søknad: EttersendingInfo;
+}
+
+export type Søknad = Pleiepengesøknad | PleiepengerEttersending;
 
 export type SøknadApiResponse = Søknad[];
 
