@@ -1,7 +1,6 @@
 import React from 'react';
 import { Søknad } from '../../types/apiTypes/søknadTypes';
-import Box from '../elements/box/Box';
-import Soknadstatus from '../soknadstatus/Soknadstatus';
+import SoknadListElement from './SoknadListElement';
 
 interface Props {
     søknader: Søknad[];
@@ -9,12 +8,8 @@ interface Props {
 
 const SoknadList = ({ søknader }: Props) => (
     <>
-        {søknader.map((søknad, index) => {
-            return (
-                <Box padBottom="l" key={index}>
-                    <Soknadstatus søknad={søknad}></Soknadstatus>
-                </Box>
-            );
+        {søknader.map((søknad) => {
+            return <SoknadListElement key={søknad.søknadId} søknad={søknad}></SoknadListElement>;
         })}
     </>
 );

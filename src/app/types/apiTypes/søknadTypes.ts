@@ -12,15 +12,15 @@ export enum Søknadsstatus {
 }
 
 export enum Søknadstype {
-    OMP_UTVIDET_RETT = 'OMP_UTVIDET_RETT',
-    OMP_UTBETALING_SNF = 'OMP_UTBETALING_SNF',
-    OMP_UTBETALING_ARBEIDSTAKER = 'OMP_UTBETALING_ARBEIDSTAKER',
-    OMP_ETTERSENDING = 'OMP_ETTERSENDING',
+    // OMP_UTVIDET_RETT = 'OMP_UTVIDET_RETT',
+    // OMP_UTBETALING_SNF = 'OMP_UTBETALING_SNF',
+    // OMP_UTBETALING_ARBEIDSTAKER = 'OMP_UTBETALING_ARBEIDSTAKER',
+    // OMP_ETTERSENDING = 'OMP_ETTERSENDING',
     PP_ETTERSENDING = 'PP_ETTERSENDING',
     PP_SYKT_BARN = 'PP_SYKT_BARN',
-    PP_NÆRSTÅENDE = 'PP_NÆRSTÅENDE',
-    OMD_OVERFØRING = 'OMD_OVERFØRING',
-    OPPLÆRINGSPENGER = 'OPPLÆRINGSPENGER',
+    // PP_NÆRSTÅENDE = 'PP_NÆRSTÅENDE',
+    // OMD_OVERFØRING = 'OMD_OVERFØRING',
+    // OPPLÆRINGSPENGER = 'OPPLÆRINGSPENGER',
 }
 
 export enum SupportedSøknadstype {
@@ -32,11 +32,8 @@ export interface Søknad {
     søknadstype: Søknadstype;
     status: Søknadsstatus;
     søknad: { fraOgMed?: string; tilOgMed?: string; beskrivelse?: string }; // TODO: Lag søknadstyper for hver av søknadene
-    saksId: string | null;
     journalpostId: string;
     opprettet: string; // LocalDateTime e.g. 2007-12-03T10:15:30.948652
-    endret: string | null; // LocalDateTime e.g. 2020-06-23T09:11:21.948652
-    behandlingsdato: string | null; // LocalDate e.g. 2007-12-03
 }
 
 export type SøknadApiResponse = Søknad[];

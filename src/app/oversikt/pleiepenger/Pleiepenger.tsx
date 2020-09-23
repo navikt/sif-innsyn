@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
-import Breadcrumbs from '../../components/breadcrumbs/Breadcrumbs';
+import Breadcrumbs, { Breadcrumb } from '../../components/breadcrumbs/Breadcrumbs';
 import Box from '../../components/elements/box/Box';
 import InfoManglendeSøknad from '../../components/info-manglende-søknad/InfoManglendeSøknad';
 import InnsynPage from '../../components/innsyn-page/InnsynPage';
@@ -8,6 +8,7 @@ import PageBannerCompact from '../../components/page-banner_compact/PageBannerCo
 import SectionPanel from '../../components/sectionPanel/SectionPanel';
 import SoknadList from '../../components/soknad-list/SoknadList';
 import { SøknadApiResponse } from '../../types/apiTypes/søknadTypes';
+import { getSøknadTitle } from '../../utils/soknadUtils';
 import Pleiepengesak from './Pleiepengesak';
 
 interface OwnProps {
@@ -19,23 +20,28 @@ export type PleiepengerSakProps = RouteComponentProps<{ id: string }>;
 type Props = OwnProps & PleiepengerSakProps;
 
 const PleiepengerPage: React.FC<Props> = ({ søknader, match: { params } }: Props) => {
-    const saksid = params.id;
+    const søknad = params.id ? søknader.find((s) => s.søknadId) : undefined;
+    const crumbs: Breadcrumb[] = [];
     // Todo - rewrite herfra og innover i sak/liste
-    if (saksid) {
-        return <Pleiepengesak id={saksid} />;
+    let pageTitle = 'Pleiepenger for sykt barn';
+    if (søknad) {
+        // crumbs.push({ route: RouteConfig.DINE_PLEIEPENGER, title: 'Pleiepenger for sykt barn' });
+        pageTitle = getSøknadTitle(søknad);
     }
-    const title = 'Pleiepenger for sykt barn';
     return (
         <InnsynPage
-            title={title}
-            topContentRenderer={() => <PageBannerCompact title={title} />}
-            breadcrumbsRenderer={() => <Breadcrumbs title={title} />}>
-            <SectionPanel title="Dine pleiepengesaker">
-                <SoknadList søknader={søknader} />
-                <Box margin="l">
-                    <InfoManglendeSøknad />
-                </Box>
-            </SectionPanel>
+            title={pageTitle}
+            topContentRenderer={() => <PageBannerCompact title={pageTitle} />}
+            breadcrumbsRenderer={() => <Breadcrumbs currentPageTitle={pageTitle} crumbs={crumbs} />}>
+            {søknad && <Pleiepengesak søknad={søknad} />}
+            {søknad === undefined && (
+                <SectionPanel title="Dine pleiepengesaker">
+                    <SoknadList søknader={søknader} />
+                    <Box margin="l">
+                        <InfoManglendeSøknad />
+                    </Box>
+                </SectionPanel>
+            )}
         </InnsynPage>
     );
 };

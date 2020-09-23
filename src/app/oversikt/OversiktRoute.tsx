@@ -7,10 +7,9 @@ import Fetcher from '../functional/fetcher/Fetcher';
 import HandleUnauthorized from '../functional/HandleUnauthorized';
 import { SøknadApiResponse, søknadRecipe } from '../types/apiTypes/søknadTypes';
 import { sortSoknad } from '../utils/sortSoknader';
-import { erOmsorgspenger, erPleiepenger } from '../utils/SøknadUtils';
-import OmsorgspengerPage from './omsorgspenger-page/OmsorgspengerPage';
-import OversiktView from './OversiktView';
-import Pleiepenger from './pleiepenger-page/Pleiepenger';
+import { erPleiepenger } from '../utils/soknadUtils';
+import Oversikt from './Oversikt';
+import Pleiepenger from './pleiepenger/Pleiepenger';
 import { getRouteFromRedirectParam } from '../utils/navigationUtils';
 
 const OversiktRoute = ({ history }: RouteComponentProps) => {
@@ -34,7 +33,6 @@ const OversiktRoute = ({ history }: RouteComponentProps) => {
             success={([søknadApiResponse]: [SøknadApiResponse]) => {
                 const alleSøknader = søknadApiResponse.sort(sortSoknad);
                 const pleiepengesoknader = alleSøknader.filter((søknad) => erPleiepenger(søknad));
-                const omsorgspengesoknader = alleSøknader.filter((søknad) => erOmsorgspenger(søknad));
 
                 // If redirect parameter is set in url
                 const redirectToRoute = getRouteFromRedirectParam(history);
@@ -45,7 +43,7 @@ const OversiktRoute = ({ history }: RouteComponentProps) => {
                         <Route
                             exact={true}
                             path={RouteConfig.OVERSIKT}
-                            component={() => <OversiktView søknader={alleSøknader} />}
+                            component={() => <Oversikt søknader={alleSøknader} />}
                         />
                         <Route
                             exact={false}
@@ -53,10 +51,6 @@ const OversiktRoute = ({ history }: RouteComponentProps) => {
                             component={(routeProps: RouteComponentProps) => (
                                 <Pleiepenger søknader={pleiepengesoknader} {...routeProps} />
                             )}
-                        />
-                        <Route
-                            path={RouteConfig.DINE_OMSORGSPENGER}
-                            component={() => <OmsorgspengerPage søknader={omsorgspengesoknader} />}
                         />
                     </Switch>
                 );

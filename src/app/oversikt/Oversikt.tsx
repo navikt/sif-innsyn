@@ -13,7 +13,7 @@ interface Props {
     søknader: Søknad[];
 }
 
-const OversiktView = ({ søknader }: Props) => {
+const Oversikt = ({ søknader }: Props) => {
     return (
         <InnsynPage
             title="Sykdom i familien - din oversikt"
@@ -21,9 +21,7 @@ const OversiktView = ({ søknader }: Props) => {
                 <PageBanner
                     title={
                         <span>
-                            Sykdom i familien
-                            <br />
-                            &mdash; din oversikt
+                            Din oversikt - <span style={{ whiteSpace: 'nowrap' }}>sykdom i familien</span>
                         </span>
                     }
                     illustration={<SvgSykdomIFamilien />}
@@ -60,4 +58,4 @@ const OversiktView = ({ søknader }: Props) => {
     );
 };
 
-export default OversiktView;
+export default Oversikt;

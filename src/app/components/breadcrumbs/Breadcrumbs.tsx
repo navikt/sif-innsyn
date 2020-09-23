@@ -2,36 +2,42 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import NavFrontendChevron from 'nav-frontend-chevron';
 import Lenke from 'nav-frontend-lenker';
+import { RouteConfig } from '../../config/routeConfig';
 import getLenker from '../../lenker';
 import bemUtils from '../../utils/bemUtils';
 import { getEnvironmentVariable } from '../../utils/envUtils';
 import useWindowSize from '../../utils/useWindowSize';
 import DittNavnIconSvg from '../ditt-nav-breadcrumbs/DittNavnIconSvg';
 import './breadcrumbs.less';
-import { RouteConfig } from '../../config/routeConfig';
 
 const cls = bemUtils('breadcrumbs');
 
-interface OwnProps {
+export interface Breadcrumb {
+    route: string;
     title: string;
+}
+
+interface OwnProps {
+    currentPageTitle: string;
+    crumbs?: Breadcrumb[];
 }
 
 type Props = OwnProps;
 
 const Breadcrumbs = (props: Props) => {
     const { width } = useWindowSize();
-    const { title } = props;
+    const { currentPageTitle, crumbs = [] } = props;
     const frontpageUrl = getEnvironmentVariable('PUBLIC_PATH');
 
-    const crumbs: React.ReactNode[] = [];
+    const crumbsToRender: React.ReactNode[] = [];
 
     if (width && width < 576) {
-        crumbs.push(
+        crumbsToRender.push(
             <div key="chevron" aria-hidden={true}>
                 <NavFrontendChevron type="venstre" />
             </div>
         );
-        crumbs.push(
+        crumbsToRender.push(
             <div key="forrige-side" className={cls.element('item')}>
                 <Lenke href={frontpageUrl} title="Gå til forrige side">
                     Oversikt
@@ -39,34 +45,46 @@ const Breadcrumbs = (props: Props) => {
             </div>
         );
     } else {
-        crumbs.push(<DittNavnIconSvg key={'dittNavIkon'} />);
-        crumbs.push(
+        crumbsToRender.push(<DittNavnIconSvg key={'dittNavIkon'} />);
+        crumbsToRender.push(
             <div key="dittNAV" className={cls.element('item')}>
                 <Lenke href={getLenker().dittNAV} title="Gå til ditt nav forsiden">
                     Ditt NAV
                 </Lenke>
             </div>
         );
-        crumbs.push(
+        crumbsToRender.push(
             <div key={`chevron_page`} aria-hidden={true}>
                 <NavFrontendChevron type="høyre" />
             </div>
         );
-        crumbs.push(
+        crumbsToRender.push(
             <div key="oversikt" className={cls.element('item')}>
-                <Link to={RouteConfig.OVERSIKT}>Din oversikt - Sykdom i familien</Link>
+                <Link to={RouteConfig.OVERSIKT}>Sykdom i familien</Link>
             </div>
         );
-        crumbs.push(
+        crumbs.forEach((crumb) => {
+            crumbsToRender.push(
+                <div key={`chevron_page_${crumb.route}`} aria-hidden={true}>
+                    <NavFrontendChevron type="høyre" />
+                </div>
+            );
+            crumbsToRender.push(
+                <Link key={crumb.route} to={crumb.route}>
+                    {crumb.title}
+                </Link>
+            );
+        });
+        crumbsToRender.push(
             <div key={`chevron_page_2`} aria-hidden={true}>
                 <NavFrontendChevron type="høyre" />
             </div>
         );
-        crumbs.push(<div key={`currentPage`}>{title}</div>);
+        crumbsToRender.push(<div key={`currentPage`}>{currentPageTitle}</div>);
     }
     return (
         <nav aria-label="Du er her" className={cls.block}>
-            {crumbs}
+            {crumbsToRender}
         </nav>
     );
 };
