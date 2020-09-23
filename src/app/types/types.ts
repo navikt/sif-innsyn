@@ -7,5 +7,4 @@ export type StringOrNull = string | null;
 
 export enum Sakstype {
     DINE_PLEIEPENGER = 'pleiepenger',
-    DINE_OMSORGSPENGER = 'omsorgspenger',
 }

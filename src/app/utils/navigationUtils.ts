@@ -5,12 +5,24 @@ import { getEnvironmentVariable } from './envUtils';
 const navNoUrl = 'https://www.nav.no/';
 const RedirectRouteParamName = 'redirect';
 
+const getRedirectRoute = (route: string, søknadsId?: string): string => {
+    return `${route}${søknadsId ? `/${søknadsId}` : ''}`;
+};
+
+const trimRouteForLeadingChar = (route: string) => {
+    if (route[0] === '/') {
+        return route.substr(1);
+    }
+    return route;
+};
+
 const getValidRedirectRoute = (route: string): string | undefined => {
-    switch (`/${route}`) {
+    const splits = trimRouteForLeadingChar(route).split('/');
+    const søknadstypeRoute = splits[0];
+    const søknadsId = splits.length === 2 ? splits[1] : undefined;
+    switch (`/${søknadstypeRoute}`) {
         case RouteConfig.DINE_PLEIEPENGER:
-            return RouteConfig.DINE_PLEIEPENGER;
-        case RouteConfig.DINE_OMSORGSPENGER:
-            return RouteConfig.DINE_OMSORGSPENGER;
+            return getRedirectRoute(RouteConfig.DINE_PLEIEPENGER, søknadsId);
         default:
             return undefined;
     }

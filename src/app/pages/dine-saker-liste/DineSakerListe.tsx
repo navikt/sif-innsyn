@@ -19,11 +19,6 @@ const getSakstypeLenkepanelInfo = (sakstype: Sakstype): SakstypeLenkepanelInfo =
                 href: RouteConfig.DINE_PLEIEPENGER,
                 tittel: 'Pleiepenger for sykt barn',
             };
-        case Sakstype.DINE_OMSORGSPENGER:
-            return {
-                href: RouteConfig.DINE_OMSORGSPENGER,
-                tittel: 'Utvidet rett om omsorgspenger',
-            };
     }
 };
 
