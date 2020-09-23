@@ -4,19 +4,16 @@ import * as E from 'fp-ts/lib/Either';
 import { pipe } from 'fp-ts/lib/pipeable';
 import * as IoTs from 'io-ts';
 import { reporter } from 'io-ts-reporters';
+import axiosConfig from '../../config/axiosConfig';
 import { FetchRecipe } from './types';
-
-export const defaultAxiosConfig: AxiosRequestConfig = {
-    withCredentials: true,
-};
 
 export async function fetchType<P>(
     url: string,
     validator: IoTs.Type<P>,
-    axiosConfig?: AxiosRequestConfig
+    config?: AxiosRequestConfig
 ): Promise<E.Either<Error, P>> {
     try {
-        const axiosResponse: AxiosResponse<P> = await axios.get(url, axiosConfig || defaultAxiosConfig);
+        const axiosResponse: AxiosResponse<P> = await axios.get(url, { ...config, ...axiosConfig });
         const json = axiosResponse.data;
         const result: E.Either<IoTs.Errors, P> = validator.decode(json);
         return pipe(

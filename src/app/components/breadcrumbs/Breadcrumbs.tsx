@@ -25,11 +25,11 @@ interface OwnProps {
 type Props = OwnProps;
 
 const Crumb = ({ title, href, route, isCurrent }: Breadcrumb & { isCurrent?: boolean }) => (
-    <div className={bem.element('crumb', isCurrent ? 'current' : undefined)}>
+    <span className={bem.element('crumb', isCurrent ? 'current' : undefined)}>
         {route && <Link to={route}>{title}</Link>}
         {href && <Lenke href={href}>{title}</Lenke>}
-        {!route && !href && <div>{title}</div>}
-    </div>
+        {!route && !href && <span>{title}</span>}
+    </span>
 );
 
 const Breadcrumbs = (props: Props) => {
@@ -39,14 +39,22 @@ const Breadcrumbs = (props: Props) => {
 
     let crumbsToRender: Array<Breadcrumb> = [];
 
-    if (width && width < 576) {
-        crumbsToRender = [
-            {
-                title: 'Tilbake',
-                href: crumbs.length > 0 ? crumbs[crumbs.length - 1].route : undefined,
-                route: crumbs.length === 0 ? frontpageUrl : undefined,
-            },
-        ];
+    if (width && width < 1024) {
+        if (crumbs.length > 0) {
+            crumbsToRender = [
+                {
+                    ...crumbs[crumbs.length - 1],
+                    title: 'Tilbake',
+                },
+            ];
+        } else {
+            crumbsToRender = [
+                {
+                    title: 'Tilbake',
+                    route: frontpageUrl,
+                },
+            ];
+        }
     } else {
         crumbsToRender = [
             {
@@ -64,14 +72,25 @@ const Breadcrumbs = (props: Props) => {
     return (
         <nav aria-label="Du er her" className={bem.block}>
             {crumbsToRender.length > 1 && <DittNavIconSvg key={'dittNavIkon'} />}
-            {crumbsToRender.map((c, idx) => (
+            {crumbsToRender.length === 1 && (
                 <>
-                    <span role="presentation" aria-hidden={true}>
-                        <NavFrontendChevron type="høyre" />
+                    <span style={{ whiteSpace: 'nowrap' }}>
+                        <span role="presentation" aria-hidden={true}>
+                            <NavFrontendChevron type="venstre" />
+                        </span>
+                        <Crumb {...crumbsToRender[0]} />
                     </span>
-                    <Crumb key={idx} {...c} isCurrent={idx === crumbsToRender.length - 1} />
                 </>
-            ))}
+            )}
+            {crumbsToRender.length > 1 &&
+                crumbsToRender.map((c, idx) => (
+                    <span key={idx} style={{ whiteSpace: 'nowrap' }}>
+                        <span role="presentation" aria-hidden={true}>
+                            <NavFrontendChevron type="høyre" />
+                        </span>
+                        <Crumb {...c} isCurrent={idx === crumbsToRender.length - 1} />
+                    </span>
+                ))}
         </nav>
     );
 };

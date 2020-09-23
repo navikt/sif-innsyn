@@ -21,7 +21,7 @@ export type PleiepengerSakProps = RouteComponentProps<{ id: string }>;
 type Props = OwnProps & PleiepengerSakProps;
 
 const PleiepengerPage: React.FC<Props> = ({ søknader, match: { params } }: Props) => {
-    const søknad = params.id ? søknader.find((s) => s.søknadId) : undefined;
+    const søknad = params.id ? søknader.find((s) => s.søknadId === params.id) : undefined;
     const crumbs: Breadcrumb[] = [];
     let pageTitle = 'Dine pleiepengesaker';
     if (søknad) {

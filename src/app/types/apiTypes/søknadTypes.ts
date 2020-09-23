@@ -28,23 +28,33 @@ export enum SupportedSøknadstype {
 }
 
 interface PleiepengesøknadInfo {
-    type: Søknadstype.PP_SYKT_BARN;
-    fraOgMed: string;
-    tilOgMed: string;
+    søknadstype: Søknadstype.PP_SYKT_BARN;
+    fraOgMed: Date;
+    tilOgMed: Date;
 }
 interface EttersendingInfo {
-    type: Søknadstype.PP_ETTERSENDING;
+    søknadstype: Søknadstype.PP_ETTERSENDING;
     beskrivelse: string;
 }
 
-export interface Søknad {
+interface SøknadBase {
     søknadId: UUID;
     søknadstype: Søknadstype;
     status: Søknadsstatus;
     søknad: PleiepengesøknadInfo | EttersendingInfo;
     journalpostId: string;
-    opprettet: string; // LocalDateTime e.g. 2007-12-03T10:15:30.948652
+    opprettet: Date; // LocalDateTime e.g. 2007-12-03T10:15:30.948652
 }
+export interface Pleiepengesøknad extends SøknadBase {
+    søknadstype: Søknadstype.PP_SYKT_BARN;
+    søknad: PleiepengesøknadInfo;
+}
+export interface PleiepengerEttersending extends SøknadBase {
+    søknadstype: Søknadstype.PP_ETTERSENDING;
+    søknad: EttersendingInfo;
+}
+
+export type Søknad = Pleiepengesøknad | PleiepengerEttersending;
 
 export type SøknadApiResponse = Søknad[];
 

@@ -42,7 +42,7 @@ const SøknadEtikett = ({ søknad }: { søknad: Søknad }) => {
 
 const showStatus = false;
 
-const Soknadstatus = ({ søknad }: Props) => {
+const SoknadListElement = ({ søknad }: Props) => {
     const href = `${RouteConfig.DINE_PLEIEPENGER}/${søknad.søknadId}`;
     return (
         <LenkepanelBase
@@ -68,4 +68,4 @@ const Soknadstatus = ({ søknad }: Props) => {
     );
 };
 
-export default Soknadstatus;
+export default SoknadListElement;

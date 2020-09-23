@@ -22,6 +22,7 @@ const OversiktRoute = ({ history }: RouteComponentProps) => {
                     error={e}
                     onWillRedirect={() => <LoadingPage />}
                     handleError={() => {
+                        console.log(e);
                         return (
                             <AlertStripe type="feil">
                                 Vi opplever ustablitet med våre søknadstjenester. Vennligst prøv igjen senere.

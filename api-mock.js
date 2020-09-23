@@ -51,7 +51,7 @@ const arbeidsgivereMock = {
 
 const soknadMock = [
     {
-        søknadId: '0f44f965-e3fb-489c-a757-b0ad46619e33',
+        søknadId: '0f44f965-e3fb-489c-a757-b0ad46619e33-4',
         søknadstype: 'OMP_UTVIDET_RETT',
         status: 'MOTTATT',
         søknad: {
@@ -84,7 +84,7 @@ const soknadMock = [
                 harNattevåk: true,
                 tilleggsinformasjon: 'Har Nattevåk',
             },
-            søknadId: 'cc644d91-4eff-4679-a7d3-fc57a0c6a1c2',
+            søknadId: 'cc644d91-4eff-4679-a7d3-fc57a0c6a1c2-5',
             medlemskap: {
                 skalBoIUtlandetNeste12Mnd: true,
                 harBoddIUtlandetSiste12Mnd: true,
@@ -182,7 +182,7 @@ const soknadMock = [
                 harNattevåk: true,
                 tilleggsinformasjon: 'Har Nattevåk',
             },
-            søknadId: 'cc644d91-4eff-4679-a7d3-fc57a0c6a1c2',
+            søknadId: 'cc644d91-4eff-4679-a7d3-fc57a0c6a1c2-a',
             medlemskap: {
                 skalBoIUtlandetNeste12Mnd: true,
                 harBoddIUtlandetSiste12Mnd: true,
@@ -248,7 +248,7 @@ const soknadMock = [
         behandlingsdato: null,
     },
     {
-        søknadId: '9c3a3ebf-e02a-4843-ad2c-9187e2f00cfa',
+        søknadId: '9c3a3ebf-e02a-4843-ad2c-9187e2f00cfa-x',
         søknadstype: 'PP_SYKT_BARN',
         status: 'UNDER_BEHANDLING',
         søknad: {
@@ -281,7 +281,7 @@ const soknadMock = [
                 harNattevåk: true,
                 tilleggsinformasjon: 'Har Nattevåk',
             },
-            søknadId: 'cc644d91-4eff-4679-a7d3-fc57a0c6a1c2',
+            søknadId: 'cc644d91-4eff-4679-a7d3-fc57a0c6a1c2-y',
             medlemskap: {
                 skalBoIUtlandetNeste12Mnd: true,
                 harBoddIUtlandetSiste12Mnd: true,
@@ -347,7 +347,7 @@ const soknadMock = [
         behandlingsdato: null,
     },
     {
-        søknadId: '9c3a3ebf-e02a-4843-ad2c-9187e2f00cfa',
+        søknadId: '9c3a3ebf-e02a-4843-ad2c-9187e2f00cfa-b',
         søknadstype: 'PP_SYKT_BARN',
         status: 'MOTTATT',
         søknad: {
@@ -380,7 +380,7 @@ const soknadMock = [
                 harNattevåk: true,
                 tilleggsinformasjon: 'Har Nattevåk',
             },
-            søknadId: 'cc644d91-4eff-4679-a7d3-fc57a0c6a1c2',
+            søknadId: 'cc644d91-4eff-4679-a7d3-fc57a0c6a1c2-3',
             medlemskap: {
                 skalBoIUtlandetNeste12Mnd: true,
                 harBoddIUtlandetSiste12Mnd: true,
@@ -452,6 +452,7 @@ const soknadMock = [
             beskrivelse: 'Lorem ipsum doret salah et spurs',
         },
         saksId: 'sak-5674839201',
+        søknadId: 'asf',
         journalpostId: '68493021',
         opprettet: '2018-01-01T03:04:05',
         endret: '2020-06-23T09:11:21.948652',

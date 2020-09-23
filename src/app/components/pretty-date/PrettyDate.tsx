@@ -4,7 +4,7 @@ import moment from 'moment';
 type FormatType = 'date' | 'dateAndTime';
 
 interface Props {
-    date: string;
+    date: string | Date;
     format?: 'date' | 'dateAndTime';
 }
 

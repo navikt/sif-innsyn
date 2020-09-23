@@ -15,13 +15,13 @@ const SoknadInfo = ({ søknad }: Props) => (
         <div className={bem.element('mottatt')}>
             Mottatt <PrettyDate date={søknad.opprettet} format="dateAndTime" />
         </div>
-        {søknad.søknad.type === Søknadstype.PP_SYKT_BARN && (
+        {søknad.søknadstype === Søknadstype.PP_SYKT_BARN && (
             <div className={bem.element('detaljer')}>
                 Gjelder perioden <PrettyDate date={søknad.søknad.fraOgMed} /> -{' '}
                 <PrettyDate date={søknad.søknad.tilOgMed} />
             </div>
         )}
-        {søknad.søknad.type === Søknadstype.PP_ETTERSENDING && (
+        {søknad.søknadstype === Søknadstype.PP_ETTERSENDING && (
             <div className={bem.element('detaljer')}>
                 Ettersending gjelder: <q>{søknad.søknad.beskrivelse}</q> ...
             </div>
