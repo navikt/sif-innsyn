@@ -1,12 +1,9 @@
 import * as React from 'react';
 import { render } from 'react-dom';
-import { Route, Switch } from 'react-router-dom';
 import moment from 'moment';
-import KalkulatorInput from 'omsorgspenger-kalkulator/lib/components/KalkulatorInput';
 import ApplicationWrapper from './components/application-wrapper/ApplicationWrapper';
 import UnavailablePage from './components/pages/unavailable-page/UnavailablePage';
-import { RouteConfig } from './config/routeConfig';
-import InnloggetRoute from './oversikt/OversiktRoute';
+import OversiktRoute from './oversikt/OversiktRoute';
 import { Locale } from './types/Locale';
 import { Feature, isFeatureEnabled } from './utils/featureToggleUtils';
 import { getLocaleFromSessionStorage, setLocaleInSessionStorage } from './utils/localeUtils';
@@ -24,39 +21,7 @@ const App: React.FunctionComponent = () => {
                 setLocaleInSessionStorage(activeLocale);
                 setLocale(activeLocale);
             }}>
-            <>
-                {isFeatureEnabled(Feature.UTILGJENGELIG) ? (
-                    <UnavailablePage />
-                ) : (
-                    <Switch>
-                        <Route
-                            path={RouteConfig.KALKULATOR}
-                            exact={true}
-                            component={() => {
-                                return <KalkulatorInput />;
-                            }}
-                        />
-                        <Route
-                            path={RouteConfig.INNLOGGET}
-                            component={() => {
-                                return <InnloggetRoute />;
-                            }}
-                        />
-                        <Route
-                            path={RouteConfig.ROOT}
-                            component={() => {
-                                return <div>Info om at en må logge inn</div>;
-                            }}
-                        />
-                        <Route
-                            path={'*'}
-                            component={() => {
-                                return <div>404 - Ukjent side</div>;
-                            }}
-                        />
-                    </Switch>
-                )}
-            </>
+            <>{isFeatureEnabled(Feature.UTILGJENGELIG) ? <UnavailablePage /> : <OversiktRoute />}</>
         </ApplicationWrapper>
     );
 };

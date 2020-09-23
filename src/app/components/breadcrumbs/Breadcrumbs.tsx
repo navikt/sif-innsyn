@@ -54,7 +54,7 @@ const Breadcrumbs = (props: Props) => {
         );
         crumbs.push(
             <div key="oversikt" className={cls.element('item')}>
-                <Link to={RouteConfig.INNLOGGET}>Din oversikt - Sykdom i familien</Link>
+                <Link to={RouteConfig.OVERSIKT}>Din oversikt - Sykdom i familien</Link>
             </div>
         );
         crumbs.push(

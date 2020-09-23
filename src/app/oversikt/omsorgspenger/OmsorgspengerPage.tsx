@@ -4,21 +4,21 @@ import { Tilbakeknapp } from 'nav-frontend-ikonknapper';
 import Lesmerpanel from 'nav-frontend-lesmerpanel';
 import { Ingress, Sidetittel, Undertittel } from 'nav-frontend-typografi';
 import Soknadstatus from 'app/components/soknadstatus/Soknadstatus';
-import { RouteConfig } from '../../config/routeConfig';
-import { Søknad } from '../../types/apiTypes/søknadTypes';
 import InnsynPage from '../../components/innsyn-page/InnsynPage';
 import PageBannerCompact from '../../components/page-banner_compact/PageBannerCompact';
+import { RouteConfig } from '../../config/routeConfig';
+import { Søknad } from '../../types/apiTypes/søknadTypes';
 
 interface Props {
     søknader: Søknad[];
 }
 
-const OmsorgspengerView: React.FC<Props> = ({ søknader }: Props) => {
+const OmsorgspengerPage: React.FC<Props> = ({ søknader }: Props) => {
     const history = useHistory();
     const title = 'Utvidet rett om omsorgspenger';
     return (
         <InnsynPage title={title} topContentRenderer={() => <PageBannerCompact title={title} />}>
-            <Tilbakeknapp onClick={() => history.push(RouteConfig.INNLOGGET)}>Tilbake til oversikt</Tilbakeknapp>
+            <Tilbakeknapp onClick={() => history.push(RouteConfig.OVERSIKT)}>Tilbake til oversikt</Tilbakeknapp>
             {søknader && (
                 <div>
                     <Sidetittel>Dine Omsorgspenger</Sidetittel>
@@ -45,9 +45,9 @@ const OmsorgspengerView: React.FC<Props> = ({ søknader }: Props) => {
                     </div>
                 </div>
             )}
-            <Tilbakeknapp onClick={() => history.push(RouteConfig.INNLOGGET)}>Tilbake til oversikt</Tilbakeknapp>
+            <Tilbakeknapp onClick={() => history.push(RouteConfig.OVERSIKT)}>Tilbake til oversikt</Tilbakeknapp>
         </InnsynPage>
     );
 };
 
-export default OmsorgspengerView;
+export default OmsorgspengerPage;

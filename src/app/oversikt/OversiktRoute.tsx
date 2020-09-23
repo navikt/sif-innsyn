@@ -6,8 +6,8 @@ import OversiktView from './OversiktView';
 import HandleUnauthorized from '../functional/HandleUnauthorized';
 import { Route, Switch } from 'react-router-dom';
 import { RouteConfig } from '../config/routeConfig';
-import PleiepengerView from './pleiepenger/PleiepengerView';
-import OmsorgspengerView from './omsorgspenger/OmsorgspengerView';
+import PleiepengerPage from './pleiepenger/PleiepengerPage';
+import OmsorgspengerPage from './omsorgspenger/OmsorgspengerPage';
 import { erOmsorgspenger, erPleiepenger } from '../utils/SøknadUtils';
 import AlertStripe from 'nav-frontend-alertstriper';
 import { sortSoknad } from '../utils/sortSoknader';
@@ -30,7 +30,6 @@ const OversiktRoute = () => (
             />
         )}
         success={([søknadApiResponse]: [SøknadApiResponse]) => {
-            // change
             const alleSøknader = søknadApiResponse.sort(sortSoknad);
             const pleiepengesoknader = alleSøknader.filter((søknad) => erPleiepenger(søknad));
             const omsorgspengesoknader = alleSøknader.filter((søknad) => erOmsorgspenger(søknad));
@@ -38,23 +37,23 @@ const OversiktRoute = () => (
                 <Switch>
                     <Route
                         exact={true}
-                        path={RouteConfig.INNLOGGET}
+                        path={RouteConfig.OVERSIKT}
                         component={() => <OversiktView søknader={alleSøknader} />}
                     />
                     <Route
                         exact={true}
                         path={RouteConfig.DINE_PLEIEPENGER}
-                        component={() => <PleiepengerView søknader={pleiepengesoknader} />}
+                        component={() => <PleiepengerPage søknader={pleiepengesoknader} />}
                     />
                     <Route
                         exact={true}
                         path={RouteConfig.DINE_OMSORGSPENGER}
-                        component={() => <OmsorgspengerView søknader={omsorgspengesoknader} />}
+                        component={() => <OmsorgspengerPage søknader={omsorgspengesoknader} />}
                     />
                     <Route
                         path={'/innlogget'}
                         component={() => {
-                            // TODO - hva skjer her?
+                            // TODO - redirect ref André
                             return <div>skal nå redirecte tilbake der bruker var.</div>;
                         }}
                     />
