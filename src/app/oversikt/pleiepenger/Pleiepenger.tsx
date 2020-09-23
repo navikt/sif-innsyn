@@ -23,7 +23,6 @@ type Props = OwnProps & PleiepengerSakProps;
 const PleiepengerPage: React.FC<Props> = ({ søknader, match: { params } }: Props) => {
     const søknad = params.id ? søknader.find((s) => s.søknadId) : undefined;
     const crumbs: Breadcrumb[] = [];
-    // Todo - rewrite herfra og innover i sak/liste
     let pageTitle = 'Dine pleiepengesaker';
     if (søknad) {
         crumbs.push({ route: RouteConfig.DINE_PLEIEPENGER, title: pageTitle });
@@ -32,7 +31,7 @@ const PleiepengerPage: React.FC<Props> = ({ søknader, match: { params } }: Prop
     return (
         <InnsynPage
             title={pageTitle}
-            topContentRenderer={() => <PageBannerCompact title={pageTitle} />}
+            topContentRenderer={() => <PageBannerCompact title={'Pleiepenger for sykt barn'} />}
             breadcrumbsRenderer={() => <Breadcrumbs currentPageTitle={pageTitle} crumbs={crumbs} />}>
             {søknad && (
                 <SectionPanel title={pageTitle}>
