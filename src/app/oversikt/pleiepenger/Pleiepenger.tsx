@@ -7,6 +7,7 @@ import InnsynPage from '../../components/innsyn-page/InnsynPage';
 import PageBannerCompact from '../../components/page-banner_compact/PageBannerCompact';
 import SectionPanel from '../../components/sectionPanel/SectionPanel';
 import SoknadList from '../../components/soknad-list/SoknadList';
+import { RouteConfig } from '../../config/routeConfig';
 import { SøknadApiResponse } from '../../types/apiTypes/søknadTypes';
 import { getSøknadTitle } from '../../utils/soknadUtils';
 import Pleiepengesak from './Pleiepengesak';
@@ -23,9 +24,9 @@ const PleiepengerPage: React.FC<Props> = ({ søknader, match: { params } }: Prop
     const søknad = params.id ? søknader.find((s) => s.søknadId) : undefined;
     const crumbs: Breadcrumb[] = [];
     // Todo - rewrite herfra og innover i sak/liste
-    let pageTitle = 'Pleiepenger for sykt barn';
+    let pageTitle = 'Dine pleiepengesaker';
     if (søknad) {
-        // crumbs.push({ route: RouteConfig.DINE_PLEIEPENGER, title: 'Pleiepenger for sykt barn' });
+        crumbs.push({ route: RouteConfig.DINE_PLEIEPENGER, title: pageTitle });
         pageTitle = getSøknadTitle(søknad);
     }
     return (
@@ -33,7 +34,13 @@ const PleiepengerPage: React.FC<Props> = ({ søknader, match: { params } }: Prop
             title={pageTitle}
             topContentRenderer={() => <PageBannerCompact title={pageTitle} />}
             breadcrumbsRenderer={() => <Breadcrumbs currentPageTitle={pageTitle} crumbs={crumbs} />}>
-            {søknad && <Pleiepengesak søknad={søknad} />}
+            {søknad && (
+                <SectionPanel title={pageTitle}>
+                    <Box margin="l">
+                        <Pleiepengesak søknad={søknad} />
+                    </Box>
+                </SectionPanel>
+            )}
             {søknad === undefined && (
                 <SectionPanel title="Dine pleiepengesaker">
                     <SoknadList søknader={søknader} />

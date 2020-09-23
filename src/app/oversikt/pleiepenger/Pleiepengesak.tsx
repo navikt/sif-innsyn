@@ -8,7 +8,7 @@ interface Props {
 const Pleiepengesak = ({ søknad }: Props) => {
     return (
         <div>
-            Søknads: <pre>{JSON.stringify(søknad)}</pre>
+            SøknadJSON: <code style={{ wordBreak: 'break-all' }}>{JSON.stringify(søknad)}</code>
         </div>
     );
 };
