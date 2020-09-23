@@ -3,7 +3,7 @@ import { render } from 'react-dom';
 import moment from 'moment';
 import ApplicationWrapper from './components/application-wrapper/ApplicationWrapper';
 import UnavailablePage from './components/pages/unavailable-page/UnavailablePage';
-import OversiktRoute from './oversikt/OversiktRoute';
+import OversiktRoute from './pages/OversiktRoute';
 import { Locale } from './types/Locale';
 import { Feature, isFeatureEnabled } from './utils/featureToggleUtils';
 import { getLocaleFromSessionStorage, setLocaleInSessionStorage } from './utils/localeUtils';
