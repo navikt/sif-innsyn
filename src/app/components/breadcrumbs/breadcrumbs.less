@@ -24,27 +24,27 @@
         }
     }
 
-    .chevron--hoyre {
-        color: @navGra60;
-        transform: scale(0.8) rotate(-90deg);
-    }
+    // .chevron--hoyre {
+    //     color: @navGra60;
+    //     transform: scale(0.8) rotate(-90deg);
+    // }
 
-    &__item {
+    &__crumb {
         max-width: 20rem;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
         margin-right: 0.5rem;
         color: lightGray;
+        position: relative;
 
         &:not(:first-child) {
             margin-left: 0.5rem;
         }
-    }
-
-    &__current {
-        color: black;
-        font-weight: bold;
+        &--current {
+            color: black;
+            font-weight: bold;
+        }
     }
 
     @media (min-width: @tablet-breakpoint) {
