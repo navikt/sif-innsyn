@@ -1,18 +1,17 @@
 import React from 'react';
-import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
-import { Hovedknapp } from 'nav-frontend-knapper';
 import Lenke from 'nav-frontend-lenker';
+import { Undertittel } from 'nav-frontend-typografi';
 import Box from '../../components/elements/box/Box';
 import Title from '../../components/elements/title/Title';
 import ExpandableInfo from '../../components/expandable-info/ExpandableInfo';
-import Knapperad from '../../components/knapperad/Knapperad';
 import ProcessDescription from '../../components/process-description/ProcessDescription';
 import SectionPanel from '../../components/section-panel/SectionPanel';
 import getLenker from '../../lenker';
 
 const NyttigInforPanel = () => (
     <SectionPanel title="Nyttig informasjon">
-        <Ekspanderbartpanel tittel="Dette kan du forvente deg etter at du har sendt søknad">
+        <Undertittel>Dette kan du forvente deg etter at du har sendt søknad</Undertittel>
+        <Box margin="l">
             <ProcessDescription
                 steps={[
                     <div key={'legeerklæring'}>
@@ -91,12 +90,6 @@ const NyttigInforPanel = () => (
                     </div>,
                 ]}
             />
-        </Ekspanderbartpanel>
-        <Box margin="xl">
-            <Knapperad>
-                <Hovedknapp>Ettersend dokumentasjon</Hovedknapp>
-                <Hovedknapp>Send en ny søknad</Hovedknapp>
-            </Knapperad>
         </Box>
     </SectionPanel>
 );

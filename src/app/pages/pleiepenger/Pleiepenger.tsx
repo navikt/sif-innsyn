@@ -10,6 +10,7 @@ import SoknadList from '../../components/soknad-list/SoknadList';
 import { RouteConfig } from '../../config/routeConfig';
 import { SøknadApiResponse } from '../../types/apiTypes/søknadTypes';
 import { getSøknadTitle } from '../../utils/soknadUtils';
+import NyttigInforPanel from './NyttigInfo';
 import Pleiepengesak from './Pleiepengesak';
 
 interface OwnProps {
@@ -37,11 +38,14 @@ const PleiepengerPage: React.FC<Props> = ({ søknader, match: { params } }: Prop
             topContentRenderer={() => <PageBannerCompact title={'Pleiepenger for sykt barn'} />}
             breadcrumbsRenderer={() => <Breadcrumbs currentPageTitle={pageTitle} crumbs={crumbs} />}>
             {søknad && (
-                <SectionPanel title={pageTitle}>
-                    <Box margin="l">
-                        <Pleiepengesak søknad={søknad} />
-                    </Box>
-                </SectionPanel>
+                <>
+                    <SectionPanel title={pageTitle}>
+                        <Box margin="l">
+                            <Pleiepengesak søknad={søknad} />
+                        </Box>
+                    </SectionPanel>
+                    <NyttigInforPanel />
+                </>
             )}
             {søknad === undefined && (
                 <SectionPanel title="Dine pleiepengesaker">

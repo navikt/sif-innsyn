@@ -34,8 +34,7 @@ const OversiktRoute = ({ history }: RouteComponentProps) => {
                 const alleSøknader = søknadApiResponse.sort(sortSoknad);
                 const pleiepengesoknader = alleSøknader.filter((søknad) => erPleiepenger(søknad));
 
-                // If redirect parameter is set in url
-                const redirectToRoute = getRedirectRouteFromUrl(history);
+                const redirectToRoute = getRedirectRouteFromUrl(history); // If redirect parameter is set in url
 
                 return (
                     <Switch>
