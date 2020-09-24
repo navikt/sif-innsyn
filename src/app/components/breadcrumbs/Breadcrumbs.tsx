@@ -71,7 +71,11 @@ const Breadcrumbs = (props: Props) => {
     }
     return (
         <nav aria-label="Du er her" className={bem.block}>
-            {crumbsToRender.length > 1 && <DittNavIconSvg key={'dittNavIkon'} />}
+            {crumbsToRender.length > 1 && (
+                <span style={{ marginRight: '.5rem', lineHeight: 0 }}>
+                    <DittNavIconSvg key={'dittNavIkon'} />
+                </span>
+            )}
             {crumbsToRender.length === 1 && (
                 <>
                     <span style={{ whiteSpace: 'nowrap' }}>
@@ -85,9 +89,11 @@ const Breadcrumbs = (props: Props) => {
             {crumbsToRender.length > 1 &&
                 crumbsToRender.map((c, idx) => (
                     <span key={idx} style={{ whiteSpace: 'nowrap' }}>
-                        <span role="presentation" aria-hidden={true}>
-                            <NavFrontendChevron type="høyre" />
-                        </span>
+                        {idx > 0 && (
+                            <span role="presentation" aria-hidden={true}>
+                                <NavFrontendChevron type="høyre" />
+                            </span>
+                        )}
                         <Crumb {...c} isCurrent={idx === crumbsToRender.length - 1} />
                     </span>
                 ))}
