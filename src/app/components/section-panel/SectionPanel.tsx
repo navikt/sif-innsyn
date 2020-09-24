@@ -40,7 +40,7 @@ const SectionPanel = ({
                 )
             )}>
             <PanelBase className={bem.element('panel')}>
-                {header}
+                {header && <head>{header}</head>}
                 {illustration && <div className={bem.element('illustration')}>{illustration}</div>}
                 {title && (
                     <div className={bem.element('title')}>

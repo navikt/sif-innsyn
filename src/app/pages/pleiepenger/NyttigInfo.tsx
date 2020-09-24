@@ -15,14 +15,16 @@ interface StepProps {
 
 const Step = ({ title, children }: StepProps): JSX.Element => (
     <div>
-        <Title titleType="element">{title}</Title>
+        <Title tag="h4" titleType="element">
+            {title}
+        </Title>
         <Box margin="s">{children}</Box>
     </div>
 );
 
 const NyttigInforPanel = () => (
     <SectionPanel title="Nyttig informasjon">
-        <Undertittel>Dette kan du forvente deg etter at du har sendt søknad</Undertittel>
+        <Undertittel tag="h3">Dette kan du forvente deg etter at du har sendt søknad</Undertittel>
         <Box margin="l">
             <ProcessDescription
                 steps={[
@@ -47,7 +49,7 @@ const NyttigInforPanel = () => (
                         </p>
                         <p>Vi kontakter deg hvis vi trenger mer informasjon</p>
                         <div>
-                            <Title titleType="element">
+                            <Title tag="h5" titleType="element">
                                 Hvis noe i situasjonen din endrer seg må du si fra til oss
                             </Title>
                             <ExpandableInfo title="Hvilke endringer må jeg si fra om?">
