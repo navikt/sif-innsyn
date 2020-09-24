@@ -18,7 +18,10 @@ const PleiepengesakSøknad = ({ søknad }: Props) => {
     return (
         <>
             <SectionPanel
-                title={`${getSøknadTitle(søknad, true)} mottatt ${getPrettyDate(søknad.opprettet, 'dayDateAndTime')}`}
+                title={`${getSøknadTitle(søknad, true)} er mottatt ${getPrettyDate(
+                    søknad.opprettet,
+                    'dayDateAndTime'
+                )}`}
                 titleTag="h1"
                 header={<Box padBottom="s">Pleiepenger for sykt barn</Box>}>
                 <Box margin="l">
@@ -26,14 +29,10 @@ const PleiepengesakSøknad = ({ søknad }: Props) => {
                         Gjelder for perioden <PrettyDate date={søknad.søknad.fraOgMed} /> -{' '}
                         <PrettyDate date={søknad.søknad.tilOgMed} />
                     </p>
+                    <p>Dette er en bekreftelse på at vi har mottatt søknaden din. </p>
                     <p>
-                        Når søknaden din er ferdig behandlet får du beskjed om det på{' '}
-                        <Lenke href={getLenker().dittNAV}>Ditt NAV</Lenke>.
-                    </p>
-                    <p>
-                        Fordi denne siden er under utvikling kan du for øyeblikket ikke åpne søknaden din eller
-                        vedleggene du har sendt, eller se status på søknaden. Disse tjenestene kommer på et senere
-                        tidspunkt.
+                        Du vil ikke kunne se oppdatert status på søknaden din her, men når den er ferdigbehandlet får du
+                        beskjed om det under saksoversikten din på <Lenke href={getLenker().dittNAV}>Ditt NAV</Lenke>.
                     </p>
                     <Box margin="xl" padBottom="xl">
                         <Knapperad align="left">
@@ -42,6 +41,10 @@ const PleiepengesakSøknad = ({ søknad }: Props) => {
                             </Knappelenke>
                         </Knapperad>
                     </Box>
+                    <p>
+                        Denne siden er under utvikling, og derfor kan du for øyeblikket ikke åpne søknaden din eller
+                        vedleggende du har sendt. Disse tjenestene kommer på et senere tidspunkt.
+                    </p>
                 </Box>
             </SectionPanel>
             <NyttigInforPanel />
