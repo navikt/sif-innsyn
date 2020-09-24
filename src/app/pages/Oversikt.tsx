@@ -19,9 +19,9 @@ const Oversikt = ({ søknader }: Props) => {
             topContentRenderer={() => (
                 <PageBanner
                     title={
-                        <span>
+                        <>
                             Din oversikt - <span style={{ whiteSpace: 'nowrap' }}>sykdom i familien</span>
-                        </span>
+                        </>
                     }
                     illustration={<SvgSykdomIFamilien />}
                 />

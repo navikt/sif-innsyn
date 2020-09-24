@@ -48,7 +48,7 @@ const PleiepengerPage: React.FC<Props> = ({ søknader, match: { params } }: Prop
                 </>
             )}
             {søknad === undefined && (
-                <SectionPanel title="Pleiepenger sykt barn">
+                <SectionPanel title="Pleiepenger sykt barn" titleTag="h1">
                     <SoknadList søknader={søknader} />
                     <Box margin="l">
                         <InfoManglendeSøknad mode="text" />

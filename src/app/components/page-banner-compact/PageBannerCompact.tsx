@@ -1,5 +1,4 @@
 import React from 'react';
-import { Sidetittel } from 'nav-frontend-typografi';
 import './pageBannerCompact.less';
 import bemUtils from '../../utils/bemUtils';
 
@@ -11,9 +10,9 @@ const bem = bemUtils('pageBannerCompact');
 
 const PageBannerCompact = ({ title }: Props) => {
     return (
-        <header className={bem.classNames(bem.block)}>
-            <Sidetittel className={bem.element('title')}>{title}</Sidetittel>
-        </header>
+        <div className={bem.classNames(bem.block)}>
+            <span className={bem.element('title')}>{title}</span>
+        </div>
     );
 };
 

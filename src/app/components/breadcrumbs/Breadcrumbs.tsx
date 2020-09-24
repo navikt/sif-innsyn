@@ -70,7 +70,7 @@ const Breadcrumbs = (props: Props) => {
         ];
     }
     return (
-        <nav aria-label="Du er her" className={bem.block}>
+        <nav aria-label="Brødsmuler" className={bem.block}>
             {crumbsToRender.length > 1 && (
                 <span style={{ marginRight: '.5rem', lineHeight: 0 }}>
                     <DittNavIconSvg key={'dittNavIkon'} />

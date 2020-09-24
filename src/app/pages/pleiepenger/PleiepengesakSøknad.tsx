@@ -15,19 +15,16 @@ interface Props {
 }
 
 const PleiepengesakSøknad = ({ søknad }: Props) => {
-    console.log(getLenker().ettersending);
-
     return (
         <>
             <SectionPanel
                 title={`${getSøknadTitle(søknad, true)} mottatt ${getPrettyDate(søknad.opprettet, 'dayDateAndTime')}`}
+                titleTag="h1"
                 header={<Box padBottom="s">Pleiepenger for sykt barn</Box>}>
                 <Box margin="l">
-                    <p>
-                        <strong>
-                            Gjelder for perioden <PrettyDate date={søknad.søknad.fraOgMed} /> -{' '}
-                            <PrettyDate date={søknad.søknad.tilOgMed} />
-                        </strong>
+                    <p style={{ fontWeight: 'bold' }}>
+                        Gjelder for perioden <PrettyDate date={søknad.søknad.fraOgMed} /> -{' '}
+                        <PrettyDate date={søknad.søknad.tilOgMed} />
                     </p>
                     <p>
                         Når søknaden din er ferdig behandlet får du beskjed om det på{' '}

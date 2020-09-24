@@ -53,8 +53,7 @@ const SoknadListElement = ({ søknad }: Props) => {
                 <Link to={href} {...props}>
                     <div className={bem.element('content')}>
                         <Undertittel tag="h3">
-                            {getSøknadTitle(søknad, true)}
-                            <br />
+                            <div>{getSøknadTitle(søknad, true)}</div>
                             <Normaltekst>
                                 <SoknadInfo søknad={søknad} />
                             </Normaltekst>
