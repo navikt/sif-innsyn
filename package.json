@@ -74,7 +74,6 @@
         "react-collapse": "^5.0.1",
         "react-dom": "^16.13.1",
         "react-intl": "^4.6.9",
-        "react-json-view": "^1.19.1",
         "react-router-dom": "^5.2.0",
         "snyk": "^1.337.0"
     },
