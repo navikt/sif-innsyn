@@ -7,6 +7,7 @@ import { SøknadsIkon } from '../../svg/FellesIkoner';
 import { Søknad, Søknadstype } from '../../types/apiTypes/søknadTypes';
 import { Sakstype } from '../../types/types';
 import { søknadTypeErPleiepenger } from '../../utils/soknadUtils';
+import Box from '../../components/elements/box/Box';
 
 interface Props {
     søknader: Søknad[];
@@ -41,7 +42,11 @@ const DineSakerListe = ({ søknader }: Props) => {
     const harPleiepenger = søknadstyper?.filter((type) => søknadTypeErPleiepenger(type)).length !== 0;
 
     if (søknader.length === 0) {
-        return <AlertStripeInfo>Vi finner ingen saker fra deg</AlertStripeInfo>;
+        return (
+            <Box padBottom="l">
+                <AlertStripeInfo>Vi finner ingen saker fra deg</AlertStripeInfo>
+            </Box>
+        );
     }
 
     return <>{harPleiepenger && <SakstypeLenkepanel sakstype={Sakstype.DINE_PLEIEPENGER} />}</>;

@@ -1,29 +1,38 @@
 import React from 'react';
-import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
-import { Hovedknapp } from 'nav-frontend-knapper';
 import Lenke from 'nav-frontend-lenker';
+import { Undertittel } from 'nav-frontend-typografi';
 import Box from '../../components/elements/box/Box';
 import Title from '../../components/elements/title/Title';
 import ExpandableInfo from '../../components/expandable-info/ExpandableInfo';
-import Knapperad from '../../components/knapperad/Knapperad';
 import ProcessDescription from '../../components/process-description/ProcessDescription';
 import SectionPanel from '../../components/section-panel/SectionPanel';
 import getLenker from '../../lenker';
 
+interface StepProps {
+    title: string;
+    children: React.ReactNode;
+}
+
+const Step = ({ title, children }: StepProps): JSX.Element => (
+    <div>
+        <Title titleType="element">{title}</Title>
+        <Box margin="s">{children}</Box>
+    </div>
+);
+
 const NyttigInforPanel = () => (
     <SectionPanel title="Nyttig informasjon">
-        <Ekspanderbartpanel tittel="Dette kan du forvente deg etter at du har sendt søknad">
+        <Undertittel>Dette kan du forvente deg etter at du har sendt søknad</Undertittel>
+        <Box margin="l">
             <ProcessDescription
                 steps={[
-                    <div key={'legeerklæring'}>
-                        <Title titleType="element">Du har sendt søknad med legeerklæring</Title>
+                    <Step key="legeerklæring" title="Du har sendt søknad med legeerklæring">
                         <p>
                             Hvis du ikke har sendt legeerklæring med søknaden din, må du{' '}
                             <Lenke href={getLenker().ettersending}>ettersende denne</Lenke> så snart du kan
                         </p>
-                    </div>,
-                    <div key="inntektsmelding">
-                        <Title titleType="element">Arbeidsgiveren din sender inntektsmelding til oss</Title>
+                    </Step>,
+                    <Step key="inntektsmelding" title="Arbeidsgiveren din sender inntektsmelding til oss">
                         <ExpandableInfo title="Hva betyr dette?">
                             <p>
                                 Du må selv si fra til arbeidsgiveren din om at de må sende en inntektsmelding til oss.
@@ -31,12 +40,11 @@ const NyttigInforPanel = () => (
                                 refusjon eller ei.
                             </p>
                         </ExpandableInfo>
-                    </div>,
-                    <div key="behandling" style={{ display: 'grid', gridGap: '0.5em' }}>
-                        <div>
-                            <Title titleType="element">Vi ser på søknaden din og behandler den</Title>
+                    </Step>,
+                    <Step key="behandling" title="Vi ser på søknaden din og behandler den">
+                        <p>
                             <Lenke href={getLenker().saksbehandlingstid}>Se saksbehandlingstider der du bor</Lenke>
-                        </div>
+                        </p>
                         <p>Vi kontakter deg hvis vi trenger mer informasjon</p>
                         <div>
                             <Title titleType="element">
@@ -58,24 +66,21 @@ const NyttigInforPanel = () => (
                                 </p>
                             </ExpandableInfo>
                         </div>
-                    </div>,
-                    <div key="svar">
-                        <Title titleType="element">
-                            Når søknaden er ferdig behandlet får du tilsendt svar i saksoversikten på Ditt NAV og i
-                            posten.
-                        </Title>
+                    </Step>,
+                    <Step
+                        key="svar"
+                        title="Når søknaden er ferdig behandlet får du tilsendt svar i saksoversikten på Ditt NAV og i posten">
                         <ExpandableInfo title="Hvilke endringer må jeg si fra om?">
                             <p>
                                 Når vi har sett på saken din vil vi sende deg et svar på søknaden din. I svaret vil det
                                 stå om du har fått innvilget det du har søkt om.
                             </p>
                         </ExpandableInfo>
-                    </div>,
-                    <div key="saksoversikt">
-                        <Title titleType="element">
-                            Hvis du får innvilget pleiepenger vil det registreres i saksoversikten din at du skal ha
-                            utbetaling
-                        </Title>
+                    </Step>,
+                    <Step
+                        key="saksoversikt"
+                        title="Hvis du får innvilget pleiepenger vil det registreres i saksoversikten din at du skal ha
+                            utbetaling">
                         <ExpandableInfo title="Når får jeg utbetaling?">
                             <p>
                                 Utbetaling av pleiepenger fra NAV er i slutten av hver måned. Hvis du har fått innvilget
@@ -88,15 +93,9 @@ const NyttigInforPanel = () => (
                                 din.
                             </p>
                         </ExpandableInfo>
-                    </div>,
+                    </Step>,
                 ]}
             />
-        </Ekspanderbartpanel>
-        <Box margin="xl">
-            <Knapperad>
-                <Hovedknapp>Ettersend dokumentasjon</Hovedknapp>
-                <Hovedknapp>Send en ny søknad</Hovedknapp>
-            </Knapperad>
         </Box>
     </SectionPanel>
 );
