@@ -1,4 +1,4 @@
-# Sykdom i familien - innsyns frontend
+# Sykdom i familien - innsyns-frontend
 
 Kildekoden til frontend-appen for sykdom i familien sin innsynsløsning
 
