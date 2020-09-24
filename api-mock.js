@@ -498,6 +498,10 @@ const startServer = () => {
         }
     });
 
+    server.get('/soknad-not-logged-in', (req, res) => {
+        res.status(401).send();
+    });
+
     server.get('/soknad/:soknadId/dokument', (req, res) => {
         if (isLoggedIn(req)) {
             res.download('eksempel-søknad.pdf', 'søknad.pdf');

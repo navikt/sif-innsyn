@@ -19,6 +19,7 @@ const OversiktRoute = ({ history }: RouteComponentProps) => {
             loading={() => <LoadingPage />}
             error={(e: Error) => (
                 <HandleUnauthorized
+                    currentRoute={history.location.pathname}
                     error={e}
                     onWillRedirect={() => <LoadingPage />}
                     handleError={() => {

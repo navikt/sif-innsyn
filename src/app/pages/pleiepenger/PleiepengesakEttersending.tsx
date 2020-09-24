@@ -3,7 +3,6 @@ import Box from '../../components/elements/box/Box';
 import { getPrettyDate } from '../../components/pretty-date/PrettyDate';
 import SectionPanel from '../../components/section-panel/SectionPanel';
 import { PleiepengerEttersending } from '../../types/apiTypes/søknadTypes';
-import { getSøknadTitle } from '../../utils/soknadUtils';
 
 interface Props {
     søknad: PleiepengerEttersending;

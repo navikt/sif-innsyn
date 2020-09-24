@@ -26,8 +26,8 @@ const getValidRedirectRoute = (route: string): string | undefined => {
     }
 };
 
-export const getRedirectParam = () => {
-    return `${REDIRECT_PARAM_NAME}=${window.location.href}`;
+export const getRedirectParam = (currentRoute?: string) => {
+    return `${REDIRECT_PARAM_NAME}=${currentRoute || window.location.href}`;
 };
 
 export const getRedirectRouteFromUrl = (history: History): string | undefined => {
