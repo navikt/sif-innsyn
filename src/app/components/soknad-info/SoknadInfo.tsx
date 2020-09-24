@@ -14,7 +14,7 @@ const bem = bemUtils('soknadInfo');
 const SoknadInfo = ({ søknad, utvidetInfo }: Props) => (
     <>
         <div className={bem.element('mottatt')}>
-            Mottatt <PrettyDate date={søknad.opprettet} format="dateAndTime" />
+            Mottatt <PrettyDate date={søknad.opprettet} format="dayDateAndTime" />
         </div>
         {utvidetInfo && (
             <>

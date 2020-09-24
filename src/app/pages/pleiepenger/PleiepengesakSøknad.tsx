@@ -30,7 +30,7 @@ const PleiepengesakSøknad = ({ søknad }: Props) => {
                 Når søknaden din er ferdig behandlet får du beskjed om det på{' '}
                 <Lenke href={getLenker().dittNAV}>Ditt NAV</Lenke>.
             </p>
-            <Box margin="xl">
+            <Box margin="xl" padBottom="xl">
                 <Knapperad align="left">
                     <Knappelenke mini={true} href={getLenker().ettersending}>
                         Ettersend dokumentasjon
