@@ -1,5 +1,5 @@
-import Lenke from 'nav-frontend-lenker';
 import React from 'react';
+import Lenke from 'nav-frontend-lenker';
 import Box from '../../components/elements/box/Box';
 import Knappelenke from '../../components/knappelenke/Knappelenke';
 import Knapperad from '../../components/knapperad/Knapperad';
@@ -30,13 +30,13 @@ const PleiepengesakSøknad = ({ søknad }: Props) => {
                         </strong>
                     </p>
                     <p>
-                        Fordi denne siden er under utvikling kan du for øyeblikket ikke se søknaden din eller vedleggene
-                        du har sendt. Du vil heller ikke per i dag se om arbeidsgiver har sendt inn inntektsmelding til
-                        oss. Disse tjenestene kommer på et senere tidspunkt.
-                    </p>
-                    <p>
                         Når søknaden din er ferdig behandlet får du beskjed om det på{' '}
                         <Lenke href={getLenker().dittNAV}>Ditt NAV</Lenke>.
+                    </p>
+                    <p>
+                        Fordi denne siden er under utvikling kan du for øyeblikket ikke åpne søknaden din eller
+                        vedleggene du har sendt, eller se status på søknaden. Disse tjenestene kommer på et senere
+                        tidspunkt.
                     </p>
                     <Box margin="xl" padBottom="xl">
                         <Knapperad align="left">

@@ -12,7 +12,7 @@ interface Lenker {
 const lenkerBokmål: Lenker = {
     saksbehandlingstid: getEnvironmentVariable('SAKBEHANDLINGSTID_INFO_URL'),
     sykdomIFamilien: getEnvironmentVariable('SYKDOM_I_FAMILIEN_INFO_URL'),
-    ettersending: getEnvironmentVariable('ETTERSENDING_URL'),
+    ettersending: getEnvironmentVariable('ETTERSENDING_PLEIEPENGER_URL'),
     klageInfo: getEnvironmentVariable('KLAGE_INFO_URL'),
     regelverkFolketrygden: getEnvironmentVariable('REGELVERK_INFO_URL'),
     dittNAV: getEnvironmentVariable('DITT_NAV_URL'),

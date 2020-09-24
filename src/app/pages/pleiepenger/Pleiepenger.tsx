@@ -51,7 +51,7 @@ const PleiepengerPage: React.FC<Props> = ({ søknader, match: { params } }: Prop
                 <SectionPanel title="Pleiepenger sykt barn">
                     <SoknadList søknader={søknader} />
                     <Box margin="l">
-                        <InfoManglendeSøknad />
+                        <InfoManglendeSøknad mode="text" />
                     </Box>
                 </SectionPanel>
             )}

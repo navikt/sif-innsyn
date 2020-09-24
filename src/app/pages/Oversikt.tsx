@@ -47,7 +47,7 @@ const Oversikt = ({ søknader }: Props) => {
                     <DineSakerListe søknader={søknader} />
                 </Box>
                 <Box>
-                    <InfoManglendeSøknad />
+                    <InfoManglendeSøknad mode="expandable" />
                 </Box>
             </SectionPanel>
         </InnsynPage>

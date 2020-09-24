@@ -13,9 +13,9 @@ const bem = bemUtils('soknadInfo');
 
 const SoknadInfo = ({ søknad, utvidetInfo }: Props) => (
     <>
-        <div className={bem.element('mottatt')}>
+        <span className={bem.element('mottatt')}>
             Mottatt <PrettyDate date={søknad.opprettet} format="dayDateAndTime" />
-        </div>
+        </span>
         {utvidetInfo && (
             <>
                 {søknad.søknadstype === Søknadstype.PP_SYKT_BARN && (

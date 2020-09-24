@@ -12,10 +12,11 @@ interface Props {
 const PleiepengesakEttersending = ({ søknad }: Props) => {
     return (
         <SectionPanel
-            title={`${getSøknadTitle(søknad, true)} mottatt ${getPrettyDate(søknad.opprettet, 'dayDateAndTime')}`}
+            title={`${getSøknadTitle(søknad, true)} av dokument`}
             header={<Box padBottom="s">Pleiepenger for sykt barn</Box>}>
+            <p>Mottatt {getPrettyDate(søknad.opprettet, 'dayDateAndTime')}.</p>
             <Box margin="l">
-                <p>Hva skal stå på denne siden?</p>
+                <p>Ettersending av dokument er mottatt og registrert på din søknad.</p>
             </Box>
         </SectionPanel>
     );

@@ -1,6 +1,5 @@
 import React from 'react';
 import Lenke from 'nav-frontend-lenker';
-import { Undertittel } from 'nav-frontend-typografi';
 import Box from '../../components/elements/box/Box';
 import Title from '../../components/elements/title/Title';
 import ExpandableInfo from '../../components/expandable-info/ExpandableInfo';
@@ -23,8 +22,7 @@ const Step = ({ title, children }: StepProps): JSX.Element => (
 );
 
 const NyttigInforPanel = () => (
-    <SectionPanel title="Nyttig informasjon">
-        <Undertittel tag="h3">Dette kan du forvente deg etter at du har sendt søknad</Undertittel>
+    <SectionPanel title="Dette kan du forvente deg etter at du har sendt søknad">
         <Box margin="l">
             <ProcessDescription
                 steps={[

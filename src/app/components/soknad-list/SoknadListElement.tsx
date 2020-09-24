@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { HoyreChevron } from 'nav-frontend-chevron';
 import Etikett from 'nav-frontend-etiketter';
 import { LenkepanelBase } from 'nav-frontend-lenkepanel';
-import { Undertittel } from 'nav-frontend-typografi';
+import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import { RouteConfig } from '../../config/routeConfig';
 import { Søknad, Søknadsstatus } from '../../types/apiTypes/søknadTypes';
 import bemUtils from '../../utils/bemUtils';
@@ -52,8 +52,13 @@ const SoknadListElement = ({ søknad }: Props) => {
             linkCreator={(props: React.AnchorHTMLAttributes<HTMLAnchorElement>) => (
                 <Link to={href} {...props}>
                     <div className={bem.element('content')}>
-                        <Undertittel tag="h3">{getSøknadTitle(søknad, true)}</Undertittel>
-                        <SoknadInfo søknad={søknad} />
+                        <Undertittel tag="h3">
+                            {getSøknadTitle(søknad, true)}
+                            <br />
+                            <Normaltekst>
+                                <SoknadInfo søknad={søknad} />
+                            </Normaltekst>
+                        </Undertittel>
                     </div>
                     {showStatus && (
                         <div className={bem.element('status')}>
