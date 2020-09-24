@@ -29,9 +29,6 @@ const SoknadInfo = ({ søknad, utvidetInfo }: Props) => (
                         Ettersending gjelder: <q>{søknad.søknad.beskrivelse}</q> ...
                     </div>
                 )}
-                <div className={bem.element('detaljer')}>
-                    Status: <code>Vi må vel si noe om at vi ikke vet status?</code>
-                </div>
             </>
         )}
     </>

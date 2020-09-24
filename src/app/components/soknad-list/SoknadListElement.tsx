@@ -52,7 +52,7 @@ const SoknadListElement = ({ søknad }: Props) => {
             linkCreator={(props: React.AnchorHTMLAttributes<HTMLAnchorElement>) => (
                 <Link to={href} {...props}>
                     <div className={bem.element('content')}>
-                        <Undertittel tag="h3">{getSøknadTitle(søknad)}</Undertittel>
+                        <Undertittel tag="h3">{getSøknadTitle(søknad, true)}</Undertittel>
                         <SoknadInfo søknad={søknad} />
                     </div>
                     {showStatus && (

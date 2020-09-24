@@ -29,20 +29,17 @@ const Oversikt = ({ søknader }: Props) => {
             )}>
             <SectionPanel>
                 <p>
-                    Du har kommet til siden Sykdom i familien – din oversikt. Denne siden er under utvikling, og etter
-                    hvert vil du kunne få oversikt, og følge saken din fra du har sendt en søknad til du får svar fra
-                    NAV
+                    På denne siden får du en bekreftelse på at vi har mottatt digitale søknader du har sendt om
+                    pleiepenger for sykt barn. Siden er under utvikling og derfor kan du foreløpig ikke åpne og se
+                    søknaden, eller vedleggene du har sendt. Disse tjenestene kommer på et senere tidspunkt.
                 </p>
-                <Element tag="h3">Hva kan jeg finne av informasjon om mine saker her?</Element>
-                <p>Per i dag kan du se:</p>
-                <ul>
-                    <li>om digital søknad om Pleiepenger for sykt barn er mottatt, og</li>
-                    <li>når den er mottatt</li>
-                </ul>
                 <p>
                     Hvis du har sendt digital søknad om omsorgspenger, opplæringspenger eller pleiepenger i livets
-                    sluttfase, kan du foreløpig ikke finne noe informasjon om disse på denne siden. Søknader som er
-                    sendt inn per post vises ikke her
+                    sluttfase, finner du foreløpig ingen informasjon om disse på denne siden. Dette er også tjenester
+                    som kommer på et senere tidspunkt.
+                </p>
+                <p>
+                    <strong>Søknader som er sendt inn per post vises ikke her, de finner du i denne oversikten.</strong>
                 </p>
             </SectionPanel>
 

@@ -33,12 +33,12 @@ export const søknadTypeErPleiepenger = (type: Søknadstype): boolean => {
 //     return type === Søknadstype.OPPLÆRINGSPENGER;
 // };
 
-export const getSøknadTitle = (søknad: Søknad): string => {
+export const getSøknadTitle = (søknad: Søknad, shortVersion?: boolean): string => {
     switch (søknad.søknadstype) {
         case Søknadstype.PP_SYKT_BARN:
-            return 'Søknad om pleiepenger for sykt barn';
+            return shortVersion ? 'Søknad' : 'Søknad om pleiepenger for sykt barn';
         case Søknadstype.PP_ETTERSENDING:
-            return 'Melding om ettersending for pleiepenger';
+            return shortVersion ? 'Ettersending' : 'Melding om ettersending for pleiepenger';
         // case Søknadstype.OMD_OVERFØRING:
         //     return 'Søknad om overføring av omsorgsdager';
         // case Søknadstype.OMP_UTBETALING_SNF:
