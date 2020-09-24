@@ -15,8 +15,8 @@ const Pleiepengesak = ({ søknad }: Props) => {
             <SoknadInfo søknad={søknad} />
             <Box margin="xl">
                 <Knapperad align="left">
-                    <Knapp>Ettersend dokumentasjon</Knapp>
-                    <Knapp>Send en ny søknad</Knapp>
+                    <Knapp mini={true}>Ettersend dokumentasjon</Knapp>
+                    <Knapp mini={true}>Send en ny søknad</Knapp>
                 </Knapperad>
             </Box>
         </div>
