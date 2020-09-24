@@ -6,29 +6,34 @@ import './soknadInfo.less';
 
 interface Props {
     søknad: Søknad;
+    utvidetInfo?: boolean;
 }
 
 const bem = bemUtils('soknadInfo');
 
-const SoknadInfo = ({ søknad }: Props) => (
+const SoknadInfo = ({ søknad, utvidetInfo }: Props) => (
     <>
         <div className={bem.element('mottatt')}>
             Mottatt <PrettyDate date={søknad.opprettet} format="dateAndTime" />
         </div>
-        {søknad.søknadstype === Søknadstype.PP_SYKT_BARN && (
-            <div className={bem.element('detaljer')}>
-                Gjelder perioden <PrettyDate date={søknad.søknad.fraOgMed} /> -{' '}
-                <PrettyDate date={søknad.søknad.tilOgMed} />
-            </div>
+        {utvidetInfo && (
+            <>
+                {søknad.søknadstype === Søknadstype.PP_SYKT_BARN && (
+                    <div className={bem.element('detaljer')}>
+                        Gjelder perioden <PrettyDate date={søknad.søknad.fraOgMed} /> -{' '}
+                        <PrettyDate date={søknad.søknad.tilOgMed} />
+                    </div>
+                )}
+                {søknad.søknadstype === Søknadstype.PP_ETTERSENDING && (
+                    <div className={bem.element('detaljer')}>
+                        Ettersending gjelder: <q>{søknad.søknad.beskrivelse}</q> ...
+                    </div>
+                )}
+                <div className={bem.element('detaljer')}>
+                    Status: <code>Vi må vel si noe om at vi ikke vet status?</code>
+                </div>
+            </>
         )}
-        {søknad.søknadstype === Søknadstype.PP_ETTERSENDING && (
-            <div className={bem.element('detaljer')}>
-                Ettersending gjelder: <q>{søknad.søknad.beskrivelse}</q> ...
-            </div>
-        )}
-        <div className={bem.element('detaljer')}>
-            Status: <code>Vi må vel si noe om at vi ikke vet status?</code>
-        </div>
     </>
 );
 

@@ -12,7 +12,7 @@ interface Props {
 const Pleiepengesak = ({ søknad }: Props) => {
     return (
         <div>
-            <SoknadInfo søknad={søknad} />
+            <SoknadInfo søknad={søknad} utvidetInfo={true} />
             <Box margin="xl">
                 <Knapperad align="left">
                     <Knapp mini={true}>Ettersend dokumentasjon</Knapp>
