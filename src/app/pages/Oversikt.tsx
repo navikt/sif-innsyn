@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { Element } from 'nav-frontend-typografi';
 import Box from '../components/elements/box/Box';
 import InfoManglendeSøknad from '../components/info-manglende-søknad/InfoManglendeSøknad';
 import InnsynPage from '../components/innsyn-page/InnsynPage';
