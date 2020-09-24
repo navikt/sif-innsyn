@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Redirect, RouteComponentProps, withRouter } from 'react-router-dom';
+import BackLink from '../../components/back-link/BackLink';
 import Breadcrumbs, { Breadcrumb } from '../../components/breadcrumbs/Breadcrumbs';
 import Box from '../../components/elements/box/Box';
 import InfoManglendeSøknad from '../../components/info-manglende-søknad/InfoManglendeSøknad';
@@ -39,7 +40,13 @@ const PleiepengerPage: React.FC<Props> = ({ søknader, match: { params } }: Prop
             breadcrumbsRenderer={() => <Breadcrumbs currentPageTitle={pageTitle} crumbs={crumbs} />}>
             {søknad && (
                 <>
-                    <SectionPanel title={pageTitle}>
+                    <SectionPanel
+                        title={pageTitle}
+                        header={
+                            <Box padBottom="xl">
+                                <BackLink to={RouteConfig.DINE_PLEIEPENGER}>Tilbake til liste</BackLink>
+                            </Box>
+                        }>
                         <Box margin="l">
                             <Pleiepengesak søknad={søknad} />
                         </Box>
@@ -48,7 +55,13 @@ const PleiepengerPage: React.FC<Props> = ({ søknader, match: { params } }: Prop
                 </>
             )}
             {søknad === undefined && (
-                <SectionPanel title="Dine pleiepengesaker">
+                <SectionPanel
+                    title="Dine pleiepengesaker"
+                    header={
+                        <Box padBottom="xl">
+                            <BackLink to={RouteConfig.OVERSIKT}>Tilbake til oversikt</BackLink>
+                        </Box>
+                    }>
                     <SoknadList søknader={søknader} />
                     <Box margin="l">
                         <InfoManglendeSøknad />
