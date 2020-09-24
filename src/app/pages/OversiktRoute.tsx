@@ -10,7 +10,7 @@ import { sortSoknad } from '../utils/sortSoknader';
 import { erPleiepenger } from '../utils/soknadUtils';
 import Oversikt from './Oversikt';
 import Pleiepenger from './pleiepenger/Pleiepenger';
-import { getRouteFromRedirectParam } from '../utils/navigationUtils';
+import { getRedirectRouteFromUrl } from '../utils/routeRedirectUtils';
 
 const OversiktRoute = ({ history }: RouteComponentProps) => {
     return (
@@ -35,7 +35,7 @@ const OversiktRoute = ({ history }: RouteComponentProps) => {
                 const pleiepengesoknader = alleSøknader.filter((søknad) => erPleiepenger(søknad));
 
                 // If redirect parameter is set in url
-                const redirectToRoute = getRouteFromRedirectParam(history);
+                const redirectToRoute = getRedirectRouteFromUrl(history);
 
                 return (
                     <Switch>

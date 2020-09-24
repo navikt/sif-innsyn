@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { RouteComponentProps, withRouter } from 'react-router-dom';
+import { Redirect, RouteComponentProps, withRouter } from 'react-router-dom';
 import Breadcrumbs, { Breadcrumb } from '../../components/breadcrumbs/Breadcrumbs';
 import Box from '../../components/elements/box/Box';
 import InfoManglendeSøknad from '../../components/info-manglende-søknad/InfoManglendeSøknad';
@@ -22,6 +22,9 @@ type Props = OwnProps & PleiepengerSakProps;
 
 const PleiepengerPage: React.FC<Props> = ({ søknader, match: { params } }: Props) => {
     const søknad = params.id ? søknader.find((s) => s.søknadId === params.id) : undefined;
+    if (params.id && søknad === undefined) {
+        return <Redirect to={RouteConfig.DINE_PLEIEPENGER} />;
+    }
     const crumbs: Breadcrumb[] = [];
     let pageTitle = 'Dine pleiepengesaker';
     if (søknad) {
