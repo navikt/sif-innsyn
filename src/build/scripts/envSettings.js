@@ -13,6 +13,7 @@ function createEnvSettingsFile(settingsFile) {
                 SYKDOM_I_FAMILIEN_INFO_URL: '${process.env.SYKDOM_I_FAMILIEN_INFO_URL}',
                 SAKBEHANDLINGSTID_INFO_URL: '${process.env.SAKBEHANDLINGSTID_INFO_URL}',
                 REGELVERK_INFO_URL: '${process.env.REGELVERK_INFO_URL}',
+                ETTERSENDING_PLEIEPENGER_URL: '${process.env.ETTERSENDING_PLEIEPENGER_URL}',
                 KLAGE_INFO_URL: '${process.env.KLAGE_INFO_URL}',
                 DITT_NAV_URL: '${process.env.DITT_NAV_URL}'
             };`

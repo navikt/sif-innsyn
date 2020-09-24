@@ -1,23 +1,23 @@
 {
-  "app": "sif-innsyn",
-  "cluster": "dev-gcp",
-  "namespace": "dusseldorf",
-  "team": "dusseldorf",
-  "minReplicas": "1",
-  "maxReplicas": "1",
-  "ingresses": [
-    "https://sif-innsyn.dev.nav.no"
-  ],
-  "env": {
-    "APPRES_CMS_URL": "https://appres.nav.no",
-    "API_URL": "https://sif-innsyn-api.dev.nav.no",
-    "PUBLIC_PATH": "/familie/sykdom-i-familien/soknad/innsyn",
-    "LOGIN_URL": "https://loginservice.dev.nav.no/login?redirect=https://sif-innsyn.dev.nav.no/familie/sykdom-i-familien/soknad/innsyn",
-    "UTILGJENGELIG": "off",
-    "MELLOMLAGRING": "on",
-    "SYKDOM_I_FAMILIEN_INFO_URL": "https://www.nav.no/familie/sykdom-i-familien/nb/",
-    "SAKBEHANDLINGSTID_INFO_URL": "https://www.nav.no/no/nav-og-samfunn/om-nav/saksbehandlingstider-i-nav",
-    "REGELVERK_INFO_URL": "https://lovdata.no/nav/folketrygdloven/kap9",
-    "KLAGE_INFO_URL": "https://www.nav.no/person/kontakt-oss/nb/tilbakemeldinger"
-  }
+    "app": "sif-innsyn",
+    "cluster": "dev-gcp",
+    "namespace": "dusseldorf",
+    "team": "dusseldorf",
+    "minReplicas": "1",
+    "maxReplicas": "1",
+    "ingresses": ["https://sif-innsyn.dev.nav.no"],
+    "env": {
+        "APPRES_CMS_URL": "https://appres.nav.no",
+        "API_URL": "https://sif-innsyn-api.dev.nav.no",
+        "PUBLIC_PATH": "/familie/sykdom-i-familien/soknad/innsyn",
+        "LOGIN_URL": "https://loginservice.dev.nav.no/login?redirect=https://sif-innsyn.dev.nav.no/familie/sykdom-i-familien/soknad/innsyn",
+        "UTILGJENGELIG": "off",
+        "MELLOMLAGRING": "on",
+        "SYKDOM_I_FAMILIEN_INFO_URL": "https://www.nav.no/familie/sykdom-i-familien/nb/",
+        "SAKBEHANDLINGSTID_INFO_URL": "https://www.nav.no/no/nav-og-samfunn/om-nav/saksbehandlingstider-i-nav",
+        "REGELVERK_INFO_URL": "https://lovdata.no/nav/folketrygdloven/kap9",
+        "KLAGE_INFO_URL": "https://www.nav.no/person/kontakt-oss/nb/tilbakemeldinger",
+        "ETTERSENDING_PLEIEPENGER_URL": "https://www.nav.no/familie/sykdom-i-familien/soknad/ettersending/pleiepenger/",
+        "DITT_NAV_URL": "https://www.nav.no/no/Ditt+NAV"
+    }
 }

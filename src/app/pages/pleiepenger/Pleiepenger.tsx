@@ -5,13 +5,11 @@ import Box from '../../components/elements/box/Box';
 import InfoManglendeSøknad from '../../components/info-manglende-søknad/InfoManglendeSøknad';
 import InnsynPage from '../../components/innsyn-page/InnsynPage';
 import PageBannerCompact from '../../components/page-banner-compact/PageBannerCompact';
-import { getPrettyDate } from '../../components/pretty-date/PrettyDate';
 import SectionPanel from '../../components/section-panel/SectionPanel';
 import SoknadList from '../../components/soknad-list/SoknadList';
 import { RouteConfig } from '../../config/routeConfig';
 import { SøknadApiResponse, Søknadstype } from '../../types/apiTypes/søknadTypes';
 import { getSøknadTitle } from '../../utils/soknadUtils';
-import NyttigInforPanel from './NyttigInfo';
 import PleiepengesakEttersending from './PleiepengesakEttersending';
 import PleiepengesakSøknad from './PleiepengesakSøknad';
 
@@ -30,28 +28,23 @@ const PleiepengerPage: React.FC<Props> = ({ søknader, match: { params } }: Prop
     }
     const crumbs: Breadcrumb[] = [];
     let pageTitle = 'Pleiepenger sykt barn';
+    let crumbPageTitle: string;
     if (søknad) {
         crumbs.push({ route: RouteConfig.DINE_PLEIEPENGER, title: pageTitle });
-        pageTitle = getSøknadTitle(søknad, true);
+        pageTitle = getSøknadTitle(søknad, false);
+        crumbPageTitle = getSøknadTitle(søknad, true);
     }
     return (
         <InnsynPage
             title={pageTitle}
             topContentRenderer={() => <PageBannerCompact title={'Din oversikt - sykdom i familien'} />}
-            breadcrumbsRenderer={() => <Breadcrumbs currentPageTitle={pageTitle} crumbs={crumbs} />}>
+            breadcrumbsRenderer={() => <Breadcrumbs currentPageTitle={crumbPageTitle || pageTitle} crumbs={crumbs} />}>
             {søknad && (
                 <>
-                    <SectionPanel
-                        title={`${pageTitle} mottatt ${getPrettyDate(søknad.opprettet, 'dayDateAndTime')}`}
-                        header={<Box padBottom="s">Pleiepenger for sykt barn</Box>}>
-                        <Box margin="l">
-                            {søknad.søknadstype === Søknadstype.PP_SYKT_BARN && <PleiepengesakSøknad søknad={søknad} />}
-                            {søknad.søknadstype === Søknadstype.PP_ETTERSENDING && (
-                                <PleiepengesakEttersending søknad={søknad} />
-                            )}
-                        </Box>
-                    </SectionPanel>
-                    <NyttigInforPanel />
+                    {søknad.søknadstype === Søknadstype.PP_SYKT_BARN && <PleiepengesakSøknad søknad={søknad} />}
+                    {søknad.søknadstype === Søknadstype.PP_ETTERSENDING && (
+                        <PleiepengesakEttersending søknad={søknad} />
+                    )}
                 </>
             )}
             {søknad === undefined && (
