@@ -1,13 +1,13 @@
 import React from 'react';
 import uniq from 'lodash.uniq';
 import { AlertStripeInfo } from 'nav-frontend-alertstriper';
-import LenkepanelMedIkon from '../../components/lenkepanel-med-ikon/LenkepanelMedIkon';
-import { RouteConfig } from '../../config/routeConfig';
-import { SøknadsIkon } from '../../svg/FellesIkoner';
-import { Søknad, Søknadstype } from '../../types/apiTypes/søknadTypes';
-import { Sakstype } from '../../types/types';
-import { søknadTypeErPleiepenger } from '../../utils/soknadUtils';
-import Box from '../../components/elements/box/Box';
+import LenkepanelMedIkon from '../../../components/lenkepanel-med-ikon/LenkepanelMedIkon';
+import { RouteConfig } from '../../../config/routeConfig';
+import { SøknadsIkon } from '../../../svg/FellesIkoner';
+import { Søknad, Søknadstype } from '../../../types/apiTypes/søknadTypes';
+import { Sakstype } from '../../../types/types';
+import { søknadTypeErPleiepenger } from '../../../utils/soknadUtils';
+import Box from '../../../components/elements/box/Box';
 
 interface Props {
     søknader: Søknad[];

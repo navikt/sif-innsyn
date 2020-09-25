@@ -1,8 +1,8 @@
 import React from 'react';
-import Box from '../../components/elements/box/Box';
-import { getPrettyDate } from '../../components/pretty-date/PrettyDate';
-import SectionPanel from '../../components/section-panel/SectionPanel';
-import { PleiepengerEttersending } from '../../types/apiTypes/søknadTypes';
+import Box from '../../../components/elements/box/Box';
+import { getPrettyDate } from '../../../components/pretty-date/PrettyDate';
+import SectionPanel from '../../../components/section-panel/SectionPanel';
+import { PleiepengerEttersending } from '../../../types/apiTypes/søknadTypes';
 
 interface Props {
     søknad: PleiepengerEttersending;

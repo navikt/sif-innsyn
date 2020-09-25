@@ -1,13 +1,13 @@
 import React from 'react';
 import Lenke from 'nav-frontend-lenker';
-import Box from '../../components/elements/box/Box';
-import Knappelenke from '../../components/knappelenke/Knappelenke';
-import Knapperad from '../../components/knapperad/Knapperad';
-import PrettyDate, { getPrettyDate } from '../../components/pretty-date/PrettyDate';
-import SectionPanel from '../../components/section-panel/SectionPanel';
-import getLenker from '../../lenker';
-import { Pleiepengesøknad } from '../../types/apiTypes/søknadTypes';
-import { getSøknadTitle } from '../../utils/soknadUtils';
+import Box from '../../../components/elements/box/Box';
+import Knappelenke from '../../../components/knappelenke/Knappelenke';
+import Knapperad from '../../../components/knapperad/Knapperad';
+import PrettyDate, { getPrettyDate } from '../../../components/pretty-date/PrettyDate';
+import SectionPanel from '../../../components/section-panel/SectionPanel';
+import getLenker from '../../../lenker';
+import { Pleiepengesøknad } from '../../../types/apiTypes/søknadTypes';
+import { getSøknadTitle } from '../../../utils/soknadUtils';
 import NyttigInforPanel from './NyttigInfo';
 
 interface Props {
