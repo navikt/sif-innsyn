@@ -6,6 +6,6 @@ interface Props {
     sakstype: Sakstype;
 }
 
-const SakstypeTittel = ({ sakstype }: Props) => <FormattedMessage id={`sakstype.${sakstype}.tittel`} />;
+const SakstypeTittel = ({ sakstype }: Props) => <FormattedMessage id={`sakstype.${sakstype}.title`} />;
 
 export default SakstypeTittel;
