@@ -25,8 +25,7 @@ const InnsynFetcher = () => {
                 />
             )}
             success={([søknadApiResponse]: [SøknadApiResponse]) => {
-                const søknader = søknadApiResponse.sort(sortSoknad);
-                return <InnsynRoutes søknader={søknader} />;
+                return <InnsynRoutes søknader={søknadApiResponse.sort(sortSoknad)} />;
             }}
         />
     );

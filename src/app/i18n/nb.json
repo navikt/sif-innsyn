@@ -1,6 +1,8 @@
 {
     "site.title": "Din oversikt - Sykdom i familien",
 
+    "sakstype.pleiepenger.title": "Pleiepenger for sykt barn",
+
     "page.loading.title": "Laster informasjon...",
     "page.error.title": "Noe gikk galt...",
     "page.error.content": "Beklager, her har det dessverre skjedd en feil. Dersom feilen fortsetter, prøv igjen litt senere.",

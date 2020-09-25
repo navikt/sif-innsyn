@@ -4,9 +4,11 @@ import Box from '../../../components/elements/box/Box';
 import Knappelenke from '../../../components/knappelenke/Knappelenke';
 import Knapperad from '../../../components/knapperad/Knapperad';
 import PrettyDate, { getPrettyDate } from '../../../components/pretty-date/PrettyDate';
+import SakstypeTittel from '../../../components/sakstype-tittel/SakstypeTittel';
 import SectionPanel from '../../../components/section-panel/SectionPanel';
 import getLenker from '../../../lenker';
 import { Pleiepengesøknad } from '../../../types/apiTypes/søknadTypes';
+import { Sakstype } from '../../../types/types';
 import { getSøknadTitle } from '../../../utils/soknadUtils';
 import NyttigInforPanel from './NyttigInfo';
 
@@ -23,7 +25,11 @@ const PleiepengesakSøknad = ({ søknad }: Props) => {
                     'dayDateAndTime'
                 )}`}
                 titleTag="h1"
-                header={<Box padBottom="s">Pleiepenger for sykt barn</Box>}>
+                header={
+                    <Box padBottom="s">
+                        <SakstypeTittel sakstype={Sakstype.PLEIEPENGER} />
+                    </Box>
+                }>
                 <Box margin="l">
                     <p style={{ fontWeight: 'bold' }}>
                         Gjelder for perioden <PrettyDate date={søknad.søknad.fraOgMed} /> -{' '}

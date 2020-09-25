@@ -1,24 +1,26 @@
 import React from 'react';
 import uniq from 'lodash.uniq';
 import { AlertStripeInfo } from 'nav-frontend-alertstriper';
+import Box from '../../../components/elements/box/Box';
 import LenkepanelMedIkon from '../../../components/lenkepanel-med-ikon/LenkepanelMedIkon';
 import { RouteConfig } from '../../../config/routeConfig';
 import { SøknadsIkon } from '../../../svg/FellesIkoner';
 import { Søknad, Søknadstype } from '../../../types/apiTypes/søknadTypes';
 import { Sakstype } from '../../../types/types';
+import { getSakstypeTitle } from '../../../utils/sakstypeUtils';
 import { søknadTypeErPleiepenger } from '../../../utils/soknadUtils';
-import Box from '../../../components/elements/box/Box';
+import { IntlShape, useIntl } from 'react-intl';
 
 interface Props {
     søknader: Søknad[];
 }
 
-const getSakstypeLenkepanelInfo = (sakstype: Sakstype): SakstypeLenkepanelInfo => {
+const getSakstypeLenkepanelInfo = (sakstype: Sakstype, intl: IntlShape): SakstypeLenkepanelInfo => {
     switch (sakstype) {
-        case Sakstype.DINE_PLEIEPENGER:
+        case Sakstype.PLEIEPENGER:
             return {
                 href: RouteConfig.DINE_PLEIEPENGER,
-                tittel: 'Pleiepenger for sykt barn',
+                tittel: getSakstypeTitle(intl, sakstype),
             };
     }
 };
@@ -33,7 +35,8 @@ interface SakstypeLenkepanelProps {
 }
 
 const SakstypeLenkepanel = ({ sakstype }: SakstypeLenkepanelProps) => {
-    const { tittel, href } = getSakstypeLenkepanelInfo(sakstype);
+    const intl = useIntl();
+    const { tittel, href } = getSakstypeLenkepanelInfo(sakstype, intl);
     return <LenkepanelMedIkon ikon={<SøknadsIkon />} href={href} tittel={tittel} />;
 };
 
@@ -49,7 +52,7 @@ const DineSakerListe = ({ søknader }: Props) => {
         );
     }
 
-    return <>{harPleiepenger && <SakstypeLenkepanel sakstype={Sakstype.DINE_PLEIEPENGER} />}</>;
+    return <>{harPleiepenger && <SakstypeLenkepanel sakstype={Sakstype.PLEIEPENGER} />}</>;
 };
 
 export default DineSakerListe;

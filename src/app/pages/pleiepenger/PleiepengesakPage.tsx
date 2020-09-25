@@ -1,9 +1,12 @@
 import React from 'react';
+import { useIntl } from 'react-intl';
 import { Redirect } from 'react-router-dom';
 import { Breadcrumb } from '../../components/breadcrumbs/Breadcrumbs';
 import InnsynPage from '../../components/innsyn-page/InnsynPage';
 import { RouteConfig } from '../../config/routeConfig';
 import { Søknad, Søknadstype } from '../../types/apiTypes/søknadTypes';
+import { Sakstype } from '../../types/types';
+import { getSakstypeTitle } from '../../utils/sakstypeUtils';
 import { getSøknadTitle } from '../../utils/soknadUtils';
 import PleiepengesakEttersending from './pleiepengesak-ettersending/PleiepengesakEttersending';
 import PleiepengesakSøknad from './pleiepengesak-søknad/PleiepengesakSøknad';
@@ -14,6 +17,7 @@ interface Props {
 }
 
 const PleiepengesakPage = ({ søknader, søknadId }: Props) => {
+    const intl = useIntl();
     const søknad = søknader.find((s) => s.søknadId === søknadId);
     if (søknad === undefined) {
         return <Redirect to={RouteConfig.DINE_PLEIEPENGER} />;
@@ -21,7 +25,7 @@ const PleiepengesakPage = ({ søknader, søknadId }: Props) => {
     const crumbs: Breadcrumb[] = [
         {
             route: RouteConfig.DINE_PLEIEPENGER,
-            title: 'Pleiepenger for sykt barn',
+            title: getSakstypeTitle(intl, Sakstype.PLEIEPENGER),
         },
     ];
     return (

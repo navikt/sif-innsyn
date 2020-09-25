@@ -6,5 +6,5 @@ export enum WillRedirect {
 export type StringOrNull = string | null;
 
 export enum Sakstype {
-    DINE_PLEIEPENGER = 'pleiepenger',
+    PLEIEPENGER = 'pleiepenger',
 }
