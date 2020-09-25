@@ -8,7 +8,7 @@ import { SøknadsIkon } from '../../../svg/FellesIkoner';
 import { Søknad, Søknadstype } from '../../../types/apiTypes/søknadTypes';
 import { Sakstype } from '../../../types/types';
 import { getSakstypeTitle } from '../../../utils/sakstypeUtils';
-import { søknadTypeErPleiepenger } from '../../../utils/soknadUtils';
+import { søknadstypeErPleiepenger } from '../../../utils/soknadUtils';
 import { IntlShape, useIntl } from 'react-intl';
 
 interface Props {
@@ -42,7 +42,7 @@ const SakstypeLenkepanel = ({ sakstype }: SakstypeLenkepanelProps) => {
 
 const DineSakerListe = ({ søknader }: Props) => {
     const søknadstyper: Søknadstype[] | undefined = uniq(søknader.map((value) => value.søknadstype));
-    const harPleiepenger = søknadstyper?.filter((type) => søknadTypeErPleiepenger(type)).length !== 0;
+    const harPleiepenger = søknadstyper?.filter((type) => søknadstypeErPleiepenger(type)).length !== 0;
 
     if (søknader.length === 0) {
         return (
