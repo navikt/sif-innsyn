@@ -1,50 +1,13 @@
 {
-    "Ja": "Ja",
-    "Nei": "Nei",
-    "VetIkke": "Jeg er usikker",
+    "site.title": "Din oversikt - Sykdom i familien",
 
-    "locale.nb": "Bokmål - norsk",
-    "locale.nn": "Nynorsk - norsk",
+    "sakstype.pleiepenger.title": "Pleiepenger for sykt barn",
 
-    "mandag": "mandag",
-    "tirsdag": "tirsdag",
-    "onsdag": "onsdag",
-    "torsdag": "torsdag",
-    "fredag": "fredag",
-
-    "mandag.caps": "Mandag",
-    "tirsdag.caps": "Tirsdag",
-    "onsdag.caps": "Onsdag",
-    "torsdag.caps": "Torsdag",
-    "fredag.caps": "Fredag",
-
-    "Mandag": "Mandag",
-    "Tirsdag": "Tirsdag",
-    "Onsdag": "Onsdag",
-    "Torsdag": "Torsdag",
-    "Fredag": "Fredag",
-
-    "banner.title": "Søknad om utbetaling av omsorgspenger når arbeidsgiver ikke utbetaler",
-
-    "page.loadingPage.tekst": "Laster ...",
-    "gotoApplicationLink.lenketekst": "Gå til den digitale søknaden",
-    "backlink.label": "Tilbake",
-
-    "hjelpetekst.skjul": "Lukk hjelpetekst",
-    "hjelpetekst.vis": "Vis hjelpetekst",
-
-    "timer": "{timer, plural, one {# time} other {# timer}}",
-    "minutter": "{minutter, plural, one {# minutt} other {# minutter}}",
-    "timerOgMinutter": "{timer, plural, one {# time} other {# timer}} og {minutter, plural, one {# minutt} other {# minutter}}",
-    "dager": "{dager, plural, one {# dag} other {# dager}}",
-
-    "timeInput.hours": "Timer",
-    "timeInput.minutes": "Minutter",
-
-    "innsyn.root.tittel": "Sykdom i familien",
-    "innsyn.root.stegTittel": "Innsyn root steg tittel",
-
-    "page.generalErrorPage.sidetittel": "Feil",
-    "page.generalErrorPage.tittel": "Noe gikk galt...",
-    "page.generalErrorPage.tekst": "Beklager, her har det dessverre skjedd en feil."
+    "page.loading.title": "Laster informasjon...",
+    "page.error.title": "Noe gikk galt...",
+    "page.error.content": "Beklager, her har det dessverre skjedd en feil. Dersom feilen fortsetter, prøv igjen litt senere.",
+    "page.404.title": "Du har kommet til en side som ikke finnes",
+    "page.404.content": "Vennligst gå tilbake",
+    "page.unavailable.title": "Tjenesten er dessverre ikke tilgjengelig",
+    "page.unavailable.content": "Vi jobber så raskt vi kan med å få den tilgjengelig."
 }

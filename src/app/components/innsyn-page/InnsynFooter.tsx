@@ -10,7 +10,7 @@ const bem = bemUtils('innsynFooter');
 const InnsynFooter = () => {
     const lenker = getLenker();
     return (
-        <section className={'innsynFooter'}>
+        <aside className={'innsynFooter'} aria-label={'Relatert informasjon'}>
             <Title tag="h2" titleStyle="centerlined" titleType="undertittel">
                 Du vil kanskje vite mer om
             </Title>
@@ -36,7 +36,7 @@ const InnsynFooter = () => {
                     </Lenke>
                 </li>
             </ul>
-        </section>
+        </aside>
     );
 };
 

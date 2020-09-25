@@ -2,8 +2,8 @@ import * as React from 'react';
 import { render } from 'react-dom';
 import moment from 'moment';
 import ApplicationWrapper from './components/application-wrapper/ApplicationWrapper';
-import UnavailablePage from './components/pages/unavailable-page/UnavailablePage';
-import OversiktRoute from './pages/OversiktRoute';
+import InnsynFetcher from './pages/InnsynFetcher';
+import UnavailablePage from './pages/support-pages/UnavailablePage';
 import { Locale } from './types/Locale';
 import { Feature, isFeatureEnabled } from './utils/featureToggleUtils';
 import { getLocaleFromSessionStorage, setLocaleInSessionStorage } from './utils/localeUtils';
@@ -21,7 +21,7 @@ const App: React.FunctionComponent = () => {
                 setLocaleInSessionStorage(activeLocale);
                 setLocale(activeLocale);
             }}>
-            <>{isFeatureEnabled(Feature.UTILGJENGELIG) ? <UnavailablePage /> : <OversiktRoute />}</>
+            {isFeatureEnabled(Feature.UTILGJENGELIG) ? <UnavailablePage /> : <InnsynFetcher />}
         </ApplicationWrapper>
     );
 };

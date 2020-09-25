@@ -1,11 +1,11 @@
 import React from 'react';
 import Lenke from 'nav-frontend-lenker';
-import Box from '../../components/elements/box/Box';
-import Title from '../../components/elements/title/Title';
-import ExpandableInfo from '../../components/expandable-info/ExpandableInfo';
-import ProcessDescription from '../../components/process-description/ProcessDescription';
-import SectionPanel from '../../components/section-panel/SectionPanel';
-import getLenker from '../../lenker';
+import Box from '../../../components/elements/box/Box';
+import Title from '../../../components/elements/title/Title';
+import ExpandableInfo from '../../../components/expandable-info/ExpandableInfo';
+import ProcessDescription from '../../../components/process-description/ProcessDescription';
+import SectionPanel from '../../../components/section-panel/SectionPanel';
+import getLenker from '../../../lenker';
 
 interface StepProps {
     title: string;

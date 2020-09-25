@@ -1,11 +1,11 @@
 import * as React from 'react';
-import Box from '../components/elements/box/Box';
-import InfoManglendeSøknad from '../components/info-manglende-søknad/InfoManglendeSøknad';
-import InnsynPage from '../components/innsyn-page/InnsynPage';
-import PageBanner from '../components/page-banner/PageBanner';
-import SectionPanel from '../components/section-panel/SectionPanel';
-import SvgSykdomIFamilien from '../svg/SvgSykdomIFamilien';
-import { Søknad } from '../types/apiTypes/søknadTypes';
+import Box from '../../components/elements/box/Box';
+import InfoManglendeSøknad from '../../components/info-manglende-søknad/InfoManglendeSøknad';
+import InnsynPage from '../../components/innsyn-page/InnsynPage';
+import PageBanner from '../../components/page-banner/PageBanner';
+import SectionPanel from '../../components/section-panel/SectionPanel';
+import SvgSykdomIFamilien from '../../svg/SvgSykdomIFamilien';
+import { Søknad } from '../../types/apiTypes/søknadTypes';
 import DineSakerListe from './dine-saker-liste/DineSakerListe';
 
 interface Props {
@@ -26,7 +26,7 @@ const Oversikt = ({ søknader }: Props) => {
                     illustration={<SvgSykdomIFamilien />}
                 />
             )}>
-            <SectionPanel>
+            <SectionPanel ariaTitle={'Introduksjon'}>
                 <p>
                     På denne siden får du en bekreftelse på at vi har mottatt digitale søknader du har sendt om
                     pleiepenger for sykt barn. Siden er under utvikling og derfor kan du foreløpig ikke åpne og se
