@@ -22,7 +22,7 @@ const PleiepengeroversiktPage = ({ søknader }: Props) => {
     const pleiepengesoknader = søknader.filter((søknad) => erPleiepenger(søknad));
     return (
         <InnsynPage title={pageTitle} breadcrumbs={crumbs}>
-            <SectionPanel title={pageTitle} titleTag="h1">
+            <SectionPanel title={pageTitle} titleTag="h1" ariaTitle={`Dine saker - ${pageTitle}`}>
                 <SoknadList søknader={pleiepengesoknader} />
                 <Box margin="l">
                     <InfoManglendeSøknad mode="text" />

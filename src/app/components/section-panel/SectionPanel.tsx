@@ -9,29 +9,41 @@ const bem = bemUtils('sectionPanel');
 interface Props {
     id?: string;
     title?: string;
+    ariaTitle?: string;
     illustration?: React.ReactNode;
     children: ReactNode;
     titleTag?: TitleTag;
     illustrationPlacement?: 'inside' | 'outside';
     titleStyle?: TitleStyle;
     header?: React.ReactNode;
+    tag?: 'section' | 'article';
 }
+
+const SectionOrArticle = (
+    props: { tag: 'section' | 'article'; children: React.ReactNode } & React.PropsWithChildren<any>
+) => {
+    const { tag, children, ...rest } = props;
+    return React.createElement(tag, rest, children);
+};
 
 const SectionPanel = ({
     id,
     title,
+    ariaTitle,
     illustration,
     children,
+    tag = 'section',
     titleTag = 'h2',
     titleStyle = 'normal',
     illustrationPlacement = 'inside',
     header,
 }: Props) => {
     return (
-        <section
+        <SectionOrArticle
+            tag={tag}
             tabIndex={-1}
             id={id}
-            aria-label={title}
+            aria-label={tag === 'section' ? ariaTitle || title : undefined}
             className={bem.classNames(
                 bem.block,
                 bem.modifierConditional(
@@ -51,7 +63,7 @@ const SectionPanel = ({
                 )}
                 {children}
             </PanelBase>
-        </section>
+        </SectionOrArticle>
     );
 };
 

@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import NavFrontendChevron from 'nav-frontend-chevron';
 import Lenke from 'nav-frontend-lenker';
 import { RouteConfig } from '../../config/routeConfig';
 import getLenker from '../../lenker';
@@ -24,13 +23,27 @@ interface OwnProps {
 
 type Props = OwnProps;
 
-const Crumb = ({ title, href, route, isCurrent }: Breadcrumb & { isCurrent?: boolean }) => (
-    <span className={bem.element('crumb', isCurrent ? 'current' : undefined)}>
-        {route && <Link to={route}>{title}</Link>}
-        {href && <Lenke href={href}>{title}</Lenke>}
-        {!route && !href && <span>{title}</span>}
-    </span>
-);
+const crumbBem = bem.child('crumb');
+const Crumb = ({
+    title,
+    href,
+    route,
+    isCurrent,
+    noChevron,
+}: Breadcrumb & { isCurrent?: boolean; noChevron?: boolean }) => {
+    return (
+        <span
+            className={crumbBem.classNames(
+                crumbBem.block,
+                crumbBem.modifierConditional('current', isCurrent),
+                crumbBem.modifierConditional('noChevron', noChevron)
+            )}>
+            {route && <Link to={route}>{title}</Link>}
+            {href && <Lenke href={href}>{title}</Lenke>}
+            {!route && !href && <span>{title}</span>}
+        </span>
+    );
+};
 
 const Breadcrumbs = (props: Props) => {
     const { width } = useWindowSize();
@@ -76,26 +89,10 @@ const Breadcrumbs = (props: Props) => {
                     <DittNavIconSvg key={'dittNavIkon'} />
                 </span>
             )}
-            {crumbsToRender.length === 1 && (
-                <>
-                    <span style={{ whiteSpace: 'nowrap' }}>
-                        <span role="presentation" aria-hidden={true}>
-                            <NavFrontendChevron type="venstre" />
-                        </span>
-                        <Crumb {...crumbsToRender[0]} />
-                    </span>
-                </>
-            )}
+            {crumbsToRender.length === 1 && <Crumb {...crumbsToRender[0]} />}
             {crumbsToRender.length > 1 &&
                 crumbsToRender.map((c, idx) => (
-                    <span key={idx} style={{ whiteSpace: 'nowrap' }}>
-                        {idx > 0 && (
-                            <span role="presentation" aria-hidden={true}>
-                                <NavFrontendChevron type="høyre" />
-                            </span>
-                        )}
-                        <Crumb {...c} isCurrent={idx === crumbsToRender.length - 1} />
-                    </span>
+                    <Crumb key={idx} {...c} isCurrent={idx === crumbsToRender.length - 1} noChevron={idx === 0} />
                 ))}
         </nav>
     );

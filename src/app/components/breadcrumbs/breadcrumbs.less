@@ -24,11 +24,6 @@
         }
     }
 
-    // .chevron--hoyre {
-    //     color: @navGra60;
-    //     transform: scale(0.8) rotate(-90deg);
-    // }
-
     &__crumb {
         max-width: 20rem;
         overflow: hidden;
@@ -37,6 +32,7 @@
         margin-right: 0.5rem;
         color: lightGray;
         position: relative;
+        padding-left: 1.25rem;
 
         &:not(:first-child) {
             margin-left: 0.5rem;
@@ -44,6 +40,19 @@
         &--current {
             color: black;
             font-weight: bold;
+        }
+
+        &:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.25rem;
+            display: block;
+            background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iOHB4IiBoZWlnaHQ9IjE0cHgiIHZpZXdCb3g9IjAgMCA4IDE0IiB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPgogICAgPHRpdGxlPkNoZXZyb24vcmlnaHQ8L3RpdGxlPgogICAgPGcgaWQ9IlBhZ2UtMSIgc3Ryb2tlPSJub25lIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPGcgaWQ9Ikdyb3VwIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtNC4wMDAwMDAsIC0xLjAwMDAwMCkiIGZpbGw9IiMzRTM4MzIiIGZpbGwtcnVsZT0ibm9uemVybyI+CiAgICAgICAgICAgIDxnIGlkPSJjaGV2cm9uIj4KICAgICAgICAgICAgICAgIDxwYXRoIGQ9Ik00LjI5ODk3NzA1LDIuNzQ3NzUyMTMgQzMuOTAwMzQwOTgsMi4zNDc5Mjk2NSAzLjkwMDM0MDk4LDEuNjk5Njg5MzMgNC4yOTg5NzcwNSwxLjI5OTg2Njg2IEM0LjY5NzYxMzExLDAuOTAwMDQ0MzgxIDUuMzQzOTI5ODYsMC45MDAwNDQzODEgNS43NDI1NjU5MiwxLjI5OTg2Njg2IEwxMS43MDEwMjMsNy4yNzYwNTczNyBDMTIuMDk5NjU5LDcuNjc1ODc5ODQgMTIuMDk5NjU5LDguMzI0MTIwMTYgMTEuNzAxMDIzLDguNzIzOTQyNjMgTDUuNzQyNTY1OTIsMTQuNzAwMTMzMSBDNS4zNDM5Mjk4NiwxNS4wOTk5NTU2IDQuNjk3NjEzMTEsMTUuMDk5OTU1NiA0LjI5ODk3NzA1LDE0LjcwMDEzMzEgQzMuOTAwMzQwOTgsMTQuMzAwMzEwNyAzLjkwMDM0MDk4LDEzLjY1MjA3MDQgNC4yOTg5NzcwNSwxMy4yNTIyNDc5IEw5LjUzNTYzOTY0LDggTDQuMjk4OTc3MDUsMi43NDc3NTIxMyBaIj48L3BhdGg+CiAgICAgICAgICAgIDwvZz4KICAgICAgICA8L2c+CiAgICA8L2c+Cjwvc3ZnPg==');
+            background-position: top left;
+            background-repeat: no-repeat;
+            width: 16px;
+            height: 16px;
         }
     }
 

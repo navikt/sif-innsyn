@@ -26,7 +26,7 @@ const Oversikt = ({ søknader }: Props) => {
                     illustration={<SvgSykdomIFamilien />}
                 />
             )}>
-            <SectionPanel>
+            <SectionPanel ariaTitle={'Introduksjon'}>
                 <p>
                     På denne siden får du en bekreftelse på at vi har mottatt digitale søknader du har sendt om
                     pleiepenger for sykt barn. Siden er under utvikling og derfor kan du foreløpig ikke åpne og se

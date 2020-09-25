@@ -24,6 +24,7 @@ const PleiepengesakSøknad = ({ søknad }: Props) => {
                     søknad.opprettet,
                     'dayDateAndTime'
                 )}`}
+                ariaTitle={'Mottatt søknad'}
                 titleTag="h1"
                 header={
                     <Box padBottom="s">
