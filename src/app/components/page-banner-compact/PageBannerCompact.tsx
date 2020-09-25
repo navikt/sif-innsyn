@@ -1,6 +1,6 @@
 import React from 'react';
-import './pageBannerCompact.less';
 import bemUtils from '../../utils/bemUtils';
+import './pageBannerCompact.less';
 
 interface Props {
     title: string;

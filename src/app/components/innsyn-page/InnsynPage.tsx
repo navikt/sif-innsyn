@@ -1,5 +1,7 @@
 import * as React from 'react';
+import { useIntl } from 'react-intl';
 import bemUtils from '../../utils/bemUtils';
+import intlHelper from '../../utils/intlUtils';
 import Breadcrumbs, { Breadcrumb } from '../breadcrumbs/Breadcrumbs';
 import Box from '../elements/box/Box';
 import PageBannerCompact from '../page-banner-compact/PageBannerCompact';
@@ -16,16 +18,13 @@ interface Props {
     children?: React.ReactNode;
 }
 const InnsynPage = ({ topContentRenderer, breadcrumbs, title, children }: Props) => {
+    const intl = useIntl();
     return (
         <Page
             className={bem.block}
             title={title}
             topContentRenderer={() =>
-                topContentRenderer ? (
-                    topContentRenderer()
-                ) : (
-                    <PageBannerCompact title={'Din oversikt - sykdom i familien'} />
-                )
+                topContentRenderer ? topContentRenderer() : <PageBannerCompact title={intlHelper(intl, 'site.title')} />
             }>
             {breadcrumbs && (
                 <div className={bem.element('breadcrumbs')}>
