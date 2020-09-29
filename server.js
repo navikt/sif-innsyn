@@ -14,6 +14,15 @@ server.use(
             directives: {
                 defaultSrc: ["'self"],
                 scriptSrc: ["'self", '*.nav.no'],
+                baseUri: ['self'],
+                blockAllMixedContent: true,
+                fontSrc: ['self', 'https:', 'data:', '*.nav.no'],
+                frameAncestors: ['self'],
+                imgSrc: ['self', 'data:'],
+                objectSrc: ['none'],
+                scriptSrcAttr: ['none'],
+                styleSrc: ['self', 'https:', 'unsafe-inline', '*.nav.no'],
+                upgradeInsecureRequests: true,
             },
         },
     })
