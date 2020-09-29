@@ -8,11 +8,19 @@ const createEnvSettingsFile = require('./src/build/scripts/envSettings');
 const getDecorator = require('./src/build/scripts/decorator');
 
 const server = express();
-server.use(helmet());
+server.use(
+    helmet({
+        contentSecurityPolicy: {
+            directives: {
+                defaultSrc: ["'self"],
+                scriptSrc: ["'self", '*.nav.no'],
+            },
+        },
+    })
+);
 server.use(compression());
 server.set('views', `${__dirname}/dist`);
 server.set('view engine', 'mustache');
-server.set('Content-Security-Policy', "default-src 'self' *.nav.no");
 server.engine('html', mustacheExpress());
 
 createEnvSettingsFile(path.resolve(`${__dirname}/dist/js/settings.js`));
