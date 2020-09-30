@@ -6,6 +6,7 @@ import { getRedirectRouteFromUrl } from '../utils/routeRedirectUtils';
 import Oversikt from './din-oversikt-page/DinOversiktPage';
 import PleiepengeroversiktPage from './pleiepenger/PleiepengeoversiktPage';
 import PleiepengesakPage from './pleiepenger/PleiepengesakPage';
+import UnknownRoutePage from './support-pages/UnknownRoutePage';
 
 interface OwnProps {
     søknader: Søknad[];
@@ -31,6 +32,7 @@ const InnsynRoutes = ({ history, søknader }: Props) => {
                     <PleiepengesakPage søknader={søknader} søknadId={params.id} />
                 )}
             />
+            <Route path={'*'} component={UnknownRoutePage} />
         </Switch>
     );
 };

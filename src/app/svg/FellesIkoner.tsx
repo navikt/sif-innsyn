@@ -1,30 +1,7 @@
 import React from 'react';
 
-export const FilIkon = () => (
-    <svg width="26" height="34" viewBox="0 0 26 34" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path
-            fillRule="evenodd"
-            clipRule="evenodd"
-            d="M24.6516 32.7688H1V0.769531H16.304L24.6516 9.11716V32.7688V32.7688Z"
-            stroke="#3E3832"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-        />
-        <path d="M16.3047 0.768555V9.11619H24.6523" stroke="#3E3832" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-);
-
-export const ArrowBack = () => (
-    <svg width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path
-            d="M7.70102 12.2522C8.09966 12.6521 8.09966 13.3003 7.70102 13.7001C7.30239 14.1 6.65607 14.1 6.25743 13.7001L0.298977 7.72394C-0.099659 7.32412 -0.099659 6.67588 0.298977 6.27606L6.25743 0.299867C6.65607 -0.0999556 7.30239 -0.0999556 7.70102 0.299867C8.09966 0.699689 8.09966 1.34793 7.70102 1.74775L2.46436 7L7.70102 12.2522Z"
-            fill="#0067C5"
-        />
-    </svg>
-);
-
 export const SøknadsIkon = () => (
-    <svg width={56} height={56} viewBox="0 0 56 56" fill="none">
+    <svg width={56} height={56} viewBox="0 0 56 56" fill="none" focusable={false}>
         <path d="M0 28C0 12.536 12.536 0 28 0s28 12.536 28 28-12.536 28-28 28S0 43.464 0 28z" fill="#E0DAE7" />
         <path
             fillRule="evenodd"

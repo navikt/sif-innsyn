@@ -30,13 +30,15 @@ const Crumb = ({
     route,
     isCurrent,
     noChevron,
-}: Breadcrumb & { isCurrent?: boolean; noChevron?: boolean }) => {
+    backLink,
+}: Breadcrumb & { isCurrent?: boolean; noChevron?: boolean; backLink?: boolean }) => {
     return (
         <span
             className={crumbBem.classNames(
                 crumbBem.block,
                 crumbBem.modifierConditional('current', isCurrent),
-                crumbBem.modifierConditional('noChevron', noChevron)
+                crumbBem.modifierConditional('noChevron', noChevron),
+                crumbBem.modifierConditional('backLink', backLink)
             )}>
             {route && <Link to={route}>{title}</Link>}
             {href && <Lenke href={href}>{title}</Lenke>}
@@ -89,7 +91,7 @@ const Breadcrumbs = (props: Props) => {
                     <DittNavIconSvg key={'dittNavIkon'} />
                 </span>
             )}
-            {crumbsToRender.length === 1 && <Crumb {...crumbsToRender[0]} />}
+            {crumbsToRender.length === 1 && <Crumb {...crumbsToRender[0]} backLink={true} />}
             {crumbsToRender.length > 1 &&
                 crumbsToRender.map((c, idx) => (
                     <Crumb key={idx} {...c} isCurrent={idx === crumbsToRender.length - 1} noChevron={idx === 0} />

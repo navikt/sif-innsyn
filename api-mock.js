@@ -484,6 +484,10 @@ const startServer = () => {
         }
     });
 
+    server.get('/soker-err', (req, res) => {
+        res.status(500).send();
+    });
+
     server.get('/barn', (req, res) => res.send(barnMock));
 
     server.get('/arbeidsgiver', (req, res) => {

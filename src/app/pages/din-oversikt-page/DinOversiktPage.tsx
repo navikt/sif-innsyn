@@ -26,21 +26,23 @@ const Oversikt = ({ søknader }: Props) => {
                     illustration={<SvgSykdomIFamilien />}
                 />
             )}>
-            <SectionPanel ariaTitle={'Introduksjon'}>
-                <p>
-                    På denne siden får du en bekreftelse på at vi har mottatt digitale søknader du har sendt om
-                    pleiepenger for sykt barn. Siden er under utvikling og derfor kan du foreløpig ikke åpne og se
-                    søknaden, eller vedleggene du har sendt. Disse tjenestene kommer på et senere tidspunkt.
-                </p>
-                <p>
-                    Hvis du har sendt digital søknad om omsorgspenger, opplæringspenger eller pleiepenger i livets
-                    sluttfase, finner du foreløpig ingen informasjon om disse på denne siden. Dette er også tjenester
-                    som kommer på et senere tidspunkt.
-                </p>
-                <p>
-                    <strong>Søknader som er sendt inn per post vises ikke her, de finner du i denne oversikten.</strong>
-                </p>
-            </SectionPanel>
+            <Box margin="l">
+                <SectionPanel ariaTitle={'Introduksjon'}>
+                    <p>
+                        På denne siden får du en bekreftelse på at vi har mottatt digitale søknader du har sendt om
+                        pleiepenger for sykt barn. Siden er under utvikling og derfor kan du foreløpig ikke åpne og se
+                        søknaden, eller vedleggene du har sendt. Disse tjenestene kommer på et senere tidspunkt.
+                    </p>
+                    <p>
+                        Hvis du har sendt digital søknad om omsorgspenger, opplæringspenger eller pleiepenger i livets
+                        sluttfase, finner du foreløpig ingen informasjon om disse på denne siden. Dette er også
+                        tjenester som kommer på et senere tidspunkt.
+                    </p>
+                    <p style={{ fontWeight: 'bold' }}>
+                        Søknader som er sendt inn per post vises ikke her, de finner du i denne oversikten.
+                    </p>
+                </SectionPanel>
+            </Box>
 
             <SectionPanel title="Dine saker">
                 <Box>

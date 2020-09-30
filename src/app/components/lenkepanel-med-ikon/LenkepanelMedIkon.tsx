@@ -17,6 +17,7 @@ const bem = bemUtils('lenkepanelMedIkon');
 const LenkepanelMedIkon = ({ tittel, href, ikon }: Props) => (
     <LenkepanelBase
         href={'#'}
+        role="navigation"
         border={true}
         className={bem.block}
         linkCreator={(props: React.AnchorHTMLAttributes<HTMLAnchorElement>) => (
