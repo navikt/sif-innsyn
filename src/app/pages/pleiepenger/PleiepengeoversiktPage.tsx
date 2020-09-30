@@ -28,7 +28,7 @@ const PleiepengeroversiktPage = ({ søknader }: Props) => {
                 titleTag="h1">
                 <SoknadList søknader={pleiepengesoknader} />
                 <Box margin="l">
-                    <InfoManglendeSøknad mode="text" />
+                    <InfoManglendeSøknad mode="expandable" />
                 </Box>
             </SectionPanel>
         </InnsynPage>
