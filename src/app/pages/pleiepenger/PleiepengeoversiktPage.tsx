@@ -11,6 +11,7 @@ import { Søknad } from '../../types/apiTypes/søknadTypes';
 import { Sakstype } from '../../types/types';
 import { getSakstypeTitle } from '../../utils/sakstypeUtils';
 import { erPleiepenger } from '../../utils/soknadUtils';
+import { AlertStripeInfo } from 'nav-frontend-alertstriper';
 
 interface Props {
     søknader: Søknad[];
@@ -26,7 +27,12 @@ const PleiepengeroversiktPage = ({ søknader }: Props) => {
             <SectionPanel
                 title={<AriaAlternative visibleText={pageTitle} ariaText={`${pageTitle} - dine saker`} />}
                 titleTag="h1">
-                <SoknadList søknader={pleiepengesoknader} />
+                {pleiepengesoknader.length > 0 && <SoknadList søknader={pleiepengesoknader} />}
+                {pleiepengesoknader.length === 0 && (
+                    <Box margin="m">
+                        <AlertStripeInfo>Vi finner ikke pleiepengesaker fra deg</AlertStripeInfo>
+                    </Box>
+                )}
                 <Box margin="l">
                     <InfoManglendeSøknad mode="expandable" />
                 </Box>
