@@ -1,14 +1,16 @@
 import React from 'react';
+import { useIntl } from 'react-intl';
 import Lenke from 'nav-frontend-lenker';
+import AriaAlternative from '../../../components/aria/AriaAlternative';
 import Box from '../../../components/elements/box/Box';
 import Knappelenke from '../../../components/knappelenke/Knappelenke';
 import Knapperad from '../../../components/knapperad/Knapperad';
 import PrettyDate, { getPrettyDate } from '../../../components/pretty-date/PrettyDate';
-import SakstypeTittel from '../../../components/sakstype-tittel/SakstypeTittel';
 import SectionPanel from '../../../components/section-panel/SectionPanel';
 import getLenker from '../../../lenker';
 import { Pleiepengesøknad } from '../../../types/apiTypes/søknadTypes';
 import { Sakstype } from '../../../types/types';
+import { getSakstypeTitle } from '../../../utils/sakstypeUtils';
 import { getSøknadTitle } from '../../../utils/soknadUtils';
 import NyttigInforPanel from './NyttigInfo';
 
@@ -17,6 +19,8 @@ interface Props {
 }
 
 const PleiepengesakSøknad = ({ søknad }: Props) => {
+    const intl = useIntl();
+    const title = getSakstypeTitle(intl, Sakstype.PLEIEPENGER);
     return (
         <>
             <SectionPanel
@@ -25,28 +29,28 @@ const PleiepengesakSøknad = ({ søknad }: Props) => {
                     'dayDateAndTime'
                 )}`}
                 titleTag="h1"
-                header={
+                introHeader={
                     <Box padBottom="s">
-                        <SakstypeTittel sakstype={Sakstype.PLEIEPENGER} />
+                        <AriaAlternative ariaText={`Søknad om ${title}`} visibleText={title} />
                     </Box>
                 }>
-                <Box margin="l">
-                    <p style={{ fontWeight: 'bold' }}>
-                        Gjelder for perioden <PrettyDate date={søknad.søknad.fraOgMed} /> -{' '}
-                        <PrettyDate date={søknad.søknad.tilOgMed} />
-                    </p>
-                    <p>Dette er en bekreftelse på at vi har mottatt søknaden din. </p>
-                    <p>
-                        Du vil ikke kunne se oppdatert status på søknaden din her, men når den er ferdigbehandlet får du
-                        beskjed om det under saksoversikten din på <Lenke href={getLenker().dittNAV}>Ditt NAV</Lenke>.
-                    </p>
-                    <Box margin="xl" padBottom="xl">
-                        <Knapperad align="left">
-                            <Knappelenke mini={true} href={getLenker().ettersending}>
-                                Ettersend dokumentasjon
-                            </Knappelenke>
-                        </Knapperad>
-                    </Box>
+                <p style={{ fontWeight: 'bold' }}>
+                    Gjelder for perioden <PrettyDate date={søknad.søknad.fraOgMed} /> til{' '}
+                    <PrettyDate date={søknad.søknad.tilOgMed} />
+                </p>
+                <p>Dette er en bekreftelse på at vi har mottatt søknaden din. </p>
+                <p>
+                    Du vil ikke kunne se oppdatert status på søknaden din her, men når den er ferdigbehandlet får du
+                    beskjed om det under saksoversikten din på <Lenke href={getLenker().dittNAV}>Ditt NAV</Lenke>.
+                </p>
+                <Box margin="xl">
+                    <Knapperad align="left">
+                        <Knappelenke mini={true} href={getLenker().ettersending}>
+                            Ettersend dokumentasjon
+                        </Knappelenke>
+                    </Knapperad>
+                </Box>
+                <Box margin="xxl">
                     <p>
                         Denne siden er under utvikling, og derfor kan du for øyeblikket ikke åpne søknaden din eller
                         vedleggende du har sendt. Disse tjenestene kommer på et senere tidspunkt.

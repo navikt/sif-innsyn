@@ -5,6 +5,10 @@
     &:focus {
         outline: none;
     }
+    &__headerAndTitle {
+        display: flex;
+        flex-direction: column;
+    }
     &__illustration {
         margin-bottom: 1rem;
         @media (min-width: @mobile-breakpoint) {
@@ -14,8 +18,12 @@
             margin-top: -2rem;
         }
     }
+    &__header {
+        order: 1;
+    }
     &__title {
         margin-bottom: 1rem;
+        order: 2;
     }
 
     &__panel {

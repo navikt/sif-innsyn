@@ -22,7 +22,7 @@ const PleiepengeroversiktPage = ({ søknader }: Props) => {
     const pageTitle = getSakstypeTitle(intl, Sakstype.PLEIEPENGER);
     const pleiepengesoknader = søknader.filter((søknad) => erPleiepenger(søknad));
     return (
-        <InnsynPage title={pageTitle} breadcrumbs={crumbs}>
+        <InnsynPage title={pageTitle} breadcrumbs={crumbs} focusOnContent={true}>
             <SectionPanel
                 title={<AriaAlternative visibleText={pageTitle} ariaText={`${pageTitle} - dine saker`} />}
                 titleTag="h1">

@@ -45,7 +45,7 @@ const Crumb = ({
             )}>
             {route && (
                 <Link to={route}>
-                    {ariaTitle ? <AriaAlternative ariaText={ariaTitle} visibleText={title} /> : { title }}
+                    {ariaTitle ? <AriaAlternative ariaText={ariaTitle} visibleText={title} /> : <span>{title}</span>}
                 </Link>
             )}
             {href && <Lenke href={href}>{title}</Lenke>}

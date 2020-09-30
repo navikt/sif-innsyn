@@ -15,7 +15,7 @@ interface Props {
     titleTag?: TitleTag;
     illustrationPlacement?: 'inside' | 'outside';
     titleStyle?: TitleStyle;
-    header?: React.ReactNode;
+    introHeader?: React.ReactNode;
     tag?: 'section' | 'article';
 }
 
@@ -36,7 +36,7 @@ const SectionPanel = ({
     titleTag = 'h2',
     titleStyle = 'normal',
     illustrationPlacement = 'inside',
-    header,
+    introHeader,
 }: Props) => {
     return (
         <SectionOrArticle
@@ -52,13 +52,17 @@ const SectionPanel = ({
                 )
             )}>
             <PanelBase className={bem.element('panel')}>
-                {header && <div>{header}</div>}
                 {illustration && <div className={bem.element('illustration')}>{illustration}</div>}
-                {title && (
-                    <div className={bem.element('title')}>
-                        <Title tag={titleTag} titleStyle={titleStyle}>
-                            {title}
-                        </Title>
+                {(introHeader || title) && (
+                    <div className={bem.element('headerAndTitle')}>
+                        {introHeader && <div>{introHeader}</div>}
+                        {title && (
+                            <div className={bem.element('title')}>
+                                <Title tag={titleTag} titleStyle={titleStyle}>
+                                    {title}
+                                </Title>
+                            </div>
+                        )}
                     </div>
                 )}
                 {children}

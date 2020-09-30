@@ -15,7 +15,7 @@ const PleiepengesakEttersending = ({ søknad }: Props) => {
         <SectionPanel
             title={`Ettersendte dokumenter er mottatt ${getPrettyDate(søknad.opprettet, 'dayDateAndTime')}`}
             titleTag="h1"
-            header={
+            introHeader={
                 <Box padBottom="s">
                     <SakstypeTittel sakstype={Sakstype.PLEIEPENGER} />
                 </Box>
