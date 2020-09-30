@@ -1,18 +1,14 @@
 import * as React from 'react';
 import Box from '../../components/elements/box/Box';
-import InfoManglendeSøknad from '../../components/info-manglende-søknad/InfoManglendeSøknad';
+import InformationIcon from '../../components/information-poster/InformationIcon';
 import InnsynPage from '../../components/innsyn-page/InnsynPage';
 import PageBanner from '../../components/page-banner/PageBanner';
 import SectionPanel from '../../components/section-panel/SectionPanel';
 import SvgSykdomIFamilien from '../../svg/SvgSykdomIFamilien';
-import { Søknad } from '../../types/apiTypes/søknadTypes';
-import DineSakerListe from './dine-saker-liste/DineSakerListe';
+import { Sakstype } from '../../types/types';
+import SakstyperListe from './dine-saker-liste/DineSakerListe';
 
-interface Props {
-    søknader: Søknad[];
-}
-
-const Oversikt = ({ søknader }: Props) => {
+const Oversikt = () => {
     return (
         <InnsynPage
             title="Sykdom i familien - din oversikt"
@@ -26,28 +22,30 @@ const Oversikt = ({ søknader }: Props) => {
                     illustration={<SvgSykdomIFamilien />}
                 />
             )}>
-            <SectionPanel ariaTitle={'Introduksjon'}>
-                <p>
-                    På denne siden får du en bekreftelse på at vi har mottatt digitale søknader du har sendt om
-                    pleiepenger for sykt barn. Siden er under utvikling og derfor kan du foreløpig ikke åpne og se
-                    søknaden, eller vedleggene du har sendt. Disse tjenestene kommer på et senere tidspunkt.
-                </p>
-                <p>
-                    Hvis du har sendt digital søknad om omsorgspenger, opplæringspenger eller pleiepenger i livets
-                    sluttfase, finner du foreløpig ingen informasjon om disse på denne siden. Dette er også tjenester
-                    som kommer på et senere tidspunkt.
-                </p>
-                <p>
-                    <strong>Søknader som er sendt inn per post vises ikke her, de finner du i denne oversikten.</strong>
-                </p>
-            </SectionPanel>
+            <Box margin="l">
+                <SectionPanel
+                    ariaTitle={'Introduksjon'}
+                    illustration={<InformationIcon />}
+                    illustrationPlacement="outside">
+                    <p>
+                        På denne siden får du en bekreftelse på at vi har mottatt digitale søknader du har sendt om
+                        pleiepenger for sykt barn. Siden er under utvikling og derfor kan du foreløpig ikke åpne og se
+                        søknaden, eller vedleggene du har sendt. Disse tjenestene kommer på et senere tidspunkt.
+                    </p>
+                    <p>
+                        Hvis du har sendt digital søknad om omsorgspenger, opplæringspenger eller pleiepenger i livets
+                        sluttfase, finner du foreløpig ingen informasjon om disse på denne siden. Dette er også
+                        tjenester som kommer på et senere tidspunkt.
+                    </p>
+                    <p style={{ fontWeight: 'bold' }}>
+                        Søknader som er sendt inn per post vises ikke her, de finner du i denne oversikten.
+                    </p>
+                </SectionPanel>
+            </Box>
 
             <SectionPanel title="Dine saker">
                 <Box>
-                    <DineSakerListe søknader={søknader} />
-                </Box>
-                <Box>
-                    <InfoManglendeSøknad mode="expandable" />
+                    <SakstyperListe sakstyper={[Sakstype.PLEIEPENGER]} />
                 </Box>
             </SectionPanel>
         </InnsynPage>

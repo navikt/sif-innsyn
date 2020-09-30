@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { useIntl } from 'react-intl';
+import AriaAlternative from '../../components/aria/AriaAlternative';
 import { Breadcrumb } from '../../components/breadcrumbs/Breadcrumbs';
 import Box from '../../components/elements/box/Box';
 import InfoManglendeSøknad from '../../components/info-manglende-søknad/InfoManglendeSøknad';
@@ -21,11 +22,13 @@ const PleiepengeroversiktPage = ({ søknader }: Props) => {
     const pageTitle = getSakstypeTitle(intl, Sakstype.PLEIEPENGER);
     const pleiepengesoknader = søknader.filter((søknad) => erPleiepenger(søknad));
     return (
-        <InnsynPage title={pageTitle} breadcrumbs={crumbs}>
-            <SectionPanel title={pageTitle} titleTag="h1" ariaTitle={`Dine saker - ${pageTitle}`}>
+        <InnsynPage title={pageTitle} breadcrumbs={crumbs} focusOnContent={true}>
+            <SectionPanel
+                title={<AriaAlternative visibleText={pageTitle} ariaText={`${pageTitle} - dine saker`} />}
+                titleTag="h1">
                 <SoknadList søknader={pleiepengesoknader} />
                 <Box margin="l">
-                    <InfoManglendeSøknad mode="text" />
+                    <InfoManglendeSøknad mode="expandable" />
                 </Box>
             </SectionPanel>
         </InnsynPage>

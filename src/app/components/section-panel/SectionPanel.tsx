@@ -2,20 +2,21 @@ import React, { ReactNode } from 'react';
 import PanelBase from 'nav-frontend-paneler';
 import bemUtils from '../../utils/bemUtils';
 import Title, { TitleStyle, TitleTag } from '../elements/title/Title';
+import CircleIllustration from './circle-illustration/CircleIllustration';
 import './sectionPanel.less';
 
 const bem = bemUtils('sectionPanel');
 
 interface Props {
     id?: string;
-    title?: string;
+    title?: React.ReactNode;
     ariaTitle?: string;
     illustration?: React.ReactNode;
     children: ReactNode;
     titleTag?: TitleTag;
     illustrationPlacement?: 'inside' | 'outside';
     titleStyle?: TitleStyle;
-    header?: React.ReactNode;
+    introHeader?: React.ReactNode;
     tag?: 'section' | 'article';
 }
 
@@ -36,14 +37,14 @@ const SectionPanel = ({
     titleTag = 'h2',
     titleStyle = 'normal',
     illustrationPlacement = 'inside',
-    header,
+    introHeader,
 }: Props) => {
     return (
         <SectionOrArticle
             tag={tag}
             tabIndex={-1}
             id={id}
-            aria-label={tag === 'section' ? ariaTitle || title : undefined}
+            aria-label={ariaTitle}
             className={bem.classNames(
                 bem.block,
                 bem.modifierConditional(
@@ -52,13 +53,21 @@ const SectionPanel = ({
                 )
             )}>
             <PanelBase className={bem.element('panel')}>
-                {header && <div>{header}</div>}
-                {illustration && <div className={bem.element('illustration')}>{illustration}</div>}
-                {title && (
-                    <div className={bem.element('title')}>
-                        <Title tag={titleTag} titleStyle={titleStyle}>
-                            {title}
-                        </Title>
+                {illustration && (
+                    <div className={bem.element('illustration')}>
+                        <CircleIllustration backgroundColor="#C1B5D0" illustration={illustration} />
+                    </div>
+                )}
+                {(introHeader || title) && (
+                    <div className={bem.element('headerAndTitle')}>
+                        {introHeader && <div>{introHeader}</div>}
+                        {title && (
+                            <div className={bem.element('title')}>
+                                <Title tag={titleTag} titleStyle={titleStyle}>
+                                    {title}
+                                </Title>
+                            </div>
+                        )}
                     </div>
                 )}
                 {children}

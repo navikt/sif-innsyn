@@ -14,9 +14,8 @@ const PleiepengesakEttersending = ({ søknad }: Props) => {
     return (
         <SectionPanel
             title={`Ettersendte dokumenter er mottatt ${getPrettyDate(søknad.opprettet, 'dayDateAndTime')}`}
-            ariaTitle={'Mottatt ettersending av dokumenter'}
             titleTag="h1"
-            header={
+            introHeader={
                 <Box padBottom="s">
                     <SakstypeTittel sakstype={Sakstype.PLEIEPENGER} />
                 </Box>

@@ -5,6 +5,7 @@ import { RouteConfig } from '../../config/routeConfig';
 import getLenker from '../../lenker';
 import bemUtils from '../../utils/bemUtils';
 import useWindowSize from '../../utils/useWindowSize';
+import AriaAlternative from '../aria/AriaAlternative';
 import DittNavIconSvg from '../ditt-nav-breadcrumbs/DittNavnIconSvg';
 import './breadcrumbs.less';
 
@@ -14,6 +15,7 @@ export interface Breadcrumb {
     href?: string;
     route?: string;
     title: string;
+    ariaTitle?: string;
 }
 
 interface OwnProps {
@@ -26,21 +28,28 @@ type Props = OwnProps;
 const crumbBem = bem.child('crumb');
 const Crumb = ({
     title,
+    ariaTitle,
     href,
     route,
     isCurrent,
     noChevron,
-}: Breadcrumb & { isCurrent?: boolean; noChevron?: boolean }) => {
+    backLink,
+}: Breadcrumb & { isCurrent?: boolean; noChevron?: boolean; backLink?: boolean }) => {
     return (
         <span
             className={crumbBem.classNames(
                 crumbBem.block,
                 crumbBem.modifierConditional('current', isCurrent),
-                crumbBem.modifierConditional('noChevron', noChevron)
+                crumbBem.modifierConditional('noChevron', noChevron),
+                crumbBem.modifierConditional('backLink', backLink)
             )}>
-            {route && <Link to={route}>{title}</Link>}
+            {route && (
+                <Link to={route}>
+                    {ariaTitle ? <AriaAlternative ariaText={ariaTitle} visibleText={title} /> : <span>{title}</span>}
+                </Link>
+            )}
             {href && <Lenke href={href}>{title}</Lenke>}
-            {!route && !href && <span>{title}</span>}
+            {!route && !href && <AriaAlternative visibleText={title} ariaText={`${title} (denne siden)`} />}
         </span>
     );
 };
@@ -58,12 +67,14 @@ const Breadcrumbs = (props: Props) => {
                 {
                     ...crumbs[crumbs.length - 1],
                     title: 'Tilbake',
+                    ariaTitle: `Tilbake til ${crumbs[crumbs.length - 1].title}`,
                 },
             ];
         } else {
             crumbsToRender = [
                 {
                     title: 'Tilbake',
+                    ariaTitle: 'Tilbake til sykdom i familien',
                     route: frontpageUrl,
                 },
             ];
@@ -89,7 +100,7 @@ const Breadcrumbs = (props: Props) => {
                     <DittNavIconSvg key={'dittNavIkon'} />
                 </span>
             )}
-            {crumbsToRender.length === 1 && <Crumb {...crumbsToRender[0]} />}
+            {crumbsToRender.length === 1 && <Crumb {...crumbsToRender[0]} backLink={true} />}
             {crumbsToRender.length > 1 &&
                 crumbsToRender.map((c, idx) => (
                     <Crumb key={idx} {...c} isCurrent={idx === crumbsToRender.length - 1} noChevron={idx === 0} />

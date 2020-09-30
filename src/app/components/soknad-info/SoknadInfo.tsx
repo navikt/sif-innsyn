@@ -20,7 +20,7 @@ const SoknadInfo = ({ søknad, utvidetInfo }: Props) => (
             <>
                 {søknad.søknadstype === Søknadstype.PP_SYKT_BARN && (
                     <div className={bem.element('detaljer')}>
-                        Gjelder perioden <PrettyDate date={søknad.søknad.fraOgMed} /> -{' '}
+                        Gjelder perioden <PrettyDate date={søknad.søknad.fraOgMed} /> til{' '}
                         <PrettyDate date={søknad.søknad.tilOgMed} />
                     </div>
                 )}

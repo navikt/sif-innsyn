@@ -4,6 +4,7 @@ import bemUtils from '../../utils/bemUtils';
 import intlHelper from '../../utils/intlUtils';
 import Breadcrumbs, { Breadcrumb } from '../breadcrumbs/Breadcrumbs';
 import Box from '../elements/box/Box';
+import FocusRegion from '../focus-region/FocusRegion';
 import PageBannerCompact from '../page-banner-compact/PageBannerCompact';
 import Page from '../page/Page';
 import InnsynFooter from './InnsynFooter';
@@ -15,9 +16,10 @@ interface Props {
     title: string;
     topContentRenderer?: () => React.ReactNode;
     breadcrumbs?: Breadcrumb[];
+    focusOnContent?: boolean;
     children?: React.ReactNode;
 }
-const InnsynPage = ({ topContentRenderer, breadcrumbs, title, children }: Props) => {
+const InnsynPage = ({ topContentRenderer, breadcrumbs, title, focusOnContent, children }: Props) => {
     const intl = useIntl();
     return (
         <Page
@@ -31,7 +33,7 @@ const InnsynPage = ({ topContentRenderer, breadcrumbs, title, children }: Props)
                     {<Breadcrumbs currentPageTitle={title} crumbs={breadcrumbs} />}
                 </div>
             )}
-            {children}
+            <FocusRegion active={focusOnContent}>{children}</FocusRegion>
             <Box margin="xxxl">
                 <InnsynFooter />
             </Box>

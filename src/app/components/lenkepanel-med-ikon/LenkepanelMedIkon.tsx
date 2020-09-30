@@ -2,8 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { HoyreChevron } from 'nav-frontend-chevron';
 import { LenkepanelBase } from 'nav-frontend-lenkepanel';
-import { Undertittel } from 'nav-frontend-typografi';
 import bemUtils from '../../utils/bemUtils';
+import AriaAlternative from '../aria/AriaAlternative';
 import './lenkepanelMedIkon.less';
 
 interface Props {
@@ -23,9 +23,9 @@ const LenkepanelMedIkon = ({ tittel, href, ikon }: Props) => (
             <Link to={href} {...props}>
                 <div className={bem.element('innhold')}>
                     <div className={bem.element('ikon')}>{ikon}</div>
-                    <Undertittel tag={'h3'} className="lenkepanel_heading">
-                        {tittel}
-                    </Undertittel>
+                    <div className={bem.element('title')}>
+                        <AriaAlternative visibleText={tittel} ariaText={`Gå til ${tittel}`} />
+                    </div>
                 </div>
                 <HoyreChevron />
             </Link>

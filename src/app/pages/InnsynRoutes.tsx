@@ -3,9 +3,10 @@ import { Redirect, Route, RouteComponentProps, Switch, withRouter } from 'react-
 import { RouteConfig } from '../config/routeConfig';
 import { Søknad } from '../types/apiTypes/søknadTypes';
 import { getRedirectRouteFromUrl } from '../utils/routeRedirectUtils';
-import Oversikt from './din-oversikt-page/DinOversiktPage';
+import DinOversiktPage from './din-oversikt-page/DinOversiktPage';
 import PleiepengeroversiktPage from './pleiepenger/PleiepengeoversiktPage';
 import PleiepengesakPage from './pleiepenger/PleiepengesakPage';
+import UnknownRoutePage from './support-pages/UnknownRoutePage';
 
 interface OwnProps {
     søknader: Søknad[];
@@ -18,7 +19,7 @@ const InnsynRoutes = ({ history, søknader }: Props) => {
     return (
         <Switch>
             {redirectToRoute && <Redirect to={redirectToRoute} />}
-            <Route exact={true} path={RouteConfig.OVERSIKT} component={() => <Oversikt søknader={søknader} />} />
+            <Route exact={true} path={RouteConfig.OVERSIKT} component={() => <DinOversiktPage />} />
             <Route
                 exact={true}
                 path={`${RouteConfig.DINE_PLEIEPENGER}`}
@@ -31,6 +32,7 @@ const InnsynRoutes = ({ history, søknader }: Props) => {
                     <PleiepengesakPage søknader={søknader} søknadId={params.id} />
                 )}
             />
+            <Route path={'*'} component={UnknownRoutePage} />
         </Switch>
     );
 };

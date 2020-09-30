@@ -1,0 +1,47 @@
+@import '../../styles/assets.less';
+
+.guide {
+    &--fullHeight {
+        .nav-veileder {
+            svg {
+                top: 0;
+                height: 100%;
+            }
+        }
+    }
+    .nav-veileder {
+        &__frame {
+            background-color: @lightProfileColor;
+        }
+        svg {
+            top: 0;
+        }
+    }
+    &--feil {
+        .nav-veilederpanel {
+            border-color: @darkProfileColor;
+
+            .nav-veileder__frame {
+                background-color: @darkProfileColor;
+            }
+        }
+    }
+    &--advarsel {
+        .nav-veilederpanel {
+            border-color: @darkAdvarsel;
+
+            .nav-veileder__frame {
+                background-color: @lightAdvarsel;
+            }
+        }
+    }
+    &--info {
+        .nav-veilederpanel {
+            border-color: #99bdcd;
+
+            .nav-veileder__frame {
+                background-color: #99bdcd;
+            }
+        }
+    }
+}
