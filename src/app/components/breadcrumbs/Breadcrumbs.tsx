@@ -5,6 +5,7 @@ import { RouteConfig } from '../../config/routeConfig';
 import getLenker from '../../lenker';
 import bemUtils from '../../utils/bemUtils';
 import useWindowSize from '../../utils/useWindowSize';
+import AriaAlternative from '../aria/AriaAlternative';
 import DittNavIconSvg from '../ditt-nav-breadcrumbs/DittNavnIconSvg';
 import './breadcrumbs.less';
 
@@ -14,6 +15,7 @@ export interface Breadcrumb {
     href?: string;
     route?: string;
     title: string;
+    ariaTitle?: string;
 }
 
 interface OwnProps {
@@ -26,6 +28,7 @@ type Props = OwnProps;
 const crumbBem = bem.child('crumb');
 const Crumb = ({
     title,
+    ariaTitle,
     href,
     route,
     isCurrent,
@@ -40,9 +43,13 @@ const Crumb = ({
                 crumbBem.modifierConditional('noChevron', noChevron),
                 crumbBem.modifierConditional('backLink', backLink)
             )}>
-            {route && <Link to={route}>{title}</Link>}
+            {route && (
+                <Link to={route}>
+                    {ariaTitle ? <AriaAlternative ariaText={ariaTitle} visibleText={title} /> : { title }}
+                </Link>
+            )}
             {href && <Lenke href={href}>{title}</Lenke>}
-            {!route && !href && <span>{title}</span>}
+            {!route && !href && <AriaAlternative visibleText={title} ariaText={`${title} (denne siden)`} />}
         </span>
     );
 };
@@ -60,12 +67,14 @@ const Breadcrumbs = (props: Props) => {
                 {
                     ...crumbs[crumbs.length - 1],
                     title: 'Tilbake',
+                    ariaTitle: `Tilbake til ${crumbs[crumbs.length - 1].title}`,
                 },
             ];
         } else {
             crumbsToRender = [
                 {
                     title: 'Tilbake',
+                    ariaTitle: 'Tilbake til sykdom i familien',
                     route: frontpageUrl,
                 },
             ];

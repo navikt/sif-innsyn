@@ -8,7 +8,7 @@ const bem = bemUtils('sectionPanel');
 
 interface Props {
     id?: string;
-    title?: string;
+    title?: React.ReactNode;
     ariaTitle?: string;
     illustration?: React.ReactNode;
     children: ReactNode;
@@ -43,7 +43,7 @@ const SectionPanel = ({
             tag={tag}
             tabIndex={-1}
             id={id}
-            aria-label={tag === 'section' ? ariaTitle || title : undefined}
+            aria-label={ariaTitle}
             className={bem.classNames(
                 bem.block,
                 bem.modifierConditional(

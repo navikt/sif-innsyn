@@ -1,3 +1,6 @@
+@import '../../styles/assets.less';
+@import '~nav-frontend-typografi-style/src/mixins.less';
+
 .soknadListElement {
     display: flex;
     align-items: center;
@@ -24,6 +27,9 @@
             width: 26px;
             height: 34px;
         }
+    }
+    &__title {
+        .typo-undertittel-mixin();
     }
     &__status {
         flex: 2 1 20%;

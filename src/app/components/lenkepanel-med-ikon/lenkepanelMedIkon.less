@@ -1,7 +1,13 @@
+@import '../../styles/assets.less';
+@import '~nav-frontend-typografi-style/src/mixins.less';
+
 .lenkepanelMedIkon {
     &__innhold {
         display: flex;
         align-items: center;
+    }
+    &__title {
+        .typo-undertittel-mixin();
     }
     &__ikon {
         line-height: 0;
