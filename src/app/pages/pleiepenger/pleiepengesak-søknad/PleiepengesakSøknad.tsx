@@ -12,7 +12,7 @@ import { Pleiepengesøknad } from '../../../types/apiTypes/søknadTypes';
 import { Sakstype } from '../../../types/types';
 import { getSakstypeTitle } from '../../../utils/sakstypeUtils';
 import { getSøknadTitle } from '../../../utils/soknadUtils';
-import NyttigInforPanel from './NyttigInfo';
+import InfoEtterSendtSøknad from './InfoEtterSendtSøknad';
 
 interface Props {
     søknad: Pleiepengesøknad;
@@ -57,7 +57,7 @@ const PleiepengesakSøknad = ({ søknad }: Props) => {
                     </p>
                 </Box>
             </SectionPanel>
-            <NyttigInforPanel />
+            <InfoEtterSendtSøknad />
         </>
     );
 };

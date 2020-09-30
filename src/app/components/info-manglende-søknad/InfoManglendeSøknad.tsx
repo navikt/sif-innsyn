@@ -13,6 +13,7 @@ const InfoManglendeSøknad = ({ mode = 'text' }: Props) =>
         </p>
     ) : (
         <Ekspanderbartpanel tittel={'Har du sendt inn en søknad som du ikke ser her?'}>
+            <p>Denne siden er helt ny, og viser derfor kun søknader som vi har mottatt etter 6. oktober 2020.</p>
             <p>
                 Det kan ta noe tid fra du har sendt en digital søknad til den vises her. Hvis du fikk kvittering på at
                 søknaden var innsendt, er den mottatt av NAV selv om den ikke vises her enda.

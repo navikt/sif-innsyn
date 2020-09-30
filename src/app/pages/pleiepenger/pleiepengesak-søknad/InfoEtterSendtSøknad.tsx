@@ -21,7 +21,7 @@ const Step = ({ title, children }: StepProps): JSX.Element => (
     </div>
 );
 
-const NyttigInforPanel = () => (
+const InfoEtterSendtSøknad = () => (
     <SectionPanel title="Dette kan du forvente deg etter at du har sendt søknad" titleTag="h2">
         <Box margin="l">
             <ProcessDescription
@@ -32,12 +32,11 @@ const NyttigInforPanel = () => (
                             <Lenke href={getLenker().ettersending}>ettersende denne</Lenke> så snart du kan
                         </p>
                     </Step>,
-                    <Step key="inntektsmelding" title="Arbeidsgiveren din sender inntektsmelding til oss">
+                    <Step key="inntektsmelding" title="Du ber arbeidsgiver om å sende inntektsmelding til oss">
                         <ExpandableInfo title="Hva betyr dette?">
                             <p>
-                                Du må selv si fra til arbeidsgiveren din om at de må sende en inntektsmelding til oss.
-                                Inntektsmeldingen gir oss blant annet informasjon om lønna di, og om arbeidsgiver vil ha
-                                refusjon eller ei.
+                                Inntektsmeldingen er nødvendig for at vi skal kunne behandle søknaden din. Den gir oss
+                                informasjon om blant annet lønna di, og om arbeidsgiver vil ha refusjon eller ei.
                             </p>
                         </ExpandableInfo>
                     </Step>,
@@ -100,4 +99,4 @@ const NyttigInforPanel = () => (
     </SectionPanel>
 );
 
-export default NyttigInforPanel;
+export default InfoEtterSendtSøknad;
