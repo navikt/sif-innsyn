@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Box from '../../components/elements/box/Box';
 import InfoManglendeSøknad from '../../components/info-manglende-søknad/InfoManglendeSøknad';
+import InformationIcon from '../../components/information-poster/InformationIcon';
 import InnsynPage from '../../components/innsyn-page/InnsynPage';
 import PageBanner from '../../components/page-banner/PageBanner';
 import SectionPanel from '../../components/section-panel/SectionPanel';
@@ -27,7 +28,10 @@ const Oversikt = ({ søknader }: Props) => {
                 />
             )}>
             <Box margin="l">
-                <SectionPanel ariaTitle={'Introduksjon'}>
+                <SectionPanel
+                    ariaTitle={'Introduksjon'}
+                    illustration={<InformationIcon />}
+                    illustrationPlacement="outside">
                     <p>
                         På denne siden får du en bekreftelse på at vi har mottatt digitale søknader du har sendt om
                         pleiepenger for sykt barn. Siden er under utvikling og derfor kan du foreløpig ikke åpne og se

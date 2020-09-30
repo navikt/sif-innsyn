@@ -2,6 +2,7 @@ import React, { ReactNode } from 'react';
 import PanelBase from 'nav-frontend-paneler';
 import bemUtils from '../../utils/bemUtils';
 import Title, { TitleStyle, TitleTag } from '../elements/title/Title';
+import CircleIllustration from './circle-illustration/CircleIllustration';
 import './sectionPanel.less';
 
 const bem = bemUtils('sectionPanel');
@@ -52,7 +53,11 @@ const SectionPanel = ({
                 )
             )}>
             <PanelBase className={bem.element('panel')}>
-                {illustration && <div className={bem.element('illustration')}>{illustration}</div>}
+                {illustration && (
+                    <div className={bem.element('illustration')}>
+                        <CircleIllustration backgroundColor="#C1B5D0" illustration={illustration} />
+                    </div>
+                )}
                 {(introHeader || title) && (
                     <div className={bem.element('headerAndTitle')}>
                         {introHeader && <div>{introHeader}</div>}

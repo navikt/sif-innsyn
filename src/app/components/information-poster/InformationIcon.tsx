@@ -3,7 +3,7 @@
 import * as React from 'react';
 
 export default () => (
-    <svg width="50px" height="62px" viewBox="0 0 50 62" version="1.1">
+    <svg width="50px" height="62px" viewBox="0 0 50 62" version="1.1" focusable={false}>
         <title>Informasjon</title>
         <defs>
             <path
