@@ -26,7 +26,7 @@
     "dependencies": {
         "@formatjs/intl-pluralrules": "^2.2.6",
         "@formatjs/intl-relativetimeformat": "^5.2.6",
-        "@navikt/omsorgsdager-kalkulator": "^0.1.13",
+        "@navikt/omsorgsdager-kalkulator": "^0.1.14",
         "@navikt/sif-common-core": "^5.0.37",
         "@navikt/sif-common-formik": "^10.0.7",
         "@navikt/sif-common-sentry": "0.0.8",
