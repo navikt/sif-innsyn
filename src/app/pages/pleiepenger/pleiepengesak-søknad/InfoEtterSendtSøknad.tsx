@@ -32,11 +32,16 @@ const InfoEtterSendtSøknad = () => (
                             <Lenke href={getLenker().ettersending}>ettersende denne</Lenke> så snart du kan
                         </p>
                     </Step>,
-                    <Step key="inntektsmelding" title="Du ber arbeidsgiver om å sende inntektsmelding til oss">
-                        <ExpandableInfo title="Hva betyr dette?">
+                    <Step key="inntektsmelding" title="Arbeidsgiver sender inntektsmelding til oss">
+                        <ExpandableInfo title="Må jeg sende inntektsmelding i min situasjon?">
                             <p>
-                                Inntektsmeldingen er nødvendig for at vi skal kunne behandle søknaden din. Den gir oss
-                                informasjon om blant annet lønna di, og om arbeidsgiver vil ha refusjon eller ei.
+                                Er du <strong>arbeidstaker</strong> og søker for første gang, eller på nytt etter et
+                                opphold, må du be arbeidsgiver om å sende inntektsmelding til oss. Vi trenger ikke ny
+                                inntektsmelding hvis du søker om en forlenget periode med pleiepenger.
+                            </p>
+                            <p>
+                                Er du <strong>selvstendig næringsdrivende eller frilanser</strong>, trenger du ikke
+                                legge ved dokumentasjon på inntekt.
                             </p>
                         </ExpandableInfo>
                     </Step>,
