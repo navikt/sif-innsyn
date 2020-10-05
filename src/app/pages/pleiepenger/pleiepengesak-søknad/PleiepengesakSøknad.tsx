@@ -41,7 +41,7 @@ const PleiepengesakSøknad = ({ søknad }: Props) => {
                 <p>Dette er en bekreftelse på at vi har mottatt søknaden din. </p>
                 <p>
                     Du vil ikke kunne se oppdatert status på søknaden din her, men når den er ferdigbehandlet får du
-                    beskjed om det under saksoversikten din på <Lenke href={getLenker().dittNAV}>Ditt NAV</Lenke>.
+                    beskjed om det under <Lenke href={getLenker().saksoversikt}>saksoversikten din på Ditt NAV</Lenke>.
                 </p>
                 <Box margin="xl">
                     <Knapperad align="left">

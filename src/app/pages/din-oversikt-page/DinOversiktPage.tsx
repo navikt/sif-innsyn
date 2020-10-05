@@ -1,14 +1,18 @@
+import Lenke from 'nav-frontend-lenker';
 import * as React from 'react';
+import { useIntl } from 'react-intl';
 import Box from '../../components/elements/box/Box';
 import InformationIcon from '../../components/information-poster/InformationIcon';
 import InnsynPage from '../../components/innsyn-page/InnsynPage';
 import PageBanner from '../../components/page-banner/PageBanner';
 import SectionPanel from '../../components/section-panel/SectionPanel';
+import getLenker from '../../lenker';
 import SvgSykdomIFamilien from '../../svg/SvgSykdomIFamilien';
 import { Sakstype } from '../../types/types';
 import SakstyperListe from './dine-saker-liste/DineSakerListe';
 
 const Oversikt = () => {
+    const intl = useIntl();
     return (
         <InnsynPage
             title="Sykdom i familien - din oversikt"
@@ -38,7 +42,8 @@ const Oversikt = () => {
                         tjenester som kommer på et senere tidspunkt.
                     </p>
                     <p style={{ fontWeight: 'bold' }}>
-                        Søknader som er sendt inn per post vises ikke her, de finner du i denne oversikten.
+                        Søknader som er sendt inn per post vises ikke her, de finner du{' '}
+                        <Lenke href={getLenker(intl.locale).saksoversikt}>i denne oversikten</Lenke>.
                     </p>
                 </SectionPanel>
             </Box>
