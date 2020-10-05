@@ -7,6 +7,7 @@ interface Lenker {
     klageInfo: string;
     regelverkFolketrygden: string;
     dittNAV: string;
+    saksoversikt: string;
 }
 
 const lenkerBokmål: Lenker = {
@@ -16,6 +17,7 @@ const lenkerBokmål: Lenker = {
     klageInfo: getEnvironmentVariable('KLAGE_INFO_URL'),
     regelverkFolketrygden: getEnvironmentVariable('REGELVERK_INFO_URL'),
     dittNAV: getEnvironmentVariable('DITT_NAV_URL'),
+    saksoversikt: 'https://tjenester.nav.no/saksoversikt/',
 };
 
 const lenkerNynorsk: Partial<Lenker> = {};
