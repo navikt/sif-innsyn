@@ -1,11 +1,12 @@
 import React from 'react';
-import moment from 'moment';
+import moment from 'moment-timezone';
 
 type FormatType = 'date' | 'dateAndTime' | 'dayDateAndTime';
 
 interface Props {
     date: string | Date;
     format?: FormatType;
+    useNorwegianTime?: boolean;
 }
 
 const getFormatString = (format: FormatType): string => {
@@ -23,6 +24,12 @@ export const getPrettyDate = (date: Date | string, format: FormatType = 'date'):
     return moment(date).format(getFormatString(format));
 };
 
-const PrettyDate = ({ date, format = 'date' }: Props) => <span>{getPrettyDate(date, format)}</span>;
+export const getPrettyDateNorwegianTime = (date: Date | string, format: FormatType = 'date'): string => {
+    return moment(date).tz('Europe/Oslo').format(getFormatString(format));
+};
+
+const PrettyDate = ({ date, format = 'date', useNorwegianTime }: Props) => (
+    <span>{useNorwegianTime ? getPrettyDate(date, format) : getPrettyDateNorwegianTime(date, format)}</span>
+);
 
 export default PrettyDate;

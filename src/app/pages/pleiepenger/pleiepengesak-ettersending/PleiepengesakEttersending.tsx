@@ -1,6 +1,6 @@
 import React from 'react';
 import Box from '../../../components/elements/box/Box';
-import { getPrettyDate } from '../../../components/pretty-date/PrettyDate';
+import { getPrettyDateNorwegianTime } from '../../../components/pretty-date/PrettyDate';
 import SakstypeTittel from '../../../components/sakstype-tittel/SakstypeTittel';
 import SectionPanel from '../../../components/section-panel/SectionPanel';
 import { PleiepengerEttersending } from '../../../types/apiTypes/søknadTypes';
@@ -13,7 +13,10 @@ interface Props {
 const PleiepengesakEttersending = ({ søknad }: Props) => {
     return (
         <SectionPanel
-            title={`Ettersendte dokumenter er mottatt ${getPrettyDate(søknad.opprettet, 'dayDateAndTime')}`}
+            title={`Ettersendte dokumenter er mottatt ${getPrettyDateNorwegianTime(
+                søknad.opprettet,
+                'dayDateAndTime'
+            )}`}
             titleTag="h1"
             introHeader={
                 <Box padBottom="s">
