@@ -9,6 +9,7 @@ import { Locale } from './types/Locale';
 import { getEnvironmentVariable } from './utils/envUtils';
 import { getLocaleFromSessionStorage, setLocaleInSessionStorage } from './utils/localeUtils';
 import './styles/app.less';
+import { Feature, isFeatureEnabled } from './utils/featureToggleUtils';
 
 const localeFromSessionStorage = getLocaleFromSessionStorage();
 moment.locale('nb');
@@ -40,6 +41,8 @@ const App: React.FunctionComponent = () => {
                     sanityConfig={appStatusSanityConfig}
                     contentRenderer={() => <InnsynFetcher />}
                 />
+            ) : isFeatureEnabled(Feature.UTILGJENGELIG) ? (
+                <UnavailablePage />
             ) : (
                 <InnsynFetcher />
             )}
