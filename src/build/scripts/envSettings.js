@@ -8,14 +8,14 @@ function createEnvSettingsFile(settingsFile) {
                 API_URL: '${process.env.API_URL}',
                 LOGIN_URL: '${process.env.LOGIN_URL}',
                 PUBLIC_PATH: '${process.env.PUBLIC_PATH}',
-                UTILGJENGELIG: '${process.env.UTILGJENGELIG}',
-                MELLOMLAGRING: '${process.env.MELLOMLAGRING}',
                 SYKDOM_I_FAMILIEN_INFO_URL: '${process.env.SYKDOM_I_FAMILIEN_INFO_URL}',
                 SAKBEHANDLINGSTID_INFO_URL: '${process.env.SAKBEHANDLINGSTID_INFO_URL}',
                 REGELVERK_INFO_URL: '${process.env.REGELVERK_INFO_URL}',
                 ETTERSENDING_PLEIEPENGER_URL: '${process.env.ETTERSENDING_PLEIEPENGER_URL}',
                 KLAGE_INFO_URL: '${process.env.KLAGE_INFO_URL}',
-                DITT_NAV_URL: '${process.env.DITT_NAV_URL}'
+                DITT_NAV_URL: '${process.env.DITT_NAV_URL}',
+                APPSTATUS_PROJECT_ID: '${process.env.APPSTATUS_PROJECT_ID}',
+                APPSTATUS_DATASET: '${process.env.APPSTATUS_DATASET}'
             };`
         );
     });
