@@ -39,10 +39,6 @@ const PleiepengesakSøknad = ({ søknad }: Props) => {
                     <PrettyDate date={søknad.søknad.tilOgMed} />
                 </p>
                 <p>Dette er en bekreftelse på at vi har mottatt søknaden din. </p>
-                <p>
-                    Du vil ikke kunne se oppdatert status på søknaden din her, men når den er ferdigbehandlet får du
-                    beskjed om det under <Lenke href={getLenker().saksoversikt}>saksoversikten din på Ditt NAV</Lenke>.
-                </p>
                 <Box margin="xl">
                     <Knapperad align="left">
                         <Knappelenke mini={true} href={getLenker().ettersending}>
@@ -51,9 +47,15 @@ const PleiepengesakSøknad = ({ søknad }: Props) => {
                     </Knapperad>
                 </Box>
                 <Box margin="xxl">
+                    <p>Denne siden er under utvikling, og derfor kan du for øyeblikket ikke</p>
+                    <ul>
+                        <li>åpne søknaden eller vedleggene du har sendt</li>
+                        <li>se oppdatert status på søknaden din</li>
+                    </ul>
                     <p>
-                        Denne siden er under utvikling, og derfor kan du for øyeblikket ikke åpne søknaden din eller
-                        vedleggende du har sendt. Disse tjenestene kommer på et senere tidspunkt.
+                        Disse tjenestene vil komme på et senere tidspunkt. Når søknaden din er ferdig behandlet får du
+                        beskjed om det under saksoversikten din på{' '}
+                        <Lenke href={getLenker().saksoversikt}>Ditt NAV</Lenke>.
                     </p>
                 </Box>
             </SectionPanel>

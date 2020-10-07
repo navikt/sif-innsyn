@@ -8,6 +8,7 @@ interface Lenker {
     regelverkFolketrygden: string;
     dittNAV: string;
     saksoversikt: string;
+    dineUtbetalinger: string;
 }
 
 const lenkerBokmål: Lenker = {
@@ -18,6 +19,7 @@ const lenkerBokmål: Lenker = {
     regelverkFolketrygden: getEnvironmentVariable('REGELVERK_INFO_URL'),
     dittNAV: getEnvironmentVariable('DITT_NAV_URL'),
     saksoversikt: 'https://tjenester.nav.no/saksoversikt/',
+    dineUtbetalinger: 'https://tjenester.nav.no/utbetalingsoversikt/',
 };
 
 const lenkerNynorsk: Partial<Lenker> = {};

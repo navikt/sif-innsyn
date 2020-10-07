@@ -8,8 +8,8 @@ import SectionPanel from '../../../components/section-panel/SectionPanel';
 import getLenker from '../../../lenker';
 
 interface StepProps {
-    title: string;
-    children: React.ReactNode;
+    title: string | JSX.Element;
+    children?: React.ReactNode;
 }
 
 const Step = ({ title, children }: StepProps): JSX.Element => (
@@ -17,7 +17,7 @@ const Step = ({ title, children }: StepProps): JSX.Element => (
         <Title tag="h3" titleType="element">
             {title}
         </Title>
-        <Box margin="s">{children}</Box>
+        {children && <Box margin="s">{children}</Box>}
     </div>
 );
 
@@ -33,7 +33,7 @@ const InfoEtterSendtSøknad = () => (
                         </p>
                     </Step>,
                     <Step key="inntektsmelding" title="Arbeidsgiver sender inntektsmelding til oss">
-                        <ExpandableInfo title="Må jeg sende inntektsmelding i min situasjon?">
+                        <ExpandableInfo title="Må det sendes inntektsmelding i min situasjon?">
                             <p>
                                 Er du <strong>arbeidstaker</strong> og søker for første gang, eller på nytt etter et
                                 opphold, må du be arbeidsgiver om å sende inntektsmelding til oss. Vi trenger ikke ny
@@ -61,7 +61,7 @@ const InfoEtterSendtSøknad = () => (
                                     <li>du begynner å jobbe igjen, eller øker antall arbeidstimer.</li>
                                     <li>omsorgen for barnet er overført til andre, helt eller delvis.</li>
                                     <li>du får omsorgsstønad fra kommunen.</li>
-                                    <li>du skal ha lovbestemt ferie. Hva er lovbestemt ferie?</li>
+                                    <li>du skal ha lovbestemt ferie.</li>
                                     <li>du skal til utlandet.</li>
                                 </ul>
                                 <p>
@@ -73,18 +73,16 @@ const InfoEtterSendtSøknad = () => (
                     </Step>,
                     <Step
                         key="svar"
-                        title="Når søknaden er ferdig behandlet får du tilsendt svar i saksoversikten på Ditt NAV og i posten">
-                        <ExpandableInfo title="Hvilke endringer må jeg si fra om?">
-                            <p>
-                                Når vi har sett på saken din vil vi sende deg et svar på søknaden din. I svaret vil det
-                                stå om du har fått innvilget det du har søkt om.
-                            </p>
-                        </ExpandableInfo>
-                    </Step>,
+                        title="Når søknaden er ferdig behandlet får du tilsendt svar i saksoversikten på Ditt NAV og i posten"></Step>,
                     <Step
                         key="saksoversikt"
-                        title="Hvis du får innvilget pleiepenger vil det registreres i saksoversikten din at du skal ha
-                            utbetaling">
+                        title={
+                            <span>
+                                Hvis du får innvilget pleiepenger registreres utbetaling under &quot;kommende
+                                utbetalinger&quot; i{' '}
+                                <Lenke href={getLenker().dineUtbetalinger}>utbetalingsoversikten din</Lenke>.
+                            </span>
+                        }>
                         <ExpandableInfo title="Når får jeg utbetaling?">
                             <p>
                                 Utbetaling av pleiepenger fra NAV er i slutten av hver måned. Hvis du har fått innvilget
