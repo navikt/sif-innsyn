@@ -54,8 +54,8 @@ const PleiepengesakSøknad = ({ søknad }: Props) => {
                     </ul>
                     <p>
                         Disse tjenestene vil komme på et senere tidspunkt. Når søknaden din er ferdig behandlet får du
-                        beskjed om det under saksoversikten din på{' '}
-                        <Lenke href={getLenker().saksoversikt}>Ditt NAV</Lenke>.
+                        beskjed om det under{' '}
+                        <Lenke href={getLenker().saksoversikt}>saksoversikten din på Ditt NAV</Lenke>.
                     </p>
                 </Box>
             </SectionPanel>
