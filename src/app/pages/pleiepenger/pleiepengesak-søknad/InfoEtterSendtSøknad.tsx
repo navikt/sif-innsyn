@@ -1,11 +1,14 @@
 import React from 'react';
+import { FormattedMessage, useIntl } from 'react-intl';
 import Lenke from 'nav-frontend-lenker';
 import Box from '../../../components/elements/box/Box';
 import Title from '../../../components/elements/title/Title';
-import ExpandableInfo from '../../../components/expandable-info/ExpandableInfo';
+import ExpandableInfo from '../../../components/expandable-content/ExpandableInfo';
 import ProcessDescription from '../../../components/process-description/ProcessDescription';
 import SectionPanel from '../../../components/section-panel/SectionPanel';
 import getLenker from '../../../lenker';
+import intlHelper from '../../../utils/intlUtils';
+import FormattedHtmlMessage from '../../../components/formatted-html-message/FormattedHtmlMessage';
 
 interface StepProps {
     title: string | JSX.Element;
@@ -21,85 +24,124 @@ const Step = ({ title, children }: StepProps): JSX.Element => (
     </div>
 );
 
-const InfoEtterSendtSøknad = () => (
-    <SectionPanel title="Dette kan du forvente deg etter at du har sendt søknad" titleTag="h2">
-        <Box margin="l">
-            <ProcessDescription
-                steps={[
-                    <Step key="legeerklæring" title="Du har sendt søknad med legeerklæring">
-                        <p>
-                            Hvis du ikke har sendt legeerklæring med søknaden din, må du{' '}
-                            <Lenke href={getLenker().ettersending}>ettersende denne</Lenke> så snart du kan
-                        </p>
-                    </Step>,
-                    <Step key="inntektsmelding" title="Arbeidsgiver sender inntektsmelding til oss">
-                        <ExpandableInfo title="Må det sendes inntektsmelding i min situasjon?">
+const InfoEtterSendtSøknad = () => {
+    const intl = useIntl();
+    return (
+        <SectionPanel title={intlHelper(intl, 'page.pleiepengesakSøknad.infoEtterSøknad.title')} titleTag="h2">
+            <Box margin="l">
+                <ProcessDescription
+                    steps={[
+                        <Step
+                            key="legeerklæring"
+                            title={intlHelper(intl, 'page.pleiepengesakSøknad.infoEtterSøknad.step1.title')}>
                             <p>
-                                Er du <strong>arbeidstaker</strong> og søker for første gang, eller på nytt etter et
-                                opphold, må du be arbeidsgiver om å sende inntektsmelding til oss. Vi trenger ikke ny
-                                inntektsmelding hvis du søker om en forlenget periode med pleiepenger.
+                                <FormattedMessage id="page.pleiepengesakSøknad.infoEtterSøknad.step1.text.1" />{' '}
+                                <Lenke href={getLenker().ettersending}>
+                                    <FormattedMessage id="page.pleiepengesakSøknad.infoEtterSøknad.step1.text.2" />
+                                </Lenke>{' '}
+                                <FormattedMessage id="page.pleiepengesakSøknad.infoEtterSøknad.step1.text.3" />
                             </p>
+                        </Step>,
+                        <Step
+                            key="inntektsmelding"
+                            title={intlHelper(intl, 'page.pleiepengesakSøknad.infoEtterSøknad.step2.title')}>
+                            <ExpandableInfo
+                                title={intlHelper(intl, 'page.pleiepengesakSøknad.infoEtterSøknad.step2.text.title')}>
+                                <FormattedHtmlMessage
+                                    tagName="p"
+                                    id="page.pleiepengesakSøknad.infoEtterSøknad.step2.text.1.html"
+                                />
+                                <FormattedHtmlMessage
+                                    tagName="p"
+                                    id="page.pleiepengesakSøknad.infoEtterSøknad.step2.text.2.html"
+                                />
+                            </ExpandableInfo>
+                        </Step>,
+                        <Step
+                            key="behandling"
+                            title={intlHelper(intl, 'page.pleiepengesakSøknad.infoEtterSøknad.step3.title')}>
                             <p>
-                                Er du <strong>selvstendig næringsdrivende eller frilanser</strong>, trenger du ikke
-                                legge ved dokumentasjon på inntekt.
+                                <FormattedMessage id="page.pleiepengesakSøknad.infoEtterSøknad.step3.text.1" />{' '}
+                                <Lenke href={getLenker().saksbehandlingstid}>
+                                    <FormattedMessage id="page.pleiepengesakSøknad.infoEtterSøknad.step3.text.2" />
+                                </Lenke>
                             </p>
-                        </ExpandableInfo>
-                    </Step>,
-                    <Step key="behandling" title="Vi ser på søknaden din og behandler den">
-                        <p>
-                            <Lenke href={getLenker().saksbehandlingstid}>Se saksbehandlingstider der du bor</Lenke>
-                        </p>
-                        <p>Vi kontakter deg hvis vi trenger mer informasjon</p>
-                        <div>
-                            <Title tag="h4" titleType="element">
-                                Hvis noe i situasjonen din endrer seg må du si fra til oss
-                            </Title>
-                            <ExpandableInfo title="Hvilke endringer må jeg si fra om?">
+                        </Step>,
+                        <Step
+                            key="abc"
+                            title={intlHelper(intl, 'page.pleiepengesakSøknad.infoEtterSøknad.step4.title')}>
+                            <ExpandableInfo
+                                title={intlHelper(intl, 'page.pleiepengesakSøknad.infoEtterSøknad.step4.text.title')}>
                                 <ul>
-                                    <li>barnet ikke lenger har behov for kontinuerlig omsorg og pleie.</li>
-                                    <li>barnet begynner eller øker tiden i et omsorgstilbud.</li>
-                                    <li>du begynner å jobbe igjen, eller øker antall arbeidstimer.</li>
-                                    <li>omsorgen for barnet er overført til andre, helt eller delvis.</li>
-                                    <li>du får omsorgsstønad fra kommunen.</li>
-                                    <li>du skal ha lovbestemt ferie.</li>
-                                    <li>du skal til utlandet.</li>
+                                    <FormattedMessage
+                                        tagName="li"
+                                        id="page.pleiepengesakSøknad.infoEtterSøknad.step4.text.1"
+                                    />
+                                    <FormattedMessage
+                                        tagName="li"
+                                        id="page.pleiepengesakSøknad.infoEtterSøknad.step4.text.2"
+                                    />
+                                    <FormattedMessage
+                                        tagName="li"
+                                        id="page.pleiepengesakSøknad.infoEtterSøknad.step4.text.3"
+                                    />
+                                    <FormattedMessage
+                                        tagName="li"
+                                        id="page.pleiepengesakSøknad.infoEtterSøknad.step4.text.4"
+                                    />
+                                    <FormattedMessage
+                                        tagName="li"
+                                        id="page.pleiepengesakSøknad.infoEtterSøknad.step4.text.5"
+                                    />
+                                    <FormattedMessage
+                                        tagName="li"
+                                        id="page.pleiepengesakSøknad.infoEtterSøknad.step4.text.6"
+                                    />
+                                    <FormattedMessage
+                                        tagName="li"
+                                        id="page.pleiepengesakSøknad.infoEtterSøknad.step4.text.7"
+                                    />
                                 </ul>
                                 <p>
-                                    Du melder fra om endringer ved å skrive en beskjed til oss. Du kan også ringe 55 55
-                                    33 33, tastevalg 3.
+                                    <FormattedMessage id="page.pleiepengesakSøknad.infoEtterSøknad.step4.text.8.a" />{' '}
+                                    <span style={{ whiteSpace: 'nowrap' }}>
+                                        <FormattedMessage id="page.pleiepengesakSøknad.infoEtterSøknad.step4.text.8.b" />
+                                    </span>{' '}
+                                    <FormattedMessage id="page.pleiepengesakSøknad.infoEtterSøknad.step4.text.8.c" />
                                 </p>
                             </ExpandableInfo>
-                        </div>
-                    </Step>,
-                    <Step
-                        key="svar"
-                        title="Når søknaden er ferdig behandlet får du tilsendt svar i saksoversikten på Ditt NAV og i posten"></Step>,
-                    <Step
-                        key="saksoversikt"
-                        title={
-                            <span>
-                                Hvis du får innvilget pleiepenger registreres utbetaling under &quot;kommende
-                                utbetalinger&quot; i{' '}
-                                <Lenke href={getLenker().dineUtbetalinger}>utbetalingsoversikten din</Lenke>.
-                            </span>
-                        }>
-                        <ExpandableInfo title="Når får jeg utbetaling?">
-                            <p>
-                                Utbetaling av pleiepenger fra NAV er i slutten av hver måned. Hvis du har fått innvilget
-                                pleiepenger for en periode tilbake i tid sender vi utbetaling for passerte måneder med
-                                en gang.
-                            </p>
-                            <p>
-                                Hvis arbeidsgiveren din skal ha refusjon (utbetale lønn til deg som vanlig og få tilbake
-                                pengene fra NAV) må du høre med arbeidsgiver om det er noe du lurer på angående lønnen
-                                din.
-                            </p>
-                        </ExpandableInfo>
-                    </Step>,
-                ]}
-            />
-        </Box>
-    </SectionPanel>
-);
+                        </Step>,
+                        <Step
+                            key="svar"
+                            title={intlHelper(intl, 'page.pleiepengesakSøknad.infoEtterSøknad.step5.title')}></Step>,
+                        <Step
+                            key="saksoversikt"
+                            title={
+                                <span>
+                                    {intlHelper(intl, 'page.pleiepengesakSøknad.infoEtterSøknad.step6.title.1')}{' '}
+                                    <Lenke href={getLenker().dineUtbetalinger}>
+                                        {intlHelper(intl, 'page.pleiepengesakSøknad.infoEtterSøknad.step6.title.2')}
+                                    </Lenke>
+                                    .
+                                </span>
+                            }>
+                            <ExpandableInfo
+                                title={intlHelper(intl, 'page.pleiepengesakSøknad.infoEtterSøknad.step6.text.title')}>
+                                <FormattedMessage
+                                    tagName="p"
+                                    id="page.pleiepengesakSøknad.infoEtterSøknad.step6.text.1"
+                                />
+                                <FormattedMessage
+                                    tagName="p"
+                                    id="page.pleiepengesakSøknad.infoEtterSøknad.step6.text.2"
+                                />
+                            </ExpandableInfo>
+                        </Step>,
+                    ]}
+                />
+            </Box>
+        </SectionPanel>
+    );
+};
 
 export default InfoEtterSendtSøknad;

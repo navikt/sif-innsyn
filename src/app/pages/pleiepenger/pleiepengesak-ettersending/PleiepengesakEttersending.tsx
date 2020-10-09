@@ -1,31 +1,31 @@
 import React from 'react';
+import { FormattedMessage, useIntl } from 'react-intl';
 import Box from '../../../components/elements/box/Box';
 import { getPrettyDateNorwegianTime } from '../../../components/pretty-date/PrettyDate';
 import SakstypeTittel from '../../../components/sakstype-tittel/SakstypeTittel';
 import SectionPanel from '../../../components/section-panel/SectionPanel';
 import { PleiepengerEttersending } from '../../../types/apiTypes/søknadTypes';
 import { Sakstype } from '../../../types/types';
+import intlHelper from '../../../utils/intlUtils';
 
 interface Props {
     søknad: PleiepengerEttersending;
 }
 
 const PleiepengesakEttersending = ({ søknad }: Props) => {
+    const intl = useIntl();
     return (
         <SectionPanel
-            title={`Ettersendte dokumenter er mottatt ${getPrettyDateNorwegianTime(
-                søknad.opprettet,
-                'dayDateAndTime'
-            )}`}
+            title={intlHelper(intl, 'page.pleiepengesakEttersending.title', {
+                mottatt: getPrettyDateNorwegianTime(søknad.opprettet, 'dayDateAndTime'),
+            })}
             titleTag="h1"
             introHeader={
                 <Box padBottom="s">
                     <SakstypeTittel sakstype={Sakstype.PLEIEPENGER} />
                 </Box>
             }>
-            <Box margin="l">
-                <p>Ettersendte dokumenter er mottatt og registrert på din sak.</p>
-            </Box>
+            <FormattedMessage tagName="p" id="page.pleiepengesakEttersending.info" />
         </SectionPanel>
     );
 };

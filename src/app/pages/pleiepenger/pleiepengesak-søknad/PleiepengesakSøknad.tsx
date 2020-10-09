@@ -1,11 +1,11 @@
 import React from 'react';
-import { useIntl } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import Lenke from 'nav-frontend-lenker';
 import AriaAlternative from '../../../components/aria/AriaAlternative';
 import Box from '../../../components/elements/box/Box';
 import Knappelenke from '../../../components/knappelenke/Knappelenke';
 import Knapperad from '../../../components/knapperad/Knapperad';
-import PrettyDate, { getPrettyDate } from '../../../components/pretty-date/PrettyDate';
+import { getPrettyDate } from '../../../components/pretty-date/PrettyDate';
 import SectionPanel from '../../../components/section-panel/SectionPanel';
 import getLenker from '../../../lenker';
 import { Pleiepengesøknad } from '../../../types/apiTypes/søknadTypes';
@@ -13,6 +13,7 @@ import { Sakstype } from '../../../types/types';
 import { getSakstypeTitle } from '../../../utils/sakstypeUtils';
 import { getSøknadTitle } from '../../../utils/soknadUtils';
 import InfoEtterSendtSøknad from './InfoEtterSendtSøknad';
+import intlHelper from '../../../utils/intlUtils';
 
 interface Props {
     søknad: Pleiepengesøknad;
@@ -21,41 +22,50 @@ interface Props {
 const PleiepengesakSøknad = ({ søknad }: Props) => {
     const intl = useIntl();
     const title = getSakstypeTitle(intl, Sakstype.PLEIEPENGER);
+    const introAriaTitle = intlHelper(intl, 'generell.SøknadOm', { title });
     return (
         <>
             <SectionPanel
-                title={`${getSøknadTitle(søknad, true)} er mottatt ${getPrettyDate(
-                    søknad.opprettet,
-                    'dayDateAndTime'
-                )}`}
+                title={intlHelper(intl, 'page.pleiepengesakSøknad.søknad.title', {
+                    søknad: getSøknadTitle(søknad, true),
+                    mottatt: getPrettyDate(søknad.opprettet, 'dayDateAndTime'),
+                })}
                 titleTag="h1"
                 introHeader={
                     <Box padBottom="s">
-                        <AriaAlternative ariaText={`Søknad om ${title}`} visibleText={title} />
+                        <AriaAlternative ariaText={introAriaTitle} visibleText={title} />
                     </Box>
                 }>
                 <p style={{ fontWeight: 'bold' }}>
-                    Gjelder for perioden <PrettyDate date={søknad.søknad.fraOgMed} /> til{' '}
-                    <PrettyDate date={søknad.søknad.tilOgMed} />
+                    <FormattedMessage
+                        id="page.pleiepengesakSøknad.periode"
+                        values={{
+                            fom: getPrettyDate(søknad.søknad.fraOgMed),
+                            tom: getPrettyDate(søknad.søknad.tilOgMed),
+                        }}
+                    />
                 </p>
-                <p>Dette er en bekreftelse på at vi har mottatt søknaden din. </p>
+                <FormattedMessage tagName="p" id="page.pleiepengesakSøknad.bekreftelse" />
+
                 <Box margin="xl">
                     <Knapperad align="left">
                         <Knappelenke mini={true} href={getLenker().ettersending}>
-                            Ettersend dokumentasjon
+                            <FormattedMessage id="page.pleiepengesakSøknad.ettersendKnapp.label" />
                         </Knappelenke>
                     </Knapperad>
                 </Box>
                 <Box margin="xxl">
-                    <p>Denne siden er under utvikling, og derfor kan du for øyeblikket ikke</p>
+                    <FormattedMessage tagName="p" id="page.pleiepengesakSøknad.info.1" />
                     <ul>
-                        <li>åpne søknaden eller vedleggene du har sendt</li>
-                        <li>se oppdatert status på søknaden din</li>
+                        <FormattedMessage tagName="li" id="page.pleiepengesakSøknad.info.2.a" />
+                        <FormattedMessage tagName="li" id="page.pleiepengesakSøknad.info.2.b" />
                     </ul>
                     <p>
-                        Disse tjenestene vil komme på et senere tidspunkt. Når søknaden din er ferdig behandlet får du
-                        beskjed om det under{' '}
-                        <Lenke href={getLenker().saksoversikt}>saksoversikten din på Ditt NAV</Lenke>.
+                        <FormattedMessage id="page.pleiepengesakSøknad.info.3.a" />{' '}
+                        <Lenke href={getLenker().saksoversikt}>
+                            <FormattedMessage id="page.pleiepengesakSøknad.info.3.b" />
+                        </Lenke>
+                        <FormattedMessage id="page.pleiepengesakSøknad.info.3.c" />
                     </p>
                 </Box>
             </SectionPanel>

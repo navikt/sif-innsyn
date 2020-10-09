@@ -19,7 +19,7 @@ const InnsynRoutes = ({ history, søknader }: Props) => {
     return (
         <Switch>
             {redirectToRoute && <Redirect to={redirectToRoute} />}
-            <Route exact={true} path={RouteConfig.OVERSIKT} component={() => <DinOversiktPage />} />
+            <Route exact={true} path={RouteConfig.OVERSIKT} component={() => <DinOversiktPage søknader={søknader} />} />
             <Route
                 exact={true}
                 path={`${RouteConfig.DINE_PLEIEPENGER}`}

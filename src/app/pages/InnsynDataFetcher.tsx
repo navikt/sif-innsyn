@@ -8,7 +8,7 @@ import InnsynRoutes from './InnsynRoutes';
 import ErrorPage from './support-pages/ErrorPage';
 import LoadingPage from './support-pages/LoadingPage';
 
-const InnsynFetcher = () => {
+const InnsynDataFetcher = () => {
     const history = useHistory();
     return (
         <Fetcher<SøknadApiResponse>
@@ -31,4 +31,4 @@ const InnsynFetcher = () => {
     );
 };
 
-export default InnsynFetcher;
+export default InnsynDataFetcher;

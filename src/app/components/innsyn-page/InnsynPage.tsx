@@ -34,7 +34,7 @@ const InnsynPage = ({ topContentRenderer, breadcrumbs, title, focusOnContent, ch
                 </div>
             )}
             <FocusRegion active={focusOnContent}>{children}</FocusRegion>
-            <Box margin="xxxl">
+            <Box margin="xxl">
                 <InnsynFooter />
             </Box>
         </Page>

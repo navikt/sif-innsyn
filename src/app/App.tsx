@@ -3,7 +3,7 @@ import { render } from 'react-dom';
 import moment from 'moment';
 import AppStatusWrapper from './components/app-status-wrapper/AppStatusWrapper';
 import ApplicationWrapper from './components/application-wrapper/ApplicationWrapper';
-import InnsynFetcher from './pages/InnsynFetcher';
+import InnsynDataFetcher from './pages/InnsynDataFetcher';
 import UnavailablePage from './pages/support-pages/UnavailablePage';
 import { Locale } from './types/Locale';
 import { getEnvironmentVariable } from './utils/envUtils';
@@ -39,12 +39,12 @@ const App: React.FunctionComponent = () => {
                     applicationKey={APPLICATION_KEY}
                     unavailableContentRenderer={() => <UnavailablePage />}
                     sanityConfig={appStatusSanityConfig}
-                    contentRenderer={() => <InnsynFetcher />}
+                    contentRenderer={() => <InnsynDataFetcher />}
                 />
             ) : isFeatureEnabled(Feature.UTILGJENGELIG) ? (
                 <UnavailablePage />
             ) : (
-                <InnsynFetcher />
+                <InnsynDataFetcher />
             )}
         </ApplicationWrapper>
     );

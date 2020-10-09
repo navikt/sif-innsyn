@@ -29,7 +29,13 @@
 
     &__panel {
         width: 100%;
-        .sectionPanelPadding();
+        padding: 1.5rem 1rem;
+        @media (min-width: @mobile-breakpoint) {
+            padding: 2rem;
+        }
+        @media (min-width: @tablet-breakpoint) {
+            padding: 2rem 2rem 2.5rem 2rem;
+        }
     }
 
     &--illustrationOutside {
