@@ -121,8 +121,8 @@ const InfoEtterSendtSøknad = () => {
                                     {intlHelper(intl, 'page.pleiepengesakSøknad.infoEtterSøknad.step6.title.1')}{' '}
                                     <Lenke href={getLenker().dineUtbetalinger}>
                                         {intlHelper(intl, 'page.pleiepengesakSøknad.infoEtterSøknad.step6.title.2')}
-                                    </Lenke>
-                                    .
+                                    </Lenke>{' '}
+                                    {intlHelper(intl, 'page.pleiepengesakSøknad.infoEtterSøknad.step6.title.3')}
                                 </span>
                             }>
                             <ExpandableInfo

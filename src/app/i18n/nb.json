@@ -17,7 +17,7 @@
     "page.dinOversikt.saker.title": "Din oversikt",
 
     "page.pleiepengesaker.oversikt.ariaTitle": "{pageTitle} - dine saker",
-    "page.pleiepengesaker.oversikt.ingenSakerFunnet": "Vi finner ikke pleiepengesaker fra deg",
+    "page.pleiepengesaker.oversikt.ingenSakerFunnet": "Vi finner ingen saker eller søknader fra deg",
     "page.pleiepengesakSøknad.søknad.title": "{søknad} er mottatt {mottatt}",
     "page.pleiepengesakSøknad.periode": "Gjelder for {fom} til {tom}",
     "page.pleiepengesakSøknad.bekreftelse": "Dette er en bekreftelse på at vi har mottatt søknaden din.",
@@ -54,8 +54,9 @@
     "page.pleiepengesakSøknad.infoEtterSøknad.step4.text.8.b": "tastevalg 3",
     "page.pleiepengesakSøknad.infoEtterSøknad.step4.text.8.c": ".",
     "page.pleiepengesakSøknad.infoEtterSøknad.step5.title": "Når søknaden er ferdig behandlet får du tilsendt svar i saksoversikten på Ditt NAV og i posten",
-    "page.pleiepengesakSøknad.infoEtterSøknad.step6.title.1": "Hvis du får innvilget pleiepenger registreres utbetaling under \"kommende utbetalinger\" i",
+    "page.pleiepengesakSøknad.infoEtterSøknad.step6.title.1": "Under \"kommende utbetalinger\" i",
     "page.pleiepengesakSøknad.infoEtterSøknad.step6.title.2": "utbetalingsoversikten din",
+    "page.pleiepengesakSøknad.infoEtterSøknad.step6.title.3": "finner du informasjon om hva du får utbetalt hvis du får innvilget pleiepenger",
     "page.pleiepengesakSøknad.infoEtterSøknad.step6.text.title": "Når får jeg utbetaling?",
     "page.pleiepengesakSøknad.infoEtterSøknad.step6.text.1": "Utbetaling av pleiepenger fra NAV er i slutten av hver måned. Hvis du har fått innvilget pleiepenger for en periode tilbake i tid sender vi utbetaling for passerte måneder med en gang.",
     "page.pleiepengesakSøknad.infoEtterSøknad.step6.text.2": "Hvis arbeidsgiveren din skal ha refusjon (utbetale lønn til deg som vanlig og få tilbake pengene fra NAV) må du høre med arbeidsgiver om det er noe du lurer på angående lønnen din.",
@@ -75,7 +76,7 @@
     "info.manglendeSøknad.title": "Har du sendt inn en søknad som du ikke ser her?",
     "info.manglendeSøknad.text.1": "Denne siden er helt ny, og viser derfor kun søknader som vi har mottatt etter 6. oktober 2020.",
     "info.manglendeSøknad.text.2": "Det kan ta noe tid fra du har sendt en digital søknad til den vises her. Hvis du fikk kvittering på at søknaden var innsendt, er den mottatt av NAV selv om den ikke vises her enda.",
-    "info.manglendeSøknad.text.3.a": "Søknader som er sendt i posten vises ikke her. De vises på",
-    "info.manglendeSøknad.text.3.b": "saksoversikten din på Ditt NAV",
+    "info.manglendeSøknad.text.3.a": "Søknader som er sendt i posten vises ikke her. De vises i",
+    "info.manglendeSøknad.text.3.b": "saksoversikten på Ditt NAV",
     "info.manglendeSøknad.text.3.c": "når søknaden er mottatt og registrert inn. Det tar som regel 2 uker fra en søknad er postlagt til den vises i saksoversikten."
 }
