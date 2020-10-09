@@ -1,34 +1,42 @@
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import Lenke from 'nav-frontend-lenker';
 import React from 'react';
-import { useIntl } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import getLenker from '../../lenker';
+import intlHelper from '../../utils/intlUtils';
+import ExpandableInfo from '../expandable-content/ExpandableInfo';
 
 interface Props {
-    mode?: 'expandable' | 'text';
+    mode?: 'expandable-panel' | 'expandable-text' | 'text';
 }
 
 const InfoManglendeSøknad = ({ mode = 'text' }: Props) => {
     const intl = useIntl();
-    return mode === 'text' ? (
-        <p>
-            Det kan ta noe tid fra du har sendt en digital søknad til den vises her. Hvis du fikk kvittering på at
-            søknaden var innsendt, er den mottatt av NAV selv om den ikke vises her enda.
-        </p>
-    ) : (
-        <Ekspanderbartpanel tittel={'Har du sendt inn en søknad som du ikke ser her?'}>
-            <p>Denne siden er helt ny, og viser derfor kun søknader som vi har mottatt etter 6. oktober 2020.</p>
+    const getExpandedContent = () => (
+        <>
+            <FormattedMessage tagName="p" id="info.manglendeSøknad.text.1" />
+            <FormattedMessage tagName="p" id="info.manglendeSøknad.text.2" />
             <p>
-                Det kan ta noe tid fra du har sendt en digital søknad til den vises her. Hvis du fikk kvittering på at
-                søknaden var innsendt, er den mottatt av NAV selv om den ikke vises her enda.
+                {intlHelper(intl, 'info.manglendeSøknad.text.3.a')}{' '}
+                <Lenke href={getLenker(intl.locale).saksoversikt}>
+                    {intlHelper(intl, 'info.manglendeSøknad.text.3.b')}
+                </Lenke>{' '}
+                {intlHelper(intl, 'info.manglendeSøknad.text.3.c')}
             </p>
-            <p>
-                Søknader som er sendt i posten vises ikke her. De vises på{' '}
-                <Lenke href={getLenker(intl.locale).saksoversikt}>en annen saksoversikt</Lenke> når søknaden er mottatt
-                og registrert inn. Det tar som regel 2 uker fra en søknad er postlagt til den vises i saksoversikten.
-            </p>
-        </Ekspanderbartpanel>
+        </>
     );
+    switch (mode) {
+        case 'text':
+            return <FormattedMessage tagName="p" id="intlHelper(intl, 'info.manglendeSøknad.shortInfo')" />;
+        case 'expandable-panel':
+            return <Ekspanderbartpanel tittel={intlHelper(intl, 'c')}>{getExpandedContent()}</Ekspanderbartpanel>;
+        case 'expandable-text':
+            return (
+                <ExpandableInfo title={intlHelper(intl, 'info.manglendeSøknad.title')}>
+                    {getExpandedContent()}
+                </ExpandableInfo>
+            );
+    }
 };
 
 export default InfoManglendeSøknad;

@@ -1,26 +1,39 @@
-import Lenke from 'nav-frontend-lenker';
 import * as React from 'react';
-import { useIntl } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
+import { AlertStripeInfo } from 'nav-frontend-alertstriper';
+import Lenke from 'nav-frontend-lenker';
 import Box from '../../components/elements/box/Box';
+import InfoManglendeSøknad from '../../components/info-manglende-søknad/InfoManglendeSøknad';
 import InformationIcon from '../../components/information-poster/InformationIcon';
 import InnsynPage from '../../components/innsyn-page/InnsynPage';
 import PageBanner from '../../components/page-banner/PageBanner';
 import SectionPanel from '../../components/section-panel/SectionPanel';
 import getLenker from '../../lenker';
 import SvgSykdomIFamilien from '../../svg/SvgSykdomIFamilien';
+import { Søknad } from '../../types/apiTypes/søknadTypes';
 import { Sakstype } from '../../types/types';
+import intlHelper from '../../utils/intlUtils';
+import { erPleiepenger } from '../../utils/soknadUtils';
 import SakstyperListe from './dine-saker-liste/DineSakerListe';
 
-const Oversikt = () => {
+interface Props {
+    søknader: Søknad[];
+}
+const Oversikt = ({ søknader }: Props) => {
     const intl = useIntl();
+    const pleiepengesoknader = søknader.filter((søknad) => erPleiepenger(søknad));
+    const harSøknader = pleiepengesoknader.length > 0;
     return (
         <InnsynPage
-            title="Sykdom i familien - din oversikt"
+            title={intlHelper(intl, 'page.dinOversikt.title')}
             topContentRenderer={() => (
                 <PageBanner
                     title={
                         <>
-                            Din oversikt - <span style={{ whiteSpace: 'nowrap' }}>sykdom i familien</span>
+                            {intlHelper(intl, 'page.dinOversikt.banner.title.1')}
+                            <span style={{ whiteSpace: 'nowrap' }}>
+                                {intlHelper(intl, 'page.dinOversikt.banner.title.2')}
+                            </span>
                         </>
                     }
                     illustration={<SvgSykdomIFamilien />}
@@ -28,30 +41,31 @@ const Oversikt = () => {
             )}>
             <Box margin="l">
                 <SectionPanel
-                    ariaTitle={'Introduksjon'}
+                    ariaTitle={intlHelper(intl, 'page.dinOversikt.intro.section.ariaTitle')}
                     illustration={<InformationIcon />}
                     illustrationPlacement="outside">
-                    <p>
-                        På denne siden får du en bekreftelse på at vi har mottatt digitale søknader du har sendt om
-                        pleiepenger for sykt barn. Siden er under utvikling og derfor kan du foreløpig ikke åpne og se
-                        søknaden, eller vedleggene du har sendt. Disse tjenestene kommer på et senere tidspunkt.
-                    </p>
-                    <p>
-                        Hvis du har sendt digital søknad om omsorgspenger, opplæringspenger eller pleiepenger i livets
-                        sluttfase, finner du foreløpig ingen informasjon om disse på denne siden. Dette er også
-                        tjenester som kommer på et senere tidspunkt.
-                    </p>
+                    <FormattedMessage tagName="p" id="page.dinOversikt.intro.1" />
+                    <FormattedMessage tagName="p" id="page.dinOversikt.intro.2" />
                     <p style={{ fontWeight: 'bold' }}>
-                        Søknader som er sendt inn per post vises ikke her, de finner du{' '}
-                        <Lenke href={getLenker(intl.locale).saksoversikt}>i denne oversikten</Lenke>.
+                        <FormattedMessage id="page.dinOversikt.intro.3.a" />{' '}
+                        <Lenke href={getLenker(intl.locale).saksoversikt}>
+                            <FormattedMessage id="page.dinOversikt.intro.3.b" />
+                        </Lenke>
+                        .
                     </p>
                 </SectionPanel>
             </Box>
 
-            <SectionPanel title="Dine saker">
-                <Box>
-                    <SakstyperListe sakstyper={[Sakstype.PLEIEPENGER]} />
-                </Box>
+            <SectionPanel title={intlHelper(intl, 'page.dinOversikt.saker.title')}>
+                {harSøknader && <SakstyperListe sakstyper={[Sakstype.PLEIEPENGER]} />}
+                {harSøknader === false && (
+                    <>
+                        <AlertStripeInfo>Vi finner ingen saker</AlertStripeInfo>
+                        <Box margin="xl">
+                            <InfoManglendeSøknad mode="expandable-text" />
+                        </Box>
+                    </>
+                )}
             </SectionPanel>
         </InnsynPage>
     );
