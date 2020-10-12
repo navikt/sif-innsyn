@@ -26,6 +26,7 @@ const Step = ({ title, children }: StepProps): JSX.Element => (
 
 const InfoEtterSendtSøknad = () => {
     const intl = useIntl();
+    const lenker = getLenker(intl.locale);
     return (
         <SectionPanel title={intlHelper(intl, 'page.pleiepengesakSøknad.infoEtterSøknad.title')} titleTag="h2">
             <Box margin="l">
@@ -36,7 +37,7 @@ const InfoEtterSendtSøknad = () => {
                             title={intlHelper(intl, 'page.pleiepengesakSøknad.infoEtterSøknad.step1.title')}>
                             <p>
                                 <FormattedMessage id="page.pleiepengesakSøknad.infoEtterSøknad.step1.text.1" />{' '}
-                                <Lenke href={getLenker().ettersending}>
+                                <Lenke href={lenker.ettersending}>
                                     <FormattedMessage id="page.pleiepengesakSøknad.infoEtterSøknad.step1.text.2" />
                                 </Lenke>{' '}
                                 <FormattedMessage id="page.pleiepengesakSøknad.infoEtterSøknad.step1.text.3" />
@@ -62,7 +63,7 @@ const InfoEtterSendtSøknad = () => {
                             title={intlHelper(intl, 'page.pleiepengesakSøknad.infoEtterSøknad.step3.title')}>
                             <p>
                                 <FormattedMessage id="page.pleiepengesakSøknad.infoEtterSøknad.step3.text.1" />{' '}
-                                <Lenke href={getLenker().saksbehandlingstid}>
+                                <Lenke href={lenker.saksbehandlingstid}>
                                     <FormattedMessage id="page.pleiepengesakSøknad.infoEtterSøknad.step3.text.2" />
                                 </Lenke>
                             </p>
@@ -103,17 +104,30 @@ const InfoEtterSendtSøknad = () => {
                                     />
                                 </ul>
                                 <p>
-                                    <FormattedMessage id="page.pleiepengesakSøknad.infoEtterSøknad.step4.text.8.a" />{' '}
+                                    <FormattedMessage id="page.pleiepengesakSøknad.infoEtterSøknad.step4.text.8.a.1" />{' '}
+                                    <Lenke href={lenker.minInnboksSkrivMelding}>
+                                        <FormattedMessage id="page.pleiepengesakSøknad.infoEtterSøknad.step4.text.8.a.2" />
+                                    </Lenke>
+                                    <FormattedMessage id="page.pleiepengesakSøknad.infoEtterSøknad.step4.text.8.a.3" />{' '}
                                     <span style={{ whiteSpace: 'nowrap' }}>
                                         <FormattedMessage id="page.pleiepengesakSøknad.infoEtterSøknad.step4.text.8.b" />
-                                    </span>{' '}
+                                    </span>
                                     <FormattedMessage id="page.pleiepengesakSøknad.infoEtterSøknad.step4.text.8.c" />
                                 </p>
                             </ExpandableInfo>
                         </Step>,
                         <Step
                             key="svar"
-                            title={intlHelper(intl, 'page.pleiepengesakSøknad.infoEtterSøknad.step5.title')}></Step>,
+                            title={
+                                <span>
+                                    {intlHelper(intl, 'page.pleiepengesakSøknad.infoEtterSøknad.step5.title.1')}{' '}
+                                    <Lenke href={lenker.saksoversikt}>
+                                        {intlHelper(intl, 'page.pleiepengesakSøknad.infoEtterSøknad.step5.title.2')}
+                                    </Lenke>{' '}
+                                    {intlHelper(intl, 'page.pleiepengesakSøknad.infoEtterSøknad.step5.title.3')}
+                                </span>
+                            }
+                        />,
                         <Step
                             key="saksoversikt"
                             title={

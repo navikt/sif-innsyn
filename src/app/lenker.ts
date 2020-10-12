@@ -9,6 +9,7 @@ interface Lenker {
     dittNAV: string;
     saksoversikt: string;
     dineUtbetalinger: string;
+    minInnboksSkrivMelding: string;
 }
 
 const lenkerBokmål: Lenker = {
@@ -20,6 +21,7 @@ const lenkerBokmål: Lenker = {
     dittNAV: getEnvironmentVariable('DITT_NAV_URL'),
     saksoversikt: 'https://tjenester.nav.no/saksoversikt/',
     dineUtbetalinger: 'https://tjenester.nav.no/utbetalingsoversikt/',
+    minInnboksSkrivMelding: 'https://mininnboks.nav.no/sporsmal/skriv/FMLI',
 };
 
 const lenkerNynorsk: Partial<Lenker> = {};
