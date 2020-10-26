@@ -29,7 +29,6 @@ spec:
         outbound:
             external:
             - host: www.nav.no
-            - host: www-q1.dev.nav.no
     ingresses:
       {{#each ingresses as |url|}}
        - {{url}}
