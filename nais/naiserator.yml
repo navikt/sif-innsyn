@@ -25,6 +25,9 @@ spec:
         requests:
             cpu: 50m
             memory: 128Mi
+    outbound:
+        external:
+        - host: www.nav.no
     ingresses:
       {{#each ingresses as |url|}}
        - {{url}}
