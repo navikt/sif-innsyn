@@ -5,7 +5,7 @@ require('dotenv').config();
 
 const { JSDOM } = jsdom;
 
-const requestDecorator = (callback) => request(`https://www.nav.no/dekoratoren/`, callback);
+const requestDecorator = (callback) => request(`${process.env.DEKORATOR_URL}/?simple=true`, callback);
 
 const getDecorator = () =>
     new Promise((resolve, reject) => {

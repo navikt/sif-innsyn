@@ -7,7 +7,7 @@
     "maxReplicas": "1",
     "ingresses": ["https://www.nav.no/familie/sykdom-i-familien/soknad/innsyn"],
     "env": {
-        "DEKORATOR_URL": "https://www.nav.no/dekoratoren/",
+        "DEKORATOR_URL": "https://www.nav.no/dekoratoren",
         "API_URL": "https://sif-innsyn-api.nav.no",
         "PUBLIC_PATH": "/familie/sykdom-i-familien/soknad/innsyn",
         "LOGIN_URL": "https://loginservice.nav.no/login?redirect=https://www.nav.no/familie/sykdom-i-familien/soknad/innsyn",
