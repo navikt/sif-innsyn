@@ -8,6 +8,9 @@ const createEnvSettingsFile = require('./src/build/scripts/envSettings');
 const getDecorator = require('./src/build/scripts/decorator');
 
 const server = express();
+
+require('dotenv').config();
+
 server.use(
     helmet({
         contentSecurityPolicy: false,

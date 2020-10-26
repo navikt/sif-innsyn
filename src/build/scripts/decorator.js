@@ -1,15 +1,9 @@
 const jsdom = require('jsdom');
 const request = require('request');
 
-require('dotenv').config();
-
 const { JSDOM } = jsdom;
 
-const requestDecorator = (callback) =>
-    request(
-        `${process.env.APPRES_CMS_URL}/common-html/v4/navno?header=true&styles=true&scripts=true&footer=true`,
-        callback
-    );
+const requestDecorator = (callback) => request(`https://www.nav.no/dekoratoren`, callback);
 
 const getDecorator = () =>
     new Promise((resolve, reject) => {
@@ -20,9 +14,9 @@ const getDecorator = () =>
                 const data = {
                     NAV_SCRIPTS: document.getElementById('scripts')[prop],
                     NAV_STYLES: document.getElementById('styles')[prop],
-                    NAV_HEADING: document.getElementById('header')[prop],
-                    NAV_FOOTER: document.getElementById('footer')[prop],
-                    PUBLIC_PATH: `${process.env.PUBLIC_PATH}`,
+                    NAV_HEADING: document.getElementById('header-withmenu')[prop],
+                    NAV_FOOTER: document.getElementById('footer-withmenu')[prop],
+                    PUBLIC_PATH: `/familie/sykdom-i-familien/soknad/innsyn`,
                 };
                 resolve(data);
             } else {
