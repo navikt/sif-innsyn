@@ -10,7 +10,7 @@
     "page.dinOversikt.banner.title.1": "Din oversikt - ",
     "page.dinOversikt.banner.title.2": "Sykdom i familien",
     "page.dinOversikt.intro.section.ariaTitle": "Introduksjon",
-    "page.dinOversikt.intro.1": "På denne siden får du en bekreftelse på at vi har mottatt digitale søknader du har sendt om pleiepenger for sykt barn. Siden er under utvikling og derfor kan du foreløpig ikke åpne og se søknaden, eller vedleggene du har sendt. Disse tjenestene kommer på et senere tidspunkt.",
+    "page.dinOversikt.intro.1": "På denne siden får du en bekreftelse på at vi har mottatt digitale søknader du har sendt om pleiepenger for sykt barn. Siden er under utvikling og derfor kan du foreløpig ikke åpne søknaden, eller vedleggene du har sendt. Disse tjenestene kommer på et senere tidspunkt.",
     "page.dinOversikt.intro.2": "Hvis du har sendt digital søknad om omsorgspenger, opplæringspenger eller pleiepenger i livets sluttfase, finner du foreløpig ingen informasjon om disse på denne siden. Dette er også tjenester som kommer på et senere tidspunkt.",
     "page.dinOversikt.intro.3.a": "Søknader som er sendt inn per post vises ikke her, de finner du",
     "page.dinOversikt.intro.3.b": "i denne oversikten",
@@ -79,7 +79,7 @@
 
     "info.manglendeSøknad.shortInfo": "Det kan ta noe tid fra du har sendt en digital søknad til den vises her. Hvis du fikk kvittering på at søknaden var innsendt, er den mottatt av NAV selv om den ikke vises her enda.",
     "info.manglendeSøknad.title": "Har du sendt inn en søknad som du ikke ser her?",
-    "info.manglendeSøknad.text.1": "Denne siden er helt ny, og viser derfor kun digitale søknader som vi har mottatt etter 12. oktober 2020.",
+    "info.manglendeSøknad.text.1": "Denne siden er helt ny, og viser derfor kun digitale søknader som vi har mottatt 4. november eller senere 2020.",
     "info.manglendeSøknad.text.2": "Det kan ta noe tid fra du har sendt en digital søknad til den vises her. Hvis du fikk kvittering på at søknaden var innsendt, er den mottatt av NAV selv om den ikke vises her enda.",
     "info.manglendeSøknad.text.3.a": "Søknader som er sendt i posten vises ikke her. De vises i",
     "info.manglendeSøknad.text.3.b": "saksoversikten på Ditt NAV",
