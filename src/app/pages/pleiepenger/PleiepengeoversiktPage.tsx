@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
+import { AlertStripeInfo } from 'nav-frontend-alertstriper';
 import AriaAlternative from '../../components/aria/AriaAlternative';
 import { Breadcrumb } from '../../components/breadcrumbs/Breadcrumbs';
 import Box from '../../components/elements/box/Box';
@@ -7,12 +8,13 @@ import InfoManglendeSøknad from '../../components/info-manglende-søknad/InfoMa
 import InnsynPage from '../../components/innsyn-page/InnsynPage';
 import SectionPanel from '../../components/section-panel/SectionPanel';
 import SoknadList from '../../components/soknad-list/SoknadList';
+import { PageKey } from '../../config/pageKey';
+import useLogSidevisning from '../../sif-amplitude/hooks/useLogSidevisning';
 import { Søknad } from '../../types/apiTypes/søknadTypes';
 import { Sakstype } from '../../types/types';
+import intlHelper from '../../utils/intlUtils';
 import { getSakstypeTitle } from '../../utils/sakstypeUtils';
 import { erPleiepenger } from '../../utils/soknadUtils';
-import { AlertStripeInfo } from 'nav-frontend-alertstriper';
-import intlHelper from '../../utils/intlUtils';
 
 interface Props {
     søknader: Søknad[];
@@ -23,6 +25,7 @@ const PleiepengeroversiktPage = ({ søknader }: Props) => {
     const crumbs: Breadcrumb[] = [];
     const pageTitle = getSakstypeTitle(intl, Sakstype.PLEIEPENGER);
     const pleiepengesoknader = søknader.filter((søknad) => erPleiepenger(søknad));
+    useLogSidevisning(PageKey.pleiepengeoversikt, { antallSøknader: pleiepengesoknader.length });
     return (
         <InnsynPage title={pageTitle} breadcrumbs={crumbs} focusOnContent={true}>
             <SectionPanel

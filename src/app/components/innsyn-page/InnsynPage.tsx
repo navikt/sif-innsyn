@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { useIntl } from 'react-intl';
 import bemUtils from '../../utils/bemUtils';
 import intlHelper from '../../utils/intlUtils';
@@ -14,6 +14,7 @@ const bem = bemUtils('innsynPage');
 
 interface Props {
     title: string;
+    logDetails?: any;
     topContentRenderer?: () => React.ReactNode;
     breadcrumbs?: Breadcrumb[];
     focusOnContent?: boolean;

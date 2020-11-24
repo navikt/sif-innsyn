@@ -4,7 +4,7 @@ import Fetcher from '../functional/fetcher/Fetcher';
 import HandleUnauthorized from '../functional/HandleUnauthorized';
 import { SøknadApiResponse, søknadRecipe } from '../types/apiTypes/søknadTypes';
 import { sortSoknad } from '../utils/sortSoknader';
-import InnsynRoutes from './InnsynRoutes';
+import InnsynRouteConfig from './InnsynRoutes';
 import ErrorPage from './support-pages/ErrorPage';
 import LoadingPage from './support-pages/LoadingPage';
 
@@ -25,7 +25,7 @@ const InnsynDataFetcher = () => {
                 />
             )}
             success={([søknadApiResponse]: [SøknadApiResponse]) => {
-                return <InnsynRoutes søknader={søknadApiResponse.sort(sortSoknad)} />;
+                return <InnsynRouteConfig søknader={søknadApiResponse.sort(sortSoknad)} />;
             }}
         />
     );

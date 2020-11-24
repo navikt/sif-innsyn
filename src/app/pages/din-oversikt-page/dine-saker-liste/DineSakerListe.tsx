@@ -1,7 +1,7 @@
 import React from 'react';
 import { IntlShape, useIntl } from 'react-intl';
 import LenkepanelMedIkon from '../../../components/lenkepanel-med-ikon/LenkepanelMedIkon';
-import { RouteConfig } from '../../../config/routeConfig';
+import { InnsynRouteConfig } from '../../../config/innsynRouteConfig';
 import { SøknadsIkon } from '../../../svg/FellesIkoner';
 import { Sakstype } from '../../../types/types';
 import { getSakstypeTitle } from '../../../utils/sakstypeUtils';
@@ -14,7 +14,7 @@ const getSakstypeLenkepanelInfo = (sakstype: Sakstype, intl: IntlShape): Sakstyp
     switch (sakstype) {
         case Sakstype.PLEIEPENGER:
             return {
-                href: RouteConfig.DINE_PLEIEPENGER,
+                href: InnsynRouteConfig.DINE_PLEIEPENGER,
                 tittel: getSakstypeTitle(intl, sakstype),
             };
     }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Lenke from 'nav-frontend-lenker';
-import { RouteConfig } from '../../config/routeConfig';
+import { InnsynRouteConfig } from '../../config/innsynRouteConfig';
 import getLenker from '../../lenker';
 import bemUtils from '../../utils/bemUtils';
 import useWindowSize from '../../utils/useWindowSize';
@@ -87,7 +87,7 @@ const Breadcrumbs = (props: Props) => {
             },
             {
                 title: 'Sykdom i familien',
-                route: RouteConfig.OVERSIKT,
+                route: InnsynRouteConfig.OVERSIKT,
             },
             ...crumbs,
             { title: currentPageTitle },

@@ -15,6 +15,8 @@ import { Sakstype } from '../../types/types';
 import intlHelper from '../../utils/intlUtils';
 import { erPleiepenger } from '../../utils/soknadUtils';
 import SakstyperListe from './dine-saker-liste/DineSakerListe';
+import { PageKey } from '../../config/pageKey';
+import useLogSidevisning from '../../sif-amplitude/hooks/useLogSidevisning';
 
 interface Props {
     søknader: Søknad[];
@@ -23,6 +25,7 @@ const Oversikt = ({ søknader }: Props) => {
     const intl = useIntl();
     const pleiepengesoknader = søknader.filter((søknad) => erPleiepenger(søknad));
     const harSøknader = pleiepengesoknader.length > 0;
+    useLogSidevisning(PageKey.frontpage, { antallSøknader: søknader.length });
     return (
         <InnsynPage
             title={intlHelper(intl, 'page.dinOversikt.title')}

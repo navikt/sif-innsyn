@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { HoyreChevron } from 'nav-frontend-chevron';
 import Etikett from 'nav-frontend-etiketter';
 import { LenkepanelBase } from 'nav-frontend-lenkepanel';
-import { RouteConfig } from '../../config/routeConfig';
+import { InnsynRouteConfig } from '../../config/innsynRouteConfig';
 import { Søknad, Søknadsstatus } from '../../types/apiTypes/søknadTypes';
 import bemUtils from '../../utils/bemUtils';
 import { getSøknadTitle } from '../../utils/soknadUtils';
@@ -42,7 +42,7 @@ const SøknadEtikett = ({ søknad }: { søknad: Søknad }) => {
 const showStatus = false;
 
 const SoknadListElement = ({ søknad }: Props) => {
-    const href = `${RouteConfig.DINE_PLEIEPENGER}/${søknad.søknadId}`;
+    const href = `${InnsynRouteConfig.DINE_PLEIEPENGER}/${søknad.søknadId}`;
     return (
         <LenkepanelBase
             href="#"

@@ -49,6 +49,8 @@ const arbeidsgivereMock = {
     ],
 };
 
+const soknadMockTom = [];
+
 const soknadMock = [
     {
         søknadId: '0f44f965-e3fb-489c-a757-b0ad46619e33-4',
@@ -497,6 +499,20 @@ const startServer = () => {
     server.get('/soknad', (req, res) => {
         if (isLoggedIn(req)) {
             res.send(soknadMock);
+        } else {
+            res.status(401).send();
+        }
+    });
+    server.get('/soknadNoen', (req, res) => {
+        if (isLoggedIn(req)) {
+            res.send([soknadMock[0], soknadMock[2]]);
+        } else {
+            res.status(401).send();
+        }
+    });
+    server.get('/soknadTom', (req, res) => {
+        if (isLoggedIn(req)) {
+            res.send(soknadMockTom);
         } else {
             res.status(401).send();
         }

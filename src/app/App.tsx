@@ -5,11 +5,12 @@ import AppStatusWrapper from './components/app-status-wrapper/AppStatusWrapper';
 import ApplicationWrapper from './components/application-wrapper/ApplicationWrapper';
 import InnsynDataFetcher from './pages/InnsynDataFetcher';
 import UnavailablePage from './pages/support-pages/UnavailablePage';
+import { Amplitude } from './sif-amplitude/AmplitudeProvider';
 import { Locale } from './types/Locale';
 import { getEnvironmentVariable } from './utils/envUtils';
+import { Feature, isFeatureEnabled } from './utils/featureToggleUtils';
 import { getLocaleFromSessionStorage, setLocaleInSessionStorage } from './utils/localeUtils';
 import './styles/app.less';
-import { Feature, isFeatureEnabled } from './utils/featureToggleUtils';
 
 const localeFromSessionStorage = getLocaleFromSessionStorage();
 moment.locale('nb');
@@ -28,25 +29,29 @@ const App: React.FunctionComponent = () => {
     const appStatusSanityConfig = getAppStatusSanityConfig();
 
     return (
-        <ApplicationWrapper
-            locale={locale}
-            onChangeLocale={(activeLocale: Locale): void => {
-                setLocaleInSessionStorage(activeLocale);
-                setLocale(activeLocale);
-            }}>
-            {appStatusSanityConfig ? (
-                <AppStatusWrapper
-                    applicationKey={APPLICATION_KEY}
-                    unavailableContentRenderer={() => <UnavailablePage />}
-                    sanityConfig={appStatusSanityConfig}
-                    contentRenderer={() => <InnsynDataFetcher />}
-                />
-            ) : isFeatureEnabled(Feature.UTILGJENGELIG) ? (
-                <UnavailablePage />
-            ) : (
-                <InnsynDataFetcher />
-            )}
-        </ApplicationWrapper>
+        <Amplitude>
+            <ApplicationWrapper
+                locale={locale}
+                onChangeLocale={(activeLocale: Locale): void => {
+                    setLocaleInSessionStorage(activeLocale);
+                    setLocale(activeLocale);
+                }}>
+                {appStatusSanityConfig ? (
+                    <AppStatusWrapper
+                        applicationKey={APPLICATION_KEY}
+                        unavailableContentRenderer={() => <UnavailablePage />}
+                        sanityConfig={appStatusSanityConfig}
+                        contentRenderer={() => <InnsynDataFetcher />}
+                    />
+                ) : isFeatureEnabled(Feature.UTILGJENGELIG) ? (
+                    <UnavailablePage />
+                ) : (
+                    <Amplitude>
+                        <InnsynDataFetcher />
+                    </Amplitude>
+                )}
+            </ApplicationWrapper>
+        </Amplitude>
     );
 };
 
