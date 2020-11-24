@@ -9,21 +9,20 @@ export enum AmplitudeEvents {
 
 export const [AmplitudeProvider, useAmplitudeInstance] = constate(() => {
     const instance: any = useRef();
-    const amplitudeKey = getEnvironmentVariable('AMPLITUDE_API_KEY');
     const isActive = getEnvironmentVariable('USE_AMPLITUDE');
 
     useEffect(() => {
-        if (amplitudeKey) {
+        if (amplitude) {
             instance.current = amplitude.getInstance();
-            instance.current.init(amplitudeKey, null, {
-                apiEndpoint: 'amplitude.nav.no/collect',
+            amplitude.getInstance().init('default', '', {
+                apiEndpoint: 'amplitude.nav.no/collect-auto',
                 saveEvents: false,
                 includeUtm: true,
                 includeReferrer: true,
                 platform: window.location.toString(),
             });
         }
-    }, [amplitudeKey, isActive]);
+    }, [isActive]);
 
     function logEvent(eventName: string, eventProperties: any) {
         if (isActive && instance.current) {
@@ -35,7 +34,7 @@ export const [AmplitudeProvider, useAmplitudeInstance] = constate(() => {
         logEvent(AmplitudeEvents.sidevisning, {
             pageKey,
             team: 'sykdom-i-familien',
-            applikasjon: 'sif-innsyn',
+            application: 'sif-innsyn',
             properties,
         });
     }

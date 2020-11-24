@@ -9,8 +9,6 @@ function useLogSidevisning<PageKeys extends string, PageProperties>(
 
     const logPage = useCallback(
         (key: PageKeys, props?: PageProperties) => {
-            console.log({ key, props });
-
             logSideskift(key, props);
         },
         [logSideskift]
