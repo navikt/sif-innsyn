@@ -9,7 +9,7 @@ export enum AmplitudeEvents {
 
 export const [AmplitudeProvider, useAmplitudeInstance] = constate(() => {
     const instance: any = useRef();
-    const amplitudeKey = getEnvironmentVariable('AMPLITUDE_API_KEY_FAMILIE');
+    const amplitudeKey = getEnvironmentVariable('AMPLITUDE_API_KEY');
     const isActive = getEnvironmentVariable('USE_AMPLITUDE');
 
     useEffect(() => {

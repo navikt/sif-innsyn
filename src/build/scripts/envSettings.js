@@ -16,7 +16,7 @@ function createEnvSettingsFile(settingsFile) {
                 DITT_NAV_URL: '${process.env.DITT_NAV_URL}',
                 APPSTATUS_PROJECT_ID: '${process.env.APPSTATUS_PROJECT_ID}',
                 APPSTATUS_DATASET: '${process.env.APPSTATUS_DATASET}',
-                AMPLITUDE_API_KEY_FAMILIE: '${process.env.AMPLITUDE_API_KEY_FAMILIE}',
+                AMPLITUDE_API_KEY: '${process.env.AMPLITUDE_API_KEY}',
                 USE_AMPLITUDE: '${process.env.USE_AMPLITUDE}',
             };`
         );
