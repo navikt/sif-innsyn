@@ -29,7 +29,6 @@ const InnsynDataFetcher = () => {
                 />
             )}
             success={([søknadApiResponse]: [SøknadApiResponse]) => {
-                console.log('Fetcher success');
                 setUserProperties({
                     antallSaker: søknadApiResponse.length,
                 });
