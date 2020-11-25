@@ -1,6 +1,6 @@
 /* eslint-disable react/display-name */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-import * as React from 'react';
+import React from 'react';
 
 export default () => (
     <svg width="50px" height="62px" viewBox="0 0 50 62" version="1.1" focusable={false}>

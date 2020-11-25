@@ -18,6 +18,7 @@
         "ETTERSENDING_PLEIEPENGER_URL": "https://www.nav.no/familie/sykdom-i-familien/soknad/ettersending/pleiepenger/",
         "DITT_NAV_URL": "https://www.nav.no/no/Ditt+NAV",
         "APPSTATUS_PROJECT_ID": "ryujtq87",
-        "APPSTATUS_DATASET": "production"
+        "APPSTATUS_DATASET": "production",
+        "USE_AMPLITUDE": "true"
     }
 }

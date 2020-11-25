@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Redirect, Route, RouteComponentProps, Switch, withRouter } from 'react-router-dom';
-import { RouteConfig } from '../config/routeConfig';
+import { InnsynRouteConfig } from '../config/innsynRouteConfig';
 import { Søknad } from '../types/apiTypes/søknadTypes';
 import { getRedirectRouteFromUrl } from '../utils/routeRedirectUtils';
 import DinOversiktPage from './din-oversikt-page/DinOversiktPage';
@@ -19,15 +19,19 @@ const InnsynRoutes = ({ history, søknader }: Props) => {
     return (
         <Switch>
             {redirectToRoute && <Redirect to={redirectToRoute} />}
-            <Route exact={true} path={RouteConfig.OVERSIKT} component={() => <DinOversiktPage søknader={søknader} />} />
             <Route
                 exact={true}
-                path={`${RouteConfig.DINE_PLEIEPENGER}`}
+                path={InnsynRouteConfig.OVERSIKT}
+                component={() => <DinOversiktPage søknader={søknader} />}
+            />
+            <Route
+                exact={true}
+                path={`${InnsynRouteConfig.DINE_PLEIEPENGER}`}
                 component={() => <PleiepengeroversiktPage søknader={søknader} />}
             />
             <Route
                 exact={true}
-                path={`${RouteConfig.DINE_PLEIEPENGER}/:id?`}
+                path={`${InnsynRouteConfig.DINE_PLEIEPENGER}/:id?`}
                 component={({ match: { params } }: RouteComponentProps<{ id: string }>) => (
                     <PleiepengesakPage søknader={søknader} søknadId={params.id} />
                 )}

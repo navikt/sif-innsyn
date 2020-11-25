@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { AxiosError } from 'axios';
 import { isForbidden, isUnauthorized } from '../utils/apiUtils';
 import { navigateToLoginPage } from '../utils/navigationUtils';

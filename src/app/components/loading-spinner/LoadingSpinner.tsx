@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import NavFrontendSpinner, { NavFrontendSpinnerBaseProps } from 'nav-frontend-spinner';
 import { Element } from 'nav-frontend-typografi';
 

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import DocumentTitle from '../document-title/DocumentTitle';
 import './page.less';
 
