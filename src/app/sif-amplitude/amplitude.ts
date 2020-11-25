@@ -9,7 +9,7 @@ export enum AmplitudeEvents {
 
 export const [AmplitudeProvider, useAmplitudeInstance] = constate(() => {
     const instance: any = useRef();
-    const isActive = getEnvironmentVariable('USE_AMPLITUDE');
+    const isActive = getEnvironmentVariable('USE_AMPLITUDE') === 'true';
 
     useEffect(() => {
         if (amplitude) {
