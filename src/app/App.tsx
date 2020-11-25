@@ -15,7 +15,7 @@ import './styles/app.less';
 const localeFromSessionStorage = getLocaleFromSessionStorage();
 moment.locale('nb');
 
-const APPLICATION_KEY = 'sif-innsyn';
+export const APPLICATION_KEY = 'sif-innsyn';
 
 const getAppStatusSanityConfig = () => {
     const projectId = getEnvironmentVariable('APPSTATUS_PROJECT_ID');

@@ -25,7 +25,7 @@ const Oversikt = ({ søknader }: Props) => {
     const intl = useIntl();
     const pleiepengesoknader = søknader.filter((søknad) => erPleiepenger(søknad));
     const harSøknader = pleiepengesoknader.length > 0;
-    useLogSidevisning(PageKey.frontpage, { antallSøknader: søknader.length });
+    useLogSidevisning(PageKey.frontpage);
     return (
         <InnsynPage
             title={intlHelper(intl, 'page.dinOversikt.title')}
