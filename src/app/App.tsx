@@ -46,9 +46,7 @@ const App: React.FunctionComponent = () => {
                 ) : isFeatureEnabled(Feature.UTILGJENGELIG) ? (
                     <UnavailablePage />
                 ) : (
-                    <Amplitude>
-                        <InnsynDataFetcher />
-                    </Amplitude>
+                    <InnsynDataFetcher />
                 )}
             </ApplicationWrapper>
         </Amplitude>

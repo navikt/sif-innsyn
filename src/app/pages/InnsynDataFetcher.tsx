@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { APPLICATION_KEY } from '../App';
 import Fetcher from '../functional/fetcher/Fetcher';
@@ -12,7 +12,8 @@ import LoadingPage from './support-pages/LoadingPage';
 
 const InnsynDataFetcher = () => {
     const history = useHistory();
-    const { logUserProperties, logApplicationStartet } = useAmplitudeInstance();
+    const { setUserProperties, logApplicationStartet } = useAmplitudeInstance();
+
     return (
         <Fetcher<SøknadApiResponse>
             recipies={[søknadRecipe]}
@@ -28,7 +29,8 @@ const InnsynDataFetcher = () => {
                 />
             )}
             success={([søknadApiResponse]: [SøknadApiResponse]) => {
-                logUserProperties({
+                console.log('Fetcher success');
+                setUserProperties({
                     antallSaker: søknadApiResponse.length,
                 });
                 logApplicationStartet(APPLICATION_KEY);

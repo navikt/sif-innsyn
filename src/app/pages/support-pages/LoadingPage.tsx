@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { useIntl } from 'react-intl';
 import LoadingSpinner from '../../components/loading-spinner/LoadingSpinner';
 import Page from '../../components/page/Page';

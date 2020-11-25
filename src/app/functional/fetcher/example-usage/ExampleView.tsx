@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import Fetcher from '../Fetcher';
 import Fetcher2 from '../Fetcher2';
 import Fetcher3 from '../Fetcher3';

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import { Normaltekst } from 'nav-frontend-typografi';
 import { getEnvironmentVariable } from '../../utils/envUtils';
 import IntlProvider, { appTekster } from '../intl-provider/IntlProvider';
@@ -19,10 +19,10 @@ const ApplicationWrapper: React.FunctionComponent<ApplicationWrapperProps> = ({
     return (
         <IntlProvider locale={locale}>
             <Normaltekst tag="div">
-                <Router basename={getEnvironmentVariable('PUBLIC_PATH')}>
+                <BrowserRouter basename={getEnvironmentVariable('PUBLIC_PATH')}>
                     {children}
                     <ApplicationMessages messages={appTekster} title={'Sykdom i familien - innsyn'} />
-                </Router>
+                </BrowserRouter>
             </Normaltekst>
         </IntlProvider>
     );

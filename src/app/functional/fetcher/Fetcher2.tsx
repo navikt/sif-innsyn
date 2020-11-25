@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { useEffect, useState } from 'react';
 import * as E from 'fp-ts/lib/Either';
 import * as O from 'fp-ts/lib/Option';

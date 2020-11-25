@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { default as NFCounsellorPanel } from 'nav-frontend-veilederpanel';
 import bemUtils from '../../utils/bemUtils';
 import InformationIcon from './InformationIcon';
