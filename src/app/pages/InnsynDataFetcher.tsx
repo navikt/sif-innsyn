@@ -1,6 +1,5 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { APPLICATION_KEY } from '../App';
 import Fetcher from '../functional/fetcher/Fetcher';
 import HandleUnauthorized from '../functional/HandleUnauthorized';
 import { useAmplitudeInstance } from '../sif-amplitude/amplitude';
@@ -32,7 +31,7 @@ const InnsynDataFetcher = () => {
                 setUserProperties({
                     antallSaker: søknadApiResponse.length,
                 });
-                logApplicationStartet(APPLICATION_KEY);
+                logApplicationStartet();
                 return <InnsynRouteConfig søknader={søknadApiResponse.sort(sortSoknad)} />;
             }}
         />
