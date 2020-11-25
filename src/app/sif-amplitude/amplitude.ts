@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import amplitude, { AmplitudeClient } from 'amplitude-js';
 import constate from 'constate';
+import { APPLICATION_KEY } from '../App';
 import { getEnvironmentVariable } from '../utils/envUtils';
 
 export enum AmplitudeEvents {
@@ -31,7 +32,7 @@ export const [AmplitudeProvider, useAmplitudeInstance] = constate(() => {
 
     function logEvent(eventName: string, eventProperties?: any) {
         if (instance.current) {
-            instance.current.logEvent(eventName, eventProperties);
+            instance.current.logEvent(eventName, { ...eventProperties, applikasjon: APPLICATION_KEY });
         }
     }
 
@@ -41,10 +42,8 @@ export const [AmplitudeProvider, useAmplitudeInstance] = constate(() => {
         }
     }
 
-    function logApplicationStartet(applicationKey: string) {
-        logEvent(AmplitudeEvents.applikasjonStartet, {
-            application: applicationKey,
-        });
+    function logApplicationStartet() {
+        logEvent(AmplitudeEvents.applikasjonStartet);
     }
 
     async function logSidevisning(pageKey: string) {
