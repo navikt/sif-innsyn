@@ -17,7 +17,7 @@ export const [AmplitudeProvider, useAmplitudeInstance] = constate(() => {
     const isActive = getEnvironmentVariable('USE_AMPLITUDE') === 'true';
 
     useEffect(() => {
-        if (amplitude && isActive && 1 + 1 === 3) {
+        if (amplitude && isActive) {
             instance.current = amplitude.getInstance();
             instance.current.init('default', '', {
                 apiEndpoint: 'amplitude.nav.no/collect-auto',
