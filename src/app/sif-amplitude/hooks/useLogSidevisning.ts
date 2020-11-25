@@ -1,24 +1,18 @@
 import { useCallback, useEffect } from 'react';
 import { useAmplitudeInstance } from '../amplitude';
 
-function useLogSidevisning<PageKeys extends string, PageProperties>(
-    pageKey: PageKeys,
-    pageProperties?: PageProperties
-) {
-    const { logSideskift } = useAmplitudeInstance();
-
+function useLogSidevisning<PageKeys extends string>(pageKey: PageKeys) {
+    const { logSidevisning } = useAmplitudeInstance();
     const logPage = useCallback(
-        (key: PageKeys, props?: PageProperties) => {
-            console.log({ key, props });
-
-            logSideskift(key, props);
+        (key: PageKeys) => {
+            logSidevisning(key);
         },
-        [logSideskift]
+        [logSidevisning]
     );
 
     useEffect(() => {
-        logPage(pageKey, pageProperties);
-    }, [pageKey, pageProperties, logPage]);
+        logPage(pageKey);
+    }, [pageKey, logPage]);
 }
 
 export default useLogSidevisning;

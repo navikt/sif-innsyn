@@ -20,7 +20,7 @@ interface Props {
 const PleiepengesakPage = ({ søknader, søknadId }: Props) => {
     const intl = useIntl();
     const søknad = søknader.find((s) => s.søknadId === søknadId);
-    useLogSidevisning(PageKey.pleiepengesak, { harSøknad: søknad !== undefined });
+    useLogSidevisning(PageKey.pleiepengesak);
     if (søknad === undefined) {
         return <Redirect to={InnsynRouteConfig.DINE_PLEIEPENGER} />;
     }

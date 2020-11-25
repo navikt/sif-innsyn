@@ -6,8 +6,6 @@ const navNoUrl = 'https://www.nav.no/';
 
 export const navigateToLoginPage = (currentRoute?: string) => {
     const href = `${getEnvironmentVariable('LOGIN_URL')}?${getRedirectParam(currentRoute)}`;
-    console.log(href);
-
     window.location.href = href;
 };
 export const navigateTo = (route: string, history: History): void => history.push(route);

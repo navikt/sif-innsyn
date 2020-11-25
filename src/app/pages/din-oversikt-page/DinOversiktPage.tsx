@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { AlertStripeInfo } from 'nav-frontend-alertstriper';
 import Lenke from 'nav-frontend-lenker';
@@ -8,6 +8,7 @@ import InformationIcon from '../../components/information-poster/InformationIcon
 import InnsynPage from '../../components/innsyn-page/InnsynPage';
 import PageBanner from '../../components/page-banner/PageBanner';
 import SectionPanel from '../../components/section-panel/SectionPanel';
+import { PageKey } from '../../config/pageKey';
 import getLenker from '../../lenker';
 import SvgSykdomIFamilien from '../../svg/SvgSykdomIFamilien';
 import { Søknad } from '../../types/apiTypes/søknadTypes';
@@ -15,17 +16,17 @@ import { Sakstype } from '../../types/types';
 import intlHelper from '../../utils/intlUtils';
 import { erPleiepenger } from '../../utils/soknadUtils';
 import SakstyperListe from './dine-saker-liste/DineSakerListe';
-import { PageKey } from '../../config/pageKey';
 import useLogSidevisning from '../../sif-amplitude/hooks/useLogSidevisning';
 
 interface Props {
     søknader: Søknad[];
 }
+
 const Oversikt = ({ søknader }: Props) => {
     const intl = useIntl();
     const pleiepengesoknader = søknader.filter((søknad) => erPleiepenger(søknad));
     const harSøknader = pleiepengesoknader.length > 0;
-    useLogSidevisning(PageKey.frontpage, { antallSøknader: søknader.length });
+    useLogSidevisning(PageKey.frontpage);
     return (
         <InnsynPage
             title={intlHelper(intl, 'page.dinOversikt.title')}

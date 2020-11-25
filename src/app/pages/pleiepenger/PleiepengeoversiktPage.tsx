@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { AlertStripeInfo } from 'nav-frontend-alertstriper';
 import AriaAlternative from '../../components/aria/AriaAlternative';
@@ -25,7 +25,7 @@ const PleiepengeroversiktPage = ({ søknader }: Props) => {
     const crumbs: Breadcrumb[] = [];
     const pageTitle = getSakstypeTitle(intl, Sakstype.PLEIEPENGER);
     const pleiepengesoknader = søknader.filter((søknad) => erPleiepenger(søknad));
-    useLogSidevisning(PageKey.pleiepengeoversikt, { antallSøknader: pleiepengesoknader.length });
+    useLogSidevisning(PageKey.pleiepengeoversikt);
     return (
         <InnsynPage title={pageTitle} breadcrumbs={crumbs} focusOnContent={true}>
             <SectionPanel
