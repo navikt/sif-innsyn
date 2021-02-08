@@ -21,7 +21,7 @@ const ApplicationWrapper: React.FunctionComponent<ApplicationWrapperProps> = ({
             <Normaltekst tag="div">
                 <BrowserRouter basename={getEnvironmentVariable('PUBLIC_PATH')}>
                     {children}
-                    <ApplicationMessages messages={appTekster} title={'Sykdom i familien - innsyn'} />
+                    <ApplicationMessages messages={appTekster} title={'Dine pleiepenger - innsyn'} />
                 </BrowserRouter>
             </Normaltekst>
         </IntlProvider>

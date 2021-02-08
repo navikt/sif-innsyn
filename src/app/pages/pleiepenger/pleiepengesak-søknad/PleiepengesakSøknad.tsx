@@ -1,7 +1,6 @@
 import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import Lenke from 'nav-frontend-lenker';
-import AriaAlternative from '../../../components/aria/AriaAlternative';
 import Box from '../../../components/elements/box/Box';
 import Knappelenke from '../../../components/knappelenke/Knappelenke';
 import Knapperad from '../../../components/knapperad/Knapperad';
@@ -9,11 +8,9 @@ import { getPrettyDate } from '../../../components/pretty-date/PrettyDate';
 import SectionPanel from '../../../components/section-panel/SectionPanel';
 import getLenker from '../../../lenker';
 import { Pleiepengesøknad } from '../../../types/apiTypes/søknadTypes';
-import { Sakstype } from '../../../types/types';
-import { getSakstypeTitle } from '../../../utils/sakstypeUtils';
+import intlHelper from '../../../utils/intlUtils';
 import { getSøknadTitle } from '../../../utils/soknadUtils';
 import InfoEtterSendtSøknad from './InfoEtterSendtSøknad';
-import intlHelper from '../../../utils/intlUtils';
 
 interface Props {
     søknad: Pleiepengesøknad;
@@ -21,8 +18,6 @@ interface Props {
 
 const PleiepengesakSøknad = ({ søknad }: Props) => {
     const intl = useIntl();
-    const title = getSakstypeTitle(intl, Sakstype.PLEIEPENGER);
-    const introAriaTitle = intlHelper(intl, 'generell.SøknadOm', { title });
     return (
         <>
             <SectionPanel
@@ -30,12 +25,7 @@ const PleiepengesakSøknad = ({ søknad }: Props) => {
                     søknad: getSøknadTitle(søknad, true),
                     mottatt: getPrettyDate(søknad.opprettet, 'dayDateAndTime'),
                 })}
-                titleTag="h1"
-                introHeader={
-                    <Box padBottom="s">
-                        <AriaAlternative ariaText={introAriaTitle} visibleText={title} />
-                    </Box>
-                }>
+                titleTag="h1">
                 <p style={{ fontWeight: 'bold' }}>
                     <FormattedMessage
                         id="page.pleiepengesakSøknad.periode"

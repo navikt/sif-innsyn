@@ -27,7 +27,7 @@ const PleiepengesakPage = ({ søknader, søknadId }: Props) => {
     }
     const crumbs: Breadcrumb[] = [
         {
-            route: InnsynRouteConfig.DINE_PLEIEPENGER,
+            route: InnsynRouteConfig.OVERSIKT,
             title: getSakstypeTitle(intl, Sakstype.PLEIEPENGER),
         },
     ];

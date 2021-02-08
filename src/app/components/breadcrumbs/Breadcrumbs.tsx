@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Lenke from 'nav-frontend-lenker';
-import { InnsynRouteConfig } from '../../config/innsynRouteConfig';
 import getLenker from '../../lenker';
 import bemUtils from '../../utils/bemUtils';
 import useWindowSize from '../../utils/useWindowSize';
@@ -74,7 +73,7 @@ const Breadcrumbs = (props: Props) => {
             crumbsToRender = [
                 {
                     title: 'Tilbake',
-                    ariaTitle: 'Tilbake til sykdom i familien',
+                    ariaTitle: 'Tilbake til dine pleiepenger',
                     route: frontpageUrl,
                 },
             ];
@@ -84,10 +83,6 @@ const Breadcrumbs = (props: Props) => {
             {
                 title: 'Ditt NAV',
                 href: getLenker().dittNAV,
-            },
-            {
-                title: 'Sykdom i familien',
-                route: InnsynRouteConfig.OVERSIKT,
             },
             ...crumbs,
             { title: currentPageTitle },
