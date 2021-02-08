@@ -1,5 +1,6 @@
 import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
+import { useLogSidevisning } from '@navikt/sif-common-amplitude';
 import { AlertStripeInfo } from 'nav-frontend-alertstriper';
 import AriaAlternative from '../../components/aria/AriaAlternative';
 import { Breadcrumb } from '../../components/breadcrumbs/Breadcrumbs';
@@ -9,7 +10,6 @@ import InnsynPage from '../../components/innsyn-page/InnsynPage';
 import SectionPanel from '../../components/section-panel/SectionPanel';
 import SoknadList from '../../components/soknad-list/SoknadList';
 import { PageKey } from '../../config/pageKey';
-import useLogSidevisning from '../../sif-amplitude/hooks/useLogSidevisning';
 import { Søknad } from '../../types/apiTypes/søknadTypes';
 import { Sakstype } from '../../types/types';
 import intlHelper from '../../utils/intlUtils';

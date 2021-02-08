@@ -1,17 +1,18 @@
 import React from 'react';
 import { useIntl } from 'react-intl';
 import { Redirect } from 'react-router-dom';
+import { useLogSidevisning } from '@navikt/sif-common-amplitude';
 import { Breadcrumb } from '../../components/breadcrumbs/Breadcrumbs';
 import InnsynPage from '../../components/innsyn-page/InnsynPage';
 import { InnsynRouteConfig } from '../../config/innsynRouteConfig';
 import { PageKey } from '../../config/pageKey';
-import useLogSidevisning from '../../sif-amplitude/hooks/useLogSidevisning';
 import { Søknad, Søknadstype } from '../../types/apiTypes/søknadTypes';
 import { Sakstype } from '../../types/types';
 import { getSakstypeTitle } from '../../utils/sakstypeUtils';
 import { getSøknadTitle } from '../../utils/soknadUtils';
 import PleiepengesakEttersending from './pleiepengesak-ettersending/PleiepengesakEttersending';
 import PleiepengesakSøknad from './pleiepengesak-søknad/PleiepengesakSøknad';
+
 interface Props {
     søknader: Søknad[];
     søknadId: string;

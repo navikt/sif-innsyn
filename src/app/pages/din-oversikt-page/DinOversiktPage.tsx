@@ -1,5 +1,6 @@
 import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
+import { useLogSidevisning } from '@navikt/sif-common-amplitude';
 import { AlertStripeInfo } from 'nav-frontend-alertstriper';
 import Lenke from 'nav-frontend-lenker';
 import Box from '../../components/elements/box/Box';
@@ -16,7 +17,6 @@ import { Sakstype } from '../../types/types';
 import intlHelper from '../../utils/intlUtils';
 import { erPleiepenger } from '../../utils/soknadUtils';
 import SakstyperListe from './dine-saker-liste/DineSakerListe';
-import useLogSidevisning from '../../sif-amplitude/hooks/useLogSidevisning';
 
 interface Props {
     søknader: Søknad[];
