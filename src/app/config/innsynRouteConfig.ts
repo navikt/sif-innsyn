@@ -1,4 +1,4 @@
-import { getEnvironmentVariable } from 'app/utils/envUtils';
+import { getEnvironmentVariable } from '../utils/envUtils';
 
 export enum InnsynRouteConfig {
     OVERSIKT = '/',
