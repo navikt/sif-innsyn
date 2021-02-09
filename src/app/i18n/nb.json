@@ -1,21 +1,20 @@
 {
-    "site.title": "Din oversikt - Sykdom i familien",
+    "site.title": "Dine pleiepenger",
 
-    "sakstype.pleiepenger.title": "Pleiepenger for sykt barn",
+    "sakstype.pleiepenger.title": "Dine pleiepenger",
 
     "generell.SøknadOm": "Søknad om {title}",
     "lenkepanel.aria.gåTil": "Gå til",
 
-    "page.dinOversikt.title": "Din oversikt - Sykdom i familien",
-    "page.dinOversikt.banner.title.1": "Din oversikt - ",
-    "page.dinOversikt.banner.title.2": "Sykdom i familien",
+    "page.dinOversikt.title": "Dine pleiepenger",
+    "page.dinOversikt.title.2": "oversikt over søknadene dine",
     "page.dinOversikt.intro.section.ariaTitle": "Introduksjon",
-    "page.dinOversikt.intro.1": "På denne siden får du en bekreftelse på at vi har mottatt digitale søknader du har sendt om pleiepenger for sykt barn. Siden er under utvikling og derfor kan du foreløpig ikke åpne søknaden, eller vedleggene du har sendt. Disse tjenestene kommer på et senere tidspunkt.",
-    "page.dinOversikt.intro.2": "Hvis du har sendt digital søknad om omsorgspenger, opplæringspenger eller pleiepenger i livets sluttfase, finner du foreløpig ingen informasjon om disse på denne siden. Dette er også tjenester som kommer på et senere tidspunkt.",
+    "page.dinOversikt.intro.1": "På denne siden får du bekreftelse på at vi har mottatt digitale søknader du har sendt om pleiepenger for sykt barn. Siden er under utvikling, og på et senere tidspunkt vil du finne mer informasjon om pleiepengesaken din her.",
     "page.dinOversikt.intro.3.a": "Søknader som er sendt inn per post vises ikke her, de finner du",
     "page.dinOversikt.intro.3.b": "i denne oversikten",
     "page.dinOversikt.intro.3.c": ".",
-    "page.dinOversikt.saker.title": "Din oversikt",
+    "page.dinOversikt.saker.title": "Dine søknader",
+    "page.dinOversikt.saker.ingenFunnet": "Vi finner ingen søknader",
 
     "page.pleiepengesaker.oversikt.ariaTitle": "{pageTitle} - dine saker",
     "page.pleiepengesaker.oversikt.ingenSakerFunnet": "Vi finner ingen saker eller søknader fra deg",

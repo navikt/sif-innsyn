@@ -16,8 +16,8 @@ const InnsynFooter = () => {
             </Title>
             <ul className={bem.element('lenker')}>
                 <li>
-                    <Lenke target="_blank" href={lenker.sykdomIFamilien}>
-                        Sykdom i familien
+                    <Lenke target="_blank" href={lenker.pleiepenger}>
+                        Pleiepenger
                     </Lenke>
                 </li>
                 <li>

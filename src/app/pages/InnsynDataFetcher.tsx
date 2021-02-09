@@ -1,8 +1,8 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+import { useAmplitudeInstance } from '@navikt/sif-common-amplitude';
 import Fetcher from '../functional/fetcher/Fetcher';
 import HandleUnauthorized from '../functional/HandleUnauthorized';
-import { useAmplitudeInstance } from '../sif-amplitude/amplitude';
 import { SøknadApiResponse, søknadRecipe } from '../types/apiTypes/søknadTypes';
 import { sortSoknad } from '../utils/sortSoknader';
 import InnsynRouteConfig from './InnsynRoutes';
@@ -11,7 +11,7 @@ import LoadingPage from './support-pages/LoadingPage';
 
 const InnsynDataFetcher = () => {
     const history = useHistory();
-    const { setUserProperties, logApplicationStartet } = useAmplitudeInstance();
+    const { setUserProperties } = useAmplitudeInstance();
 
     return (
         <Fetcher<SøknadApiResponse>
@@ -31,7 +31,6 @@ const InnsynDataFetcher = () => {
                 setUserProperties({
                     antallSaker: søknadApiResponse.length,
                 });
-                logApplicationStartet();
                 return <InnsynRouteConfig søknader={søknadApiResponse.sort(sortSoknad)} />;
             }}
         />

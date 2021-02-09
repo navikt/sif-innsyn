@@ -1,5 +1,6 @@
 import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
+import { useLogSidevisning } from '@navikt/sif-common-amplitude';
 import { AlertStripeInfo } from 'nav-frontend-alertstriper';
 import Lenke from 'nav-frontend-lenker';
 import Box from '../../components/elements/box/Box';
@@ -8,15 +9,13 @@ import InformationIcon from '../../components/information-poster/InformationIcon
 import InnsynPage from '../../components/innsyn-page/InnsynPage';
 import PageBanner from '../../components/page-banner/PageBanner';
 import SectionPanel from '../../components/section-panel/SectionPanel';
+import SoknadList from '../../components/soknad-list/SoknadList';
 import { PageKey } from '../../config/pageKey';
 import getLenker from '../../lenker';
 import SvgSykdomIFamilien from '../../svg/SvgSykdomIFamilien';
 import { Søknad } from '../../types/apiTypes/søknadTypes';
-import { Sakstype } from '../../types/types';
 import intlHelper from '../../utils/intlUtils';
 import { erPleiepenger } from '../../utils/soknadUtils';
-import SakstyperListe from './dine-saker-liste/DineSakerListe';
-import useLogSidevisning from '../../sif-amplitude/hooks/useLogSidevisning';
 
 interface Props {
     søknader: Søknad[];
@@ -33,12 +32,12 @@ const Oversikt = ({ søknader }: Props) => {
             topContentRenderer={() => (
                 <PageBanner
                     title={
-                        <>
-                            {intlHelper(intl, 'page.dinOversikt.banner.title.1')}
-                            <span style={{ whiteSpace: 'nowrap' }}>
-                                {intlHelper(intl, 'page.dinOversikt.banner.title.2')}
+                        <div>
+                            <div>{intlHelper(intl, 'page.dinOversikt.title')}</div>
+                            <span style={{ fontSize: '1.5rem' }}>
+                                &mdash; {intlHelper(intl, 'page.dinOversikt.title.2')}
                             </span>
-                        </>
+                        </div>
                     }
                     illustration={<SvgSykdomIFamilien />}
                 />
@@ -49,7 +48,6 @@ const Oversikt = ({ søknader }: Props) => {
                     illustration={<InformationIcon />}
                     illustrationPlacement="outside">
                     <FormattedMessage tagName="p" id="page.dinOversikt.intro.1" />
-                    <FormattedMessage tagName="p" id="page.dinOversikt.intro.2" />
                     <p style={{ fontWeight: 'bold' }}>
                         <FormattedMessage id="page.dinOversikt.intro.3.a" />{' '}
                         <Lenke href={getLenker(intl.locale).saksoversikt}>
@@ -61,15 +59,17 @@ const Oversikt = ({ søknader }: Props) => {
             </Box>
 
             <SectionPanel title={intlHelper(intl, 'page.dinOversikt.saker.title')}>
-                {harSøknader && <SakstyperListe sakstyper={[Sakstype.PLEIEPENGER]} />}
+                {harSøknader && <SoknadList søknader={pleiepengesoknader} />}
                 {harSøknader === false && (
                     <>
-                        <AlertStripeInfo>Vi finner ingen saker</AlertStripeInfo>
-                        <Box margin="xl">
-                            <InfoManglendeSøknad mode="expandable-text" />
-                        </Box>
+                        <AlertStripeInfo>
+                            <FormattedMessage id="page.dinOversikt.saker.ingenFunnet" />
+                        </AlertStripeInfo>
                     </>
                 )}
+                <Box margin="xl">
+                    <InfoManglendeSøknad mode="expandable-text" />
+                </Box>
             </SectionPanel>
         </InnsynPage>
     );

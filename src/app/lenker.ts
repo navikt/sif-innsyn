@@ -1,7 +1,7 @@
 import { getEnvironmentVariable } from './utils/envUtils';
 
 interface Lenker {
-    sykdomIFamilien: string;
+    pleiepenger: string;
     saksbehandlingstid: string;
     ettersending: string;
     klageInfo: string;
@@ -14,7 +14,7 @@ interface Lenker {
 
 const lenkerBokmål: Lenker = {
     saksbehandlingstid: getEnvironmentVariable('SAKBEHANDLINGSTID_INFO_URL'),
-    sykdomIFamilien: getEnvironmentVariable('SYKDOM_I_FAMILIEN_INFO_URL'),
+    pleiepenger: getEnvironmentVariable('SYKDOM_I_FAMILIEN_INFO_URL'),
     ettersending: getEnvironmentVariable('ETTERSENDING_PLEIEPENGER_URL'),
     klageInfo: getEnvironmentVariable('KLAGE_INFO_URL'),
     regelverkFolketrygden: getEnvironmentVariable('REGELVERK_INFO_URL'),

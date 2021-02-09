@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { render } from 'react-dom';
+import { AmplitudeProvider } from '@navikt/sif-common-amplitude';
 import moment from 'moment';
 import AppStatusWrapper from './components/app-status-wrapper/AppStatusWrapper';
 import ApplicationWrapper from './components/application-wrapper/ApplicationWrapper';
 import InnsynDataFetcher from './pages/InnsynDataFetcher';
 import UnavailablePage from './pages/support-pages/UnavailablePage';
-import { Amplitude } from './sif-amplitude/AmplitudeProvider';
 import { Locale } from './types/Locale';
 import { getEnvironmentVariable } from './utils/envUtils';
 import { Feature, isFeatureEnabled } from './utils/featureToggleUtils';
@@ -29,7 +29,7 @@ const App: React.FunctionComponent = () => {
     const appStatusSanityConfig = getAppStatusSanityConfig();
 
     return (
-        <Amplitude>
+        <AmplitudeProvider applicationKey={APPLICATION_KEY}>
             <ApplicationWrapper
                 locale={locale}
                 onChangeLocale={(activeLocale: Locale): void => {
@@ -49,7 +49,7 @@ const App: React.FunctionComponent = () => {
                     <InnsynDataFetcher />
                 )}
             </ApplicationWrapper>
-        </Amplitude>
+        </AmplitudeProvider>
     );
 };
 

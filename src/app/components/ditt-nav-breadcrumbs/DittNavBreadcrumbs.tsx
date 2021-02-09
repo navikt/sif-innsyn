@@ -1,9 +1,9 @@
 import React from 'react';
 import Lenke from 'nav-frontend-lenker';
+import getLenker from '../../lenker';
 import bemUtils from '../../utils/bemUtils';
 import DittNavIconSvg from './DittNavnIconSvg';
 import './dittNavBreadcrumbs.less';
-import getLenker from '../../lenker';
 
 const bem = bemUtils('dittNavBreadcrumbs');
 
@@ -12,8 +12,8 @@ const DittNavBreadcrumbs = () => (
         <div className={bem.element('icon')} role="presentation" aria-hidden={true}>
             <DittNavIconSvg />
         </div>
-        <Lenke href={getLenker().dittNAV}>Ditt NAV</Lenke> <span className={bem.element('separator')}>/</span> Sykdom i
-        familien
+        <Lenke href={getLenker().dittNAV}>Ditt NAV</Lenke> <span className={bem.element('separator')}>/</span> Dine
+        pleiepenger
     </div>
 );
 

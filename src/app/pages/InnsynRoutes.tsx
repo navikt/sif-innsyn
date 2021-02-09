@@ -4,7 +4,6 @@ import { InnsynRouteConfig } from '../config/innsynRouteConfig';
 import { Søknad } from '../types/apiTypes/søknadTypes';
 import { getRedirectRouteFromUrl } from '../utils/routeRedirectUtils';
 import DinOversiktPage from './din-oversikt-page/DinOversiktPage';
-import PleiepengeroversiktPage from './pleiepenger/PleiepengeoversiktPage';
 import PleiepengesakPage from './pleiepenger/PleiepengesakPage';
 import UnknownRoutePage from './support-pages/UnknownRoutePage';
 
@@ -23,11 +22,6 @@ const InnsynRoutes = ({ history, søknader }: Props) => {
                 exact={true}
                 path={InnsynRouteConfig.OVERSIKT}
                 component={() => <DinOversiktPage søknader={søknader} />}
-            />
-            <Route
-                exact={true}
-                path={`${InnsynRouteConfig.DINE_PLEIEPENGER}`}
-                component={() => <PleiepengeroversiktPage søknader={søknader} />}
             />
             <Route
                 exact={true}
