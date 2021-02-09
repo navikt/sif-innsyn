@@ -30,17 +30,7 @@ const Oversikt = ({ søknader }: Props) => {
         <InnsynPage
             title={intlHelper(intl, 'page.dinOversikt.title')}
             topContentRenderer={() => (
-                <PageBanner
-                    title={
-                        <div>
-                            <div>{intlHelper(intl, 'page.dinOversikt.title')}</div>
-                            <span style={{ fontSize: '1.5rem' }}>
-                                &mdash; {intlHelper(intl, 'page.dinOversikt.title.2')}
-                            </span>
-                        </div>
-                    }
-                    illustration={<SvgSykdomIFamilien />}
-                />
+                <PageBanner title={intlHelper(intl, 'page.dinOversikt.title')} illustration={<SvgSykdomIFamilien />} />
             )}>
             <Box margin="l">
                 <SectionPanel
