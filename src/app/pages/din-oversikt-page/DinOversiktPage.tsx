@@ -48,11 +48,13 @@ const Oversikt = ({ søknader }: Props) => {
                 </SectionPanel>
             </Box>
 
-            <SectionPanel title={'Dine søknader'}>
+            <SectionPanel title={intlHelper(intl, 'page.dinOversikt.saker.title')}>
                 {harSøknader && <SoknadList søknader={pleiepengesoknader} />}
                 {harSøknader === false && (
                     <>
-                        <AlertStripeInfo>Vi finner ingen søknader</AlertStripeInfo>
+                        <AlertStripeInfo>
+                            <FormattedMessage id="page.dinOversikt.saker.ingenFunnet" />
+                        </AlertStripeInfo>
                     </>
                 )}
                 <Box margin="xl">

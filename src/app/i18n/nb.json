@@ -12,7 +12,8 @@
     "page.dinOversikt.intro.3.a": "Søknader som er sendt inn per post vises ikke her, de finner du",
     "page.dinOversikt.intro.3.b": "i denne oversikten",
     "page.dinOversikt.intro.3.c": ".",
-    "page.dinOversikt.saker.title": "Din oversikt",
+    "page.dinOversikt.saker.title": "Dine søknader",
+    "page.dinOversikt.saker.ingenFunnet": "Vi finner ingen søknader",
 
     "page.pleiepengesaker.oversikt.ariaTitle": "{pageTitle} - dine saker",
     "page.pleiepengesaker.oversikt.ingenSakerFunnet": "Vi finner ingen saker eller søknader fra deg",
