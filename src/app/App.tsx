@@ -12,8 +12,9 @@ import { Feature, isFeatureEnabled } from './utils/featureToggleUtils';
 import { getLocaleFromSessionStorage, setLocaleInSessionStorage } from './utils/localeUtils';
 import './styles/app.less';
 
-const localeFromSessionStorage = getLocaleFromSessionStorage();
 moment.locale('nb');
+
+const localeFromSessionStorage = getLocaleFromSessionStorage();
 
 export const APPLICATION_KEY = 'sif-innsyn';
 
