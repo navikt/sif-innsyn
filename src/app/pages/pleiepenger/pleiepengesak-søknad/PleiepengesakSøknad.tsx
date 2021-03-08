@@ -2,63 +2,65 @@ import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import Lenke from 'nav-frontend-lenker';
 import Box from '../../../components/elements/box/Box';
-import Knappelenke from '../../../components/knappelenke/Knappelenke';
-import Knapperad from '../../../components/knapperad/Knapperad';
 import { getPrettyDate } from '../../../components/pretty-date/PrettyDate';
-import SectionPanel from '../../../components/section-panel/SectionPanel';
 import getLenker from '../../../lenker';
 import { Pleiepengesøknad } from '../../../types/apiTypes/søknadTypes';
 import intlHelper from '../../../utils/intlUtils';
 import { getSøknadTitle } from '../../../utils/soknadUtils';
 import InfoEtterSendtSøknad from './InfoEtterSendtSøknad';
+import Title from '../../../components/elements/title/Title';
+import Alertstripe from 'nav-frontend-alertstriper';
+import bemUtils from '../../../utils/bemUtils';
+import './pleiepengesakSøknad.less';
 
 interface Props {
     søknad: Pleiepengesøknad;
 }
 
+const bem = bemUtils('ppSoknad');
+
 const PleiepengesakSøknad = ({ søknad }: Props) => {
     const intl = useIntl();
     return (
         <>
-            <SectionPanel
-                title={intlHelper(intl, 'page.pleiepengesakSøknad.søknad.title', {
-                    søknad: getSøknadTitle(søknad, true),
-                    mottatt: getPrettyDate(søknad.opprettet, 'dayDateAndTime'),
-                })}
-                titleTag="h1">
-                <p style={{ fontWeight: 'bold' }}>
-                    <FormattedMessage
-                        id="page.pleiepengesakSøknad.periode"
-                        values={{
-                            fom: getPrettyDate(søknad.søknad.fraOgMed),
-                            tom: getPrettyDate(søknad.søknad.tilOgMed),
-                        }}
-                    />
+            <Box className={bem.element('infoOmSoknad')}>
+                <p>
+                    <Title tag="h1">{intlHelper(intl, 'page.pleiepengesakSøknad.søknad.title')}</Title>
                 </p>
-                <FormattedMessage tagName="p" id="page.pleiepengesakSøknad.bekreftelse" />
-
                 <Box margin="xl">
-                    <Knapperad align="left">
-                        <Knappelenke mini={true} href={getLenker().ettersending}>
-                            <FormattedMessage id="page.pleiepengesakSøknad.ettersendKnapp.label" />
-                        </Knappelenke>
-                    </Knapperad>
-                </Box>
-                <Box margin="xxl">
-                    <FormattedMessage tagName="p" id="page.pleiepengesakSøknad.info.1" />
-                    <ul>
-                        <FormattedMessage tagName="li" id="page.pleiepengesakSøknad.info.2.a" />
-                        <FormattedMessage tagName="li" id="page.pleiepengesakSøknad.info.2.b" />
-                    </ul>
+                    <p style={{ fontWeight: 'bold' }}>
+                        <FormattedMessage
+                            id="page.pleiepengesakSøknad.periode"
+                            values={{
+                                fom: getPrettyDate(søknad.søknad.fraOgMed),
+                                tom: getPrettyDate(søknad.søknad.tilOgMed),
+                            }}
+                        />
+                    </p>
                     <p>
-                        <FormattedMessage id="page.pleiepengesakSøknad.info.3.a" />{' '}
-                        <Lenke href={getLenker().saksoversikt}>
-                            <FormattedMessage id="page.pleiepengesakSøknad.info.3.b" />
-                        </Lenke>
-                        <FormattedMessage id="page.pleiepengesakSøknad.info.3.c" />
+                        <Alertstripe type="suksess" form="inline">
+                            <FormattedMessage
+                                id="page.pleiepengesakSøknad.søknad.mottatDato"
+                                values={{
+                                    søknad: getSøknadTitle(søknad, true),
+                                    mottatt: getPrettyDate(søknad.opprettet, 'dayDateAndTime'),
+                                }}
+                            />
+                        </Alertstripe>
                     </p>
                 </Box>
-            </SectionPanel>
+
+                <Box margin="xl">
+                    <Lenke href={getLenker().ettersending}>
+                        <FormattedMessage id="page.pleiepengesakSøknad.ettersendKnapp.label" />
+                    </Lenke>
+                </Box>
+                <Box margin="l">
+                    <Lenke href={'#'}>
+                        <FormattedMessage id="page.pleiepengesakSøknad.pdfLenke" />
+                    </Lenke>
+                </Box>
+            </Box>
             <InfoEtterSendtSøknad />
         </>
     );

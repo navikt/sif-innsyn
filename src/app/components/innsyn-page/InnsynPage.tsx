@@ -7,6 +7,7 @@ import Box from '../elements/box/Box';
 import FocusRegion from '../focus-region/FocusRegion';
 import PageBannerCompact from '../page-banner-compact/PageBannerCompact';
 import Page from '../page/Page';
+import SectionPanel from '../section-panel/SectionPanel';
 import InnsynFooter from './InnsynFooter';
 import './innsynPage.less';
 
@@ -34,10 +35,12 @@ const InnsynPage = ({ topContentRenderer, breadcrumbs, title, focusOnContent, ch
                     {<Breadcrumbs currentPageTitle={title} crumbs={breadcrumbs} />}
                 </div>
             )}
-            <FocusRegion active={focusOnContent}>{children}</FocusRegion>
-            <Box margin="xxl">
-                <InnsynFooter />
-            </Box>
+            <SectionPanel>
+                <FocusRegion active={focusOnContent}>{children}</FocusRegion>
+                <Box className={bem.element('footer')}>
+                    <InnsynFooter />
+                </Box>
+            </SectionPanel>
         </Page>
     );
 };
