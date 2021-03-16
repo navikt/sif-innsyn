@@ -43,9 +43,7 @@ const InfoEtterSendtSøknad = () => {
                                     key="legeerklæring"
                                     title={intlHelper(intl, 'page.pleiepengesakSøknad.infoEtterSøknad.step1.title')}>
                                     <p>
-                                        <FormattedMessage id="page.pleiepengesakSøknad.infoEtterSøknad.step1.text.1" />{' '}
-                                        <FormattedMessage id="page.pleiepengesakSøknad.infoEtterSøknad.step1.text.2" />{' '}
-                                        <FormattedMessage id="page.pleiepengesakSøknad.infoEtterSøknad.step1.text.3" />
+                                        <FormattedMessage id="page.pleiepengesakSøknad.infoEtterSøknad.step1.text.1" />
                                     </p>
                                 </Step>,
                                 <Step
@@ -61,31 +59,28 @@ const InfoEtterSendtSøknad = () => {
                                     title={intlHelper(intl, 'page.pleiepengesakSøknad.infoEtterSøknad.step3.title')}>
                                     <p>
                                         <FormattedMessage id="page.pleiepengesakSøknad.infoEtterSøknad.step3.text.1" />
-                                        <br />
-                                        <Lenke href={lenker.saksbehandlingstid}>
-                                            <FormattedMessage id="page.pleiepengesakSøknad.infoEtterSøknad.step3.text.2" />
-                                        </Lenke>
                                     </p>
                                 </Step>,
 
                                 <Step
                                     key="svar"
-                                    title={intlHelper(intl, 'page.pleiepengesakSøknad.infoEtterSøknad.step5.title.1')}>
+                                    title={intlHelper(intl, 'page.pleiepengesakSøknad.infoEtterSøknad.step4.title.1')}>
                                     <p>
-                                        <FormattedMessage id="page.pleiepengesakSøknad.infoEtterSøknad.step5.title.2" />{' '}
+                                        <FormattedMessage id="page.pleiepengesakSøknad.infoEtterSøknad.step4.title.2" />{' '}
                                         <Lenke href={lenker.ettersending}>
-                                            {intlHelper(intl, 'page.pleiepengesakSøknad.infoEtterSøknad.step5.title.3')}
+                                            {intlHelper(intl, 'page.pleiepengesakSøknad.infoEtterSøknad.step4.title.3')}
                                         </Lenke>{' '}
-                                        {intlHelper(intl, 'page.pleiepengesakSøknad.infoEtterSøknad.step5.title.4')}
+                                        {intlHelper(intl, 'page.pleiepengesakSøknad.infoEtterSøknad.step4.title.4')}
                                     </p>
                                 </Step>,
                                 <Step
                                     key="saksoversikt"
-                                    title={intlHelper(intl, 'page.pleiepengesakSøknad.infoEtterSøknad.step6.title.1')}>
-                                    {intlHelper(intl, 'page.pleiepengesakSøknad.infoEtterSøknad.step6.title.2')}{' '}
+                                    title={intlHelper(intl, 'page.pleiepengesakSøknad.infoEtterSøknad.step5.title')}>
+                                    {intlHelper(intl, 'page.pleiepengesakSøknad.infoEtterSøknad.step5.info.1')}{' '}
                                     <Lenke href={getLenker().dineUtbetalinger}>
-                                        {intlHelper(intl, 'page.pleiepengesakSøknad.infoEtterSøknad.step6.title.3')}
-                                    </Lenke>
+                                        {intlHelper(intl, 'page.pleiepengesakSøknad.infoEtterSøknad.step5.lenkeTitel')}
+                                    </Lenke>{' '}
+                                    {intlHelper(intl, 'page.pleiepengesakSøknad.infoEtterSøknad.step5.info.2')}
                                 </Step>,
                             ]}
                         />
@@ -95,23 +90,13 @@ const InfoEtterSendtSøknad = () => {
             <SectionPanel>
                 <Box className={bem.element('infoEttersendKnappeBox')}>
                     <Title>{intlHelper(intl, 'page.pleiepengesakSøknad.infoEtterSøknad.melde.title')}</Title>
-                    <FormattedMessage id="page.pleiepengesakSøknad.infoEtterSøknad.melde.text.1" />
-                    <br />
-                    <FormattedMessage id="page.pleiepengesakSøknad.infoEtterSøknad.melde.text.2" />
+                    <FormattedMessage id="page.pleiepengesakSøknad.infoEtterSøknad.melde.text.1" />{' '}
+                    <Lenke href={getLenker().endringerDuMåGiBeskjedOm}>
+                        {intlHelper(intl, 'page.pleiepengesakSøknad.infoEtterSøknad.melde.lenkeTitel')}
+                    </Lenke>
                     <Box margin="l">
                         <Knappelenke href={getLenker().minInnboksSkrivMelding}>
                             <FormattedMessage id="page.pleiepengesakSøknad.infoEtterSøknad.melde.knappTitle" />
-                        </Knappelenke>
-                    </Box>
-                </Box>
-
-                <Box className={bem.element('infoEttersendKnappeBox')}>
-                    <Title>{intlHelper(intl, 'page.pleiepengesakSøknad.infoEtterSøknad.søkePåNytt.title')}</Title>
-
-                    <FormattedHtmlMessage id="page.pleiepengesakSøknad.infoEtterSøknad.søkePåNytt.tekst1.html" />
-                    <Box margin="l">
-                        <Knappelenke href={getLenker().pleiepenger}>
-                            <FormattedMessage id="page.pleiepengesakSøknad.infoEtterSøknad.søkePåNytt.knappTitle" />
                         </Knappelenke>
                     </Box>
                 </Box>

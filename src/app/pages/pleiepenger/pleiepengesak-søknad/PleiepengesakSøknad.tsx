@@ -56,44 +56,44 @@ const PleiepengesakSøknad = ({ søknad }: Props) => {
                     </p>
                     <Box margin="l">
                         <Alertstripe type="advarsel">
-                            Husk å be alle arbeidsgiverne dine sende oss inntektsmelding så fort som mulig hvis:
+                            <FormattedMessage id="page.pleiepengesakSøknad.søknad.alertstripe.title" />
                             <ul>
-                                <li>du søker for første gang, eller</li>
-                                <li>det er mer enn 4 uker siden du hadde pleiepenger sist </li>
+                                <li>
+                                    <FormattedMessage id="page.pleiepengesakSøknad.søknad.alertstripe.list.1" />
+                                </li>
+                                <li>
+                                    <FormattedMessage id="page.pleiepengesakSøknad.søknad.alertstripe.list.2" />
+                                </li>
                             </ul>
                         </Alertstripe>
                     </Box>
                     <Box margin="xl">
                         <Box margin="m">
-                            <Ekspanderbartpanel tittel="Bekreftelse til arbeidsgiver">
-                                Her kan du se, laste ned eller skrive ut bekreftelse til arbeidsgiver for perioden du
-                                søker pleiepenger
+                            <Ekspanderbartpanel
+                                tittel={intlHelper(intl, 'page.pleiepengesakSøknad.ekspanderbartpanel1.title')}>
+                                <FormattedMessage id="page.pleiepengesakSøknad.ekspanderbartpanel1.info" />
+
                                 <Box margin="xl">
-                                    <UndertekstBold>Dokumenter som kan lastes ned</UndertekstBold>
+                                    <UndertekstBold>
+                                        <FormattedMessage id="page.pleiepengesakSøknad.ekspanderbartpanel1.list.tittle" />
+                                    </UndertekstBold>
                                     <ul className={bem.element('no-bullets')}>
                                         <li>
                                             <Lenke href="#">
                                                 <FileIcon />
-                                                <span>
-                                                    Bekreftelse/informasjon til Arbeids- og velferdsetaten (pdf)
-                                                </span>
+                                                <span>Bekreftelse til Arbeids- og velferdsetaten (pdf)</span>
                                             </Lenke>
                                         </li>
                                         <li>
                                             <Lenke href="#">
                                                 <FileIcon />
-                                                <span>
-                                                    Bekreftelse/informasjon til Den Norske Opera og Ballett (pdf)
-                                                </span>
+                                                <span>Bekreftelse til Den Norske Opera og Ballett (pdf)</span>
                                             </Lenke>
                                         </li>
                                         <li>
                                             <Lenke href="#">
                                                 <FileIcon />
-                                                <span>
-                                                    Bekreftelse/informasjon til Sykehuset i Østfold avdeling ortopedi
-                                                    (pdf)
-                                                </span>
+                                                <span>Bekreftelse til Sykehuset i Østfold avdeling ortopedi (pdf)</span>
                                             </Lenke>
                                         </li>
                                     </ul>
@@ -102,19 +102,20 @@ const PleiepengesakSøknad = ({ søknad }: Props) => {
                         </Box>
                         <Box margin="m">
                             <Ekspanderbartpanel
-                                tittel={intlHelper(intl, 'page.pleiepengesakSøknad.ekspanderbartpanel.label')}>
+                                tittel={intlHelper(intl, 'page.pleiepengesakSøknad.ekspanderbartpanel2.title')}>
                                 <p>
-                                    For at vi skal kunne bahendle søknaden din, trenger vi dokumentasjon Her kan du
-                                    laste opp legeerklæring og annen dokumentasjon{' '}
+                                    <FormattedMessage id="page.pleiepengesakSøknad.ekspanderbartpanel2.info.1" />
                                 </p>
-                                <ul>
-                                    <li>Kanksje du må ettersende dette</li>
-                                    <li>Kanskje du må ettersende dette også </li>
-                                    <li>Eller dette?</li>
-                                </ul>
+                                <p>
+                                    <FormattedMessage id="page.pleiepengesakSøknad.ekspanderbartpanel2.info.2" />
+                                </p>
+                                <p>
+                                    <FormattedMessage id="page.pleiepengesakSøknad.ekspanderbartpanel2.info.3" />
+                                </p>
+
                                 <Box margin="l">
                                     <Knappelenke href={getLenker().ettersending}>
-                                        <FormattedMessage id="page.pleiepengesakSøknad.ettersendKnapp.label" />
+                                        <FormattedMessage id="page.pleiepengesakSøknad.ekspanderbartpanel2.ettersendKnapp.label" />
                                     </Knappelenke>
                                 </Box>
                             </Ekspanderbartpanel>
