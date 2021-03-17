@@ -17,6 +17,7 @@ import Title from '../../../components/elements/title/Title';
 import { FileContentIcon } from '../../../svg/FellesIkoner';
 import { getEnvironmentVariable } from '../../../utils/envUtils';
 import './pleiepengesakSøknad.less';
+import { mindreTimerEtterInnsendtEnnMaxAntallTimer } from '../../../utils/dateUtils';
 
 interface Props {
     søknad: Pleiepengesøknad;
@@ -24,7 +25,7 @@ interface Props {
 
 const bem = bemUtils('ppSoknad');
 
-const getApiUrlBySoknadIdOrgNumber = (
+const getApiUrlBySoknadIdOgOrgnummer = (
     soknadID: string,
     organisasjonsnummer: string,
     organisasjonNavn: string
@@ -36,27 +37,10 @@ const getApiUrlBySoknadIdOrgNumber = (
 const PleiepengesakSøknad = ({ søknad }: Props) => {
     const intl = useIntl();
 
-    const listItems = søknad.søknad.arbeidsgivere.organisasjoner.map((organisasjon) => (
-        <li key={organisasjon.organisasjonsnummer} className={bem.element('listElement')}>
-            <Lenke
-                target="_blank"
-                href={getApiUrlBySoknadIdOrgNumber(
-                    søknad.søknadId,
-                    organisasjon.organisasjonsnummer,
-                    organisasjon.navn
-                )}>
-                <FileContentIcon />
-                <span>
-                    <FormattedMessage
-                        id="page.pleiepengesakSøknad.ekspanderbartpanel1.list.itemName"
-                        values={{
-                            organisasjonsnavn: organisasjon.navn,
-                        }}
-                    />
-                </span>
-            </Lenke>
-        </li>
-    ));
+    const harArbeidsgiver =
+        søknad.søknad.arbeidsgivere.organisasjoner && søknad.søknad.arbeidsgivere.organisasjoner.length > 0;
+
+    const visAlertstripe = harArbeidsgiver && mindreTimerEtterInnsendtEnnMaxAntallTimer(søknad.opprettet, 48);
 
     return (
         <>
@@ -76,33 +60,63 @@ const PleiepengesakSøknad = ({ søknad }: Props) => {
                             }}
                         />
                     </p>
-                    <Box margin="l">
-                        <Alertstripe type="advarsel">
-                            <FormattedMessage id="page.pleiepengesakSøknad.søknad.alertstripe.title" />
-                            <ul>
-                                <li>
-                                    <FormattedMessage id="page.pleiepengesakSøknad.søknad.alertstripe.list.1" />
-                                </li>
-                                <li>
-                                    <FormattedMessage id="page.pleiepengesakSøknad.søknad.alertstripe.list.2" />
-                                </li>
-                            </ul>
-                        </Alertstripe>
-                    </Box>
-                    <Box margin="xl">
-                        <Box margin="m">
-                            <Ekspanderbartpanel
-                                tittel={intlHelper(intl, 'page.pleiepengesakSøknad.ekspanderbartpanel1.title')}>
-                                <FormattedMessage id="page.pleiepengesakSøknad.ekspanderbartpanel1.info" />
-
-                                <Box margin="xl">
-                                    <UndertekstBold>
-                                        <FormattedMessage id="page.pleiepengesakSøknad.ekspanderbartpanel1.list.tittle" />
-                                    </UndertekstBold>
-                                </Box>
-                                <ul className={bem.element('no-bullets')}>{listItems}</ul>
-                            </Ekspanderbartpanel>
+                    {visAlertstripe && (
+                        <Box margin="l">
+                            <Alertstripe type="advarsel">
+                                <FormattedMessage id="page.pleiepengesakSøknad.søknad.alertstripe.title" />
+                                <ul>
+                                    <li>
+                                        <FormattedMessage id="page.pleiepengesakSøknad.søknad.alertstripe.list.1" />
+                                    </li>
+                                    <li>
+                                        <FormattedMessage id="page.pleiepengesakSøknad.søknad.alertstripe.list.2" />
+                                    </li>
+                                </ul>
+                            </Alertstripe>
                         </Box>
+                    )}
+
+                    <Box margin="xl">
+                        {harArbeidsgiver && (
+                            <Box margin="m">
+                                <Ekspanderbartpanel
+                                    tittel={intlHelper(intl, 'page.pleiepengesakSøknad.ekspanderbartpanel1.title')}>
+                                    <FormattedMessage id="page.pleiepengesakSøknad.ekspanderbartpanel1.info" />
+
+                                    <Box margin="xl">
+                                        <UndertekstBold>
+                                            <FormattedMessage id="page.pleiepengesakSøknad.ekspanderbartpanel1.list.tittle" />
+                                        </UndertekstBold>
+                                    </Box>
+                                    <ul className={bem.element('no-bullets')}>
+                                        {søknad.søknad.arbeidsgivere.organisasjoner.map((organisasjon) => (
+                                            <li
+                                                key={organisasjon.organisasjonsnummer}
+                                                className={bem.element('listElement')}>
+                                                <Lenke
+                                                    target="_blank"
+                                                    href={getApiUrlBySoknadIdOgOrgnummer(
+                                                        søknad.søknadId,
+                                                        organisasjon.organisasjonsnummer,
+                                                        organisasjon.navn
+                                                    )}>
+                                                    <FileContentIcon />
+                                                    <span>
+                                                        <FormattedMessage
+                                                            id="page.pleiepengesakSøknad.ekspanderbartpanel1.list.itemName"
+                                                            values={{
+                                                                organisasjonsnavn: organisasjon.navn,
+                                                            }}
+                                                        />
+                                                    </span>
+                                                </Lenke>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </Ekspanderbartpanel>
+                            </Box>
+                        )}
+
                         <Box margin="m">
                             <Ekspanderbartpanel
                                 tittel={intlHelper(intl, 'page.pleiepengesakSøknad.ekspanderbartpanel2.title')}>
