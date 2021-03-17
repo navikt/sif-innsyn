@@ -35,7 +35,9 @@ const bem = bemUtils('ppSoknad');
 
 // const FileContent = require('@navikt/ds-icons/svg/FileContent.svg');
 export const getApiUrlBySoknadIdOrgNumber = (soknadID: string, orgnummer: string): string => {
-    return `${getEnvironmentVariable('API_URL')}/${soknadID}/arbeidsgivermelding?organisasjonsnummer=${orgnummer}`;
+    return `${getEnvironmentVariable(
+        'API_URL'
+    )}/soknad/${soknadID}/arbeidsgivermelding?organisasjonsnummer=${orgnummer}`;
 };
 const PleiepengesakSøknad = ({ søknad }: Props) => {
     const intl = useIntl();
