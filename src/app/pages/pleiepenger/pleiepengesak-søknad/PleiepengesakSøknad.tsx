@@ -31,13 +31,13 @@ const getApiUrlBySoknadIdOrgNumber = (
 ): string => {
     return `${getEnvironmentVariable(
         'API_URL'
-    )}/soknad/${soknadID}/arbeidsgivermelding?organisasjonsnummer=${organisasjonsnummer}&filnavn=BekreftelseTil${organisasjonNavn}.pdf`;
+    )}/soknad/${soknadID}/arbeidsgivermelding?organisasjonsnummer=${organisasjonsnummer}&filnavn=BekreftelseTil${organisasjonNavn}`;
 };
 const PleiepengesakSøknad = ({ søknad }: Props) => {
     const intl = useIntl();
 
     const listItems = søknad.søknad.arbeidsgivere.organisasjoner.map((organisasjon) => (
-        <li key={organisasjon.organisasjonsnummer}>
+        <li key={organisasjon.organisasjonsnummer} className={bem.element('listElement')}>
             <Lenke
                 target="_blank"
                 href={getApiUrlBySoknadIdOrgNumber(

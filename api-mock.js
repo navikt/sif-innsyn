@@ -529,6 +529,13 @@ const startServer = () => {
             res.status(401).send();
         }
     });
+    server.get('/soknad/:soknadId/arbeidsgivermelding', (req, res) => {
+        if (isLoggedIn(req)) {
+            res.download('BekreftelseTilKLONELABBEN.pdf', 'BekreftelseTilKLONELABBEN.pdf');
+        } else {
+            res.status(401).send();
+        }
+    });
 
     server.listen(port, () => {
         console.log(`Mockserver is listening on port: ${port}`);
