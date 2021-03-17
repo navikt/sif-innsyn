@@ -13,7 +13,7 @@ import SectionPanel from '../../../components/section-panel/SectionPanel';
 import bemUtils from '../../../utils/bemUtils';
 import './pleiepengesakSøknad.less';
 
-const bem = bemUtils('ppSoknad');
+const bem = bemUtils('infoEtterSendt');
 interface StepProps {
     title: string | JSX.Element;
     children?: React.ReactNode;
@@ -34,7 +34,7 @@ const InfoEtterSendtSøknad = () => {
     return (
         <>
             <SectionPanel>
-                <Box className={bem.element('infoEttersend')}>
+                <Box className={bem.block}>
                     <Title tag="h3">{intlHelper(intl, 'page.pleiepengesakSøknad.infoEtterSøknad.title')}</Title>
                     <Box margin="xl">
                         <ProcessDescription
@@ -88,16 +88,19 @@ const InfoEtterSendtSøknad = () => {
                 </Box>
             </SectionPanel>
             <SectionPanel>
-                <Box className={bem.element('infoEttersendKnappeBox')}>
+                <Box className={bem.element('knappeBox')}>
                     <Title>{intlHelper(intl, 'page.pleiepengesakSøknad.infoEtterSøknad.melde.title')}</Title>
-                    <FormattedMessage id="page.pleiepengesakSøknad.infoEtterSøknad.melde.text.1" />{' '}
-                    <Lenke href={getLenker().endringerDuMåGiBeskjedOm}>
-                        {intlHelper(intl, 'page.pleiepengesakSøknad.infoEtterSøknad.melde.lenkeTitel')}
-                    </Lenke>
+
                     <Box margin="l">
-                        <Knappelenke href={getLenker().minInnboksSkrivMelding}>
-                            <FormattedMessage id="page.pleiepengesakSøknad.infoEtterSøknad.melde.knappTitle" />
-                        </Knappelenke>
+                        <FormattedMessage id="page.pleiepengesakSøknad.infoEtterSøknad.melde.text.1" />{' '}
+                        <Lenke href={getLenker().endringerDuMåGiBeskjedOm}>
+                            {intlHelper(intl, 'page.pleiepengesakSøknad.infoEtterSøknad.melde.lenkeTitel')}
+                        </Lenke>
+                        <Box margin="l">
+                            <Knappelenke href={getLenker().minInnboksSkrivMelding}>
+                                <FormattedMessage id="page.pleiepengesakSøknad.infoEtterSøknad.melde.knappTitle" />
+                            </Knappelenke>
+                        </Box>
                     </Box>
                 </Box>
             </SectionPanel>
