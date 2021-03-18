@@ -303,7 +303,7 @@ const soknadMock = [
                         organisasjonsnummer: '1212',
                     },
                     {
-                        navn: 'Navn',
+                        navn: 'Navn med mellomrom',
                         skalJobbe: 'redusert',
                         skalJobbeProsent: 22.512,
                         vetIkkeEkstrainfo: null,
@@ -402,7 +402,7 @@ const soknadMock = [
                         organisasjonsnummer: '1212',
                     },
                     {
-                        navn: 'Navn',
+                        navn: 'Navn med mellomrom',
                         skalJobbe: 'redusert',
                         skalJobbeProsent: 22.512,
                         vetIkkeEkstrainfo: null,

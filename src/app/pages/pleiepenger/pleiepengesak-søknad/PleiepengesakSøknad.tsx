@@ -32,7 +32,10 @@ const getApiUrlBySoknadIdOgOrgnummer = (
 ): string => {
     return `${getEnvironmentVariable(
         'API_URL'
-    )}/soknad/${soknadID}/arbeidsgivermelding?organisasjonsnummer=${organisasjonsnummer}&filnavn=Bekreftelse_til_${organisasjonNavn}`;
+    )}/soknad/${soknadID}/arbeidsgivermelding?organisasjonsnummer=${organisasjonsnummer}&filnavn=Bekreftelse_til_${organisasjonNavn.replace(
+        / /g,
+        '_'
+    )}`;
 };
 const PleiepengesakSøknad = ({ søknad }: Props) => {
     const intl = useIntl();
