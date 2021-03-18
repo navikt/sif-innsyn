@@ -32,7 +32,7 @@ const PleiepengesakPage = ({ søknader, søknadId }: Props) => {
         },
     ];
     return (
-        <InnsynPage title={getSøknadTitle(søknad, true)} breadcrumbs={crumbs} focusOnContent={true}>
+        <InnsynPage title={getSøknadTitle(søknad, true)} breadcrumbs={crumbs} focusOnContent={false}>
             {søknad.søknadstype === Søknadstype.PP_SYKT_BARN && <PleiepengesakSøknad søknad={søknad} />}
             {søknad.søknadstype === Søknadstype.PP_ETTERSENDING && <PleiepengesakEttersending søknad={søknad} />}
         </InnsynPage>

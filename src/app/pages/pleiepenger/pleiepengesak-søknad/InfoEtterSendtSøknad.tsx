@@ -3,7 +3,6 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import Lenke from 'nav-frontend-lenker';
 import Box from '../../../components/elements/box/Box';
 import Title from '../../../components/elements/title/Title';
-// import ExpandableInfo from '../../../components/expandable-content/ExpandableInfo';
 import ProcessDescription from '../../../components/process-description/ProcessDescription';
 import getLenker from '../../../lenker';
 import intlHelper from '../../../utils/intlUtils';
@@ -28,9 +27,15 @@ const Step = ({ title, children }: StepProps): JSX.Element => (
     </div>
 );
 
-const InfoEtterSendtSøknad = () => {
+interface Props {
+    harArbeidsgiver: boolean;
+}
+
+const InfoEtterSendtSøknad = ({ harArbeidsgiver }: Props) => {
     const intl = useIntl();
     const lenker = getLenker(intl.locale);
+    console.log(harArbeidsgiver);
+
     return (
         <>
             <SectionPanel>
@@ -53,12 +58,20 @@ const InfoEtterSendtSøknad = () => {
                                         tagName="p"
                                         id="page.pleiepengesakSøknad.infoEtterSøknad.step2.text.title"
                                     />
+                                    <FormattedHtmlMessage
+                                        tagName="p"
+                                        id="page.pleiepengesakSøknad.infoEtterSøknad.step2.text.title.2"
+                                    />
                                 </Step>,
                                 <Step
                                     key="behandling"
                                     title={intlHelper(intl, 'page.pleiepengesakSøknad.infoEtterSøknad.step3.title')}>
                                     <p>
-                                        <FormattedMessage id="page.pleiepengesakSøknad.infoEtterSøknad.step3.text.1" />
+                                        {harArbeidsgiver ? (
+                                            <FormattedMessage id="page.pleiepengesakSøknad.infoEtterSøknad.step3.text.1" />
+                                        ) : (
+                                            <FormattedMessage id="page.pleiepengesakSøknad.infoEtterSøknad.step3.text.2" />
+                                        )}
                                     </p>
                                 </Step>,
 

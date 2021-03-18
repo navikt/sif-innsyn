@@ -32,7 +32,7 @@ const getApiUrlBySoknadIdOgOrgnummer = (
 ): string => {
     return `${getEnvironmentVariable(
         'API_URL'
-    )}/soknad/${soknadID}/arbeidsgivermelding?organisasjonsnummer=${organisasjonsnummer}&filnavn=BekreftelseTil${organisasjonNavn}`;
+    )}/soknad/${soknadID}/arbeidsgivermelding?organisasjonsnummer=${organisasjonsnummer}&filnavn=Bekreftelse_til_${organisasjonNavn}`;
 };
 const PleiepengesakSøknad = ({ søknad }: Props) => {
     const intl = useIntl();
@@ -46,12 +46,16 @@ const PleiepengesakSøknad = ({ søknad }: Props) => {
         <>
             <SectionPanel>
                 <Box className={bem.element('infoOmSoknad')}>
-                    <Title>
-                        {intlHelper(intl, 'page.pleiepengesakSøknad.søknad.title', {
-                            mottatt: getPrettyDate(søknad.opprettet, 'dayDateAndTime'),
-                        })}
-                    </Title>
-                    <p style={{ fontWeight: 'bold', marginTop: '2rem', marginBottom: '3rem' }}>
+                    <Title>{intlHelper(intl, 'page.pleiepengesakSøknad.søknad.title')}</Title>
+                    <p style={{ fontWeight: 'bold', marginTop: '2rem' }}>
+                        <FormattedMessage
+                            id="page.pleiepengesakSøknad.søknad.motatt"
+                            values={{
+                                mottatt: getPrettyDate(søknad.opprettet, 'dayDateAndTime'),
+                            }}
+                        />
+                    </p>
+                    <p style={{ fontWeight: 'bold', marginBottom: '3rem' }}>
                         <FormattedMessage
                             id="page.pleiepengesakSøknad.periode"
                             values={{
@@ -140,7 +144,7 @@ const PleiepengesakSøknad = ({ søknad }: Props) => {
                     </Box>
                 </Box>
             </SectionPanel>
-            <InfoEtterSendtSøknad />
+            <InfoEtterSendtSøknad harArbeidsgiver={harArbeidsgiver} />
         </>
     );
 };
