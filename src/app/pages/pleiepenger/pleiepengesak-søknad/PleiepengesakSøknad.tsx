@@ -48,8 +48,8 @@ const PleiepengesakSøknad = ({ søknad }: Props) => {
     return (
         <>
             <SectionPanel>
-                <Box className={bem.element('infoOmSoknad')}>
-                    <Title>{intlHelper(intl, 'page.pleiepengesakSøknad.søknad.title')}</Title>
+                <Box>
+                    <Title tag="h1">{intlHelper(intl, 'page.pleiepengesakSøknad.søknad.title')}</Title>
                     <p style={{ fontWeight: 'bold', marginTop: '2rem' }}>
                         <FormattedMessage
                             id="page.pleiepengesakSøknad.søknad.motatt"

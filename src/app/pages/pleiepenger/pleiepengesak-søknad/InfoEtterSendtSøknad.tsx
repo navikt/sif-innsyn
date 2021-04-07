@@ -9,10 +9,8 @@ import intlHelper from '../../../utils/intlUtils';
 import FormattedHtmlMessage from '../../../components/formatted-html-message/FormattedHtmlMessage';
 import Knappelenke from '../../../components/knappelenke/Knappelenke';
 import SectionPanel from '../../../components/section-panel/SectionPanel';
-import bemUtils from '../../../utils/bemUtils';
 import './pleiepengesakSøknad.less';
 
-const bem = bemUtils('infoEtterSendt');
 interface StepProps {
     title: string | JSX.Element;
     children?: React.ReactNode;
@@ -34,13 +32,12 @@ interface Props {
 const InfoEtterSendtSøknad = ({ harArbeidsgiver }: Props) => {
     const intl = useIntl();
     const lenker = getLenker(intl.locale);
-    console.log(harArbeidsgiver);
 
     return (
         <>
             <SectionPanel>
-                <Box className={bem.block}>
-                    <Title tag="h3">{intlHelper(intl, 'page.pleiepengesakSøknad.infoEtterSøknad.title')}</Title>
+                <Box>
+                    <Title>{intlHelper(intl, 'page.pleiepengesakSøknad.infoEtterSøknad.title')}</Title>
                     <Box margin="xl">
                         <ProcessDescription
                             steps={[
@@ -101,9 +98,8 @@ const InfoEtterSendtSøknad = ({ harArbeidsgiver }: Props) => {
                 </Box>
             </SectionPanel>
             <SectionPanel>
-                <Box className={bem.element('knappeBox')}>
+                <Box>
                     <Title>{intlHelper(intl, 'page.pleiepengesakSøknad.infoEtterSøknad.melde.title')}</Title>
-
                     <Box margin="l">
                         <FormattedMessage id="page.pleiepengesakSøknad.infoEtterSøknad.melde.text.1" />{' '}
                         <Lenke href={getLenker().endringerDuMåGiBeskjedOm}>
