@@ -14,6 +14,7 @@ function createEnvSettingsFile(settingsFile) {
                 ETTERSENDING_PLEIEPENGER_URL: '${process.env.ETTERSENDING_PLEIEPENGER_URL}',
                 KLAGE_INFO_URL: '${process.env.KLAGE_INFO_URL}',
                 DITT_NAV_URL: '${process.env.DITT_NAV_URL}',
+                ENRINGER_DU_MA_GI_BESKJED_OM_INFO_URL: '${process.env.ENRINGER_DU_MA_GI_BESKJED_OM_INFO_URL}',
                 APPSTATUS_PROJECT_ID: '${process.env.APPSTATUS_PROJECT_ID}',
                 APPSTATUS_DATASET: '${process.env.APPSTATUS_DATASET}',
                 USE_AMPLITUDE: '${process.env.USE_AMPLITUDE}',

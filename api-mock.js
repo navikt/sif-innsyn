@@ -147,7 +147,7 @@ const soknadMock = [
         },
         saksId: null,
         journalpostId: '68493021',
-        opprettet: '2018-11-05T03:04:05',
+        opprettet: '2021-03-17T03:04:05',
         endret: '2020-06-23T09:11:21.948652',
         behandlingsdato: null,
     },
@@ -303,7 +303,7 @@ const soknadMock = [
                         organisasjonsnummer: '1212',
                     },
                     {
-                        navn: 'Navn',
+                        navn: 'Navn med mellomrom',
                         skalJobbe: 'redusert',
                         skalJobbeProsent: 22.512,
                         vetIkkeEkstrainfo: null,
@@ -344,7 +344,7 @@ const soknadMock = [
         },
         saksId: 'sak-5674839201',
         journalpostId: '68493021',
-        opprettet: '2018-06-03T03:04:05',
+        opprettet: '2021-03-16T03:04:05',
         endret: '2020-06-23T09:11:21.948652',
         behandlingsdato: null,
     },
@@ -402,7 +402,7 @@ const soknadMock = [
                         organisasjonsnummer: '1212',
                     },
                     {
-                        navn: 'Navn',
+                        navn: 'Navn med mellomrom',
                         skalJobbe: 'redusert',
                         skalJobbeProsent: 22.512,
                         vetIkkeEkstrainfo: null,
@@ -525,6 +525,13 @@ const startServer = () => {
     server.get('/soknad/:soknadId/dokument', (req, res) => {
         if (isLoggedIn(req)) {
             res.download('eksempel-søknad.pdf', 'søknad.pdf');
+        } else {
+            res.status(401).send();
+        }
+    });
+    server.get('/soknad/:soknadId/arbeidsgivermelding', (req, res) => {
+        if (isLoggedIn(req)) {
+            res.download('BekreftelseTilKLONELABBEN.pdf', 'BekreftelseTilKLONELABBEN.pdf');
         } else {
             res.status(401).send();
         }

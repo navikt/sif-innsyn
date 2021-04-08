@@ -34,8 +34,9 @@ const InnsynPage = ({ topContentRenderer, breadcrumbs, title, focusOnContent, ch
                     {<Breadcrumbs currentPageTitle={title} crumbs={breadcrumbs} />}
                 </div>
             )}
+
             <FocusRegion active={focusOnContent}>{children}</FocusRegion>
-            <Box margin="xxl">
+            <Box className={bem.element('footer')}>
                 <InnsynFooter />
             </Box>
         </Page>

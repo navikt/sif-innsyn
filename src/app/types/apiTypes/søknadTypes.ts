@@ -27,8 +27,22 @@ export enum SupportedSøknadstype {
     PP_SYKT_BARN = 'PP_SYKT_BARN',
 }
 
+interface Organisasjon {
+    navn: string;
+    skalJobbe: string;
+    skalJobbeProsent: number;
+    vetIkkeEkstrainfo?: string | null;
+    jobberNormaltTimer: number;
+    organisasjonsnummer: string;
+}
+
+interface Arbeidsgivere {
+    organisasjoner: Organisasjon[];
+}
+
 interface PleiepengerSøknadInfo {
     søknadstype: Søknadstype.PP_SYKT_BARN;
+    arbeidsgivere: Arbeidsgivere;
     fraOgMed: Date;
     tilOgMed: Date;
 }
