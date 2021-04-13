@@ -79,6 +79,7 @@ const PleiepengesakSøknad = ({ søknad }: Props) => {
                                         <FormattedMessage id="page.pleiepengesakSøknad.søknad.alertstripe.list.2" />
                                     </li>
                                 </ul>
+                                <FormattedMessage id="page.pleiepengesakSøknad.søknad.alertstripe.info" />
                             </Alertstripe>
                         </Box>
                     )}
