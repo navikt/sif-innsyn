@@ -102,7 +102,6 @@ const PleiepengesakSøknad = ({ søknad }: Props) => {
                                                 key={organisasjon.organisasjonsnummer}
                                                 className={bem.element('listElement')}>
                                                 <Lenke
-                                                    target="_blank"
                                                     href={getApiUrlBySoknadIdOgOrgnummer(
                                                         søknad.søknadId,
                                                         organisasjon.organisasjonsnummer,
