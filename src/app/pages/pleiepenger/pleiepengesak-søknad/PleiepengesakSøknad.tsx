@@ -107,7 +107,6 @@ const PleiepengesakSøknad = ({ søknad }: Props) => {
                                                             id="page.pleiepengesakSøknad.ekspanderbartpanel1.list.itemName"
                                                             values={{
                                                                 organisasjonsnavn: organisasjon.navn,
-                                                                organisasjonsnummer: organisasjon.organisasjonsnummer,
                                                             }}
                                                         />
                                                     </span>
