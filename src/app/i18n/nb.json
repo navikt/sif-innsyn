@@ -28,7 +28,7 @@
     "page.pleiepengesakSøknad.ekspanderbartpanel1.title": "Bekreftelse til arbeidsgiver",
     "page.pleiepengesakSøknad.ekspanderbartpanel1.info": "Hvis arbeidsgiver ønsker en bekreftelse på at du har søkt pleiepenger kan du laste ned eller skrive ut bekreftelse her.",
     "page.pleiepengesakSøknad.ekspanderbartpanel1.list.tittle": "Dokumenter som kan lastes ned",
-    "page.pleiepengesakSøknad.ekspanderbartpanel1.list.itemName": "Bekreftelse til {organisasjonsnavn} (pdf)",
+    "page.pleiepengesakSøknad.ekspanderbartpanel1.list.itemName": "Bekreftelse til arbeidsgiver {organisasjonsnummer} (pdf)",
     "page.pleiepengesakSøknad.ekspanderbartpanel2.title": "Ettersend legeerklæring eller annen dokumentasjon",
     "page.pleiepengesakSøknad.ekspanderbartpanel2.info.1": "For at vi skal kunne behandle søknaden din trenger vi legeerklæring. Hvis du ikke sendte den inn sammen med søknaden din kan du laste den opp her.",
     "page.pleiepengesakSøknad.ekspanderbartpanel2.info.2": "Vi trenger også inntektsmelding, men den er det arbeidsgiveren din som sender.",
