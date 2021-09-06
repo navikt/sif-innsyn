@@ -106,6 +106,7 @@ const PleiepengesakSøknad = ({ søknad }: Props) => {
                                                         <FormattedMessage
                                                             id="page.pleiepengesakSøknad.ekspanderbartpanel1.list.itemName"
                                                             values={{
+                                                                organisasjonsnavn: organisasjon.navn,
                                                                 organisasjonsnummer: organisasjon.organisasjonsnummer,
                                                             }}
                                                         />
