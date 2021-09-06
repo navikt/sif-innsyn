@@ -25,17 +25,10 @@ interface Props {
 
 const bem = bemUtils('ppSoknad');
 
-const getApiUrlBySoknadIdOgOrgnummer = (
-    soknadID: string,
-    organisasjonsnummer: string,
-    organisasjonNavn: string
-): string => {
+const getApiUrlBySoknadIdOgOrgnummer = (soknadID: string, organisasjonsnummer: string): string => {
     return `${getEnvironmentVariable(
         'API_URL'
-    )}/soknad/${soknadID}/arbeidsgivermelding?organisasjonsnummer=${organisasjonsnummer}&filnavn=Bekreftelse_til_${organisasjonNavn.replace(
-        / /g,
-        '_'
-    )}`;
+    )}/soknad/${soknadID}/arbeidsgivermelding?organisasjonsnummer=${organisasjonsnummer}`;
 };
 const PleiepengesakSøknad = ({ søknad }: Props) => {
     const intl = useIntl();
@@ -96,6 +89,7 @@ const PleiepengesakSøknad = ({ søknad }: Props) => {
                                             <FormattedMessage id="page.pleiepengesakSøknad.ekspanderbartpanel1.list.tittle" />
                                         </UndertekstBold>
                                     </Box>
+
                                     <ul className={bem.element('no-bullets')}>
                                         {søknad.søknad.arbeidsgivere.organisasjoner.map((organisasjon) => (
                                             <li
@@ -105,8 +99,7 @@ const PleiepengesakSøknad = ({ søknad }: Props) => {
                                                     target="_blank"
                                                     href={getApiUrlBySoknadIdOgOrgnummer(
                                                         søknad.søknadId,
-                                                        organisasjon.organisasjonsnummer,
-                                                        organisasjon.navn
+                                                        organisasjon.organisasjonsnummer
                                                     )}>
                                                     <FileContentIcon />
                                                     <span>

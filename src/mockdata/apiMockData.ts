@@ -71,7 +71,7 @@ export const soknadMock = [
                         skalJobbeProsent: 0.0,
                         vetIkkeEkstrainfo: null,
                         jobberNormaltTimer: 0.0,
-                        organisasjonsnummer: '1212',
+                        organisasjonsnummer: '167890366646',
                     },
                     {
                         navn: 'Navn',
@@ -79,7 +79,7 @@ export const soknadMock = [
                         skalJobbeProsent: 22.512,
                         vetIkkeEkstrainfo: null,
                         jobberNormaltTimer: 0.0,
-                        organisasjonsnummer: '54321',
+                        organisasjonsnummer: '1543215647784',
                     },
                 ],
             },
