@@ -89,7 +89,7 @@ const PleiepengesakSøknad = ({ søknad }: Props) => {
                                             <FormattedMessage id="page.pleiepengesakSøknad.ekspanderbartpanel1.list.tittle" />
                                         </UndertekstBold>
                                     </Box>
-                                    {console.log(søknad.søknad.arbeidsgivere.organisasjoner)}
+
                                     <ul className={bem.element('no-bullets')}>
                                         {søknad.søknad.arbeidsgivere.organisasjoner.map((organisasjon) => (
                                             <li
