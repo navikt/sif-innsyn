@@ -16,6 +16,7 @@ import SvgSykdomIFamilien from '../../svg/SvgSykdomIFamilien';
 import { Søknad } from '../../types/apiTypes/søknadTypes';
 import intlHelper from '../../utils/intlUtils';
 import { erPleiepenger } from '../../utils/soknadUtils';
+import MellomlagringDataFetcher from '../MellomlagringDataFetcher';
 
 interface Props {
     søknader: Søknad[];
@@ -25,6 +26,7 @@ const Oversikt = ({ søknader }: Props) => {
     const intl = useIntl();
     const pleiepengesoknader = søknader.filter((søknad) => erPleiepenger(søknad));
     const harSøknader = pleiepengesoknader.length > 0;
+
     useLogSidevisning(PageKey.frontpage);
     return (
         <InnsynPage
@@ -47,6 +49,8 @@ const Oversikt = ({ søknader }: Props) => {
                     </p>
                 </SectionPanel>
             </Box>
+
+            <MellomlagringDataFetcher />
 
             <SectionPanel title={intlHelper(intl, 'page.dinOversikt.saker.title')}>
                 {harSøknader && <SoknadList søknader={pleiepengesoknader} />}

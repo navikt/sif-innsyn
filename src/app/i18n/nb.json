@@ -12,6 +12,10 @@
     "page.dinOversikt.intro.3.a": "Søknader som er sendt inn per post vises ikke her, de finner du",
     "page.dinOversikt.intro.3.b": "i denne oversikten",
     "page.dinOversikt.intro.3.c": ".",
+    "page.dinOversikt.påbegyntSøknad.title": "Påbegynt søknad",
+    "page.dinOversikt.påbegyntSøknad.ingenPåbegynt": "Du har ikke påbegynt søknad",
+    "page.dinOversikt.påbegyntSøknad.info": "Velg søknaden under om du ønsker å fortsette å fylle i og sende inn denne. Vi lagrer påbegynte og lagrede søknader i 24 timer. Du lagret søknaden {dato} kl {tid}.",
+    "page.dinOversikt.påbegyntSøknad.knappen": "Gå til påbegynt søknad",
     "page.dinOversikt.saker.title": "Dine søknader",
     "page.dinOversikt.saker.ingenFunnet": "Vi finner ingen søknader",
 
