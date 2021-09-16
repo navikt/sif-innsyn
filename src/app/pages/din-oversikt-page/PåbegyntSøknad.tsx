@@ -6,6 +6,7 @@ import getLenker from '../../lenker';
 import { getDateStringFromApiDateString, getTimeStringFromApiDateString } from '../../utils/dateUtils';
 import SectionPanel from '../../components/section-panel/SectionPanel';
 import LenkepanelUtenIkon from '../../components/lenkepanel-uten-ikon/LenkepanelUtenIkon';
+import BlyantIkon from './blyantIkon';
 
 interface Props {
     updatedTimestemp?: string;
@@ -17,7 +18,10 @@ const PåbegyntSøknad = ({ updatedTimestemp }: Props) => {
     const tid = getTimeStringFromApiDateString(updatedTimestemp);
 
     return (
-        <SectionPanel title={intlHelper(intl, 'page.dinOversikt.påbegyntSøknad.title')}>
+        <SectionPanel
+            illustration={<BlyantIkon />}
+            illustrationPlacement="outside"
+            title={intlHelper(intl, 'page.dinOversikt.påbegyntSøknad.title')}>
             {dato && tid && (
                 <>
                     <Box>{intlHelper(intl, `page.dinOversikt.påbegyntSøknad.info`)}</Box>
