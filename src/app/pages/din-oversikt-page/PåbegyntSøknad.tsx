@@ -1,11 +1,11 @@
 import Box from '../../components/elements/box/Box';
 import React from 'react';
 import intlHelper from '../../utils/intlUtils';
-import { FormattedMessage, useIntl } from 'react-intl';
-import Knappelenke from '../../components/knappelenke/Knappelenke';
+import { useIntl } from 'react-intl';
 import getLenker from '../../lenker';
 import { getDateStringFromApiDateString, getTimeStringFromApiDateString } from '../../utils/dateUtils';
 import SectionPanel from '../../components/section-panel/SectionPanel';
+import LenkepanelUtenIkon from '../../components/lenkepanel-uten-ikon/LenkepanelUtenIkon';
 
 interface Props {
     updatedTimestemp?: string;
@@ -20,12 +20,14 @@ const PåbegyntSøknad = ({ updatedTimestemp }: Props) => {
         <SectionPanel title={intlHelper(intl, 'page.dinOversikt.påbegyntSøknad.title')}>
             {dato && tid && (
                 <>
-                    <Box>{intlHelper(intl, `page.dinOversikt.påbegyntSøknad.info`, { dato, tid })}</Box>
+                    <Box>{intlHelper(intl, `page.dinOversikt.påbegyntSøknad.info`)}</Box>
 
                     <Box margin="xl">
-                        <Knappelenke href={getLenker().pleiepengerURL} target={'blank'}>
-                            <FormattedMessage id="page.dinOversikt.påbegyntSøknad.knappen" />
-                        </Knappelenke>
+                        <LenkepanelUtenIkon
+                            href={getLenker().pleiepengerURL}
+                            tittel={intlHelper(intl, 'page.dinOversikt.påbegyntSøknad.lenkeTittel')}
+                            tekst={intlHelper(intl, `page.dinOversikt.påbegyntSøknad.info.1`, { dato, tid })}
+                        />
                     </Box>
                 </>
             )}

@@ -537,6 +537,12 @@ const startServer = () => {
         }
     });
 
+    server.get('/mellomlagring', (req, res) => {
+        res.send(
+            '{"formData":{"periodeFra":"2021-09-01","periodeTil":"2021-09-01","barnetsNavn":"","barnetsFødselsnummer":"","barnetSøknadenGjelder":"2284226387980","harForståttRettigheterOgPlikter":true,"harBekreftetOpplysninger":false,"søknadenGjelderEtAnnetBarn":false,"legeerklæring":[],"arbeidsforhold":[],"harBoddUtenforNorgeSiste12Mnd":"unanswered","utenlandsoppholdSiste12Mnd":[],"skalBoUtenforNorgeNeste12Mnd":"unanswered","utenlandsoppholdNeste12Mnd":[],"skalOppholdeSegIUtlandetIPerioden":"no","utenlandsoppholdIPerioden":[],"skalTaUtFerieIPerioden":"no","ferieuttakIPerioden":[],"harMedsøker":"no","samtidigHjemme":"unanswered","harNattevåk":"unanswered","harBeredskap":"unanswered","harHattInntektSomFrilanser":"unanswered","selvstendig_harHattInntektSomSN":"unanswered","andreYtelser":[]},"metadata":{"lastStepID":"tidsrom","version":"6.1","updatedTimestemp":"2021-09-15T13:18:01.060Z"}}'
+        );
+    });
+
     server.listen(port, () => {
         console.log(`Mockserver is listening on port: ${port}`);
     });
