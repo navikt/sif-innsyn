@@ -9,9 +9,9 @@ const MellomlagringDataFetcher = () => {
         <Fetcher<MellomlagringApiResponse>
             recipies={[mellomlagringRecipe]}
             loading={() => <LoadingPage />}
-            error={(e: Error) => {
-                console.log(e);
-                return <PåbegyntSøknad />;
+            error={() => {
+                //return <PåbegyntSøknad />;
+                return <></>;
             }}
             success={([mellomlagringApiResponse]: [MellomlagringApiResponse]) => {
                 return <PåbegyntSøknad updatedTimestemp={mellomlagringApiResponse.metadata.updatedTimestemp} />;
