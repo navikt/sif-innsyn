@@ -1,16 +1,12 @@
 import Box from '../../components/elements/box/Box';
 import React from 'react';
 import intlHelper from '../../utils/intlUtils';
-import { useIntl } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import getLenker from '../../lenker';
-import {
-    getDateStringFromApiDateString,
-    getDateTilSlettSøknadString,
-    getTimeStringFromApiDateString,
-} from '../../utils/dateUtils';
+import { getDatoOgTidTilSlettSøknadString } from '../../utils/dateUtils';
 import SectionPanel from '../../components/section-panel/SectionPanel';
-import LenkepanelUtenIkon from '../../components/lenkepanel-uten-ikon/LenkepanelUtenIkon';
 import BlyantIkon from './blyantIkon';
+import Knappelenke from '../../components/knappelenke/Knappelenke';
 
 interface Props {
     updatedTimestemp?: string;
@@ -18,32 +14,27 @@ interface Props {
 
 const PåbegyntSøknad = ({ updatedTimestemp }: Props) => {
     const intl = useIntl();
-    const dato = getDateStringFromApiDateString(updatedTimestemp);
-    const tid = getTimeStringFromApiDateString(updatedTimestemp);
-    const datoNårSlettes = getDateTilSlettSøknadString(updatedTimestemp);
+    const datoNårSlettes = getDatoOgTidTilSlettSøknadString(updatedTimestemp);
 
     return (
         <SectionPanel
             illustration={<BlyantIkon />}
             illustrationPlacement="outside"
             title={intlHelper(intl, 'page.dinOversikt.påbegyntSøknad.title')}>
-            {dato && tid && (
+            {datoNårSlettes && (
                 <>
                     <Box>{intlHelper(intl, `page.dinOversikt.påbegyntSøknad.info`)}</Box>
                     <Box margin="m">
                         {intlHelper(intl, `page.dinOversikt.påbegyntSøknad.info.1`, { datoNårSlettes })}
                     </Box>
-
                     <Box margin="xl">
-                        <LenkepanelUtenIkon
-                            href={getLenker().pleiepengerURL}
-                            tittel={intlHelper(intl, 'page.dinOversikt.påbegyntSøknad.lenkeTittel')}
-                            tekst={intlHelper(intl, `page.dinOversikt.påbegyntSøknad.info.2`, { dato, tid })}
-                        />
+                        <Knappelenke mini type="hoved" href={getLenker().pleiepengerURL}>
+                            <FormattedMessage id="page.dinOversikt.påbegyntSøknad.knappen" />
+                        </Knappelenke>
                     </Box>
                 </>
             )}
-            {!dato && !tid && <Box>{intlHelper(intl, 'page.dinOversikt.påbegyntSøknad.ingenPåbegynt')}</Box>}
+            {!datoNårSlettes && <Box>{intlHelper(intl, 'page.dinOversikt.påbegyntSøknad.ingenPåbegynt')}</Box>}
         </SectionPanel>
     );
 };

@@ -55,7 +55,7 @@ const SectionPanel = ({
             <PanelBase className={bem.element('panel')}>
                 {illustration && (
                     <div className={bem.element('illustration')}>
-                        <CircleIllustration backgroundColor="#C1B5D0" illustration={illustration} />
+                        <CircleIllustration backgroundColor="white" illustration={illustration} />
                     </div>
                 )}
                 {(introHeader || title) && (
