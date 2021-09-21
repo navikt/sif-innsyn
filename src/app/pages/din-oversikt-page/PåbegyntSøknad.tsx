@@ -23,10 +23,8 @@ const PåbegyntSøknad = ({ updatedTimestemp }: Props) => {
             title={intlHelper(intl, 'page.dinOversikt.påbegyntSøknad.title')}>
             {datoNårSlettes && (
                 <>
-                    <Box>{intlHelper(intl, `page.dinOversikt.påbegyntSøknad.info`)}</Box>
-                    <Box margin="m">
-                        {intlHelper(intl, `page.dinOversikt.påbegyntSøknad.info.1`, { datoNårSlettes })}
-                    </Box>
+                    <Box>{intlHelper(intl, `page.dinOversikt.påbegyntSøknad.info`, { datoNårSlettes })}</Box>
+
                     <Box margin="xl">
                         <Knappelenke mini type="hoved" href={getLenker().pleiepengerURL}>
                             <FormattedMessage id="page.dinOversikt.påbegyntSøknad.knappen" />

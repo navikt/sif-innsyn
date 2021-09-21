@@ -10,8 +10,7 @@
 
     "page.dinOversikt.påbegyntSøknad.title": "Påbegynt søknad",
     "page.dinOversikt.påbegyntSøknad.ingenPåbegynt": "Du har ikke påbegynt søknad",
-    "page.dinOversikt.påbegyntSøknad.info": "Du har én påbegynt søknad. Vi kan ikke behandle en søknad før du fullfører innsendingen. Søknaden slettes automatisk om 72 timer etter du startet på søknaden.",
-    "page.dinOversikt.påbegyntSøknad.info.1": "Denne påbegynte søknaden slettes {datoNårSlettes}.",
+    "page.dinOversikt.påbegyntSøknad.info": "Du har én påbegynt søknad om pleiepenger. Vi lagrer påbegynte søknader i 72 timer (3 døgn). Det betyr at du kan fortsette å fylle ut denne søknaden til og med {datoNårSlettes}. Etter dette blir søknaden slettet.",
     "page.dinOversikt.påbegyntSøknad.knappen": "Gå til påbegynt søknad",
     "page.dinOversikt.saker.title": "Dine søknader",
     "page.dinOversikt.saker.ingenFunnet": "Vi finner ingen søknader",
