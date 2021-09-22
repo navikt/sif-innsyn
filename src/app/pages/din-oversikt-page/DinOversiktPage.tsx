@@ -22,6 +22,7 @@ interface Props {
 const Oversikt = ({ søknader }: Props) => {
     const intl = useIntl();
     const pleiepengesoknader = søknader.filter((søknad) => erPleiepenger(søknad));
+    const femFørsteDokumenter = pleiepengesoknader.filter((søknad, index) => index <= 4);
     const harSøknader = pleiepengesoknader.length > 0;
 
     useLogSidevisning(PageKey.frontpage);
@@ -34,7 +35,7 @@ const Oversikt = ({ søknader }: Props) => {
             <MellomlagringDataFetcher />
 
             <SectionPanel title={intlHelper(intl, 'page.dinOversikt.saker.title')}>
-                {harSøknader && <SoknadList søknader={pleiepengesoknader} />}
+                {harSøknader && <SoknadList søknader={femFørsteDokumenter} />}
                 {harSøknader === false && (
                     <>
                         <AlertStripeInfo>
