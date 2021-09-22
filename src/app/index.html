@@ -1,22 +1,18 @@
 <!DOCTYPE html>
 <html lang="no">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        {{{NAV_SCRIPTS}}} {{{NAV_STYLES}}}
+    </head>
 
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {{{NAV_SCRIPTS}}} {{{NAV_STYLES}}}
-</head>
-
-<body>
-    <div id="sif-innsyn-container">
-        <div id="sif-innsyn-container--content-wrapper">
-            {{{NAV_HEADING}}}
-            <div id="app"></div>
-            <script type="text/javascript" src="{{{PUBLIC_PATH}}}/dist/js/settings.js"></script>
+    <body>
+        <div id="sif-innsyn-container">
+            <div id="sif-innsyn-container--content-wrapper">
+                {{{NAV_HEADING}}}
+                <div id="app"></div>
+                <script type="text/javascript" src="{{{PUBLIC_PATH}}}/dist/settings.js"></script>
+            </div>
+            <div id="sif-innsyn-container--footer">{{{NAV_FOOTER}}}</div>
         </div>
-        <div id="sif-innsyn-container--footer">
-            {{{NAV_FOOTER}}}
-        </div>
-    </div>
-</body>
-
+    </body>
 </html>

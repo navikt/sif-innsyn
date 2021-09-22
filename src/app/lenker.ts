@@ -11,6 +11,7 @@ interface Lenker {
     dineUtbetalinger: string;
     minInnboksSkrivMelding: string;
     endringerDuMåGiBeskjedOm: string;
+    pleiepengerURL: string;
 }
 
 const lenkerBokmål: Lenker = {
@@ -24,6 +25,7 @@ const lenkerBokmål: Lenker = {
     dineUtbetalinger: 'https://tjenester.nav.no/utbetalingsoversikt/',
     minInnboksSkrivMelding: 'https://mininnboks.nav.no/sporsmal/skriv/FMLI',
     endringerDuMåGiBeskjedOm: getEnvironmentVariable('ENRINGER_DU_MA_GI_BESKJED_OM_INFO_URL'),
+    pleiepengerURL: getEnvironmentVariable('PLEIEPENGER_URL'),
 };
 
 const lenkerNynorsk: Partial<Lenker> = {};

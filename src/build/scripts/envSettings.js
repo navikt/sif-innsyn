@@ -12,6 +12,8 @@ function createEnvSettingsFile(settingsFile) {
                 SAKBEHANDLINGSTID_INFO_URL: '${process.env.SAKBEHANDLINGSTID_INFO_URL}',
                 REGELVERK_INFO_URL: '${process.env.REGELVERK_INFO_URL}',
                 ETTERSENDING_PLEIEPENGER_URL: '${process.env.ETTERSENDING_PLEIEPENGER_URL}',
+                PLEIEPENGER_URL: '${process.env.PLEIEPENGER_URL}',
+                PP_MELLOMLAGRING_API_URL: '${process.env.PP_MELLOMLAGRING_API_URL}',
                 KLAGE_INFO_URL: '${process.env.KLAGE_INFO_URL}',
                 DITT_NAV_URL: '${process.env.DITT_NAV_URL}',
                 ENRINGER_DU_MA_GI_BESKJED_OM_INFO_URL: '${process.env.ENRINGER_DU_MA_GI_BESKJED_OM_INFO_URL}',

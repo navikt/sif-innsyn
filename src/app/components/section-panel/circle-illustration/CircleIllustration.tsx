@@ -10,7 +10,7 @@ interface Props {
 const CircleIllustration: React.FunctionComponent<Props> = ({
     illustration,
     backgroundColor,
-    size = '6rem',
+    size = '5rem',
 }: Props) => (
     <CircleMask size={size} color={backgroundColor} scaleSvg={false}>
         {illustration}
