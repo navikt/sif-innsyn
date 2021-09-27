@@ -14,6 +14,21 @@
     "page.dinOversikt.påbegyntSøknad.knappen": "Gå til påbegynt søknad",
     "page.dinOversikt.saker.title": "Dine innsendte søknader",
     "page.dinOversikt.saker.ingenFunnet": "Vi finner ingen søknader",
+    "page.dinOversikt.saker.visAlle": "vis alle dokumenter",
+
+    "page.dinOversikt.lenker.endring.title": "Vil du melde om endringer i din situasjon?",
+    "page.dinOversikt.lenker.endring.info": "Her kan du melde fra om endringer i din eller barnets situasjon. Skal du søke på nytt eller forlenge pleiepengeperioden, må du sende ny søknad",
+    "page.dinOversikt.lenker.endring.knapp.title": "Meld fra om endring",
+    "page.dinOversikt.lenker.nySøknad.title": "Vil du sende ny søknad?",
+    "page.dinOversikt.lenker.nySøknad.info": "Skal du søke på nytt eller forlenge pleiepengeperioden, må du sende ny søknad",
+    "page.dinOversikt.lenker.nySøknad.knapp.title": "GÅ TIL NY SØKNAD",
+
+    "page.søknader.tittle": "Dine innsendte søknader",
+    "page.søknader.crumbs.dinePP": "Dine pleiepenger",
+    "page.søknader.visAlle": "vis alle dokumenter",
+    "page.søknader.visMindre": "vis mindre dokumenter",
+
+    "page.pleiepengesakPage.crumbs.dineInnsendteSøknader": "Dine innsendte søknader",
 
     "page.pleiepengesaker.oversikt.ariaTitle": "{pageTitle} - dine saker",
     "page.pleiepengesaker.oversikt.ingenSakerFunnet": "Vi finner ingen saker eller søknader fra deg",

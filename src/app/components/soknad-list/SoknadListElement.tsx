@@ -12,6 +12,7 @@ import './soknadListElement.less';
 
 interface Props {
     søknad: Søknad;
+    link?: InnsynRouteConfig;
 }
 
 const bem = bemUtils('soknadListElement');
@@ -41,8 +42,10 @@ const SøknadEtikett = ({ søknad }: { søknad: Søknad }) => {
 
 const showStatus = false;
 
-const SoknadListElement = ({ søknad }: Props) => {
-    const href = `${InnsynRouteConfig.DINE_PLEIEPENGER}/${søknad.søknadId}`;
+const SoknadListElement = ({ søknad, link }: Props) => {
+    const href = link
+        ? `${InnsynRouteConfig.SØKNADER_SØKNAD}/${søknad.søknadId}`
+        : `${InnsynRouteConfig.DINE_PLEIEPENGER}/${søknad.søknadId}`;
     return (
         <LenkepanelBase
             href="#"
@@ -51,7 +54,7 @@ const SoknadListElement = ({ søknad }: Props) => {
             linkCreator={(props: React.AnchorHTMLAttributes<HTMLAnchorElement>) => (
                 <Link to={href} {...props}>
                     <div className={bem.element('content')}>
-                        <div className={bem.element('title')}>{getSøknadTitle(søknad, true)}</div>
+                        <div className={bem.element('title')}>{getSøknadTitle(søknad, false)}</div>
                         <SoknadInfo søknad={søknad} />
                     </div>
                     {showStatus && (

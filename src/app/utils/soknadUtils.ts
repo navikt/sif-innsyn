@@ -11,7 +11,7 @@ export const søknadstypeErPleiepenger = (type: Søknadstype): boolean => {
 export const getSøknadTitle = (søknad: Søknad, shortVersion?: boolean): string => {
     switch (søknad.søknadstype) {
         case Søknadstype.PP_SYKT_BARN:
-            return shortVersion ? 'Søknad' : 'Søknad om pleiepenger for sykt barn';
+            return shortVersion ? 'Søknad' : 'Søknad om pleiepenger';
         case Søknadstype.PP_ETTERSENDING:
             return shortVersion ? 'Ettersending' : 'Melding om ettersending for pleiepenger';
     }

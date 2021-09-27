@@ -5,4 +5,5 @@ export enum PageKey {
     'unknownRoutePage' = 'UkjentSide',
     'pleiepengeoversikt' = 'Oversikt-pleiepenger',
     'pleiepengesak' = 'Detaljer-pleiepengesøknad',
+    'alleSoknader' = 'Alle-Søknader',
 }
