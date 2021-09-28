@@ -47,16 +47,21 @@ const Søknader = ({ søknader }: Props) => {
                 additionalInfo={<InfoManglendeSøknad mode="expandable-text" />}>
                 {harSøknader && (
                     <CollapsableContainer isOpen={true} animated={true} ariaLive="polite">
-                        {gruperteSøknader.map((group) => (
-                            <Box margin="xl" key={group.år}>
-                                <Title tag="h2" titleStyle="normal">
-                                    {group.år}
-                                </Title>
-                                <Box margin="xl">
-                                    <SoknadList søknader={group.søknader} link={InnsynRouteConfig.SØKNADER_SØKNAD} />
+                        <Box margin="m" padBottom="xxl">
+                            {gruperteSøknader.map((group) => (
+                                <Box margin="xl" key={group.år}>
+                                    <Title tag="h2" titleStyle="normal">
+                                        {group.år}
+                                    </Title>
+                                    <Box margin="xl">
+                                        <SoknadList
+                                            søknader={group.søknader}
+                                            link={InnsynRouteConfig.SØKNADER_SØKNAD}
+                                        />
+                                    </Box>
                                 </Box>
-                            </Box>
-                        ))}
+                            ))}
+                        </Box>
                     </CollapsableContainer>
                 )}
 
