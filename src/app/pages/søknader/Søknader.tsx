@@ -28,7 +28,7 @@ interface Props {
 
 const Søknader = ({ søknader }: Props) => {
     const intl = useIntl();
-    const [visAlle, setVisAlle] = useState<boolean>(true);
+    const [visAlle, setVisAlle] = useState<boolean>(false);
     const [toggleContentId] = useState(guid());
 
     const pleiepengesoknader = søknader.filter((søknad) => erPleiepenger(søknad));
@@ -76,7 +76,7 @@ const Søknader = ({ søknader }: Props) => {
                                     onToggle={() => setVisAlle(!visAlle)}
                                     isOpen={visAlle}
                                     controlsId={toggleContentId}>
-                                    {intlHelper(intl, visAlle ? 'page.søknader.visAlle' : 'page.søknader.visFærre')}
+                                    {intlHelper(intl, visAlle ? 'page.søknader.visFærre' : 'page.søknader.visAlle')}
                                 </InfoToggleButton>
                             </div>
                         )}
