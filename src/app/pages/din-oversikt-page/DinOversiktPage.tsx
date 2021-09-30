@@ -32,10 +32,13 @@ interface Props {
 
 const Oversikt = ({ søknader }: Props) => {
     const intl = useIntl();
+
     const pleiepengesoknader = søknader.filter((søknad) => erPleiepenger(søknad));
-    const femFørsteSoknader = pleiepengesoknader.filter((søknad, index) => index <= 4);
     const harSøknader = pleiepengesoknader.length > 0;
+    const seksFørsteSoknader = pleiepengesoknader.slice(0, 5);
+
     useLogSidevisning(PageKey.frontpage);
+
     return (
         <InnsynPage
             title={intlHelper(intl, 'page.dinOversikt.title')}
@@ -50,25 +53,28 @@ const Oversikt = ({ søknader }: Props) => {
                     title={intlHelper(intl, 'page.dinOversikt.saker.title')}
                     additionalInfo={<InfoManglendeSøknad mode="expandable-text" />}>
                     {harSøknader && (
-                        <Box margin="xxl">
-                            <SoknadList søknader={femFørsteSoknader} />
-                        </Box>
+                        <>
+                            <Box margin="xxl">
+                                <SoknadList søknader={seksFørsteSoknader} />
+                            </Box>
+
+                            {pleiepengesoknader.length > 6 && (
+                                <div className={bem.classNames(bem.block, bem.element('alleSoknaderLenke'))}>
+                                    <Lenke href={InnsynRouteConfig.SØKNADER}>
+                                        {intlHelper(intl, 'page.dinOversikt.saker.visAlle')}
+                                        <NavFrontendChevron className={bem.element('chevron')} type={'høyre'} />
+                                    </Lenke>
+                                </div>
+                            )}
+                        </>
                     )}
+
                     {harSøknader === false && (
                         <>
                             <AlertStripeInfo>
                                 <FormattedMessage id="page.dinOversikt.saker.ingenFunnet" />
                             </AlertStripeInfo>
                         </>
-                    )}
-
-                    {harSøknader && pleiepengesoknader.length > 4 && (
-                        <div className={bem.classNames(bem.block, bem.element('alleSoknaderLenke'))}>
-                            <Lenke href={InnsynRouteConfig.SØKNADER}>
-                                {intlHelper(intl, 'page.dinOversikt.saker.visAlle')}
-                                <NavFrontendChevron className={bem.element('chevron')} type={'høyre'} />
-                            </Lenke>
-                        </div>
                     )}
                 </SectionPanel>
             </div>

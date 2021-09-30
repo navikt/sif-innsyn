@@ -25,8 +25,9 @@
 
     "page.søknader.tittle": "Dine innsendte søknader",
     "page.søknader.crumbs.dinePP": "Dine pleiepenger",
+    "page.søknader.ingenFunnet": "Vi finner ingen søknader",
     "page.søknader.visAlle": "Vis alle dokumenter",
-    "page.søknader.visMindre": "Vis færre dokumenter",
+    "page.søknader.visFærre": "Vis færre dokumenter",
 
     "page.pleiepengesakPage.crumbs.dineInnsendteSøknader": "Dine innsendte søknader",
 

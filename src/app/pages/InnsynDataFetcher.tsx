@@ -4,10 +4,10 @@ import { useAmplitudeInstance } from '@navikt/sif-common-amplitude';
 import Fetcher from '../functional/fetcher/Fetcher';
 import HandleUnauthorized from '../functional/HandleUnauthorized';
 import { SøknadApiResponse, søknadRecipe } from '../types/apiTypes/søknadTypes';
-import { sortSoknad } from '../utils/sortSoknader';
 import InnsynRouteConfig from './InnsynRoutes';
 import ErrorPage from './support-pages/ErrorPage';
 import LoadingPage from './support-pages/LoadingPage';
+import { sortSoknad } from '../utils/soknadUtils';
 
 const InnsynDataFetcher = () => {
     const history = useHistory();
