@@ -35,7 +35,7 @@ const PleiepengesakSøknad = ({ søknad }: Props) => {
 
     const harArbeidsgiver =
         søknad.søknad.arbeidsgivere.organisasjoner && søknad.søknad.arbeidsgivere.organisasjoner.length > 0;
-
+    console.log(søknad);
     const visAlertstripe = harArbeidsgiver && mindreTimerEtterInnsendtEnnMaxAntallTimer(søknad.opprettet, 48);
 
     return (
