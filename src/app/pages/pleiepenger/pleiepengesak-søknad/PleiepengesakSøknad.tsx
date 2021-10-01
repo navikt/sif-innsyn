@@ -42,21 +42,23 @@ const PleiepengesakSøknad = ({ søknad }: Props) => {
     console.log(søknad);
     const visAlertstripe = harArbeidsgiver && mindreTimerEtterInnsendtEnnMaxAntallTimer(søknad.opprettet, 48);
     const mapOrganisasjoner = (organisasjon: Organisasjon | Arbeidsgiver) => {
-        <li key={organisasjon.organisasjonsnummer} className={bem.element('listElement')}>
-            <Lenke
-                target="_blank"
-                href={getApiUrlBySoknadIdOgOrgnummer(søknad.søknadId, organisasjon.organisasjonsnummer)}>
-                <FileContentIcon />
-                <span>
-                    <FormattedMessage
-                        id="page.pleiepengesakSøknad.ekspanderbartpanel1.list.itemName"
-                        values={{
-                            organisasjonsnavn: organisasjon.navn,
-                        }}
-                    />
-                </span>
-            </Lenke>
-        </li>;
+        return (
+            <li key={organisasjon.organisasjonsnummer} className={bem.element('listElement')}>
+                <Lenke
+                    target="_blank"
+                    href={getApiUrlBySoknadIdOgOrgnummer(søknad.søknadId, organisasjon.organisasjonsnummer)}>
+                    <FileContentIcon />
+                    <span>
+                        <FormattedMessage
+                            id="page.pleiepengesakSøknad.ekspanderbartpanel1.list.itemName"
+                            values={{
+                                organisasjonsnavn: organisasjon.navn,
+                            }}
+                        />
+                    </span>
+                </Lenke>
+            </li>
+        );
     };
     return (
         <>
@@ -112,9 +114,13 @@ const PleiepengesakSøknad = ({ søknad }: Props) => {
 
                                     <ul className={bem.element('no-bullets')}>
                                         {'organisasjoner' in søknad.søknad.arbeidsgivere &&
-                                            søknad.søknad.arbeidsgivere.organisasjoner.map(mapOrganisasjoner)}
+                                            søknad.søknad.arbeidsgivere.organisasjoner.map((organisasjon) =>
+                                                mapOrganisasjoner(organisasjon)
+                                            )}
                                         {isArray(søknad.søknad.arbeidsgivere) &&
-                                            søknad.søknad.arbeidsgivere.map(mapOrganisasjoner)}
+                                            søknad.søknad.arbeidsgivere.map((organisasjon) =>
+                                                mapOrganisasjoner(organisasjon)
+                                            )}
                                     </ul>
                                 </Ekspanderbartpanel>
                             </Box>
