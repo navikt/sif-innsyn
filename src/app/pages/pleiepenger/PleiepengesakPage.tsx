@@ -42,7 +42,7 @@ const PleiepengesakPage = ({ søknader, søknadId, backRoute }: Props) => {
         },
         {
             route: backRoute,
-            title: intlHelper(intl, 'dineInnsendteSøknader'),
+            title: intlHelper(intl, 'page.pleiepengesakPage.crumbs.dineInnsendteSøknader'),
         },
     ];
 
