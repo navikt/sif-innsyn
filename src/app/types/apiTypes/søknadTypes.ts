@@ -27,7 +27,7 @@ export enum SupportedSøknadstype {
     PP_SYKT_BARN = 'PP_SYKT_BARN',
 }
 
-interface Organisasjon {
+export interface Organisasjon {
     navn: string;
     skalJobbe: string;
     skalJobbeProsent: number;
@@ -36,13 +36,19 @@ interface Organisasjon {
     organisasjonsnummer: string;
 }
 
-interface Arbeidsgivere {
+export interface Arbeidsgivere {
     organisasjoner: Organisasjon[];
+}
+
+export interface Arbeidsgiver {
+    erAnsatt: boolean;
+    navn: string;
+    organisasjonsnummer: string;
 }
 
 interface PleiepengerSøknadInfo {
     søknadstype: Søknadstype.PP_SYKT_BARN;
-    arbeidsgivere: Arbeidsgivere;
+    arbeidsgivere: Arbeidsgivere | Arbeidsgiver[];
     fraOgMed: Date;
     tilOgMed: Date;
 }
