@@ -39,7 +39,6 @@ const PleiepengesakSøknad = ({ søknad }: Props) => {
         'organisasjoner' in søknad.søknad.arbeidsgivere
             ? søknad.søknad.arbeidsgivere.organisasjoner && søknad.søknad.arbeidsgivere.organisasjoner.length > 0
             : søknad.søknad.arbeidsgivere && søknad.søknad.arbeidsgivere.length > 0;
-    console.log(søknad);
     const visAlertstripe = harArbeidsgiver && mindreTimerEtterInnsendtEnnMaxAntallTimer(søknad.opprettet, 48);
     const mapOrganisasjoner = (organisasjon: Organisasjon | Arbeidsgiver) => {
         return (
