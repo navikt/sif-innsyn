@@ -4,12 +4,14 @@ import bemUtils from '../../utils/bemUtils';
 import Title, { TitleStyle, TitleTag } from '../elements/title/Title';
 import CircleIllustration from './circle-illustration/CircleIllustration';
 import './sectionPanel.less';
+import Box from '../elements/box/Box';
 
 const bem = bemUtils('sectionPanel');
 
 interface Props {
     id?: string;
     title?: React.ReactNode;
+    additionalInfo?: React.ReactNode;
     ariaTitle?: string;
     illustration?: React.ReactNode;
     children: ReactNode;
@@ -30,6 +32,7 @@ const SectionOrArticle = (
 const SectionPanel = ({
     id,
     title,
+    additionalInfo,
     ariaTitle,
     illustration,
     children,
@@ -66,6 +69,7 @@ const SectionPanel = ({
                                 <Title tag={titleTag} titleStyle={titleStyle}>
                                     {title}
                                 </Title>
+                                {additionalInfo && <Box margin={'l'}>{additionalInfo}</Box>}
                             </div>
                         )}
                     </div>

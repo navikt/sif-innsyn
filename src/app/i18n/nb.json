@@ -14,6 +14,22 @@
     "page.dinOversikt.påbegyntSøknad.knappen": "Gå til påbegynt søknad",
     "page.dinOversikt.saker.title": "Dine innsendte søknader",
     "page.dinOversikt.saker.ingenFunnet": "Vi finner ingen søknader",
+    "page.dinOversikt.saker.visAlle": "Vis alle dokumenter",
+
+    "page.dinOversikt.lenker.endring.title": "Vil du melde om endringer i din situasjon?",
+    "page.dinOversikt.lenker.endring.info": "Her kan du melde fra om endringer i din eller barnets situasjon. Skal du søke på nytt eller forlenge pleiepengeperioden, må du sende ny søknad",
+    "page.dinOversikt.lenker.endring.knapp.title": "Meld fra om endring",
+    "page.dinOversikt.lenker.nySøknad.title": "Vil du sende ny søknad?",
+    "page.dinOversikt.lenker.nySøknad.info": "Skal du søke på nytt eller forlenge pleiepengeperioden, må du sende ny søknad",
+    "page.dinOversikt.lenker.nySøknad.knapp.title": "GÅ TIL NY SØKNAD",
+
+    "page.søknader.tittle": "Dine innsendte søknader",
+    "page.søknader.crumbs.dinePP": "Dine pleiepenger",
+    "page.søknader.ingenFunnet": "Vi finner ingen søknader",
+    "page.søknader.visAlle": "Vis alle dokumenter",
+    "page.søknader.visFærre": "Vis færre dokumenter",
+
+    "page.pleiepengesakPage.crumbs.dineInnsendteSøknader": "Dine innsendte søknader",
 
     "page.pleiepengesaker.oversikt.ariaTitle": "{pageTitle} - dine saker",
     "page.pleiepengesaker.oversikt.ingenSakerFunnet": "Vi finner ingen saker eller søknader fra deg",
@@ -78,7 +94,7 @@
 
     "info.manglendeSøknad.shortInfo": "Det kan ta noe tid fra du har sendt en digital søknad til den vises her. Hvis du fikk kvittering på at søknaden var innsendt, er den mottatt av NAV selv om den ikke vises her enda.",
     "info.manglendeSøknad.title": "Har du sendt inn en søknad som du ikke ser her?",
-    "info.manglendeSøknad.text.1": "Denne siden er helt ny, og viser derfor kun digitale søknader som vi har mottatt 4. november 2020 eller senere.",
+    "info.manglendeSøknad.text.1": "Denne siden viser kun digitale søknader som vi har mottatt 4. november 2020 eller senere.",
     "info.manglendeSøknad.text.2": "Det kan ta noe tid fra du har sendt en digital søknad til den vises her. Hvis du fikk kvittering på at søknaden var innsendt, er den mottatt av NAV selv om den ikke vises her enda.",
     "info.manglendeSøknad.text.3.a": "Søknader som er sendt i posten vises ikke her. De vises i",
     "info.manglendeSøknad.text.3.b": "saksoversikten på Ditt NAV",

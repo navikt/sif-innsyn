@@ -16,8 +16,10 @@ import Knappelenke from '../../../components/knappelenke/Knappelenke';
 import Title from '../../../components/elements/title/Title';
 import { FileContentIcon } from '../../../svg/FellesIkoner';
 import { getEnvironmentVariable } from '../../../utils/envUtils';
+import { Arbeidsgiver, Organisasjon } from '../../../types/apiTypes/søknadTypes';
 import './pleiepengesakSøknad.less';
 import { mindreTimerEtterInnsendtEnnMaxAntallTimer } from '../../../utils/dateUtils';
+import { isArray } from 'lodash';
 
 interface Props {
     søknad: Pleiepengesøknad;
@@ -34,10 +36,29 @@ const PleiepengesakSøknad = ({ søknad }: Props) => {
     const intl = useIntl();
 
     const harArbeidsgiver =
-        søknad.søknad.arbeidsgivere.organisasjoner && søknad.søknad.arbeidsgivere.organisasjoner.length > 0;
-
+        'organisasjoner' in søknad.søknad.arbeidsgivere
+            ? søknad.søknad.arbeidsgivere.organisasjoner && søknad.søknad.arbeidsgivere.organisasjoner.length > 0
+            : søknad.søknad.arbeidsgivere && søknad.søknad.arbeidsgivere.length > 0;
     const visAlertstripe = harArbeidsgiver && mindreTimerEtterInnsendtEnnMaxAntallTimer(søknad.opprettet, 48);
-
+    const mapOrganisasjoner = (organisasjon: Organisasjon | Arbeidsgiver) => {
+        return (
+            <li key={organisasjon.organisasjonsnummer} className={bem.element('listElement')}>
+                <Lenke
+                    target="_blank"
+                    href={getApiUrlBySoknadIdOgOrgnummer(søknad.søknadId, organisasjon.organisasjonsnummer)}>
+                    <FileContentIcon />
+                    <span>
+                        <FormattedMessage
+                            id="page.pleiepengesakSøknad.ekspanderbartpanel1.list.itemName"
+                            values={{
+                                organisasjonsnavn: organisasjon.navn,
+                            }}
+                        />
+                    </span>
+                </Lenke>
+            </li>
+        );
+    };
     return (
         <>
             <SectionPanel>
@@ -91,28 +112,14 @@ const PleiepengesakSøknad = ({ søknad }: Props) => {
                                     </Box>
 
                                     <ul className={bem.element('no-bullets')}>
-                                        {søknad.søknad.arbeidsgivere.organisasjoner.map((organisasjon) => (
-                                            <li
-                                                key={organisasjon.organisasjonsnummer}
-                                                className={bem.element('listElement')}>
-                                                <Lenke
-                                                    target="_blank"
-                                                    href={getApiUrlBySoknadIdOgOrgnummer(
-                                                        søknad.søknadId,
-                                                        organisasjon.organisasjonsnummer
-                                                    )}>
-                                                    <FileContentIcon />
-                                                    <span>
-                                                        <FormattedMessage
-                                                            id="page.pleiepengesakSøknad.ekspanderbartpanel1.list.itemName"
-                                                            values={{
-                                                                organisasjonsnavn: organisasjon.navn,
-                                                            }}
-                                                        />
-                                                    </span>
-                                                </Lenke>
-                                            </li>
-                                        ))}
+                                        {'organisasjoner' in søknad.søknad.arbeidsgivere &&
+                                            søknad.søknad.arbeidsgivere.organisasjoner.map((organisasjon) =>
+                                                mapOrganisasjoner(organisasjon)
+                                            )}
+                                        {isArray(søknad.søknad.arbeidsgivere) &&
+                                            søknad.søknad.arbeidsgivere.map((organisasjon) =>
+                                                mapOrganisasjoner(organisasjon)
+                                            )}
                                     </ul>
                                 </Ekspanderbartpanel>
                             </Box>

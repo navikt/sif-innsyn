@@ -5,7 +5,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import getLenker from '../../lenker';
 import { getDatoOgTidTilSlettSøknadString } from '../../utils/dateUtils';
 import SectionPanel from '../../components/section-panel/SectionPanel';
-import BlyantIkon from './blyantIkon';
+import BlyantIkon from '../../svg/blyantIkon';
 import Knappelenke from '../../components/knappelenke/Knappelenke';
 
 interface Props {

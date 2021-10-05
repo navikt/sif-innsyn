@@ -6,6 +6,7 @@ import { getRedirectRouteFromUrl } from '../utils/routeRedirectUtils';
 import DinOversiktPage from './din-oversikt-page/DinOversiktPage';
 import PleiepengesakPage from './pleiepenger/PleiepengesakPage';
 import UnknownRoutePage from './support-pages/UnknownRoutePage';
+import Søknader from './søknader/Søknader';
 
 interface OwnProps {
     søknader: Søknad[];
@@ -27,9 +28,25 @@ const InnsynRoutes = ({ history, søknader }: Props) => {
                 exact={true}
                 path={`${InnsynRouteConfig.DINE_PLEIEPENGER}/:id?`}
                 component={({ match: { params } }: RouteComponentProps<{ id: string }>) => (
-                    <PleiepengesakPage søknader={søknader} søknadId={params.id} />
+                    <PleiepengesakPage
+                        søknader={søknader}
+                        søknadId={params.id}
+                        backRoute={InnsynRouteConfig.OVERSIKT}
+                    />
                 )}
             />
+            <Route
+                exact={true}
+                path={`${InnsynRouteConfig.SØKNADER_SØKNAD}/:id?`}
+                component={({ match: { params } }: RouteComponentProps<{ id: string }>) => (
+                    <PleiepengesakPage
+                        søknader={søknader}
+                        søknadId={params.id}
+                        backRoute={InnsynRouteConfig.SØKNADER}
+                    />
+                )}
+            />
+            <Route exact={true} path={InnsynRouteConfig.SØKNADER} component={() => <Søknader søknader={søknader} />} />
             <Route path={'*'} component={UnknownRoutePage} />
         </Switch>
     );
