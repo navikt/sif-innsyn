@@ -16,7 +16,7 @@ const getFormatString = (format: FormatType): string => {
         case 'dateShort':
             return 'DD.MM.YYYY';
         case 'dateAndTime':
-            return 'D. MMMM YYYY, HH:mm';
+            return 'D. MMMM YYYY, [kl.] HH:mm';
         case 'dayDateAndTime':
             return 'dddd D. MMMM YYYY, [kl.] HH:mm';
         case 'dayDateAndTimeShort':
