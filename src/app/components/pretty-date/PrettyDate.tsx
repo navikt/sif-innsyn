@@ -1,7 +1,7 @@
 import React from 'react';
 import moment from 'moment-timezone';
 
-type FormatType = 'date' | 'dateAndTime' | 'dayDateAndTime';
+type FormatType = 'date' | 'dateAndTime' | 'dayDateAndTime' | 'dayDateAndTimeShort' | 'dateShort';
 
 interface Props {
     date: string | Date;
@@ -13,10 +13,14 @@ const getFormatString = (format: FormatType): string => {
     switch (format) {
         case 'date':
             return 'D. MMMM YYYY';
+        case 'dateShort':
+            return 'DD.MM.YYYY';
         case 'dateAndTime':
-            return 'D. MMMM YYYY, HH:mm';
+            return 'D. MMMM YYYY, [kl.] HH:mm';
         case 'dayDateAndTime':
             return 'dddd D. MMMM YYYY, [kl.] HH:mm';
+        case 'dayDateAndTimeShort':
+            return 'DD.MM.YYYY, [kl.] HH:mm';
     }
 };
 

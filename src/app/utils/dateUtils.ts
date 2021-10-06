@@ -8,7 +8,7 @@ export const isValidDate = (dateString: string): boolean => dayjs(dateString).is
 
 export const getDatoOgTidTilSlettSøknadString = (dateString?: string): string | undefined => {
     if (dateString && isValidDate(dateString)) {
-        return dayjs(dateString).add(72, 'hour').format('D.MM.YYYY [kl.] HH:mm');
+        return dayjs(dateString).add(72, 'hour').format('D. MMMM YYYY [kl.] HH:mm');
     }
     return '';
 };
