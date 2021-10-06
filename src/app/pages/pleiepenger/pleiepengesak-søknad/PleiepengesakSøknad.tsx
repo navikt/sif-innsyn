@@ -64,23 +64,22 @@ const PleiepengesakSøknad = ({ søknad }: Props) => {
             <SectionPanel>
                 <Box>
                     <Title tag="h1">{intlHelper(intl, 'page.pleiepengesakSøknad.søknad.title')}</Title>
-                    <p style={{ fontWeight: 'bold', marginTop: '2rem' }}>
+                    <Box margin="l">
                         <FormattedMessage
                             id="page.pleiepengesakSøknad.søknad.motatt"
                             values={{
-                                mottatt: getPrettyDate(søknad.opprettet, 'dayDateAndTime'),
+                                mottatt: getPrettyDate(søknad.opprettet, 'dayDateAndTimeShort'),
                             }}
                         />
-                    </p>
-                    <p style={{ fontWeight: 'bold', marginBottom: '3rem' }}>
-                        <FormattedMessage
-                            id="page.pleiepengesakSøknad.periode"
-                            values={{
-                                fom: getPrettyDate(søknad.søknad.fraOgMed),
-                                tom: getPrettyDate(søknad.søknad.tilOgMed),
-                            }}
-                        />
-                    </p>
+                    </Box>
+                    <FormattedMessage
+                        id="page.pleiepengesakSøknad.periode"
+                        values={{
+                            fom: getPrettyDate(søknad.søknad.fraOgMed, 'dateShort'),
+                            tom: getPrettyDate(søknad.søknad.tilOgMed, 'dateShort'),
+                        }}
+                    />
+
                     {visAlertstripe && (
                         <Box margin="l">
                             <Alertstripe type="advarsel">
