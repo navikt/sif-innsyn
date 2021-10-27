@@ -24,8 +24,9 @@ const PleiepengesakPage = ({ søknader, søknadId, backRoute }: Props) => {
     const intl = useIntl();
     const søknad = søknader.find((s) => s.søknadId === søknadId);
     useLogSidevisning(PageKey.pleiepengesak);
-    if (søknad === undefined) {
-        return <Redirect to={InnsynRouteConfig.DINE_PLEIEPENGER} />;
+
+    if (søknadId === undefined || søknad === undefined) {
+        return <Redirect to={InnsynRouteConfig.OVERSIKT} />;
     }
 
     const crumbsOversikt: Breadcrumb[] = [
