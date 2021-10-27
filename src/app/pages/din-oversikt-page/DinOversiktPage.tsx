@@ -13,7 +13,7 @@ import { Søknad } from '../../types/apiTypes/søknadTypes';
 import intlHelper from '../../utils/intlUtils';
 import { erPleiepenger } from '../../utils/soknadUtils';
 import MellomlagringDataFetcher from '../MellomlagringDataFetcher';
-import { InnsynRouteConfig } from '../../config/innsynRouteConfig';
+import { getRouteUrl, InnsynRouteConfig } from '../../config/innsynRouteConfig';
 import DocumenterIkon from '../../svg/dokumenterIkon';
 import NavFrontendChevron from 'nav-frontend-chevron';
 import Lenke from 'nav-frontend-lenker';
@@ -60,7 +60,7 @@ const Oversikt = ({ søknader }: Props) => {
 
                             {pleiepengesoknader.length > 6 && (
                                 <div className={bem.classNames(bem.block, bem.element('alleSoknaderLenke'))}>
-                                    <Lenke href={InnsynRouteConfig.SØKNADER}>
+                                    <Lenke href={getRouteUrl(InnsynRouteConfig.SØKNADER)}>
                                         {intlHelper(intl, 'page.dinOversikt.saker.visAlle')}
                                         <NavFrontendChevron className={bem.element('chevron')} type={'høyre'} />
                                     </Lenke>

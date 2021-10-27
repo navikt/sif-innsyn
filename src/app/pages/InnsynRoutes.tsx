@@ -14,6 +14,13 @@ interface OwnProps {
 
 type Props = OwnProps & RouteComponentProps;
 
+const getRoute = (søknadId: string, søknader: Søknad[]) =>
+    søknadId === 'soknader' ? (
+        <Søknader søknader={søknader} />
+    ) : (
+        <PleiepengesakPage søknader={søknader} søknadId={søknadId} backRoute={InnsynRouteConfig.OVERSIKT} />
+    ); // Til å støtte gamle lenker på dittNAV.
+
 const InnsynRoutes = ({ history, søknader }: Props) => {
     const redirectToRoute = getRedirectRouteFromUrl(history); // If redirect-parameter is set in url
     return (
@@ -37,6 +44,13 @@ const InnsynRoutes = ({ history, søknader }: Props) => {
             />
             <Route
                 exact={true}
+                path={`${InnsynRouteConfig.SOKNAD_FRA_LENKE}/:id?`}
+                component={
+                    ({ match: { params } }: RouteComponentProps<{ id: string }>) => getRoute(params.id, søknader) // Til å støtte gamle lenker på dittNAV vers.
+                }
+            />
+            <Route
+                exact={true}
                 path={`${InnsynRouteConfig.SØKNADER_SØKNAD}/:id?`}
                 component={({ match: { params } }: RouteComponentProps<{ id: string }>) => (
                     <PleiepengesakPage
@@ -46,7 +60,7 @@ const InnsynRoutes = ({ history, søknader }: Props) => {
                     />
                 )}
             />
-            <Route exact={true} path={InnsynRouteConfig.SØKNADER} component={() => <Søknader søknader={søknader} />} />
+
             <Route path={'*'} component={UnknownRoutePage} />
         </Switch>
     );
