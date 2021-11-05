@@ -89,8 +89,7 @@ const InfoEtterSendtSøknad = ({ harArbeidsgiver }: Props) => {
                                     {intlHelper(intl, 'page.pleiepengesakSøknad.infoEtterSøknad.step5.info.1')}{' '}
                                     <Lenke href={getLenker().dineUtbetalinger}>
                                         {intlHelper(intl, 'page.pleiepengesakSøknad.infoEtterSøknad.step5.lenkeTitel')}
-                                    </Lenke>{' '}
-                                    {intlHelper(intl, 'page.pleiepengesakSøknad.infoEtterSøknad.step5.info.2')}
+                                    </Lenke>
                                 </Step>,
                             ]}
                         />
