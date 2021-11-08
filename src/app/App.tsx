@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { render } from 'react-dom';
 import { AmplitudeProvider } from '@navikt/sif-common-amplitude';
-import moment from 'moment';
 import AppStatusWrapper from './components/app-status-wrapper/AppStatusWrapper';
 import ApplicationWrapper from './components/application-wrapper/ApplicationWrapper';
 import InnsynDataFetcher from './pages/InnsynDataFetcher';
@@ -11,8 +10,6 @@ import { getEnvironmentVariable } from './utils/envUtils';
 import { Feature, isFeatureEnabled } from './utils/featureToggleUtils';
 import { getLocaleFromSessionStorage, setLocaleInSessionStorage } from './utils/localeUtils';
 import './styles/app.less';
-
-moment.locale('nb');
 
 const localeFromSessionStorage = getLocaleFromSessionStorage();
 
