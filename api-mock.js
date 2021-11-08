@@ -1,15 +1,11 @@
-const os = require('os');
-const fs = require('fs');
 const express = require('express');
-const Busboy = require('busboy');
-const _ = require('lodash');
 const path = require('path');
 
 const server = express();
 
 server.use(express.json());
 server.use((req, res, next) => {
-    const allowedOrigins = ['http://localhost:1337'];
+    const allowedOrigins = ['http://localhost:1337', 'http://localhost:8080'];
     const requestOrigin = req.headers.origin;
     if (allowedOrigins.indexOf(requestOrigin) >= 0) {
         res.set('Access-Control-Allow-Origin', requestOrigin);

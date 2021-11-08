@@ -1,6 +1,5 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 
 const webpackConfig = {
@@ -19,22 +18,32 @@ const webpackConfig = {
         rules: [
             {
                 test: /\.(ts|tsx)$/,
-                loader: require.resolve('eslint-loader'),
                 enforce: 'pre',
+                use: [
+                    {
+                        options: {
+                            eslintPath: require.resolve('eslint'),
+                        },
+                        loader: require.resolve('eslint-loader'),
+                    },
+                ],
+                exclude: /node_modules/,
             },
             {
                 test: /\.(ts|tsx)$/,
-                include: [path.resolve(__dirname, './../../app')],
-                loader: require.resolve('awesome-typescript-loader'),
+                include: [path.resolve(__dirname, './../../app'), path.resolve(__dirname, './../../common')],
+                use: [
+                    {
+                        loader: 'ts-loader',
+                        options: {
+                            experimentalFileCaching: false,
+                        },
+                    },
+                ],
             },
             {
                 test: /\.less$/,
                 use: [MiniCssExtractPlugin.loader, 'css-loader', 'less-loader'],
-            },
-            {
-                test: /\.svg$/,
-                loader: 'svg-sprite-loader',
-                options: {},
             },
         ],
     },
@@ -43,9 +52,6 @@ const webpackConfig = {
         new MiniCssExtractPlugin({
             filename: 'css/[name].css?[fullhash]-[chunkhash]-[name]',
             linkType: 'text/css',
-        }),
-        new SpriteLoaderPlugin({
-            plainSprite: true,
         }),
     ],
 };
