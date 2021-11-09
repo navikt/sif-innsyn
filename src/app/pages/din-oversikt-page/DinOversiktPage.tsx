@@ -23,6 +23,7 @@ import Box from '../../components/elements/box/Box';
 import Title from '../../components/elements/title/Title';
 import getLenker from '../../lenker';
 import Knappelenke from '../../components/knappelenke/Knappelenke';
+import Info from './Info';
 
 const bem = bemUtils('dinOversiktPage');
 
@@ -103,6 +104,11 @@ const Oversikt = ({ søknader }: Props) => {
                         </Box>
                     </Box>
                 </SectionPanel>
+            </div>
+            <div className={bem.classNames(bem.block, bem.element('sectionPanel'))}>
+                <Box margin="xl">
+                    <Info />
+                </Box>
             </div>
         </InnsynPage>
     );

@@ -23,6 +23,11 @@
     "page.dinOversikt.lenker.nySøknad.info": "Skal du søke på nytt eller forlenge pleiepengeperioden, må du sende ny søknad",
     "page.dinOversikt.lenker.nySøknad.knapp.title": "GÅ TIL NY SØKNAD",
 
+    "page.dinOversikt.info": "Hva skjer etter at du har sendt noe til oss?",
+    "page.dinOversikt.info.innsent.søknad.tittel": "Saksgang etter innsendt søknad",
+
+    "page.dinOversikt.info.innsent.endringsmelding.tittel": "Saksgang etter innsendt endringsmelding",
+
     "page.søknader.tittle": "Dine innsendte søknader",
     "page.søknader.crumbs.dinePP": "Dine pleiepenger",
     "page.søknader.ingenFunnet": "Vi finner ingen søknader",
