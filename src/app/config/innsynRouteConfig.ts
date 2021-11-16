@@ -2,6 +2,7 @@ import { getEnvironmentVariable } from '../utils/envUtils';
 
 export enum InnsynRouteConfig {
     OVERSIKT = '/',
+    IKKE_TILGANG = '/ikke-tilgang', // Bruker har ikke tilgang til tjenesten
     SOKNAD_FRA_LENKE = '/dine-pleiepenger', // Til å støtte gamle lenker på dittNAV.
     DINE_PLEIEPENGER = '/dine-pleiepenger/soknad',
     SØKNADER = `/dine-pleiepenger/soknader`,

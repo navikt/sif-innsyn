@@ -522,6 +522,10 @@ const startServer = () => {
         res.status(401).send();
     });
 
+    server.get('/soknad-umyndig', (req, res) => {
+        res.status(451).send();
+    });
+
     server.get('/soknad/:soknadId/dokument', (req, res) => {
         if (isLoggedIn(req)) {
             res.download('eksempel-søknad.pdf', 'søknad.pdf');

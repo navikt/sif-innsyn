@@ -4,6 +4,7 @@ import { InnsynRouteConfig } from '../config/innsynRouteConfig';
 import { Søknad } from '../types/apiTypes/søknadTypes';
 import { getRedirectRouteFromUrl } from '../utils/routeRedirectUtils';
 import DinOversiktPage from './din-oversikt-page/DinOversiktPage';
+import IkkeTilgangPage from './ikke-tilgang-page/IkkeTilgangPage';
 import PleiepengesakPage from './pleiepenger/PleiepengesakPage';
 import UnknownRoutePage from './support-pages/UnknownRoutePage';
 import Søknader from './søknader/Søknader';
@@ -61,6 +62,7 @@ const InnsynRoutes = ({ history, søknader }: Props) => {
                 )}
             />
 
+            <Route exact={true} path={`${InnsynRouteConfig.IKKE_TILGANG}`} component={IkkeTilgangPage} />
             <Route path={'*'} component={UnknownRoutePage} />
         </Switch>
     );
