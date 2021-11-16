@@ -61,8 +61,6 @@ const InnsynRoutes = ({ history, søknader }: Props) => {
                     />
                 )}
             />
-
-            <Route exact={true} path={`${InnsynRouteConfig.IKKE_TILGANG}`} component={IkkeTilgangPage} />
             <Route path={'*'} component={UnknownRoutePage} />
         </Switch>
     );
