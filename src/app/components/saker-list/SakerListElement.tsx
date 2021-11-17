@@ -6,12 +6,13 @@ import './sakerListElement.less';
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import Box from '../elements/box/Box';
 import intlHelper from '../../utils/intlUtils';
-import { UndertekstBold } from 'nav-frontend-typografi';
+
 import SoknadInfo from '../soknad-info/SoknadInfo';
 import { getEnvironmentVariable } from '../../utils/envUtils';
 import { FileContentIcon } from '../../svg/FellesIkoner';
 import Lenke from 'nav-frontend-lenker';
 import { isArray } from 'lodash';
+import { Normaltekst } from 'nav-frontend-typografi';
 
 interface Props {
     søknad: Søknad;
@@ -95,20 +96,23 @@ const SakerListElement = ({ søknad }: Props) => {
                 }>
                 <Box margin="xl">
                     <Box>
-                        <UndertekstBold>Dokumenter vi har mottat fra deg sammen med søknad</UndertekstBold>
+                        <Normaltekst style={{ fontWeight: 'bold' }}>
+                            Dokumenter vi har mottat fra deg sammen med søknad
+                        </Normaltekst>
                     </Box>
                     {søknad.dokumenter.length > 0 && (
                         <ul className={bem.element('no-bullets')}>
                             {søknad.dokumenter.map((dokument) => mapDokumenter(dokument))}
                         </ul>
                     )}
+                    {søknad.dokumenter.length === 0 && <Normaltekst>Ingen dokumenter fant.</Normaltekst>}
                 </Box>
 
                 {harArbeidsgiver() && (
                     <Box margin="xl">
-                        <UndertekstBold>
+                        <Normaltekst style={{ fontWeight: 'bold' }}>
                             <FormattedMessage id="page.dinOversikt.saker.ppSøknad.bekreftelseTilArbeidsgiver.tittle" />
-                        </UndertekstBold>
+                        </Normaltekst>
                         <ul className={bem.element('no-bullets')}>
                             {'arbeidsgivere' in søknad.søknad &&
                                 'organisasjoner' in søknad.søknad.arbeidsgivere &&
