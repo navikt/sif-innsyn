@@ -123,7 +123,7 @@ const Oversikt = ({ søknader }: Props) => {
                                 <SakerList søknader={seksFørsteSoknader} />
                             </Box>
 
-                            {pleiepengesoknader.length > 1 && (
+                            {pleiepengesoknader.length > 6 && (
                                 <div className={bem.classNames(bem.block, bem.element('alleSoknaderLenke'))}>
                                     <Lenke href={getRouteUrl(InnsynRouteConfig.SØKNADER)}>
                                         {intlHelper(intl, 'page.dinOversikt.saker.visAlle')}

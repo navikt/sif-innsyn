@@ -101,6 +101,9 @@
     "page.unavailable.title": "Tjenesten er dessverre ikke tilgjengelig",
     "page.unavailable.content": "Vi jobber så raskt vi kan med å få den tilgjengelig.",
 
+    "page.ikkeTilgang.title": "Ingen tilgang",
+    "page.ikkeTilgang.content": "Du har ikke tilgang til denne siden",
+
     "info.manglendeSøknad.shortInfo": "Det kan ta noe tid fra du har sendt en digital søknad til den vises her. Hvis du fikk kvittering på at søknaden var innsendt, er den mottatt av NAV selv om den ikke vises her enda.",
     "info.manglendeSøknad.title": "Har du sendt inn en søknad som du ikke ser her?",
     "info.manglendeSøknad.text.1": "Denne siden viser kun digitale søknader som vi har mottatt 4. november 2020 eller senere.",
