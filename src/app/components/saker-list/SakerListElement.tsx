@@ -58,7 +58,7 @@ const SakerListElement = ({ søknad }: Props) => {
     const mapDokumenter = (dokument: Dokument) => {
         return (
             <li key={dokument.dokumentInfoId} className={bem.element('listElement')}>
-                <Lenke target="_blank" href={`${dokument.url}?dokumentTittel=${dokument.tittel}`}>
+                <Lenke target="_blank" href={`${dokument.url}?dokumentTittel=${dokument.tittel}.${dokument.filtype}`}>
                     <FileContentIcon />
                     <span>{`${dokument.tittel} (PDF)`}</span>
                 </Lenke>

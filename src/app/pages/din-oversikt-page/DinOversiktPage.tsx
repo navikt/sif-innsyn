@@ -119,7 +119,7 @@ const Oversikt = ({ søknader }: Props) => {
                     additionalInfo={<InfoManglendeSøknad mode="expandable-text" />}>
                     {harSøknader && (
                         <>
-                            <Box margin="xxl">
+                            <Box margin="l">
                                 <SakerList søknader={seksFørsteSoknader} />
                             </Box>
 
