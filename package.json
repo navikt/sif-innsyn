@@ -36,7 +36,7 @@
         "@types/lodash.uniq": "^4.5.6",
         "@types/moment-timezone": "^0.5.30",
         "amplitude-js": "^7.4.1",
-        "axios": "^0.21.1",
+        "axios": "^0.21.2",
         "classnames": "^2.2.6",
         "constate": "^3.1.0",
         "dayjs": "^1.10.4",
