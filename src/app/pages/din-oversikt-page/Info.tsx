@@ -5,7 +5,7 @@ import { useIntl } from 'react-intl';
 // import getLenker from '../../lenker';
 // import { getDatoOgTidTilSlettSøknadString } from '../../utils/dateUtils';
 import SectionPanel from '../../components/section-panel/SectionPanel';
-import BlyantIkon from '../../svg/blyantIkon';
+import PillIkon from '../../svg/pilIkon';
 // import Knappelenke from '../../components/knappelenke/Knappelenke';
 import ExpandableInfo from '../../components/expandable-content/ExpandableInfo';
 
@@ -14,7 +14,7 @@ const Info = () => {
 
     return (
         <SectionPanel
-            illustration={<BlyantIkon />}
+            illustration={<PillIkon />}
             illustrationPlacement="outside"
             title={intlHelper(intl, 'page.dinOversikt.info')}>
             <>

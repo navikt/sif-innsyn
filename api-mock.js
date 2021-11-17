@@ -343,6 +343,13 @@ const soknadMock = [
         opprettet: '2021-03-16T03:04:05',
         endret: '2020-06-23T09:11:21.948652',
         behandlingsdato: null,
+        dokumenter: [
+            {
+                tittel: 'Søknad om pleiepenger',
+                url: 'http://localhost:1234/dokument/510534976/533438764/ARKIV',
+                dokumentInfoId: '513437665',
+            },
+        ],
     },
     {
         søknadId: '9c3a3ebf-e02a-4843-ad2c-9187e2f00cfa-b',
@@ -442,6 +449,27 @@ const soknadMock = [
         opprettet: '2018-06-02T03:04:05',
         endret: '2020-06-23T09:11:21.948652',
         behandlingsdato: null,
+        dokumenter: [
+            {
+                tittel: 'Søknad om pleiepenger',
+                url: 'http://localhost:1234/dokument/510534976/533438764/ARKIV',
+                relevanteDatoer: [
+                    {
+                        dato: '2021-08-04T14:54:58',
+                        datotype: 'DATO_OPPRETTET',
+                    },
+                    {
+                        dato: '2021-08-04T14:54:58',
+                        datotype: 'DATO_DOKUMENT',
+                    },
+                    {
+                        dato: '2021-08-04T02:00',
+                        datotype: 'DATO_REGISTRERT',
+                    },
+                ],
+                dokumentInfoId: '533437665',
+            },
+        ],
     },
     {
         søknadstype: 'PP_ETTERSENDING',
@@ -455,6 +483,27 @@ const soknadMock = [
         opprettet: '2018-01-01T03:04:05',
         endret: '2020-06-23T09:11:21.948652',
         behandlingsdato: null,
+        dokumenter: [
+            {
+                tittel: 'Søknad om pleiepenger',
+                url: 'http://localhost:1234/dokument/510534976/533438764/ARKIV',
+                relevanteDatoer: [
+                    {
+                        dato: '2021-08-04T14:54:58',
+                        datotype: 'DATO_OPPRETTET',
+                    },
+                    {
+                        dato: '2021-08-04T14:54:58',
+                        datotype: 'DATO_DOKUMENT',
+                    },
+                    {
+                        dato: '2021-08-04T02:00',
+                        datotype: 'DATO_REGISTRERT',
+                    },
+                ],
+                dokumentInfoId: '533438765',
+            },
+        ],
     },
 ];
 
@@ -521,6 +570,13 @@ const startServer = () => {
     server.get('/soknad/:soknadId/dokument', (req, res) => {
         if (isLoggedIn(req)) {
             res.download('eksempel-søknad.pdf', 'søknad.pdf');
+        } else {
+            res.status(401).send();
+        }
+    });
+    server.get('/dokument/:journalpostId/:dokumentInfoId/:variantFormat', (req, res) => {
+        if (isLoggedIn(req)) {
+            res.download('Søknad om pleiepenger.pdf', 'Søknad om pleiepenger.pdf');
         } else {
             res.status(401).send();
         }

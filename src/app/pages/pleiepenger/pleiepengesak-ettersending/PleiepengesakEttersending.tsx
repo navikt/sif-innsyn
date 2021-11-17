@@ -17,7 +17,7 @@ const PleiepengesakEttersending = ({ søknad }: Props) => {
     return (
         <SectionPanel
             title={intlHelper(intl, 'page.pleiepengesakEttersending.title', {
-                mottatt: getPrettyDateNorwegianTime(søknad.opprettet, 'dayDateAndTime'),
+                mottatt: getPrettyDateNorwegianTime(søknad.søknad.mottatt, 'dayDateAndTime'),
             })}
             titleTag="h1"
             introHeader={

@@ -68,7 +68,7 @@ const PleiepengesakSøknad = ({ søknad }: Props) => {
                         <FormattedMessage
                             id="page.pleiepengesakSøknad.søknad.motatt"
                             values={{
-                                mottatt: getPrettyDate(søknad.opprettet, 'dateAndTime'),
+                                mottatt: getPrettyDate(søknad.søknad.mottatt, 'dateAndTime'),
                             }}
                         />
                     </Box>

@@ -33,7 +33,7 @@ const ExpandableInfo = ({
     const [toggleContentId] = useState(guid());
     const [child1isOpen, setChild1isOpen] = useState<boolean>(initialOpen || false);
     const [child2isOpen, setChild2isOpen] = useState<boolean>(initialOpen || false);
-    console.log(children);
+
     return (
         <div className={bem.block}>
             {!dobbelButton && (

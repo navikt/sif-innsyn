@@ -14,6 +14,7 @@ export enum Søknadsstatus {
 export enum Søknadstype {
     PP_ETTERSENDING = 'PP_ETTERSENDING',
     PP_SYKT_BARN = 'PP_SYKT_BARN',
+    PP_ENDRINGSMELDING = 'PP_ENDRINGSMELDING',
     // OMP_UTVIDET_RETT = 'OMP_UTVIDET_RETT',
     // OMP_UTBETALING_SNF = 'OMP_UTBETALING_SNF',
     // OMP_UTBETALING_ARBEIDSTAKER = 'OMP_UTBETALING_ARBEIDSTAKER',
@@ -46,15 +47,24 @@ export interface Arbeidsgiver {
     organisasjonsnummer: string;
 }
 
-interface PleiepengerSøknadInfo {
+export interface Dokument {
+    tittel: string;
+    url: string;
+    filtype: string;
+    dokumentInfoId: string;
+}
+
+export interface PleiepengerSøknadInfo {
     søknadstype: Søknadstype.PP_SYKT_BARN;
     arbeidsgivere: Arbeidsgivere | Arbeidsgiver[];
     fraOgMed: Date;
     tilOgMed: Date;
+    mottatt: Date; // LocalDateTime e.g. 2007-12-03T10:15:30.948652
 }
 interface PleiepengerEttersendingInfo {
     søknadstype: Søknadstype.PP_ETTERSENDING;
     beskrivelse: string;
+    mottatt: Date; // LocalDateTime e.g. 2007-12-03T10:15:30.948652
 }
 
 interface SøknadBase {
@@ -64,6 +74,7 @@ interface SøknadBase {
     søknad: PleiepengerSøknadInfo | PleiepengerEttersendingInfo;
     journalpostId: string;
     opprettet: Date; // LocalDateTime e.g. 2007-12-03T10:15:30.948652
+    dokumenter: Dokument[];
 }
 export interface Pleiepengesøknad extends SøknadBase {
     søknadstype: Søknadstype.PP_SYKT_BARN;
@@ -74,7 +85,12 @@ export interface PleiepengerEttersending extends SøknadBase {
     søknad: PleiepengerEttersendingInfo;
 }
 
-export type Søknad = Pleiepengesøknad | PleiepengerEttersending;
+export interface PleiepengerEndringsmelding extends SøknadBase {
+    søknadstype: Søknadstype.PP_ENDRINGSMELDING;
+    søknad: PleiepengerSøknadInfo;
+}
+
+export type Søknad = Pleiepengesøknad | PleiepengerEttersending | PleiepengerEndringsmelding;
 
 export type SøknadApiResponse = Søknad[];
 
