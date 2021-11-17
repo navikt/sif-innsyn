@@ -60,7 +60,6 @@ const InnsynRoutes = ({ history, søknader }: Props) => {
                     />
                 )}
             />
-
             <Route path={'*'} component={UnknownRoutePage} />
         </Switch>
     );

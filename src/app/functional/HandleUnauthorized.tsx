@@ -1,6 +1,6 @@
 import React from 'react';
 import { AxiosError } from 'axios';
-import { isForbidden, isUnauthorized } from '../utils/apiUtils';
+import { isUnauthorized } from '../utils/apiUtils';
 import { navigateToLoginPage } from '../utils/navigationUtils';
 
 interface Props {
@@ -14,12 +14,11 @@ export const hasResponseStatus = (value: any): value is AxiosError =>
     !!(value && value.response && value.response.status);
 
 const HandleUnauthorized: React.FC<Props> = ({ error, currentRoute, onWillRedirect, handleError }: Props) => {
-    if (hasResponseStatus(error) && (isForbidden(error) || isUnauthorized(error))) {
+    if (hasResponseStatus(error) && isUnauthorized(error)) {
         navigateToLoginPage(currentRoute);
         return onWillRedirect();
-    } else {
-        return handleError(error);
     }
+    return handleError(error);
 };
 
 export default HandleUnauthorized;
