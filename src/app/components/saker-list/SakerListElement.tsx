@@ -2,23 +2,23 @@ import React from 'react';
 import { Arbeidsgiver, Dokument, Organisasjon, Søknad, Søknadstype } from '../../types/apiTypes/søknadTypes';
 import bemUtils from '../../utils/bemUtils';
 import { FormattedMessage, useIntl } from 'react-intl';
-import './sakerListElement.less';
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import Box from '../elements/box/Box';
 import intlHelper from '../../utils/intlUtils';
-
 import SoknadInfo from '../soknad-info/SoknadInfo';
 import { getEnvironmentVariable } from '../../utils/envUtils';
 import { FileContentIcon } from '../../svg/FellesIkoner';
 import Lenke from 'nav-frontend-lenker';
 import { isArray } from 'lodash';
 import { Normaltekst } from 'nav-frontend-typografi';
-
+import './sakerListElement.less';
+import { getPrettyDate } from '../pretty-date/PrettyDate';
 interface Props {
     søknad: Søknad;
 }
 
 export const bem = bemUtils('sakerListElement');
+
 export const getApiUrlBySoknadIdOgOrgnummer = (soknadID: string, organisasjonsnummer: string): string => {
     return `${getEnvironmentVariable(
         'API_URL'
@@ -56,10 +56,12 @@ const SakerListElement = ({ søknad }: Props) => {
         );
     };
 
-    const mapDokumenter = (dokument: Dokument) => {
+    const mapDokumenter = (dokument: Dokument, date: string) => {
         return (
             <li key={dokument.dokumentInfoId} className={bem.element('listElement')}>
-                <Lenke target="_blank" href={`${dokument.url}?dokumentTittel=${dokument.tittel}.${dokument.filtype}`}>
+                <Lenke
+                    target="_blank"
+                    href={`${dokument.url}?dokumentTittel=${dokument.tittel} mottatt ${date}.${dokument.filtype}`}>
                     <FileContentIcon />
                     <span>{`${dokument.tittel} (PDF)`}</span>
                 </Lenke>
@@ -89,23 +91,29 @@ const SakerListElement = ({ søknad }: Props) => {
                 tittel={
                     <>
                         <div>{tittel()}</div>
-                        <span style={{ fontWeight: 'normal', fontSize: 17 }}>
+                        <span>
                             <SoknadInfo søknad={søknad} />
                         </span>
                     </>
                 }>
                 <Box margin="xl">
                     <Box>
-                        <Normaltekst style={{ fontWeight: 'bold' }}>
-                            Dokumenter vi har mottat fra deg sammen med søknad
+                        <Normaltekst className={bem.element('dokumenter')}>
+                            <FormattedMessage id={'page.dinOversikt.saker.sakerlistElement.dokumenter.title'} />
                         </Normaltekst>
                     </Box>
                     {søknad.dokumenter.length > 0 && (
                         <ul className={bem.element('no-bullets')}>
-                            {søknad.dokumenter.map((dokument) => mapDokumenter(dokument))}
+                            {søknad.dokumenter.map((dokument) =>
+                                mapDokumenter(dokument, getPrettyDate(søknad.søknad.mottatt, 'dayDateAndTimeShort'))
+                            )}
                         </ul>
                     )}
-                    {søknad.dokumenter.length === 0 && <Normaltekst>Ingen dokumenter fant.</Normaltekst>}
+                    {søknad.dokumenter.length === 0 && (
+                        <Normaltekst>
+                            {intlHelper(intl, 'page.dinOversikt.saker.sakerlistElement.dokumenter.ingenDokumenter')}
+                        </Normaltekst>
+                    )}
                 </Box>
 
                 {harArbeidsgiver() && (

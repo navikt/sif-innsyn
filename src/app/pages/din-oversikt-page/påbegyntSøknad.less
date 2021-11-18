@@ -1,16 +1,12 @@
 @import '../../styles/assets.less';
 @import '~nav-frontend-typografi-style/src/mixins.less';
 
-.sakerListElement {
+.påbegyntSøknad {
     display: flex;
     align-items: center;
     width: 100%;
-    &__mottatt {
-        opacity: 0.75;
-    }
-    &__detaljer {
-        margin-top: 0.25rem;
-    }
+    margin-top: 1rem;
+
     &__content {
         flex: 2 1 80%;
         padding-left: 0.5rem;
@@ -27,14 +23,6 @@
     }
     &__title {
         .typo-undertittel-mixin();
-        font-size: 1.125rem;
-    }
-    &__dokumenter {
-        font-weight: bold;
-    }
-    &__no-bullets {
-        list-style-type: none; /* Remove bullets */
-        padding: 0rem;
-        margin: 0.5rem 0rem;
+        font-size: 1.25rem;
     }
 }

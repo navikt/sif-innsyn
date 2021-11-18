@@ -8,14 +8,17 @@
 
     "page.dinOversikt.title": "Dine pleiepenger",
 
-    "page.dinOversikt.påbegyntSøknad.title": "Påbegynt søknad",
+    "page.dinOversikt.påbegyntSøknad.title": "Vil du fortsette der du slapp?",
     "page.dinOversikt.påbegyntSøknad.ingenPåbegynt": "Du har ikke påbegynt søknad",
-    "page.dinOversikt.påbegyntSøknad.info": "Du har en påbegynt søknad om pleiepenger. Vi lagrer påbegynte søknader i 72 timer (3 døgn). Det betyr at du kan fortsette å fylle ut denne søknaden til og med {datoNårSlettes}. Etter dette blir søknaden slettet.",
-    "page.dinOversikt.påbegyntSøknad.knappen": "Gå til påbegynt søknad",
+    "page.dinOversikt.påbegyntSøknad.info.title": "Søknad om pleiepenger sykt barn",
+    "page.dinOversikt.påbegyntSøknad.info": "Lagres til og med {datoNårSlettes}",
+
     "page.dinOversikt.saker.title": "Dette har vi mottat fra deg",
     "page.dinOversikt.saker.sakstype.ppSøknad": "Søknad om pleiepenger",
     "page.dinOversikt.saker.sakstype.ettersending": "Ettersendelse",
     "page.dinOversikt.saker.sakstype.endringsMelding": "Endringsmelding pleiepenger - {type}",
+    "page.dinOversikt.saker.sakerlistElement.dokumenter.title": "Dokumenter vi har mottatt fra deg sammen med søknad",
+    "page.dinOversikt.saker.sakerlistElement.dokumenter.ingenDokumenter": "Ingen dokumenter fant.",
     "page.dinOversikt.saker.ppSøknad.bekreftelseTilArbeidsgiver.tittle": "Bekreftelse til arbeidsgiver(e)",
     "page.dinOversikt.saker.ppSøknad.bekreftelseTilArbeidsgiver.info": "Hvis arbeidsgiver ønsker en bekreftelse på at du har søkt pleiepenger kan du laste ned eller skrive ut denne bekreftelsen har",
     "page.dinOversikt.saker.ingenFunnet": "Vi finner ingen søknader",
