@@ -59,20 +59,11 @@ const Oversikt = ({ søknader }: Props) => {
         pleiepengesoknader.some((søknad) => mindreTimerEtterInnsendtEnnMaxAntallTimer(søknad.opprettet, 48));
 
     useLogSidevisning(PageKey.frontpage);
-    console.log(pleiepengesoknader);
+
     return (
         <InnsynPage
             title={intlHelper(intl, 'page.dinOversikt.title')}
-            topContentRenderer={() => (
-                <PageBanner title={intlHelper(intl, 'page.dinOversikt.title')}>
-                    <div>
-                        <FormattedMessage id="page.dinOversikt.pageBanner.1" />
-                    </div>
-                    <div>
-                        <FormattedMessage id="page.dinOversikt.pageBanner.2" />
-                    </div>
-                </PageBanner>
-            )}>
+            topContentRenderer={() => <PageBanner title={intlHelper(intl, 'page.dinOversikt.title')}></PageBanner>}>
             {visAlertstripe && (
                 <Box padBottom="xl">
                     <Alertstripe type="advarsel">
