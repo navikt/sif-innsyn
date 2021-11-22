@@ -7,6 +7,21 @@
     "lenkepanel.aria.gåTil": "Gå til",
 
     "page.dinOversikt.title": "Dine pleiepenger",
+    "page.dinOversikt.pageBanner.1": "Her finner du søknader du har sendt til oss.",
+    "page.dinOversikt.pageBanner.2": "Her kan du også ettersende dokumentasjon, eller sende en ny søknad.",
+
+    "page.dinOversikt.linkPanel.title": "Hva ønsker du å gjøre?",
+    "page.dinOversikt.linkPanel.ettersending.title": "Ettersende noe?",
+    "page.dinOversikt.linkPanel.ettersending.lenkeTekst": "Gå til ettersending",
+    "page.dinOversikt.linkPanel.ettersending.lenkeTekst.info": "Her kan du ettersende dokumenter i saken din.",
+
+    "page.dinOversikt.linkPanel.endringsmelding.title": "Ettersende noe?",
+    "page.dinOversikt.linkPanel.endringsmelding.lenkeTekst": "Gå til «Skriv til oss»",
+    "page.dinOversikt.linkPanel.endringsmelding.lenkeTekst.info": "Her kan du melde fra om endringer som har betydning i saken din.",
+
+    "page.dinOversikt.linkPanel.søknad.title": "Sende ny søknad?",
+    "page.dinOversikt.linkPanel.søknad.lenkeTekst": "Gå til ny søknad",
+    "page.dinOversikt.linkPanel.søknad.lenkeTekst.info": "Her kan du søke om forlengelse, eller sende en helt ny søknad.",
 
     "page.dinOversikt.påbegyntSøknad.title": "Vil du fortsette der du slapp?",
     "page.dinOversikt.påbegyntSøknad.ingenPåbegynt": "Du har ikke påbegynt søknad",
@@ -17,10 +32,9 @@
     "page.dinOversikt.saker.sakstype.ppSøknad": "Søknad om pleiepenger",
     "page.dinOversikt.saker.sakstype.ettersending": "Ettersendelse",
     "page.dinOversikt.saker.sakstype.endringsMelding": "Endringsmelding pleiepenger - {type}",
-    "page.dinOversikt.saker.sakerlistElement.dokumenter.title": "Dokumenter vi har mottatt fra deg sammen med søknad",
     "page.dinOversikt.saker.sakerlistElement.dokumenter.ingenDokumenter": "Ingen dokumenter fant.",
-    "page.dinOversikt.saker.ppSøknad.bekreftelseTilArbeidsgiver.tittle": "Bekreftelse til arbeidsgiver(e)",
-    "page.dinOversikt.saker.ppSøknad.bekreftelseTilArbeidsgiver.info": "Hvis arbeidsgiver ønsker en bekreftelse på at du har søkt pleiepenger kan du laste ned eller skrive ut denne bekreftelsen har",
+    "page.dinOversikt.saker.ppSøknad.bekreftelseTilArbeidsgiver.title": "Bekreftelse til arbeidsgiver(e)",
+    "page.dinOversikt.saker.ppSøknad.bekreftelseTilArbeidsgiver.info": "Dette er en bekreftelse du kan gi til arbeidsgiver ved behov. Denne bekrefter at søknaden din er mottatt, hvilken periode du har søkt for, samt informasjon om at arbeidsgiver må sende inntektsmelding til oss.",
     "page.dinOversikt.saker.ingenFunnet": "Vi finner ingen søknader",
     "page.dinOversikt.saker.visAlle": "Vis alle dokumenter",
 
@@ -33,6 +47,11 @@
 
     "page.dinOversikt.info": "Hva skjer etter at du har sendt noe til oss?",
     "page.dinOversikt.info.innsent.søknad.tittel": "Saksgang etter innsendt søknad",
+    "page.dinOversikt.info.innsent.søknad.legeerklæring.tittel": "Legeerklæring",
+    "page.dinOversikt.info.innsent.søknad.legeerklæring": "Vi sjekker om vi har fått legeerklæring fra deg. Hvis du ikke sendte den sammen med søknaden din, må du ettersende den til oss så snart du kan.",
+
+    "page.dinOversikt.info.innsent.søknad.inntektsmelding.tittel": "Inntektsmelding fra arbeidsgiver",
+    "page.dinOversikt.info.innsent.søknad.inntektsmelding": "Hvis du er arbeidstaker, sjekker vi om vi har fått inntektsmelding fra arbeidsgiveren din. Den trenger vi hvis du søker for første gang, eller det er mer enn 4 uker siden du hadde pleiepenger sist. Kontakt arbeidsgiver for å sikre at de sender inntektsmeldingen til oss.",
 
     "page.dinOversikt.info.innsent.endringsmelding.tittel": "Saksgang etter innsendt endringsmelding",
 
@@ -110,7 +129,6 @@
     "info.manglendeSøknad.shortInfo": "Det kan ta noe tid fra du har sendt en digital søknad til den vises her. Hvis du fikk kvittering på at søknaden var innsendt, er den mottatt av NAV selv om den ikke vises her enda.",
     "info.manglendeSøknad.title": "Har du sendt inn en søknad som du ikke ser her?",
     "info.manglendeSøknad.text.1": "Denne siden viser kun digitale søknader som vi har mottatt 4. november 2020 eller senere.",
-    "info.manglendeSøknad.text.2": "Det kan ta noe tid fra du har sendt en digital søknad til den vises her. Hvis du fikk kvittering på at søknaden var innsendt, er den mottatt av NAV selv om den ikke vises her enda.",
     "info.manglendeSøknad.text.3.a": "Søknader som er sendt i posten vises ikke her. De vises i",
     "info.manglendeSøknad.text.3.b": "saksoversikten på Ditt NAV",
     "info.manglendeSøknad.text.3.c": "når søknaden er mottatt og registrert inn. Det tar som regel 2 uker fra en søknad er postlagt til den vises i saksoversikten."

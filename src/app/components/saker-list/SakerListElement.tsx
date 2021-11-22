@@ -96,12 +96,7 @@ const SakerListElement = ({ søknad }: Props) => {
                         </span>
                     </>
                 }>
-                <Box margin="xl">
-                    <Box>
-                        <Normaltekst className={bem.element('dokumenter')}>
-                            <FormattedMessage id={'page.dinOversikt.saker.sakerlistElement.dokumenter.title'} />
-                        </Normaltekst>
-                    </Box>
+                <Box margin="l">
                     {søknad.dokumenter.length > 0 && (
                         <ul className={bem.element('no-bullets')}>
                             {søknad.dokumenter.map((dokument) =>
@@ -119,8 +114,12 @@ const SakerListElement = ({ søknad }: Props) => {
                 {harArbeidsgiver() && (
                     <Box margin="xl">
                         <Normaltekst style={{ fontWeight: 'bold' }}>
-                            <FormattedMessage id="page.dinOversikt.saker.ppSøknad.bekreftelseTilArbeidsgiver.tittle" />
+                            <FormattedMessage id="page.dinOversikt.saker.ppSøknad.bekreftelseTilArbeidsgiver.title" />
                         </Normaltekst>
+                        <Normaltekst>
+                            <FormattedMessage id="page.dinOversikt.saker.ppSøknad.bekreftelseTilArbeidsgiver.info" />
+                        </Normaltekst>
+
                         <ul className={bem.element('no-bullets')}>
                             {'arbeidsgivere' in søknad.søknad &&
                                 'organisasjoner' in søknad.søknad.arbeidsgivere &&

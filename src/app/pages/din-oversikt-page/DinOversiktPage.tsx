@@ -65,8 +65,12 @@ const Oversikt = ({ søknader }: Props) => {
             title={intlHelper(intl, 'page.dinOversikt.title')}
             topContentRenderer={() => (
                 <PageBanner title={intlHelper(intl, 'page.dinOversikt.title')}>
-                    <div> Her finner du dine innsendte søknader og endringsmeldinger.</div>{' '}
-                    <div>Hvis du har en påbegynt og lagret søknad vil den også dukke opp her</div>
+                    <div>
+                        <FormattedMessage id="page.dinOversikt.pageBanner.1" />
+                    </div>
+                    <div>
+                        <FormattedMessage id="page.dinOversikt.pageBanner.2" />
+                    </div>
                 </PageBanner>
             )}>
             {visAlertstripe && (
@@ -87,68 +91,66 @@ const Oversikt = ({ søknader }: Props) => {
             )}
             <MellomlagringDataFetcher />
 
-            <FrontpagePanelWrapper maxColumns={3} title={'Er det noe du vil melde fra til oss om? '}>
+            <FrontpagePanelWrapper maxColumns={3} title={intlHelper(intl, 'page.dinOversikt.linkPanel.title')}>
                 <LinkPanel
                     image={<EttersendIkon />}
-                    title="Ettersende noe?"
+                    title={intlHelper(intl, 'page.dinOversikt.linkPanel.ettersending.title')}
                     lenke={getLenker().ettersending}
-                    lenkeTekst={'Gå til ettersending'}>
-                    Hvis du vil dette eller dette så kan du gjøre det her
+                    lenkeTekst={intlHelper(intl, 'page.dinOversikt.linkPanel.ettersending.lenkeTekst')}>
+                    <>
+                        <FormattedMessage id="page.dinOversikt.linkPanel.ettersending.lenkeTekst.info" />
+                        <br />
+                        <br />
+                    </>
                 </LinkPanel>
                 <LinkPanel
                     image={<EndringIkon />}
-                    title="Melde fra om endring?"
-                    lenke={'/'}
-                    lenkeTekst={'Gå til endringsmelding'}>
-                    Hvis du vil dette eller dette så kan du gjøre det her
+                    title={intlHelper(intl, 'page.dinOversikt.linkPanel.ettersending.title')}
+                    lenke={getLenker().minInnboksSkrivMelding}
+                    lenkeTekst={intlHelper(intl, 'page.dinOversikt.linkPanel.endringsmelding.lenkeTekst')}>
+                    <FormattedMessage id="page.dinOversikt.linkPanel.endringsmelding.lenkeTekst.info" />
                 </LinkPanel>
                 <LinkPanel
                     image={<NySøknadIkon />}
-                    title="Sende ny søknad?"
+                    title={intlHelper(intl, 'page.dinOversikt.linkPanel.søknad.title')}
                     lenke={getLenker().pleiepengerURL}
-                    lenkeTekst={'Gå til ny søknad'}>
-                    Hvis du vil dette eller dette så kan du gjøre det her
+                    lenkeTekst={intlHelper(intl, 'page.dinOversikt.linkPanel.søknad.lenkeTekst')}>
+                    <FormattedMessage id="page.dinOversikt.linkPanel.søknad.lenkeTekst.info" />
                 </LinkPanel>
             </FrontpagePanelWrapper>
 
-            <div className={bem.classNames(bem.block, bem.element('sectionPanelSoknader'))}>
-                <SectionPanel
-                    illustration={<DocumenterIkon />}
-                    illustrationPlacement="outside"
-                    title={'Dette har vi mottatt fra deg'}
-                    additionalInfo={<InfoManglendeSøknad mode="expandable-text" />}>
-                    {harSøknader && (
-                        <>
-                            <Box margin="l">
-                                <SakerList søknader={seksFørsteSoknader} />
-                            </Box>
+            <SectionPanel
+                illustration={<DocumenterIkon />}
+                illustrationPlacement="outside"
+                title={intlHelper(intl, 'page.dinOversikt.saker.title')}
+                additionalInfo={<InfoManglendeSøknad mode="expandable-text" />}>
+                {harSøknader && (
+                    <>
+                        <Box margin="l">
+                            <SakerList søknader={seksFørsteSoknader} />
+                        </Box>
 
-                            {pleiepengesoknader.length > 6 && (
-                                <div className={bem.classNames(bem.block, bem.element('alleSoknaderLenke'))}>
-                                    <Lenke href={getRouteUrl(InnsynRouteConfig.SØKNADER)}>
-                                        {intlHelper(intl, 'page.dinOversikt.saker.visAlle')}
-                                        <NavFrontendChevron className={bem.element('chevron')} type={'høyre'} />
-                                    </Lenke>
-                                </div>
-                            )}
-                        </>
-                    )}
+                        {pleiepengesoknader.length > 6 && (
+                            <div className={bem.classNames(bem.block, bem.element('alleSoknaderLenke'))}>
+                                <Lenke href={getRouteUrl(InnsynRouteConfig.SØKNADER)}>
+                                    {intlHelper(intl, 'page.dinOversikt.saker.visAlle')}
+                                    <NavFrontendChevron className={bem.element('chevron')} type={'høyre'} />
+                                </Lenke>
+                            </div>
+                        )}
+                    </>
+                )}
 
-                    {harSøknader === false && (
-                        <>
-                            <AlertStripeInfo>
-                                <FormattedMessage id="page.dinOversikt.saker.ingenFunnet" />
-                            </AlertStripeInfo>
-                        </>
-                    )}
-                </SectionPanel>
-            </div>
+                {harSøknader === false && (
+                    <>
+                        <AlertStripeInfo>
+                            <FormattedMessage id="page.dinOversikt.saker.ingenFunnet" />
+                        </AlertStripeInfo>
+                    </>
+                )}
+            </SectionPanel>
 
-            <div className={bem.classNames(bem.block, bem.element('sectionPanel'))}>
-                <Box margin="xl">
-                    <Info />
-                </Box>
-            </div>
+            <Info />
         </InnsynPage>
     );
 };

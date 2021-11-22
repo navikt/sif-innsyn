@@ -14,7 +14,6 @@ const InfoManglendeSøknad = ({ mode = 'text' }: Props) => {
     const intl = useIntl();
     const getExpandedContent = () => (
         <>
-            <FormattedMessage tagName="p" id="info.manglendeSøknad.text.2" />
             <p>
                 {intlHelper(intl, 'info.manglendeSøknad.text.3.a')}{' '}
                 <Lenke href={getLenker(intl.locale).saksoversikt}>
@@ -22,7 +21,6 @@ const InfoManglendeSøknad = ({ mode = 'text' }: Props) => {
                 </Lenke>{' '}
                 {intlHelper(intl, 'info.manglendeSøknad.text.3.c')}
             </p>
-            <FormattedMessage tagName="p" id="info.manglendeSøknad.text.1" />
         </>
     );
     switch (mode) {
