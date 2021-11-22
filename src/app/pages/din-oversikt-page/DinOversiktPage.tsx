@@ -74,7 +74,7 @@ const Oversikt = ({ søknader }: Props) => {
                 </PageBanner>
             )}>
             {visAlertstripe && (
-                <Box margin="l">
+                <Box padBottom="xl">
                     <Alertstripe type="advarsel">
                         <FormattedMessage id="page.pleiepengesakSøknad.søknad.alertstripe.title" />
                         <ul>
@@ -90,67 +90,70 @@ const Oversikt = ({ søknader }: Props) => {
                 </Box>
             )}
             <MellomlagringDataFetcher />
+            <Box>
+                <FrontpagePanelWrapper maxColumns={3} title={intlHelper(intl, 'page.dinOversikt.linkPanel.title')}>
+                    <LinkPanel
+                        image={<EttersendIkon />}
+                        title={intlHelper(intl, 'page.dinOversikt.linkPanel.ettersending.title')}
+                        lenke={getLenker().ettersending}
+                        lenkeTekst={intlHelper(intl, 'page.dinOversikt.linkPanel.ettersending.lenkeTekst')}>
+                        <>
+                            <FormattedMessage id="page.dinOversikt.linkPanel.ettersending.lenkeTekst.info" />
+                            <br />
+                            <br />
+                        </>
+                    </LinkPanel>
+                    <LinkPanel
+                        image={<EndringIkon />}
+                        title={intlHelper(intl, 'page.dinOversikt.linkPanel.endringsmelding.title')}
+                        lenke={getLenker().minInnboksSkrivMelding}
+                        lenkeTekst={intlHelper(intl, 'page.dinOversikt.linkPanel.endringsmelding.lenkeTekst')}>
+                        <FormattedMessage id="page.dinOversikt.linkPanel.endringsmelding.lenkeTekst.info" />
+                    </LinkPanel>
+                    <LinkPanel
+                        image={<NySøknadIkon />}
+                        title={intlHelper(intl, 'page.dinOversikt.linkPanel.søknad.title')}
+                        lenke={getLenker().pleiepengerURL}
+                        lenkeTekst={intlHelper(intl, 'page.dinOversikt.linkPanel.søknad.lenkeTekst')}>
+                        <FormattedMessage id="page.dinOversikt.linkPanel.søknad.lenkeTekst.info" />
+                    </LinkPanel>
+                </FrontpagePanelWrapper>
+            </Box>
+            <Box>
+                <SectionPanel
+                    illustration={<DocumenterIkon />}
+                    illustrationPlacement="outside"
+                    title={intlHelper(intl, 'page.dinOversikt.saker.title')}
+                    additionalInfo={<InfoManglendeSøknad mode="expandable-text" />}>
+                    {harSøknader && (
+                        <>
+                            <Box margin="l">
+                                <SakerList søknader={seksFørsteSoknader} />
+                            </Box>
 
-            <FrontpagePanelWrapper maxColumns={3} title={intlHelper(intl, 'page.dinOversikt.linkPanel.title')}>
-                <LinkPanel
-                    image={<EttersendIkon />}
-                    title={intlHelper(intl, 'page.dinOversikt.linkPanel.ettersending.title')}
-                    lenke={getLenker().ettersending}
-                    lenkeTekst={intlHelper(intl, 'page.dinOversikt.linkPanel.ettersending.lenkeTekst')}>
-                    <>
-                        <FormattedMessage id="page.dinOversikt.linkPanel.ettersending.lenkeTekst.info" />
-                        <br />
-                        <br />
-                    </>
-                </LinkPanel>
-                <LinkPanel
-                    image={<EndringIkon />}
-                    title={intlHelper(intl, 'page.dinOversikt.linkPanel.ettersending.title')}
-                    lenke={getLenker().minInnboksSkrivMelding}
-                    lenkeTekst={intlHelper(intl, 'page.dinOversikt.linkPanel.endringsmelding.lenkeTekst')}>
-                    <FormattedMessage id="page.dinOversikt.linkPanel.endringsmelding.lenkeTekst.info" />
-                </LinkPanel>
-                <LinkPanel
-                    image={<NySøknadIkon />}
-                    title={intlHelper(intl, 'page.dinOversikt.linkPanel.søknad.title')}
-                    lenke={getLenker().pleiepengerURL}
-                    lenkeTekst={intlHelper(intl, 'page.dinOversikt.linkPanel.søknad.lenkeTekst')}>
-                    <FormattedMessage id="page.dinOversikt.linkPanel.søknad.lenkeTekst.info" />
-                </LinkPanel>
-            </FrontpagePanelWrapper>
+                            {pleiepengesoknader.length > 6 && (
+                                <div className={bem.classNames(bem.block, bem.element('alleSoknaderLenke'))}>
+                                    <Lenke href={getRouteUrl(InnsynRouteConfig.SØKNADER)}>
+                                        {intlHelper(intl, 'page.dinOversikt.saker.visAlle')}
+                                        <NavFrontendChevron className={bem.element('chevron')} type={'høyre'} />
+                                    </Lenke>
+                                </div>
+                            )}
+                        </>
+                    )}
 
-            <SectionPanel
-                illustration={<DocumenterIkon />}
-                illustrationPlacement="outside"
-                title={intlHelper(intl, 'page.dinOversikt.saker.title')}
-                additionalInfo={<InfoManglendeSøknad mode="expandable-text" />}>
-                {harSøknader && (
-                    <>
-                        <Box margin="l">
-                            <SakerList søknader={seksFørsteSoknader} />
-                        </Box>
-
-                        {pleiepengesoknader.length > 6 && (
-                            <div className={bem.classNames(bem.block, bem.element('alleSoknaderLenke'))}>
-                                <Lenke href={getRouteUrl(InnsynRouteConfig.SØKNADER)}>
-                                    {intlHelper(intl, 'page.dinOversikt.saker.visAlle')}
-                                    <NavFrontendChevron className={bem.element('chevron')} type={'høyre'} />
-                                </Lenke>
-                            </div>
-                        )}
-                    </>
-                )}
-
-                {harSøknader === false && (
-                    <>
-                        <AlertStripeInfo>
-                            <FormattedMessage id="page.dinOversikt.saker.ingenFunnet" />
-                        </AlertStripeInfo>
-                    </>
-                )}
-            </SectionPanel>
-
-            <Info />
+                    {harSøknader === false && (
+                        <>
+                            <AlertStripeInfo>
+                                <FormattedMessage id="page.dinOversikt.saker.ingenFunnet" />
+                            </AlertStripeInfo>
+                        </>
+                    )}
+                </SectionPanel>
+            </Box>
+            <Box margin="xl">
+                <Info />
+            </Box>
         </InnsynPage>
     );
 };

@@ -15,7 +15,7 @@
     "page.dinOversikt.linkPanel.ettersending.lenkeTekst": "Gå til ettersending",
     "page.dinOversikt.linkPanel.ettersending.lenkeTekst.info": "Her kan du ettersende dokumenter i saken din.",
 
-    "page.dinOversikt.linkPanel.endringsmelding.title": "Ettersende noe?",
+    "page.dinOversikt.linkPanel.endringsmelding.title": "Melde fra om endring?",
     "page.dinOversikt.linkPanel.endringsmelding.lenkeTekst": "Gå til «Skriv til oss»",
     "page.dinOversikt.linkPanel.endringsmelding.lenkeTekst.info": "Her kan du melde fra om endringer som har betydning i saken din.",
 
@@ -28,7 +28,7 @@
     "page.dinOversikt.påbegyntSøknad.info.title": "Søknad om pleiepenger sykt barn",
     "page.dinOversikt.påbegyntSøknad.info": "Lagres til og med {datoNårSlettes}",
 
-    "page.dinOversikt.saker.title": "Dette har vi mottat fra deg",
+    "page.dinOversikt.saker.title": "Dette har vi mottatt fra deg",
     "page.dinOversikt.saker.sakstype.ppSøknad": "Søknad om pleiepenger",
     "page.dinOversikt.saker.sakstype.ettersending": "Ettersendelse",
     "page.dinOversikt.saker.sakstype.endringsMelding": "Endringsmelding pleiepenger - {type}",
@@ -45,8 +45,8 @@
     "page.dinOversikt.lenker.nySøknad.info": "Skal du søke på nytt eller forlenge pleiepengeperioden, må du sende ny søknad",
     "page.dinOversikt.lenker.nySøknad.knapp.title": "GÅ TIL NY SØKNAD",
 
-    "page.dinOversikt.info": "Hva skjer etter at du har sendt noe til oss?",
-    "page.dinOversikt.info.innsent.søknad.tittel": "Saksgang etter innsendt søknad",
+    "page.dinOversikt.info": "Hva skjer etter at du har søknad til oss?",
+    "page.dinOversikt.info.innsent.søknad.tittel": "Dette skjer etter innsendt søknad",
     "page.dinOversikt.info.innsent.søknad.legeerklæring.tittel": "Legeerklæring",
     "page.dinOversikt.info.innsent.søknad.legeerklæring": "Vi sjekker om vi har fått legeerklæring fra deg. Hvis du ikke sendte den sammen med søknaden din, må du ettersende den til oss så snart du kan.",
 
