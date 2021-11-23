@@ -55,10 +55,10 @@ const Oversikt = ({ søknader }: Props) => {
     };
     const visAlertstripe =
         harSøknader &&
-        pleiepengesoknader.some((søknad) => harArbeidsgiver(søknad)) &&
         pleiepengesoknader.some(
             (søknad) =>
                 søknad.søknadstype === Søknadstype.PP_SYKT_BARN &&
+                harArbeidsgiver(søknad) &&
                 mindreTimerEtterInnsendtEnnMaxAntallTimer(søknad.opprettet, 48)
         );
 
