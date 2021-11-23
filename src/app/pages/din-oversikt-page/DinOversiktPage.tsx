@@ -10,7 +10,7 @@ import SectionPanel from '../../components/section-panel/SectionPanel';
 import { PageKey } from '../../config/pageKey';
 import Alertstripe from 'nav-frontend-alertstriper';
 // import SvgSykdomIFamilien from '../../svg/SvgSykdomIFamilien';
-import { Søknad } from '../../types/apiTypes/søknadTypes';
+import { Søknad, Søknadstype } from '../../types/apiTypes/søknadTypes';
 import intlHelper from '../../utils/intlUtils';
 import { erPleiepenger } from '../../utils/soknadUtils';
 import MellomlagringDataFetcher from '../MellomlagringDataFetcher';
@@ -56,7 +56,11 @@ const Oversikt = ({ søknader }: Props) => {
     const visAlertstripe =
         harSøknader &&
         pleiepengesoknader.some((søknad) => harArbeidsgiver(søknad)) &&
-        pleiepengesoknader.some((søknad) => mindreTimerEtterInnsendtEnnMaxAntallTimer(søknad.opprettet, 48));
+        pleiepengesoknader.some(
+            (søknad) =>
+                søknad.søknadstype === Søknadstype.PP_SYKT_BARN &&
+                mindreTimerEtterInnsendtEnnMaxAntallTimer(søknad.opprettet, 48)
+        );
 
     useLogSidevisning(PageKey.frontpage);
 
