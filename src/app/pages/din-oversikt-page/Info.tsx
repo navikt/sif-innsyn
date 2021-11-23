@@ -3,7 +3,11 @@ import intlHelper from '../../utils/intlUtils';
 import { FormattedMessage, useIntl } from 'react-intl';
 import SectionPanel from '../../components/section-panel/SectionPanel';
 import PillIkon from '../../svg/pilIkon';
+import './info.less';
+import bemUtils from '../../utils/bemUtils';
 // import ExpandableInfo from '../../components/expandable-content/ExpandableInfo';
+
+const bem = bemUtils('info');
 
 const Info = () => {
     const intl = useIntl();
@@ -14,48 +18,52 @@ const Info = () => {
             illustrationPlacement="outside"
             title={intlHelper(intl, 'page.dinOversikt.info')}>
             <>
-                <span>
-                    <ul style={{ marginTop: '2rem' }}>
-                        <li style={{ marginBottom: '1rem' }}>
-                            <span style={{ fontWeight: 'bold' }}>
+                <span className={bem.block}>
+                    <ul>
+                        <li>
+                            <span>
                                 <FormattedMessage id="page.dinOversikt.info.innsent.søknad.legeerklæring.tittel" />
                             </span>
-                            <div>
+                            <p>
                                 <FormattedMessage id="page.dinOversikt.info.innsent.søknad.legeerklæring" />
-                            </div>
+                            </p>
                         </li>
 
-                        <li style={{ marginBottom: '1rem' }}>
-                            <span style={{ fontWeight: 'bold' }}>
+                        <li>
+                            <span>
                                 <FormattedMessage id="page.dinOversikt.info.innsent.søknad.inntektsmelding.tittel" />
                             </span>
-                            <div>
-                                <FormattedMessage id="page.dinOversikt.info.innsent.søknad.inntektsmelding" />
-                            </div>
-                            <div style={{ marginTop: '0.8rem' }}>
-                                Hvis du ikke er arbeidstaker, trenger du ikke sende informasjon om inntekten din.
-                            </div>
+                            <p>
+                                <FormattedMessage id="page.dinOversikt.info.innsent.søknad.inntektsmelding.avsnitt.1" />
+                            </p>
+                            <p>
+                                <FormattedMessage id="page.dinOversikt.info.innsent.søknad.inntektsmelding.avsnitt.2" />
+                            </p>
                         </li>
-                        <li style={{ marginBottom: '1rem' }}>
-                            <span style={{ fontWeight: 'bold' }}>Vi behandler søknaden din</span>
-                            <div>
-                                Når vi har fått legeerklæring og inntektsmelding kan vi behandle søknaden din. Vi
-                                kontakter deg hvis vi trenger flere opplysninger fra deg.
-                            </div>
+
+                        <li>
+                            <span>
+                                <FormattedMessage id="page.dinOversikt.info.innsent.søknad.behandling.tittel" />
+                            </span>
+                            <p>
+                                <FormattedMessage id="page.dinOversikt.info.innsent.søknad.behandling" />
+                            </p>
                         </li>
-                        <li style={{ marginBottom: '1rem' }}>
-                            <span style={{ fontWeight: 'bold' }}>Når søknaden er ferdig behandlet</span>
-                            <div>
-                                Når vi har behandlet søknaden din, sender vi deg et svar som du finner under
-                                saksoversikten på Ditt NAV. Vi sender også svaret til deg i posten.
-                            </div>
+                        <li>
+                            <span>
+                                <FormattedMessage id="page.dinOversikt.info.innsent.søknad.ferdigBehandlet.tittel" />
+                            </span>
+                            <p>
+                                <FormattedMessage id="page.dinOversikt.info.innsent.søknad.ferdigBehandlet" />
+                            </p>
                         </li>
-                        <li style={{ marginBottom: '1rem' }}>
-                            <span style={{ fontWeight: 'bold' }}>Utbetaling</span>
-                            <div>
-                                Du finner informasjon om utbetaling under «kommende utbetalinger» i
-                                utbetalingsoversikten på Ditt NAV.
-                            </div>
+                        <li>
+                            <span>
+                                <FormattedMessage id="page.dinOversikt.info.innsent.søknad.utbetaling.tittel" />
+                            </span>
+                            <p>
+                                <FormattedMessage id="page.dinOversikt.info.innsent.søknad.utbetaling" />
+                            </p>
                         </li>
                     </ul>
                 </span>

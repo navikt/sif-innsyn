@@ -44,14 +44,24 @@
     "page.dinOversikt.lenker.nySøknad.knapp.title": "GÅ TIL NY SØKNAD",
 
     "page.dinOversikt.info": "Hva skjer etter at du har søknad til oss?",
+    "page.dinOversikt.info.innsent.endringsmelding.tittel": "Saksgang etter innsendt endringsmelding",
+
     "page.dinOversikt.info.innsent.søknad.tittel": "Dette skjer etter innsendt søknad",
     "page.dinOversikt.info.innsent.søknad.legeerklæring.tittel": "Legeerklæring",
     "page.dinOversikt.info.innsent.søknad.legeerklæring": "Vi sjekker om vi har fått legeerklæring fra deg. Hvis du ikke sendte den sammen med søknaden din, må du ettersende den til oss så snart du kan.",
 
     "page.dinOversikt.info.innsent.søknad.inntektsmelding.tittel": "Inntektsmelding fra arbeidsgiver",
-    "page.dinOversikt.info.innsent.søknad.inntektsmelding": "Hvis du er arbeidstaker, sjekker vi om vi har fått inntektsmelding fra arbeidsgiveren din. Den trenger vi hvis du søker for første gang, eller det er mer enn 4 uker siden du hadde pleiepenger sist. Kontakt arbeidsgiver for å sikre at de sender inntektsmeldingen til oss.",
+    "page.dinOversikt.info.innsent.søknad.inntektsmelding.avsnitt.1": "Hvis du er arbeidstaker, sjekker vi om vi har fått inntektsmelding fra arbeidsgiveren din. Den trenger vi hvis du søker for første gang, eller det er mer enn 4 uker siden du hadde pleiepenger sist. Kontakt arbeidsgiver for å sikre at de sender inntektsmeldingen til oss.",
+    "page.dinOversikt.info.innsent.søknad.inntektsmelding.avsnitt.2": "Hvis du ikke er arbeidstaker, trenger du ikke sende informasjon om inntekten din.",
 
-    "page.dinOversikt.info.innsent.endringsmelding.tittel": "Saksgang etter innsendt endringsmelding",
+    "page.dinOversikt.info.innsent.søknad.behandling.tittel": "Vi behandler søknaden din",
+    "page.dinOversikt.info.innsent.søknad.behandling": "Når vi har fått legeerklæring og inntektsmelding kan vi behandle søknaden din. Vi kontakter deg hvis vi trenger flere opplysninger fra deg.",
+
+    "page.dinOversikt.info.innsent.søknad.ferdigBehandlet.tittel": "Når søknaden er ferdig behandlet",
+    "page.dinOversikt.info.innsent.søknad.ferdigBehandlet": "Når vi har behandlet søknaden din, sender vi deg et svar som du finner under saksoversikten på Ditt NAV. Vi sender også svaret til deg i posten.",
+
+    "page.dinOversikt.info.innsent.søknad.utbetaling.tittel": "Utbetaling",
+    "page.dinOversikt.info.innsent.søknad.utbetaling": "Du finner informasjon om utbetaling under «kommende utbetalinger» i utbetalingsoversikten på Ditt NAV.",
 
     "page.søknader.tittle": "Dine innsendte søknader",
     "page.søknader.crumbs.dinePP": "Dine pleiepenger",
