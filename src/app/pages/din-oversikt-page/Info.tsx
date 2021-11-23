@@ -1,6 +1,6 @@
 import React from 'react';
 import intlHelper from '../../utils/intlUtils';
-import { useIntl } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 import SectionPanel from '../../components/section-panel/SectionPanel';
 import PillIkon from '../../svg/pilIkon';
 // import ExpandableInfo from '../../components/expandable-content/ExpandableInfo';
@@ -17,20 +17,20 @@ const Info = () => {
                 <span>
                     <ul style={{ marginTop: '2rem' }}>
                         <li style={{ marginBottom: '1rem' }}>
-                            <span style={{ fontWeight: 'bold' }}>Legeerklæring</span>
+                            <span style={{ fontWeight: 'bold' }}>
+                                <FormattedMessage id="page.dinOversikt.info.innsent.søknad.legeerklæring.tittel" />
+                            </span>
                             <div>
-                                Vi sjekker om vi har fått legeerklæring fra deg. Hvis du ikke sendte den sammen med
-                                søknaden din, må du ettersende den til oss så snart du kan.
+                                <FormattedMessage id="page.dinOversikt.info.innsent.søknad.legeerklæring" />
                             </div>
                         </li>
 
                         <li style={{ marginBottom: '1rem' }}>
-                            <span style={{ fontWeight: 'bold' }}>Inntektsmelding fra arbeidsgiver</span>
+                            <span style={{ fontWeight: 'bold' }}>
+                                <FormattedMessage id="page.dinOversikt.info.innsent.søknad.inntektsmelding.tittel" />
+                            </span>
                             <div>
-                                Hvis du er arbeidstaker, sjekker vi om vi har fått inntektsmelding fra arbeidsgiveren
-                                din. Den trenger vi hvis du søker for første gang, eller det er mer enn 4 uker siden du
-                                hadde pleiepenger sist. Kontakt arbeidsgiver for å sikre at de sender inntektsmeldingen
-                                til oss.
+                                <FormattedMessage id="page.dinOversikt.info.innsent.søknad.inntektsmelding" />
                             </div>
                             <div style={{ marginTop: '0.8rem' }}>
                                 Hvis du ikke er arbeidstaker, trenger du ikke sende informasjon om inntekten din.

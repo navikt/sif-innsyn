@@ -97,14 +97,14 @@ const SakerListElement = ({ søknad }: Props) => {
                     </>
                 }>
                 <Box margin="l">
-                    {søknad.dokumenter.length > 0 && (
+                    {søknad.dokumenter && søknad.dokumenter.length > 0 && (
                         <ul className={bem.element('no-bullets')}>
                             {søknad.dokumenter.map((dokument) =>
                                 mapDokumenter(dokument, getPrettyDate(søknad.søknad.mottatt, 'dayDateAndTimeShort'))
                             )}
                         </ul>
                     )}
-                    {søknad.dokumenter.length === 0 && (
+                    {(søknad.dokumenter === undefined || søknad.dokumenter.length === 0) && (
                         <Normaltekst>
                             {intlHelper(intl, 'page.dinOversikt.saker.sakerlistElement.dokumenter.ingenDokumenter')}
                         </Normaltekst>
