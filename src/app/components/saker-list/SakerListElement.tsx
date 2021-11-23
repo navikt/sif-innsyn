@@ -61,7 +61,9 @@ const SakerListElement = ({ søknad }: Props) => {
             <li key={dokument.dokumentInfoId} className={bem.element('listElement')}>
                 <Lenke
                     target="_blank"
-                    href={`${dokument.url}?dokumentTittel=${dokument.tittel} mottatt ${date}.${dokument.filtype}`}>
+                    href={`${dokument.url}?dokumentTittel=${
+                        dokument.tittel
+                    } mottatt ${date}.${dokument.filtype.toLowerCase()}`}>
                     <FileContentIcon />
                     <span>{`${dokument.tittel} (PDF)`}</span>
                 </Lenke>
@@ -75,7 +77,7 @@ const SakerListElement = ({ søknad }: Props) => {
             case Søknadstype.PP_SYKT_BARN:
                 return intlHelper(intl, 'page.dinOversikt.saker.sakstype.ppSøknad');
             case Søknadstype.PP_ETTERSENDING:
-                return intlHelper(intl, 'page.dinOversikt.saker.sakstype.ettersending');
+                return intlHelper(intl, 'page.dinOversikt.saker.sakstype.pp.ettersendelse');
             case Søknadstype.PP_ENDRINGSMELDING:
                 return (
                     <FormattedMessage
@@ -111,7 +113,7 @@ const SakerListElement = ({ søknad }: Props) => {
                     )}
                 </Box>
 
-                {harArbeidsgiver() && (
+                {søknad.søknadstype === Søknadstype.PP_SYKT_BARN && harArbeidsgiver() && (
                     <Box margin="xl">
                         <Normaltekst style={{ fontWeight: 'bold' }}>
                             <FormattedMessage id="page.dinOversikt.saker.ppSøknad.bekreftelseTilArbeidsgiver.title" />

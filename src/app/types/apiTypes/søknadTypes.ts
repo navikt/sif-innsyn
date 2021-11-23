@@ -12,7 +12,7 @@ export enum Søknadsstatus {
 }
 
 export enum Søknadstype {
-    PP_ETTERSENDING = 'PP_ETTERSENDING',
+    PP_ETTERSENDING = 'PP_ETTERSENDELSE',
     PP_SYKT_BARN = 'PP_SYKT_BARN',
     PP_ENDRINGSMELDING = 'PP_ENDRINGSMELDING',
     // OMP_UTVIDET_RETT = 'OMP_UTVIDET_RETT',

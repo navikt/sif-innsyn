@@ -347,6 +347,7 @@ const soknadMock = [
             {
                 tittel: 'Søknad om pleiepenger',
                 url: 'http://localhost:1234/dokument/510534976/533438764/ARKIV',
+                filtype: 'PDF',
                 dokumentInfoId: '513437665',
             },
         ],
@@ -453,26 +454,13 @@ const soknadMock = [
             {
                 tittel: 'Søknad om pleiepenger',
                 url: 'http://localhost:1234/dokument/510534976/533438764/ARKIV',
-                relevanteDatoer: [
-                    {
-                        dato: '2021-08-04T14:54:58',
-                        datotype: 'DATO_OPPRETTET',
-                    },
-                    {
-                        dato: '2021-08-04T14:54:58',
-                        datotype: 'DATO_DOKUMENT',
-                    },
-                    {
-                        dato: '2021-08-04T02:00',
-                        datotype: 'DATO_REGISTRERT',
-                    },
-                ],
+                filtype: 'PDF',
                 dokumentInfoId: '533437665',
             },
         ],
     },
     {
-        søknadstype: 'PP_ETTERSENDING',
+        søknadstype: 'PP_ETTERSENDELSE',
         status: 'MOTTATT',
         søknad: {
             beskrivelse: 'Lorem ipsum doret salah et spurs',
@@ -485,23 +473,16 @@ const soknadMock = [
         behandlingsdato: null,
         dokumenter: [
             {
-                tittel: 'Søknad om pleiepenger',
-                url: 'http://localhost:1234/dokument/510534976/533438764/ARKIV',
-                relevanteDatoer: [
-                    {
-                        dato: '2021-08-04T14:54:58',
-                        datotype: 'DATO_OPPRETTET',
-                    },
-                    {
-                        dato: '2021-08-04T14:54:58',
-                        datotype: 'DATO_DOKUMENT',
-                    },
-                    {
-                        dato: '2021-08-04T02:00',
-                        datotype: 'DATO_REGISTRERT',
-                    },
-                ],
+                tittel: 'Ettersendelse pleiepenger sykt barn',
+                url: 'http://localhost:1234/dokument/510534976/533438765/ARKIV',
+                filtype: 'PDF',
                 dokumentInfoId: '533438765',
+            },
+            {
+                tittel: 'BekreftelseTilKLONELABBEN.pdf',
+                url: 'http://localhost:1234/dokument/510534976/533438766/ARKIV',
+                filtype: 'PDF',
+                dokumentInfoId: '533438766',
             },
         ],
     },
@@ -580,11 +561,25 @@ const startServer = () => {
     });
     server.get('/dokument/:journalpostId/:dokumentInfoId/:variantFormat', (req, res) => {
         if (isLoggedIn(req)) {
-            res.download('Søknad om pleiepenger.pdf', 'Søknad om pleiepenger.pdf');
+            switch (req.params.dokumentInfoId) {
+                case '533438765':
+                    res.download(
+                        'Ettersending av vedlegg - Pleiepenger sykt barn.pdf',
+                        'Ettersending av vedlegg - Pleiepenger sykt barn.pdf'
+                    );
+                    break;
+                case '533438766':
+                    res.download('BekreftelseTilKLONELABBEN.pdf', 'BekreftelseTilKLONELABBEN.pdf');
+                    break;
+                default:
+                    res.download('Søknad om pleiepenger.pdf', 'Søknad om pleiepenger.pdf');
+                    break;
+            }
         } else {
             res.status(401).send();
         }
     });
+
     server.get('/soknad/:soknadId/arbeidsgivermelding', (req, res) => {
         if (isLoggedIn(req)) {
             res.download('BekreftelseTilKLONELABBEN.pdf', 'BekreftelseTilKLONELABBEN.pdf');

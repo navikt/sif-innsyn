@@ -28,7 +28,7 @@
 
     "page.dinOversikt.saker.title": "Dette har vi mottatt fra deg",
     "page.dinOversikt.saker.sakstype.ppSøknad": "Søknad om pleiepenger",
-    "page.dinOversikt.saker.sakstype.ettersending": "Ettersendelse",
+    "page.dinOversikt.saker.sakstype.pp.ettersendelse": "Ettersendelse - Pleiepenger sykt barn",
     "page.dinOversikt.saker.sakstype.endringsMelding": "Endringsmelding pleiepenger - {type}",
     "page.dinOversikt.saker.sakerlistElement.dokumenter.ingenDokumenter": "Ingen dokumenter fant.",
     "page.dinOversikt.saker.ppSøknad.bekreftelseTilArbeidsgiver.title": "Bekreftelse til arbeidsgiver(e)",
