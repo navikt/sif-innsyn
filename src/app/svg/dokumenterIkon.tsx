@@ -1,7 +1,14 @@
 import React from 'react';
 
 const DocumenterIkon = () => (
-    <svg width="68" height="68" viewBox="0 0 68 68" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+        width="68"
+        height="68"
+        viewBox="0 0 68 68"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        focusable={false}
+        role="presentation">
         <circle cx="34" cy="34" r="34" fill="white" />
         <path
             fillRule="evenodd"

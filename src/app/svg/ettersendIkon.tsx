@@ -1,7 +1,14 @@
 import React from 'react';
 
 const EttersendIkon = () => (
-    <svg width="99" height="95" viewBox="0 0 99 95" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+        width="99"
+        height="95"
+        viewBox="0 0 99 95"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        focusable={false}
+        role="presentation">
         <path
             d="M29.647 2C29.647 0.895429 30.5425 0 31.647 0H83.3936C84.4982 0 85.3936 0.89543 85.3936 2V81C85.3936 82.1046 84.4982 83 83.3936 83H31.647C30.5425 83 29.647 82.1046 29.647 81V2Z"
             fill="white"

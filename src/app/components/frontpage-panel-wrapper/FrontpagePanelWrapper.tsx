@@ -1,7 +1,7 @@
-import bemUtils from '../../utils/bemUtils';
+import { Systemtittel } from 'nav-frontend-typografi';
 import React, { Children } from 'react';
+import bemUtils from '../../utils/bemUtils';
 import './frontpagePanelWrapper.less';
-import Title from '../elements/title/Title';
 
 interface Props {
     maxColumns?: number;
@@ -14,9 +14,7 @@ const FrontpagePanelWrapper: React.FC<Props> = ({ maxColumns = 3, title, childre
     return (
         <>
             <div className={bem.element('title')}>
-                <Title tag={'h1'} titleStyle={'normal'}>
-                    {title}
-                </Title>
+                <Systemtittel>{title}</Systemtittel>
             </div>
 
             <div className={bem.classNames(bem.block, bem.modifier(`columns-${maxColumns}`))}>

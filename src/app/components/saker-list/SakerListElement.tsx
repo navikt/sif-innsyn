@@ -10,7 +10,7 @@ import { getEnvironmentVariable } from '../../utils/envUtils';
 import { FileContentIcon } from '../../svg/FellesIkoner';
 import Lenke from 'nav-frontend-lenker';
 import { isArray } from 'lodash';
-import { Normaltekst } from 'nav-frontend-typografi';
+import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import './sakerListElement.less';
 import { getPrettyDate } from '../pretty-date/PrettyDate';
 interface Props {
@@ -40,7 +40,7 @@ const SakerListElement = ({ søknad }: Props) => {
 
     const mapOrganisasjoner = (organisasjon: Organisasjon | Arbeidsgiver) => {
         return (
-            <li key={organisasjon.organisasjonsnummer} className={bem.element('listElement')}>
+            <li key={organisasjon.organisasjonsnummer} className={bem.element('sakerlistElement')}>
                 <Lenke
                     target="_blank"
                     href={getApiUrlBySoknadIdOgOrgnummer(søknad.søknadId, organisasjon.organisasjonsnummer)}>
@@ -94,7 +94,7 @@ const SakerListElement = ({ søknad }: Props) => {
             <Ekspanderbartpanel
                 tittel={
                     <>
-                        <div>{tittel()}</div>
+                        <Undertittel tag="h3">{tittel()}</Undertittel>
                         <span>
                             <SoknadInfo søknad={søknad} />
                         </span>
@@ -117,7 +117,7 @@ const SakerListElement = ({ søknad }: Props) => {
 
                 {søknad.søknadstype === Søknadstype.PP_SYKT_BARN && harArbeidsgiver() && (
                     <Box margin="xl">
-                        <Normaltekst style={{ fontWeight: 'bold' }}>
+                        <Normaltekst tag="h4" style={{ fontWeight: 'bold' }}>
                             <FormattedMessage id="page.dinOversikt.saker.ppSøknad.bekreftelseTilArbeidsgiver.title" />
                         </Normaltekst>
                         <Normaltekst>

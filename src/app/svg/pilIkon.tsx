@@ -1,7 +1,14 @@
 import React from 'react';
 
 const PillIkon = () => (
-    <svg width="65" height="56" viewBox="0 0 65 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+        width="65"
+        height="56"
+        viewBox="0 0 65 56"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        focusable={false}
+        role="presentation">
         <ellipse cx="32.5" cy="27.7594" rx="31.9532" ry="27.7594" fill="white" />
         <path
             fillRule="evenodd"

@@ -28,7 +28,7 @@ const InfoToggleButtonDobbel = (props: Props) => {
     const show2Button = children && children[0] && children[1];
 
     return (
-        <span>
+        <div>
             <button
                 type="button"
                 className={cls.classNames(cls.block, cls.modifierConditional('open', isOpen))}
@@ -60,7 +60,7 @@ const InfoToggleButtonDobbel = (props: Props) => {
                     </span>
                 </button>
             )}
-        </span>
+        </div>
     );
 };
 

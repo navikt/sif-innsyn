@@ -95,11 +95,7 @@ const Oversikt = ({ søknader }: Props) => {
                         title={intlHelper(intl, 'page.dinOversikt.linkPanel.ettersending.title')}
                         lenke={getLenker().ettersending}
                         lenkeTekst={intlHelper(intl, 'page.dinOversikt.linkPanel.ettersending.lenkeTekst')}>
-                        <>
-                            <FormattedMessage id="page.dinOversikt.linkPanel.ettersending.lenkeTekst.info" />
-                            <br />
-                            <br />
-                        </>
+                        <FormattedMessage id="page.dinOversikt.linkPanel.ettersending.lenkeTekst.info" />
                     </LinkPanel>
                     <LinkPanel
                         image={<EndringIkon />}

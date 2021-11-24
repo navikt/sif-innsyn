@@ -1,7 +1,14 @@
 import React from 'react';
 
 const EndringIkon = () => (
-    <svg width="76" height="97" viewBox="0 0 76 97" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+        width="76"
+        height="97"
+        viewBox="0 0 76 97"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        focusable={false}
+        role="presentation">
         <path
             fillRule="evenodd"
             clipRule="evenodd"

@@ -13,15 +13,13 @@ interface Props {
 const InfoManglendeSøknad = ({ mode = 'text' }: Props) => {
     const intl = useIntl();
     const getExpandedContent = () => (
-        <>
-            <p>
-                {intlHelper(intl, 'info.manglendeSøknad.text.3.a')}{' '}
-                <Lenke href={getLenker(intl.locale).saksoversikt}>
-                    {intlHelper(intl, 'info.manglendeSøknad.text.3.b')}
-                </Lenke>{' '}
-                {intlHelper(intl, 'info.manglendeSøknad.text.3.c')}
-            </p>
-        </>
+        <p>
+            {intlHelper(intl, 'info.manglendeSøknad.text.3.a')}{' '}
+            <Lenke href={getLenker(intl.locale).saksoversikt}>
+                {intlHelper(intl, 'info.manglendeSøknad.text.3.b')}
+            </Lenke>{' '}
+            {intlHelper(intl, 'info.manglendeSøknad.text.3.c')}
+        </p>
     );
     switch (mode) {
         case 'text':
