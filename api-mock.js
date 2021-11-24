@@ -395,26 +395,26 @@ const soknadMock = [
             },
             vedleggUrls: ['http://localhost:8080/1234', 'http://localhost:8080/12345'],
             harMedsøker: true,
-            arbeidsgivere: {
-                organisasjoner: [
-                    {
-                        navn: 'Nei',
-                        skalJobbe: 'nei',
-                        skalJobbeProsent: 0.0,
-                        vetIkkeEkstrainfo: null,
-                        jobberNormaltTimer: 0.0,
-                        organisasjonsnummer: '73645736727',
-                    },
-                    {
-                        navn: 'Navn med mellomrom',
-                        skalJobbe: 'redusert',
-                        skalJobbeProsent: 22.512,
-                        vetIkkeEkstrainfo: null,
-                        jobberNormaltTimer: 0.0,
-                        organisasjonsnummer: '846785862386',
-                    },
-                ],
-            },
+            arbeidsgivere: [
+                {
+                    erAnsatt: true,
+                    navn: 'Google Norge AS',
+                    organisasjonsnummer: '73645736727',
+                    sluttetFørSøknadsperiode: false,
+                },
+                {
+                    erAnsatt: false,
+                    navn: 'Microsoft Norge AS',
+                    organisasjonsnummer: '846785862386',
+                    sluttetFørSøknadsperiode: true,
+                },
+                {
+                    erAnsatt: false,
+                    navn: 'Amazon Norge AS',
+                    organisasjonsnummer: '846776864386',
+                },
+            ],
+
             samtidigHjemme: null,
             tilsynsordning: {
                 ja: {

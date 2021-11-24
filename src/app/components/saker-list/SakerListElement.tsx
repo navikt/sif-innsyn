@@ -31,7 +31,9 @@ const SakerListElement = ({ søknad }: Props) => {
         if ('arbeidsgivere' in søknad.søknad) {
             return 'organisasjoner' in søknad.søknad.arbeidsgivere
                 ? søknad.søknad.arbeidsgivere.organisasjoner && søknad.søknad.arbeidsgivere.organisasjoner.length > 0
-                : søknad.søknad.arbeidsgivere && søknad.søknad.arbeidsgivere.length > 0;
+                : søknad.søknad.arbeidsgivere &&
+                      søknad.søknad.arbeidsgivere.length > 0 &&
+                      søknad.søknad.arbeidsgivere.some((arbeidsgiver) => !arbeidsgiver.sluttetFørSøknadsperiode);
         }
         return false;
     };
@@ -130,7 +132,10 @@ const SakerListElement = ({ søknad }: Props) => {
                                 )}
                             {'arbeidsgivere' in søknad.søknad &&
                                 isArray(søknad.søknad.arbeidsgivere) &&
-                                søknad.søknad.arbeidsgivere.map((organisasjon) => mapOrganisasjoner(organisasjon))}
+                                søknad.søknad.arbeidsgivere.map(
+                                    (organisasjon) =>
+                                        !organisasjon.sluttetFørSøknadsperiode && mapOrganisasjoner(organisasjon)
+                                )}
                         </ul>
                     </Box>
                 )}

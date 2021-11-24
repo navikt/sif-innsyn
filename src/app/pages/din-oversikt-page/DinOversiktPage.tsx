@@ -10,7 +10,7 @@ import SectionPanel from '../../components/section-panel/SectionPanel';
 import { PageKey } from '../../config/pageKey';
 import Alertstripe from 'nav-frontend-alertstriper';
 // import SvgSykdomIFamilien from '../../svg/SvgSykdomIFamilien';
-import { Søknad, Søknadstype } from '../../types/apiTypes/søknadTypes';
+import { PleiepengerSøknadInfo, Søknad, Søknadstype } from '../../types/apiTypes/søknadTypes';
 import intlHelper from '../../utils/intlUtils';
 import { erPleiepenger } from '../../utils/soknadUtils';
 import MellomlagringDataFetcher from '../MellomlagringDataFetcher';
@@ -45,20 +45,23 @@ const Oversikt = ({ søknader }: Props) => {
     const pleiepengesoknader = søknader.filter((søknad) => erPleiepenger(søknad));
     const harSøknader = pleiepengesoknader.length > 0;
     const seksFørsteSoknader = pleiepengesoknader.slice(0, 5);
-    const harArbeidsgiver = (søknad: Søknad) => {
-        if ('arbeidsgivere' in søknad.søknad) {
-            return 'organisasjoner' in søknad.søknad.arbeidsgivere
-                ? søknad.søknad.arbeidsgivere.organisasjoner && søknad.søknad.arbeidsgivere.organisasjoner.length > 0
-                : søknad.søknad.arbeidsgivere && søknad.søknad.arbeidsgivere.length > 0;
+    const harArbeidsgiver = (søknad: PleiepengerSøknadInfo) => {
+        if ('arbeidsgivere' in søknad) {
+            return 'organisasjoner' in søknad.arbeidsgivere
+                ? søknad.arbeidsgivere.organisasjoner && søknad.arbeidsgivere.organisasjoner.length > 0
+                : søknad.arbeidsgivere &&
+                      søknad.arbeidsgivere.length > 0 &&
+                      søknad.arbeidsgivere.some((arbeidsgiver) => !arbeidsgiver.sluttetFørSøknadsperiode);
         }
         return false;
     };
+
     const visAlertstripe =
         harSøknader &&
         pleiepengesoknader.some(
             (søknad) =>
                 søknad.søknadstype === Søknadstype.PP_SYKT_BARN &&
-                harArbeidsgiver(søknad) &&
+                harArbeidsgiver(søknad.søknad) &&
                 mindreTimerEtterInnsendtEnnMaxAntallTimer(søknad.opprettet, 48)
         );
 
