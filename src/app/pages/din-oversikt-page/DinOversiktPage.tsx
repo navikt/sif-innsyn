@@ -6,10 +6,8 @@ import InfoManglendeSøknad from '../../components/info-manglende-søknad/InfoMa
 import InnsynPage from '../../components/innsyn-page/InnsynPage';
 import PageBanner from '../../components/page-banner/PageBanner';
 import SectionPanel from '../../components/section-panel/SectionPanel';
-// import SoknadList from '../../components/soknad-list/SoknadList';
 import { PageKey } from '../../config/pageKey';
 import Alertstripe from 'nav-frontend-alertstriper';
-// import SvgSykdomIFamilien from '../../svg/SvgSykdomIFamilien';
 import { PleiepengerSøknadInfo, Søknad, Søknadstype } from '../../types/apiTypes/søknadTypes';
 import intlHelper from '../../utils/intlUtils';
 import { erPleiepenger } from '../../utils/soknadUtils';
@@ -21,9 +19,7 @@ import Lenke from 'nav-frontend-lenker';
 import './dinOversiktPage.less';
 import bemUtils from '../../utils/bemUtils';
 import Box from '../../components/elements/box/Box';
-// import Title from '../../components/elements/title/Title';
 import getLenker from '../../lenker';
-// import Knappelenke from '../../components/knappelenke/Knappelenke';
 import Info from './Info';
 import SakerList from '../../components/saker-list/SakerList';
 import { mindreTimerEtterInnsendtEnnMaxAntallTimer } from '../../utils/dateUtils';
@@ -145,9 +141,8 @@ const Oversikt = ({ søknader }: Props) => {
                     )}
                 </SectionPanel>
             </Box>
-            <Box margin="xl">
-                <Info />
-            </Box>
+
+            <Info />
         </InnsynPage>
     );
 };

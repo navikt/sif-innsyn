@@ -26,8 +26,23 @@
         margin: 0;
     }
     &__content {
-        padding: 1rem 1.5rem 1.5rem 1.5rem;
+        padding: 1rem;
+
+        @media (min-width: @mobile-breakpoint) {
+            padding: 1rem 1.5rem 1.5rem 1.5rem;
+        }
+
         color: @c-text;
+    }
+    &__child {
+        @media (min-width: @tablet-breakpoint) {
+            min-height: 66px;
+        }
+    }
+    &__lenke {
+        @media (min-width: @mobile-breakpoint) {
+            margin-top: 1rem;
+        }
     }
     &__image {
         display: block;

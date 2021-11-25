@@ -3,12 +3,20 @@
 
 .info {
     ul {
-        margin-top: 2rem;
+        padding-inline-start: 1rem;
+        margin-top: 0;
+        @media (min-width: @mobile-breakpoint) {
+            margin-top: 2rem;
+            padding-inline-start: 40px;
+        }
     }
     li {
-        margin-bottom: 1rem;
+        margin-bottom: 0.5rem;
         div:first-child {
             font-weight: bold;
+        }
+        @media (min-width: @mobile-breakpoint) {
+            margin-bottom: 1rem;
         }
     }
 }

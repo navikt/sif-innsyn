@@ -1,9 +1,9 @@
 import React from 'react';
 import { HoyreChevron } from 'nav-frontend-chevron';
 import { Undertittel } from 'nav-frontend-typografi';
-import './linkPanel.less';
 import bemUtils from '../../utils/bemUtils';
 import Lenke from 'nav-frontend-lenker';
+import './linkPanel.less';
 
 interface Props {
     image: React.ReactNode;
@@ -23,8 +23,8 @@ const LinkPanel: React.FC<Props> = ({ title, lenkeTekst, lenke, image, children 
                     <Undertittel tag="h3" className={bem.element('title')}>
                         {title}
                     </Undertittel>
-                    <div>{children}</div>
-                    <div style={{ marginTop: '1rem' }}>
+                    <div className={bem.element('child')}>{children}</div>
+                    <div className={bem.element('lenke')}>
                         <Lenke href={lenke}>
                             {lenkeTekst} <HoyreChevron />
                         </Lenke>

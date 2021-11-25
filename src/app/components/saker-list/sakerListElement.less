@@ -2,9 +2,6 @@
 @import '~nav-frontend-typografi-style/src/mixins.less';
 
 .sakerListElement {
-    display: flex;
-    align-items: center;
-    width: 100%;
     &__mottatt {
         opacity: 0.75;
     }
@@ -32,9 +29,12 @@
     &__dokumenter {
         font-weight: bold;
     }
-    &__no-bullets {
+    ul {
         list-style-type: none; /* Remove bullets */
         padding: 0rem;
         margin: 0.5rem 0rem;
+    }
+    li {
+        padding-bottom: 0.8rem;
     }
 }

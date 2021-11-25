@@ -7,11 +7,15 @@ interface Props {
 }
 
 const SakerList = ({ søknader }: Props) => (
-    <>
+    <ul style={{ listStyleType: 'none', paddingInlineStart: 0 }}>
         {søknader.map((søknad) => {
-            return <SakerListElement key={søknad.søknadId} søknad={søknad}></SakerListElement>;
+            return (
+                <li key={søknad.søknadId}>
+                    <SakerListElement søknad={søknad}></SakerListElement>
+                </li>
+            );
         })}
-    </>
+    </ul>
 );
 
 export default SakerList;

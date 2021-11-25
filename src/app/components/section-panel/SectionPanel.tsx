@@ -3,8 +3,8 @@ import PanelBase from 'nav-frontend-paneler';
 import bemUtils from '../../utils/bemUtils';
 import Title, { TitleStyle, TitleTag } from '../elements/title/Title';
 import CircleIllustration from './circle-illustration/CircleIllustration';
-import './sectionPanel.less';
 import Box from '../elements/box/Box';
+import './sectionPanel.less';
 
 const bem = bemUtils('sectionPanel');
 

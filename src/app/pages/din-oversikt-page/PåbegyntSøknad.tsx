@@ -12,7 +12,7 @@ import './påbegyntSøknad.less';
 interface Props {
     updatedTimestemp?: string;
 }
-const bem = bemUtils('påbegyntSøknad');
+const bem = bemUtils('pabegynt');
 
 const PåbegyntSøknad = ({ updatedTimestemp }: Props) => {
     const intl = useIntl();
@@ -21,19 +21,17 @@ const PåbegyntSøknad = ({ updatedTimestemp }: Props) => {
     return (
         <SectionPanel title={intlHelper(intl, 'page.dinOversikt.påbegyntSøknad.title')}>
             {datoNårSlettes && (
-                <>
+                <div className={bem.block}>
                     <LenkepanelBase href={getLenker().pleiepengerURL} border={true}>
-                        <>
-                            <div className={bem.element('content')}>
-                                <div className={bem.element('title')}>
-                                    {intlHelper(intl, 'page.dinOversikt.påbegyntSøknad.info.title')}
-                                </div>
-
-                                {intlHelper(intl, `page.dinOversikt.påbegyntSøknad.info`, { datoNårSlettes })}
+                        <div className={bem.element('content')}>
+                            <div className={bem.element('title')}>
+                                {intlHelper(intl, 'page.dinOversikt.påbegyntSøknad.info.title')}
                             </div>
-                        </>
+
+                            {intlHelper(intl, `page.dinOversikt.påbegyntSøknad.info`, { datoNårSlettes })}
+                        </div>
                     </LenkepanelBase>
-                </>
+                </div>
             )}
             {!datoNårSlettes && <Box>{intlHelper(intl, 'page.dinOversikt.påbegyntSøknad.ingenPåbegynt')}</Box>}
         </SectionPanel>

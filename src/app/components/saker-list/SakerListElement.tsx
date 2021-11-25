@@ -40,7 +40,7 @@ const SakerListElement = ({ søknad }: Props) => {
 
     const mapOrganisasjoner = (organisasjon: Organisasjon | Arbeidsgiver) => {
         return (
-            <li key={organisasjon.organisasjonsnummer} className={bem.element('sakerlistElement')}>
+            <li key={organisasjon.organisasjonsnummer}>
                 <Lenke
                     target="_blank"
                     href={getApiUrlBySoknadIdOgOrgnummer(søknad.søknadId, organisasjon.organisasjonsnummer)}>
@@ -60,7 +60,7 @@ const SakerListElement = ({ søknad }: Props) => {
 
     const mapDokumenter = (dokument: Dokument, date: string) => {
         return (
-            <li key={dokument.dokumentInfoId} className={bem.element('listElement')}>
+            <li key={dokument.dokumentInfoId}>
                 <Lenke
                     target="_blank"
                     href={`${dokument.url}?dokumentTittel=${
@@ -99,10 +99,11 @@ const SakerListElement = ({ søknad }: Props) => {
                             <SoknadInfo søknad={søknad} />
                         </span>
                     </>
-                }>
+                }
+                className={bem.block}>
                 <Box margin="l">
                     {søknad.dokumenter && søknad.dokumenter.length > 0 && (
-                        <ul className={bem.element('no-bullets')}>
+                        <ul>
                             {søknad.dokumenter.map((dokument) =>
                                 mapDokumenter(dokument, getPrettyDate(søknad.søknad.mottatt, 'dayDateAndTimeShort'))
                             )}
@@ -124,12 +125,14 @@ const SakerListElement = ({ søknad }: Props) => {
                             <FormattedMessage id="page.dinOversikt.saker.ppSøknad.bekreftelseTilArbeidsgiver.info" />
                         </Normaltekst>
 
-                        <ul className={bem.element('no-bullets')}>
+                        <ul>
                             {'arbeidsgivere' in søknad.søknad &&
                                 'organisasjoner' in søknad.søknad.arbeidsgivere &&
                                 søknad.søknad.arbeidsgivere.organisasjoner.map((organisasjon) =>
                                     mapOrganisasjoner(organisasjon)
                                 )}
+                        </ul>
+                        <ul>
                             {'arbeidsgivere' in søknad.søknad &&
                                 isArray(søknad.søknad.arbeidsgivere) &&
                                 søknad.søknad.arbeidsgivere.map(
