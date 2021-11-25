@@ -2,6 +2,14 @@
 @import '~nav-frontend-typografi-style/src/mixins.less';
 
 .sakerListElement {
+    .ekspanderbartPanel {
+        @media (max-width: @mobile-breakpoint) {
+            &__hode {
+                padding: 0.5rem;
+            }
+        }
+    }
+
     &__mottatt {
         opacity: 0.75;
     }
