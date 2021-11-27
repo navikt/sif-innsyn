@@ -19,7 +19,7 @@
         "PLEIEPENGER_URL": "https://www.nav.no/familie/sykdom-i-familien/soknad/pleiepenger/soknad",
         "PP_MELLOMLAGRING_API_URL": "https://pleiepengesoknad-api.nav.no/mellomlagring",
         "ENRINGER_DU_MA_GI_BESKJED_OM_INFO_URL": "https://www.nav.no/familie/sykdom-i-familien/nb/pleiepenger-for-sykt-barn#Endringer-du-ma-gi-beskjed-om",
-        "DITT_NAV_URL": "https://www.nav.no/no/Ditt+NAV",
+        "DITT_NAV_URL": "https://www.nav.no/person/dittnav",
         "APPSTATUS_PROJECT_ID": "ryujtq87",
         "APPSTATUS_DATASET": "production",
         "USE_AMPLITUDE": "true"
