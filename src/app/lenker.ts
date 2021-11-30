@@ -21,7 +21,7 @@ const lenkerBokmål: Lenker = {
     klageInfo: getEnvironmentVariable('KLAGE_INFO_URL'),
     regelverkFolketrygden: getEnvironmentVariable('REGELVERK_INFO_URL'),
     dittNAV: getEnvironmentVariable('DITT_NAV_URL'),
-    saksoversikt: 'https://tjenester.nav.no/saksoversikt/',
+    saksoversikt: 'https://person.nav.no/mine-saker',
     dineUtbetalinger: 'https://tjenester.nav.no/utbetalingsoversikt/',
     minInnboksSkrivMelding: 'https://mininnboks.nav.no/sporsmal/skriv/FMLI',
     endringerDuMåGiBeskjedOm: getEnvironmentVariable('ENRINGER_DU_MA_GI_BESKJED_OM_INFO_URL'),
