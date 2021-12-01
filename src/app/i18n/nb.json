@@ -28,7 +28,7 @@
 
     "page.dinOversikt.saker.title": "Dette har vi mottatt fra deg",
     "page.dinOversikt.saker.sakstype.ppSøknad": "Søknad om pleiepenger",
-    "page.dinOversikt.saker.sakstype.pp.ettersendelse": "Ettersendelse - Pleiepenger sykt barn",
+    "page.dinOversikt.saker.sakstype.pp.ettersendelse": "Ettersendelse av dokumenter - Pleiepenger sykt barn",
     "page.dinOversikt.saker.sakstype.endringsMelding": "Endringsmelding pleiepenger - {type}",
     "page.dinOversikt.saker.sakerlistElement.dokumenter.ingenDokumenter": "Ingen dokumenter fant.",
     "page.dinOversikt.saker.ppSøknad.bekreftelseTilArbeidsgiver.title": "Bekreftelse til arbeidsgiver(e)",
@@ -51,7 +51,7 @@
     "page.dinOversikt.info.innsent.søknad.legeerklæring": "Vi sjekker om vi har fått legeerklæring fra deg. Hvis du ikke sendte den sammen med søknaden din, må du ettersende den til oss så snart du kan.",
 
     "page.dinOversikt.info.innsent.søknad.inntektsmelding.tittel": "Inntektsmelding fra arbeidsgiver",
-    "page.dinOversikt.info.innsent.søknad.inntektsmelding.avsnitt.1": "Hvis du er arbeidstaker, sjekker vi om vi har fått inntektsmelding fra arbeidsgiveren din. Den trenger vi hvis du søker for første gang, eller det er mer enn 4 uker siden du hadde pleiepenger sist. Kontakt arbeidsgiver for å sikre at de sender inntektsmeldingen til oss.",
+    "page.dinOversikt.info.innsent.søknad.inntektsmelding.avsnitt.1": "Hvis du er arbeidstaker, sjekker vi om vi har fått inntektsmelding fra arbeidsgiveren din. Den trenger vi hvis du søker for første gang, eller det er 4 uker eller mer siden sist du hadde pleiepenger. Kontakt arbeidsgiver for å sikre at de sender inntektsmeldingen til oss.",
     "page.dinOversikt.info.innsent.søknad.inntektsmelding.avsnitt.2": "Hvis du ikke er arbeidstaker, trenger du ikke sende informasjon om inntekten din.",
 
     "page.dinOversikt.info.innsent.søknad.behandling.tittel": "Vi behandler søknaden din",
