@@ -77,7 +77,7 @@ const InfoEtterSendtSøknad = ({ harArbeidsgiver }: Props) => {
                                     title={intlHelper(intl, 'page.pleiepengesakSøknad.infoEtterSøknad.step4.title.1')}>
                                     <p>
                                         <FormattedMessage id="page.pleiepengesakSøknad.infoEtterSøknad.step4.title.2" />{' '}
-                                        <Lenke href={lenker.ettersending}>
+                                        <Lenke href={lenker.saksoversikt}>
                                             {intlHelper(intl, 'page.pleiepengesakSøknad.infoEtterSøknad.step4.title.3')}
                                         </Lenke>{' '}
                                         {intlHelper(intl, 'page.pleiepengesakSøknad.infoEtterSøknad.step4.title.4')}
