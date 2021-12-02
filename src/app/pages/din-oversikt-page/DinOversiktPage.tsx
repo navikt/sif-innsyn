@@ -85,7 +85,7 @@ const Oversikt = ({ søknader }: Props) => {
             )}
             <MellomlagringDataFetcher />
             <Box>
-                <FrontpagePanelWrapper maxColumns={3} title={intlHelper(intl, 'page.dinOversikt.linkPanel.title')}>
+                <FrontpagePanelWrapper maxColumns={3}>
                     <LinkPanel
                         image={<EttersendIkon />}
                         title={intlHelper(intl, 'page.dinOversikt.linkPanel.ettersending.title')}

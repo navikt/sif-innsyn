@@ -8,7 +8,6 @@
 
     "page.dinOversikt.title": "Dine pleiepenger",
 
-    "page.dinOversikt.linkPanel.title": "Hva ønsker du å gjøre?",
     "page.dinOversikt.linkPanel.ettersending.title": "Ettersende noe?",
     "page.dinOversikt.linkPanel.ettersending.lenkeTekst": "Gå til ettersending",
     "page.dinOversikt.linkPanel.ettersending.lenkeTekst.info": "Her kan du ettersende dokumenter i saken din.",
@@ -21,9 +20,9 @@
     "page.dinOversikt.linkPanel.søknad.lenkeTekst": "Gå til ny søknad",
     "page.dinOversikt.linkPanel.søknad.lenkeTekst.info": "Her kan du søke om forlengelse, eller sende en helt ny søknad.",
 
-    "page.dinOversikt.påbegyntSøknad.title": "Vil du fortsette der du slapp?",
+    "page.dinOversikt.påbegyntSøknad.title": "Vil du fortsette på en påbegynt søknad?",
     "page.dinOversikt.påbegyntSøknad.ingenPåbegynt": "Du har ikke påbegynt søknad",
-    "page.dinOversikt.påbegyntSøknad.info.title": "Søknad om pleiepenger sykt barn",
+    "page.dinOversikt.påbegyntSøknad.info.title": "Gå til påbegynt søknad om pleiepenger sykt barn",
     "page.dinOversikt.påbegyntSøknad.info": "Lagres til og med {datoNårSlettes}",
 
     "page.dinOversikt.saker.title": "Dette har vi mottatt fra deg",

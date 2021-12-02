@@ -5,17 +5,19 @@ import './frontpagePanelWrapper.less';
 
 interface Props {
     maxColumns?: number;
-    title: string;
+    title?: string;
 }
 
 const bem = bemUtils('frontpagePanelWrapper');
 
-const FrontpagePanelWrapper: React.FC<Props> = ({ maxColumns = 3, title, children }) => {
+const FrontpagePanelWrapper: React.FC<Props> = ({ maxColumns = 3, title = undefined, children }) => {
     return (
         <>
-            <div className={bem.element('title')}>
-                <Systemtittel>{title}</Systemtittel>
-            </div>
+            {title && (
+                <div className={bem.element('title')}>
+                    <Systemtittel>{title}</Systemtittel>
+                </div>
+            )}
 
             <div className={bem.classNames(bem.block, bem.modifier(`columns-${maxColumns}`))}>
                 {Children.map(children, (child) => (
