@@ -18,6 +18,7 @@ const InnsynRoutes = ({ history, søknader }: Props) => {
     return (
         <Switch>
             {redirectToRoute && <Redirect to={redirectToRoute} />}
+
             <Route
                 exact={true}
                 path={InnsynRouteConfig.OVERSIKT}

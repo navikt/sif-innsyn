@@ -1,6 +1,7 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
+const ESLintPlugin = require('eslint-webpack-plugin');
 
 const webpackConfig = {
     entry: {
@@ -18,19 +19,6 @@ const webpackConfig = {
         rules: [
             {
                 test: /\.(ts|tsx)$/,
-                enforce: 'pre',
-                use: [
-                    {
-                        options: {
-                            eslintPath: require.resolve('eslint'),
-                        },
-                        loader: require.resolve('eslint-loader'),
-                    },
-                ],
-                exclude: /node_modules/,
-            },
-            {
-                test: /\.(ts|tsx)$/,
                 include: [path.resolve(__dirname, './../../app'), path.resolve(__dirname, './../../common')],
                 use: [
                     {
@@ -43,7 +31,18 @@ const webpackConfig = {
             },
             {
                 test: /\.less$/,
-                use: [MiniCssExtractPlugin.loader, 'css-loader', 'less-loader'],
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    'css-loader',
+                    {
+                        loader: 'less-loader',
+                        options: {
+                            lessOptions: {
+                                math: 'always',
+                            },
+                        },
+                    },
+                ],
             },
         ],
     },
@@ -52,6 +51,10 @@ const webpackConfig = {
         new MiniCssExtractPlugin({
             filename: 'css/[name].css?[fullhash]-[chunkhash]-[name]',
             linkType: 'text/css',
+        }),
+        new ESLintPlugin({
+            extensions: ['ts', 'tsx'],
+            failOnWarning: false,
         }),
     ],
 };
