@@ -5,7 +5,6 @@ import { InnsynRouteConfig } from '../../config/innsynRouteConfig';
 import { Søknad } from '../../types/apiTypes/søknadTypes';
 import SectionPanel from '../../components/section-panel/SectionPanel';
 import Box from '../../components/elements/box/Box';
-import SoknadList from '../../components/soknad-list/SoknadList';
 import InfoManglendeSøknad from '../../components/info-manglende-søknad/InfoManglendeSøknad';
 import { erPleiepenger, groupByYear } from '../../utils/soknadUtils';
 import Title from '../../components/elements/title/Title';
@@ -17,8 +16,9 @@ import { PageKey } from '../../config/pageKey';
 import { FormattedMessage, useIntl } from 'react-intl';
 import intlHelper from '../../utils/intlUtils';
 import bemUtils from '../../utils/bemUtils';
-import './soknader.less';
 import { AlertStripeInfo } from 'nav-frontend-alertstriper';
+import SakerList from '../../components/saker-list/SakerList';
+import './soknader.less';
 
 const bem = bemUtils('soknader');
 
@@ -60,10 +60,7 @@ const Søknader = ({ søknader }: Props) => {
                                             {group.år}
                                         </Title>
                                         <Box margin="xl">
-                                            <SoknadList
-                                                søknader={group.søknader}
-                                                link={InnsynRouteConfig.SØKNADER_SØKNAD}
-                                            />
+                                            <SakerList søknader={group.søknader} />
                                         </Box>
                                     </Box>
                                 ))}

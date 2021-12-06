@@ -1,5 +1,13 @@
 import React from 'react';
-import moment from 'moment-timezone';
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+import timezone from 'dayjs/plugin/timezone';
+
+require('dayjs/locale/nb');
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
+dayjs.locale('nb');
 
 type FormatType = 'date' | 'dateAndTime' | 'dayDateAndTime' | 'dayDateAndTimeShort' | 'dateShort';
 
@@ -25,11 +33,11 @@ const getFormatString = (format: FormatType): string => {
 };
 
 export const getPrettyDate = (date: Date | string, format: FormatType = 'date'): string => {
-    return moment(date).format(getFormatString(format));
+    return dayjs(date).format(getFormatString(format));
 };
 
 export const getPrettyDateNorwegianTime = (date: Date | string, format: FormatType = 'date'): string => {
-    return moment(date).tz('Europe/Oslo').format(getFormatString(format));
+    return dayjs(date).tz('Europe/Oslo').format(getFormatString(format));
 };
 
 const PrettyDate = ({ date, format = 'date', useNorwegianTime }: Props) => (

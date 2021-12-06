@@ -6,10 +6,9 @@ import InfoManglendeSøknad from '../../components/info-manglende-søknad/InfoMa
 import InnsynPage from '../../components/innsyn-page/InnsynPage';
 import PageBanner from '../../components/page-banner/PageBanner';
 import SectionPanel from '../../components/section-panel/SectionPanel';
-import SoknadList from '../../components/soknad-list/SoknadList';
 import { PageKey } from '../../config/pageKey';
-import SvgSykdomIFamilien from '../../svg/SvgSykdomIFamilien';
-import { Søknad } from '../../types/apiTypes/søknadTypes';
+import Alertstripe from 'nav-frontend-alertstriper';
+import { PleiepengerSøknadInfo, Søknad, Søknadstype } from '../../types/apiTypes/søknadTypes';
 import intlHelper from '../../utils/intlUtils';
 import { erPleiepenger } from '../../utils/soknadUtils';
 import MellomlagringDataFetcher from '../MellomlagringDataFetcher';
@@ -20,9 +19,15 @@ import Lenke from 'nav-frontend-lenker';
 import './dinOversiktPage.less';
 import bemUtils from '../../utils/bemUtils';
 import Box from '../../components/elements/box/Box';
-import Title from '../../components/elements/title/Title';
 import getLenker from '../../lenker';
-import Knappelenke from '../../components/knappelenke/Knappelenke';
+import Info from './Info';
+import SakerList from '../../components/saker-list/SakerList';
+import { mindreTimerEtterInnsendtEnnMaxAntallTimer } from '../../utils/dateUtils';
+import LinkPanel from '../../components/link-panel/LinkPanel';
+import EttersendIkon from '../../svg/ettersendIkon';
+import FrontpagePanelWrapper from '../../components/frontpage-panel-wrapper/FrontpagePanelWrapper';
+import EndringIkon from '../../svg/endringIkon';
+import NySøknadIkon from '../../svg/nySøknadIcon';
 
 const bem = bemUtils('dinOversiktPage');
 
@@ -36,17 +41,75 @@ const Oversikt = ({ søknader }: Props) => {
     const pleiepengesoknader = søknader.filter((søknad) => erPleiepenger(søknad));
     const harSøknader = pleiepengesoknader.length > 0;
     const seksFørsteSoknader = pleiepengesoknader.slice(0, 5);
+    const harArbeidsgiver = (søknad: PleiepengerSøknadInfo) => {
+        if ('arbeidsgivere' in søknad) {
+            return 'organisasjoner' in søknad.arbeidsgivere
+                ? søknad.arbeidsgivere.organisasjoner && søknad.arbeidsgivere.organisasjoner.length > 0
+                : søknad.arbeidsgivere &&
+                      søknad.arbeidsgivere.length > 0 &&
+                      søknad.arbeidsgivere.some((arbeidsgiver) => !arbeidsgiver.sluttetFørSøknadsperiode);
+        }
+        return false;
+    };
+
+    const visAlertstripe =
+        harSøknader &&
+        pleiepengesoknader.some(
+            (søknad) =>
+                søknad.søknadstype === Søknadstype.PP_SYKT_BARN &&
+                harArbeidsgiver(søknad.søknad) &&
+                mindreTimerEtterInnsendtEnnMaxAntallTimer(søknad.opprettet, 48)
+        );
 
     useLogSidevisning(PageKey.frontpage);
 
     return (
         <InnsynPage
             title={intlHelper(intl, 'page.dinOversikt.title')}
-            topContentRenderer={() => (
-                <PageBanner title={intlHelper(intl, 'page.dinOversikt.title')} illustration={<SvgSykdomIFamilien />} />
-            )}>
+            topContentRenderer={() => <PageBanner title={intlHelper(intl, 'page.dinOversikt.title')}></PageBanner>}>
+            {visAlertstripe && (
+                <Box padBottom="xl">
+                    <Alertstripe type="advarsel">
+                        <FormattedMessage id="page.pleiepengesakSøknad.søknad.alertstripe.title" />
+                        <ul>
+                            <li>
+                                <FormattedMessage id="page.pleiepengesakSøknad.søknad.alertstripe.list.1" />
+                            </li>
+                            <li>
+                                <FormattedMessage id="page.pleiepengesakSøknad.søknad.alertstripe.list.2" />
+                            </li>
+                        </ul>
+                        <FormattedMessage id="page.pleiepengesakSøknad.søknad.alertstripe.info" />
+                    </Alertstripe>
+                </Box>
+            )}
             <MellomlagringDataFetcher />
-            <div className={bem.classNames(bem.block, bem.element('sectionPanelSoknader'))}>
+            <Box>
+                <FrontpagePanelWrapper maxColumns={3}>
+                    <LinkPanel
+                        image={<EttersendIkon />}
+                        title={intlHelper(intl, 'page.dinOversikt.linkPanel.ettersending.title')}
+                        lenke={getLenker().ettersending}
+                        lenkeTekst={intlHelper(intl, 'page.dinOversikt.linkPanel.ettersending.lenkeTekst')}>
+                        <FormattedMessage id="page.dinOversikt.linkPanel.ettersending.lenkeTekst.info" />
+                    </LinkPanel>
+                    <LinkPanel
+                        image={<EndringIkon />}
+                        title={intlHelper(intl, 'page.dinOversikt.linkPanel.endringsmelding.title')}
+                        lenke={getLenker().minInnboksSkrivMelding}
+                        lenkeTekst={intlHelper(intl, 'page.dinOversikt.linkPanel.endringsmelding.lenkeTekst')}>
+                        <FormattedMessage id="page.dinOversikt.linkPanel.endringsmelding.lenkeTekst.info" />
+                    </LinkPanel>
+                    <LinkPanel
+                        image={<NySøknadIkon />}
+                        title={intlHelper(intl, 'page.dinOversikt.linkPanel.søknad.title')}
+                        lenke={getLenker().pleiepengerURL}
+                        lenkeTekst={intlHelper(intl, 'page.dinOversikt.linkPanel.søknad.lenkeTekst')}>
+                        <FormattedMessage id="page.dinOversikt.linkPanel.søknad.lenkeTekst.info" />
+                    </LinkPanel>
+                </FrontpagePanelWrapper>
+            </Box>
+            <Box>
                 <SectionPanel
                     illustration={<DocumenterIkon />}
                     illustrationPlacement="outside"
@@ -54,8 +117,8 @@ const Oversikt = ({ søknader }: Props) => {
                     additionalInfo={<InfoManglendeSøknad mode="expandable-text" />}>
                     {harSøknader && (
                         <>
-                            <Box margin="xxl">
-                                <SoknadList søknader={seksFørsteSoknader} />
+                            <Box margin="l">
+                                <SakerList søknader={seksFørsteSoknader} />
                             </Box>
 
                             {pleiepengesoknader.length > 6 && (
@@ -77,33 +140,9 @@ const Oversikt = ({ søknader }: Props) => {
                         </>
                     )}
                 </SectionPanel>
-            </div>
-            <div className={bem.classNames(bem.block, bem.element('sectionPanel'))}>
-                <SectionPanel>
-                    <Box margin="xl">
-                        <Title>{intlHelper(intl, 'page.dinOversikt.lenker.endring.title')}</Title>
-                        <Box margin="l">
-                            <FormattedMessage id="page.dinOversikt.lenker.endring.info" />{' '}
-                            <Box margin="l">
-                                <Knappelenke href={getLenker().endringerDuMåGiBeskjedOm}>
-                                    <FormattedMessage id="page.dinOversikt.lenker.endring.knapp.title" />
-                                </Knappelenke>
-                            </Box>
-                        </Box>
-                    </Box>
-                    <Box margin="xxl" padBottom="xxl">
-                        <Title>{intlHelper(intl, 'page.dinOversikt.lenker.nySøknad.title')}</Title>
-                        <Box margin="l">
-                            <FormattedMessage id="page.dinOversikt.lenker.nySøknad.info" />{' '}
-                            <Box margin="l">
-                                <Knappelenke href={getLenker().pleiepenger}>
-                                    <FormattedMessage id="page.dinOversikt.lenker.nySøknad.knapp.title" />
-                                </Knappelenke>
-                            </Box>
-                        </Box>
-                    </Box>
-                </SectionPanel>
-            </div>
+            </Box>
+
+            <Info />
         </InnsynPage>
     );
 };

@@ -1,15 +1,11 @@
-const os = require('os');
-const fs = require('fs');
 const express = require('express');
-const Busboy = require('busboy');
-const _ = require('lodash');
 const path = require('path');
 
 const server = express();
 
 server.use(express.json());
 server.use((req, res, next) => {
-    const allowedOrigins = ['http://localhost:1337'];
+    const allowedOrigins = ['http://localhost:1337', 'http://localhost:8080'];
     const requestOrigin = req.headers.origin;
     if (allowedOrigins.indexOf(requestOrigin) >= 0) {
         res.set('Access-Control-Allow-Origin', requestOrigin);
@@ -347,6 +343,14 @@ const soknadMock = [
         opprettet: '2021-03-16T03:04:05',
         endret: '2020-06-23T09:11:21.948652',
         behandlingsdato: null,
+        dokumenter: [
+            {
+                tittel: 'Søknad om pleiepenger',
+                url: 'http://localhost:1234/dokument/510534976/533438764/ARKIV',
+                filtype: 'PDF',
+                dokumentInfoId: '513437665',
+            },
+        ],
     },
     {
         søknadId: '9c3a3ebf-e02a-4843-ad2c-9187e2f00cfa-b',
@@ -391,26 +395,26 @@ const soknadMock = [
             },
             vedleggUrls: ['http://localhost:8080/1234', 'http://localhost:8080/12345'],
             harMedsøker: true,
-            arbeidsgivere: {
-                organisasjoner: [
-                    {
-                        navn: 'Nei',
-                        skalJobbe: 'nei',
-                        skalJobbeProsent: 0.0,
-                        vetIkkeEkstrainfo: null,
-                        jobberNormaltTimer: 0.0,
-                        organisasjonsnummer: '73645736727',
-                    },
-                    {
-                        navn: 'Navn med mellomrom',
-                        skalJobbe: 'redusert',
-                        skalJobbeProsent: 22.512,
-                        vetIkkeEkstrainfo: null,
-                        jobberNormaltTimer: 0.0,
-                        organisasjonsnummer: '846785862386',
-                    },
-                ],
-            },
+            arbeidsgivere: [
+                {
+                    erAnsatt: true,
+                    navn: 'Google Norge AS',
+                    organisasjonsnummer: '73645736727',
+                    sluttetFørSøknadsperiode: false,
+                },
+                {
+                    erAnsatt: false,
+                    navn: 'Microsoft Norge AS',
+                    organisasjonsnummer: '846785862386',
+                    sluttetFørSøknadsperiode: true,
+                },
+                {
+                    erAnsatt: false,
+                    navn: 'Amazon Norge AS',
+                    organisasjonsnummer: '846776864386',
+                },
+            ],
+
             samtidigHjemme: null,
             tilsynsordning: {
                 ja: {
@@ -446,9 +450,17 @@ const soknadMock = [
         opprettet: '2018-06-02T03:04:05',
         endret: '2020-06-23T09:11:21.948652',
         behandlingsdato: null,
+        dokumenter: [
+            {
+                tittel: 'Søknad om pleiepenger',
+                url: 'http://localhost:1234/dokument/510534976/533438764/ARKIV',
+                filtype: 'PDF',
+                dokumentInfoId: '533437665',
+            },
+        ],
     },
     {
-        søknadstype: 'PP_ETTERSENDING',
+        søknadstype: 'PP_ETTERSENDELSE',
         status: 'MOTTATT',
         søknad: {
             beskrivelse: 'Lorem ipsum doret salah et spurs',
@@ -459,6 +471,20 @@ const soknadMock = [
         opprettet: '2018-01-01T03:04:05',
         endret: '2020-06-23T09:11:21.948652',
         behandlingsdato: null,
+        dokumenter: [
+            {
+                tittel: 'Ettersendelse pleiepenger sykt barn',
+                url: 'http://localhost:1234/dokument/510534976/533438765/ARKIV',
+                filtype: 'PDF',
+                dokumentInfoId: '533438765',
+            },
+            {
+                tittel: 'BekreftelseTilKLONELABBEN.pdf',
+                url: 'http://localhost:1234/dokument/510534976/533438766/ARKIV',
+                filtype: 'PDF',
+                dokumentInfoId: '533438766',
+            },
+        ],
     },
 ];
 
@@ -533,6 +559,27 @@ const startServer = () => {
             res.status(401).send();
         }
     });
+    server.get('/dokument/:journalpostId/:dokumentInfoId/:variantFormat', (req, res) => {
+        if (isLoggedIn(req)) {
+            switch (req.params.dokumentInfoId) {
+                case '533438765':
+                    res.download(
+                        'Ettersending av vedlegg - Pleiepenger sykt barn.pdf',
+                        'Ettersending av vedlegg - Pleiepenger sykt barn.pdf'
+                    );
+                    break;
+                case '533438766':
+                    res.download('BekreftelseTilKLONELABBEN.pdf', 'BekreftelseTilKLONELABBEN.pdf');
+                    break;
+                default:
+                    res.download('Søknad om pleiepenger.pdf', 'Søknad om pleiepenger.pdf');
+                    break;
+            }
+        } else {
+            res.status(401).send();
+        }
+    });
+
     server.get('/soknad/:soknadId/arbeidsgivermelding', (req, res) => {
         if (isLoggedIn(req)) {
             res.download('BekreftelseTilKLONELABBEN.pdf', 'BekreftelseTilKLONELABBEN.pdf');

@@ -6,7 +6,7 @@ import DittNavBreadcrumbs from '../ditt-nav-breadcrumbs/DittNavBreadcrumbs';
 
 interface Props {
     title: React.ReactNode;
-    illustration: React.ReactNode;
+    illustration?: React.ReactNode;
     footer?: React.ReactNode;
     wide?: boolean;
     children?: React.ReactNode;
@@ -14,7 +14,7 @@ interface Props {
 
 const bem = bemUtils('pageBanner');
 
-const PageBanner: React.FunctionComponent<Props> = ({ title, illustration, footer, children, wide }: Props) => {
+const PageBanner: React.FC<Props> = ({ title, illustration, footer, children, wide }: Props) => {
     return (
         <div className={bem.classNames(bem.block, bem.modifierConditional('wide', wide))}>
             <div className={bem.element('borderBox')}>
@@ -28,9 +28,11 @@ const PageBanner: React.FunctionComponent<Props> = ({ title, illustration, foote
                         <Sidetittel className={bem.element('title')}>{title}</Sidetittel>
                         {children && <div className={bem.element('content')}>{children}</div>}
                     </div>
-                    <div className={bem.element('illustration')} role="presentation" aria-hidden={true}>
-                        {illustration}
-                    </div>
+                    {illustration && (
+                        <div className={bem.element('illustration')} role="presentation" aria-hidden={true}>
+                            {illustration}
+                        </div>
+                    )}
                 </div>
             </div>
             {footer && (

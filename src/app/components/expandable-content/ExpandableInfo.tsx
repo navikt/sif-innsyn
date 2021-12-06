@@ -28,6 +28,7 @@ const ExpandableInfo = ({ children, initialOpen, closeTitle, title, filledBackgr
                     <Normaltekst tag="span">{isOpen ? closeTitle || title : title}</Normaltekst>
                 </InfoToggleButton>
             </div>
+
             <div className={bem.element('content')} id={toggleContentId}>
                 <CollapsableContainer isOpen={isOpen} animated={true} ariaLive="polite">
                     {filledBackground ? <AlertStripeInfo>{children}</AlertStripeInfo> : children}

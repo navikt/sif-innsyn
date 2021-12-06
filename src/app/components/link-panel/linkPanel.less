@@ -1,0 +1,77 @@
+@import '../../styles/assets.less';
+
+.linkPanel {
+    @borderRadius: 0.25rem;
+
+    display: block;
+    background-color: white;
+    border-radius: @borderRadius;
+
+    a {
+        text-decoration: none;
+    }
+
+    &:hover,
+    &:focus {
+        a,
+        .linkPanel__contentLink {
+            color: @c-link !important;
+            text-decoration: underline;
+        }
+    }
+    &__title {
+        margin-bottom: 0.5rem;
+    }
+    p {
+        margin: 0;
+    }
+    &__content {
+        padding: 1rem;
+
+        @media (min-width: @mobile-breakpoint) {
+            padding: 1rem 1.5rem 1.5rem 1.5rem;
+        }
+
+        color: @c-text;
+    }
+    &__child {
+        @media (min-width: @tablet-breakpoint) {
+            min-height: 66px;
+        }
+    }
+    &__lenke {
+        @media (min-width: @mobile-breakpoint) {
+            margin-top: 1rem;
+        }
+    }
+    &__image {
+        display: block;
+        background-color: @c-theme;
+        border-top-left-radius: @borderRadius;
+        border-top-right-radius: @borderRadius;
+        border-bottom: 0.25rem solid @c-theme-dark;
+        line-height: 0;
+        padding: 1rem 0 0 0;
+        text-align: center;
+        height: 8rem;
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        svg {
+            max-width: 10rem;
+            max-height: 7rem;
+        }
+    }
+}
+.frontpageLenkepanel {
+    display: flex;
+    align-items: center;
+
+    &__title {
+        font-size: 1.125rem;
+    }
+
+    &__image {
+        margin-right: 0.5rem;
+    }
+}

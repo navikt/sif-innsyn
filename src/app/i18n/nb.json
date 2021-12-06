@@ -8,11 +8,30 @@
 
     "page.dinOversikt.title": "Dine pleiepenger",
 
-    "page.dinOversikt.påbegyntSøknad.title": "Påbegynt søknad",
+    "page.dinOversikt.linkPanel.ettersending.title": "Ettersende noe?",
+    "page.dinOversikt.linkPanel.ettersending.lenkeTekst": "Gå til ettersending",
+    "page.dinOversikt.linkPanel.ettersending.lenkeTekst.info": "Her kan du ettersende dokumenter i saken din.",
+
+    "page.dinOversikt.linkPanel.endringsmelding.title": "Melde fra om endring?",
+    "page.dinOversikt.linkPanel.endringsmelding.lenkeTekst": "Gå til «Skriv til oss»",
+    "page.dinOversikt.linkPanel.endringsmelding.lenkeTekst.info": "Her kan du melde fra om endringer som har betydning i saken din.",
+
+    "page.dinOversikt.linkPanel.søknad.title": "Sende ny søknad?",
+    "page.dinOversikt.linkPanel.søknad.lenkeTekst": "Gå til ny søknad",
+    "page.dinOversikt.linkPanel.søknad.lenkeTekst.info": "Her kan du søke om forlengelse, eller sende en helt ny søknad.",
+
+    "page.dinOversikt.påbegyntSøknad.title": "Vil du fortsette på en påbegynt søknad?",
     "page.dinOversikt.påbegyntSøknad.ingenPåbegynt": "Du har ikke påbegynt søknad",
-    "page.dinOversikt.påbegyntSøknad.info": "Du har en påbegynt søknad om pleiepenger. Vi lagrer påbegynte søknader i 72 timer (3 døgn). Det betyr at du kan fortsette å fylle ut denne søknaden til og med {datoNårSlettes}. Etter dette blir søknaden slettet.",
-    "page.dinOversikt.påbegyntSøknad.knappen": "Gå til påbegynt søknad",
-    "page.dinOversikt.saker.title": "Dine innsendte søknader",
+    "page.dinOversikt.påbegyntSøknad.info.title": "Gå til påbegynt søknad om pleiepenger sykt barn",
+    "page.dinOversikt.påbegyntSøknad.info": "Lagres til og med {datoNårSlettes}",
+
+    "page.dinOversikt.saker.title": "Dette har vi mottatt fra deg",
+    "page.dinOversikt.saker.sakstype.ppSøknad": "Søknad om pleiepenger",
+    "page.dinOversikt.saker.sakstype.pp.ettersendelse": "Ettersendelse av dokumenter - Pleiepenger sykt barn",
+    "page.dinOversikt.saker.sakstype.endringsMelding": "Endringsmelding pleiepenger - {type}",
+    "page.dinOversikt.saker.sakerlistElement.dokumenter.ingenDokumenter": "Dokumenter ikke tilgjengelig.",
+    "page.dinOversikt.saker.ppSøknad.bekreftelseTilArbeidsgiver.title": "Bekreftelse til arbeidsgiver(e)",
+    "page.dinOversikt.saker.ppSøknad.bekreftelseTilArbeidsgiver.info": "Dette er en bekreftelse du kan gi til arbeidsgiver ved behov. Denne bekrefter at søknaden din er mottatt, hvilken periode du har søkt for, samt informasjon om at arbeidsgiver må sende inntektsmelding til oss.",
     "page.dinOversikt.saker.ingenFunnet": "Vi finner ingen søknader",
     "page.dinOversikt.saker.visAlle": "Vis alle dokumenter",
 
@@ -22,6 +41,26 @@
     "page.dinOversikt.lenker.nySøknad.title": "Vil du sende ny søknad?",
     "page.dinOversikt.lenker.nySøknad.info": "Skal du søke på nytt eller forlenge pleiepengeperioden, må du sende ny søknad",
     "page.dinOversikt.lenker.nySøknad.knapp.title": "GÅ TIL NY SØKNAD",
+
+    "page.dinOversikt.info": "Hva skjer etter at du har søknad til oss?",
+    "page.dinOversikt.info.innsent.endringsmelding.tittel": "Saksgang etter innsendt endringsmelding",
+
+    "page.dinOversikt.info.innsent.søknad.tittel": "Dette skjer etter innsendt søknad",
+    "page.dinOversikt.info.innsent.søknad.legeerklæring.tittel": "Legeerklæring",
+    "page.dinOversikt.info.innsent.søknad.legeerklæring": "Vi sjekker om vi har fått legeerklæring fra deg. Hvis du ikke sendte den sammen med søknaden din, må du ettersende den til oss så snart du kan.",
+
+    "page.dinOversikt.info.innsent.søknad.inntektsmelding.tittel": "Inntektsmelding fra arbeidsgiver",
+    "page.dinOversikt.info.innsent.søknad.inntektsmelding.avsnitt.1": "Hvis du er arbeidstaker, sjekker vi om vi har fått inntektsmelding fra arbeidsgiveren din. Den trenger vi hvis du søker for første gang, eller det er 4 uker eller mer siden sist du hadde pleiepenger. Kontakt arbeidsgiver for å sikre at de sender inntektsmeldingen til oss.",
+    "page.dinOversikt.info.innsent.søknad.inntektsmelding.avsnitt.2": "Hvis du ikke er arbeidstaker, trenger du ikke sende informasjon om inntekten din.",
+
+    "page.dinOversikt.info.innsent.søknad.behandling.tittel": "Vi behandler søknaden din",
+    "page.dinOversikt.info.innsent.søknad.behandling": "Når vi har fått legeerklæring og inntektsmelding kan vi behandle søknaden din. Vi kontakter deg hvis vi trenger flere opplysninger fra deg.",
+
+    "page.dinOversikt.info.innsent.søknad.ferdigBehandlet.tittel": "Når søknaden er ferdig behandlet",
+    "page.dinOversikt.info.innsent.søknad.ferdigBehandlet": "Når vi har behandlet søknaden din, sender vi deg et svar som du finner under saksoversikten på Ditt NAV. Vi sender også svaret til deg i posten.",
+
+    "page.dinOversikt.info.innsent.søknad.utbetaling.tittel": "Utbetaling",
+    "page.dinOversikt.info.innsent.søknad.utbetaling": "Du finner informasjon om utbetaling under «kommende utbetalinger» i utbetalingsoversikten på Ditt NAV.",
 
     "page.søknader.tittle": "Dine innsendte søknader",
     "page.søknader.crumbs.dinePP": "Dine pleiepenger",
@@ -37,14 +76,14 @@
     "page.pleiepengesakSøknad.søknad.motatt": "Søknad mottatt: {mottatt}",
     "page.pleiepengesakSøknad.periode": "Søknadsperiode: {fom} til {tom}",
     "page.pleiepengesakSøknad.søknad.mottatDato": "{søknad} er mottatt {mottatt}",
-    "page.pleiepengesakSøknad.søknad.alertstripe.title": "Husk å be arbeidsgivern(e) dine sende inntektsmelding til oss så snart som mulig hvis",
+    "page.pleiepengesakSøknad.søknad.alertstripe.title": "Vi har nylig mottatt søknad om pleiepenger fra deg. Husk å be arbeidsgivern(e) dine sende inntektsmelding til oss så snart som mulig hvis",
     "page.pleiepengesakSøknad.søknad.alertstripe.list.1": "du søker for første gang, eller",
     "page.pleiepengesakSøknad.søknad.alertstripe.list.2": "det er mer enn 4 uker siden du hadde pleiepenger sist.",
     "page.pleiepengesakSøknad.søknad.alertstripe.info": "Dette er viktig ettersom vi ikke får behandlet søknaden din uten inntektsmeldingen.",
     "page.pleiepengesakSøknad.ekspanderbartpanel1.title": "Bekreftelse til arbeidsgiver",
     "page.pleiepengesakSøknad.ekspanderbartpanel1.info": "Hvis arbeidsgiver ønsker en bekreftelse på at du har søkt pleiepenger kan du laste ned eller skrive ut bekreftelse her.",
     "page.pleiepengesakSøknad.ekspanderbartpanel1.list.tittle": "Dokumenter som kan lastes ned",
-    "page.pleiepengesakSøknad.ekspanderbartpanel1.list.itemName": "Bekreftelse til {organisasjonsnavn} (pdf)",
+    "page.pleiepengesakSøknad.ekspanderbartpanel1.list.itemName": "Bekreftelse til {organisasjonsnavn} (PDF)",
     "page.pleiepengesakSøknad.ekspanderbartpanel2.title": "Ettersend legeerklæring eller annen dokumentasjon",
     "page.pleiepengesakSøknad.ekspanderbartpanel2.info.1": "For at vi skal kunne behandle søknaden din trenger vi legeerklæring. Hvis du ikke sendte den inn sammen med søknaden din kan du laste den opp her.",
     "page.pleiepengesakSøknad.ekspanderbartpanel2.info.2": "Vi trenger også inntektsmelding, men den er det arbeidsgiveren din som sender.",
@@ -97,7 +136,6 @@
     "info.manglendeSøknad.shortInfo": "Det kan ta noe tid fra du har sendt en digital søknad til den vises her. Hvis du fikk kvittering på at søknaden var innsendt, er den mottatt av NAV selv om den ikke vises her enda.",
     "info.manglendeSøknad.title": "Har du sendt inn en søknad som du ikke ser her?",
     "info.manglendeSøknad.text.1": "Denne siden viser kun digitale søknader som vi har mottatt 4. november 2020 eller senere.",
-    "info.manglendeSøknad.text.2": "Det kan ta noe tid fra du har sendt en digital søknad til den vises her. Hvis du fikk kvittering på at søknaden var innsendt, er den mottatt av NAV selv om den ikke vises her enda.",
     "info.manglendeSøknad.text.3.a": "Søknader som er sendt i posten vises ikke her. De vises i",
     "info.manglendeSøknad.text.3.b": "saksoversikten på Ditt NAV",
     "info.manglendeSøknad.text.3.c": "når søknaden er mottatt og registrert inn. Det tar som regel 2 uker fra en søknad er postlagt til den vises i saksoversikten."

@@ -1,7 +1,7 @@
 import React from 'react';
 
 export const SøknadsIkon = () => (
-    <svg width={56} height={56} viewBox="0 0 56 56" fill="none" focusable={false}>
+    <svg width={56} height={56} viewBox="0 0 56 56" fill="none" focusable={false} role="img">
         <path d="M0 28C0 12.536 12.536 0 28 0s28 12.536 28 28-12.536 28-28 28S0 43.464 0 28z" fill="#E0DAE7" />
         <path
             fillRule="evenodd"
@@ -19,12 +19,11 @@ export const SøknadsIkon = () => (
 );
 
 export const FileContentIcon = () => (
-    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" focusable="false" role="img">
-        <g>
-            <path
-                d="M14 0L21 7V24H3V0H14ZM12 2H5V22H19V8H12V2ZM15 17V19H7V17H15ZM17 13V15H7V13H17ZM13 9V11H7V9H13ZM14 2.83V6L17.17 5.999L14 2.83Z"
-                fill="#3E3832"
-            />
-        </g>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" focusable="false" role="presentation">
+        <path
+            d="M14 0L21 7V24H3V0H14ZM12 2H5V22H19V8H12V2ZM15 17V19H7V17H15ZM17 13V15H7V13H17ZM13 9V11H7V9H13ZM14 2.83V6L17.17 5.999L14 2.83Z"
+            fill="#3E3832"
+            stroke="none"
+        />
     </svg>
 );

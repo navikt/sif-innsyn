@@ -2,6 +2,7 @@
     border: none;
     background: transparent;
     padding: 0;
+    padding-right: 0;
     outline: none;
     cursor: pointer;
 
@@ -9,14 +10,15 @@
         color: #0067c5;
         display: inline-block;
         text-align: left;
-        border-bottom: solid 1px #b7b1a9;
-        padding-right: 1.5rem;
+        border-bottom-color: transparent;
         position: relative;
+        padding-right: 2rem;
     }
     &:hover {
         outline: none;
         .infoToggleButton__content {
-            border-bottom-color: transparent;
+            border-bottom: solid 1px #0067c5;
+            padding-right: 2rem;
         }
     }
     &:focus,
@@ -28,6 +30,7 @@
             background-color: #254b6d;
             box-shadow: 0 0 0 2px #254b6d;
             border-bottom-color: transparent;
+            padding-right: 2rem;
         }
     }
     &__label {
@@ -35,9 +38,6 @@
     }
     &__chevron {
         position: absolute;
-        right: 0;
-        .nav-frontend-chevron {
-            margin-left: 0.4rem;
-        }
+        margin-left: 0.3rem;
     }
 }

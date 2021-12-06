@@ -1,19 +1,25 @@
 @import '../../styles/assets.less';
 @import '~nav-frontend-typografi-style/src/mixins.less';
 
-.sakerListElement {
-    display: flex;
+.pabegynt {
     align-items: center;
     width: 100%;
-    &__mottatt {
-        opacity: 0.75;
-    }
-    &__detaljer {
-        margin-top: 0.25rem;
+
+    .lenkepanel {
+        padding: 0.5rem;
+        margin-bottom: 0;
+
+        @media (min-width: @mobile-breakpoint) {
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
     }
     &__content {
         flex: 2 1 80%;
-        padding-left: 0.5rem;
+        @media (min-width: @mobile-breakpoint) {
+            padding-left: 0.5rem;
+        }
+
         position: relative;
         &:before {
             content: '';
@@ -27,11 +33,6 @@
     }
     &__title {
         .typo-undertittel-mixin();
-        font-size: 1.125rem;
-    }
-    &__status {
-        flex: 2 1 20%;
-        white-space: nowrap;
-        text-align: right;
+        font-size: 1.25rem;
     }
 }

@@ -2,9 +2,14 @@
 @import '~nav-frontend-typografi-style/src/mixins.less';
 
 .sakerListElement {
-    display: flex;
-    align-items: center;
-    width: 100%;
+    .ekspanderbartPanel {
+        @media (max-width: @mobile-breakpoint) {
+            &__hode {
+                padding: 0.5rem;
+            }
+        }
+    }
+
     &__mottatt {
         opacity: 0.75;
     }
@@ -29,9 +34,15 @@
         .typo-undertittel-mixin();
         font-size: 1.125rem;
     }
-    &__status {
-        flex: 2 1 20%;
-        white-space: nowrap;
-        text-align: right;
+    &__dokumenter {
+        font-weight: bold;
+    }
+    ul {
+        list-style-type: none; /* Remove bullets */
+        padding: 0rem;
+        margin: 0.5rem 0rem;
+    }
+    li {
+        padding-bottom: 0.8rem;
     }
 }

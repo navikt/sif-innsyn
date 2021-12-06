@@ -16,6 +16,8 @@ export const getSøknadTitle = (søknad: Søknad, shortVersion?: boolean): strin
             return shortVersion ? 'Søknad' : 'Søknad om pleiepenger';
         case Søknadstype.PP_ETTERSENDING:
             return shortVersion ? 'Ettersending' : 'Melding om ettersending for pleiepenger';
+        case Søknadstype.PP_ENDRINGSMELDING:
+            return shortVersion ? 'Endringsmelding' : 'Endringsmelding pleiepenger - arbeidstid';
     }
 };
 

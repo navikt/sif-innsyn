@@ -1,7 +1,10 @@
 @import '../../styles/assets.less';
 
 .sectionPanel {
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
+    @media (min-width: @tablet-breakpoint) {
+        margin-bottom: 2rem;
+    }
     &:focus {
         outline: none;
     }
@@ -12,27 +15,22 @@
     &__illustration {
         margin-bottom: 1rem;
         text-align: center;
-        @media (min-width: @mobile-breakpoint) {
-            margin-top: -1rem;
-        }
-        @media (min-width: @tablet-breakpoint) {
-            margin-top: -2rem;
-        }
     }
     &__header {
         order: 1;
     }
     &__title {
-        margin-bottom: 1rem;
+        margin-bottom: 0.5rem;
+        @media (min-width: @tablet-breakpoint) {
+            margin-bottom: 1rem;
+        }
+
         order: 2;
     }
 
     &__panel {
         width: 100%;
-        padding: 1.5rem 1rem;
-        @media (min-width: @mobile-breakpoint) {
-            padding: 2rem;
-        }
+        padding: 0.5rem 0.5rem 0.5rem 0.5rem;
         @media (min-width: @tablet-breakpoint) {
             padding: 2rem 2rem 2.5rem 2rem;
         }
@@ -42,9 +40,12 @@
         .sectionPanel {
             &__panel {
                 padding-top: 0;
+                margin-bottom: 2.5rem;
+                @media (min-width: @tablet-breakpoint) {
+                    margin-bottom: 4.5rem;
+                }
             }
             &__illustration {
-                margin-top: 4rem;
                 margin-bottom: -2.5rem;
                 transform: translateY(calc(-50%)) scale(0.8);
                 @media (min-width: @tablet-breakpoint) {

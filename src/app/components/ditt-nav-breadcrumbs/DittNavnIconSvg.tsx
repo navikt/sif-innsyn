@@ -5,7 +5,7 @@ interface Props {
 }
 function DittNavnIconSvg({ size = '24px' }: Props) {
     return (
-        <svg width={size} height={size} viewBox="0 0 33 33" fill="none" focusable={false}>
+        <svg width={size} height={size} viewBox="0 0 33 33" fill="none" focusable={false} role="presentation">
             <path
                 fillRule="evenodd"
                 clipRule="evenodd"
