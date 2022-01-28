@@ -28,6 +28,7 @@ import EttersendIkon from '../../svg/ettersendIkon';
 import FrontpagePanelWrapper from '../../components/frontpage-panel-wrapper/FrontpagePanelWrapper';
 import EndringIkon from '../../svg/endringIkon';
 import NySøknadIkon from '../../svg/nySøknadIcon';
+import { Feature, isFeatureEnabled } from '../../utils/featureToggleUtils';
 
 const bem = bemUtils('dinOversiktPage');
 
@@ -93,13 +94,24 @@ const Oversikt = ({ søknader }: Props) => {
                         lenkeTekst={intlHelper(intl, 'page.dinOversikt.linkPanel.ettersending.lenkeTekst')}>
                         <FormattedMessage id="page.dinOversikt.linkPanel.ettersending.lenkeTekst.info" />
                     </LinkPanel>
-                    <LinkPanel
-                        image={<EndringIkon />}
-                        title={intlHelper(intl, 'page.dinOversikt.linkPanel.endringsmelding.title')}
-                        lenke={getLenker().minInnboksSkrivMelding}
-                        lenkeTekst={intlHelper(intl, 'page.dinOversikt.linkPanel.endringsmelding.lenkeTekst')}>
-                        <FormattedMessage id="page.dinOversikt.linkPanel.endringsmelding.lenkeTekst.info" />
-                    </LinkPanel>
+                    {isFeatureEnabled(Feature.ENDRINGSDIALOG) ? (
+                        <LinkPanel
+                            image={<EndringIkon />}
+                            title={intlHelper(intl, 'page.dinOversikt.linkPanel.endringsmelding.title')}
+                            lenke={getLenker().endringsdialogPleiepenger}
+                            lenkeTekst={intlHelper(intl, 'page.dinOversikt.linkPanel.endringsmelding.lenkeTekst')}>
+                            <FormattedMessage id="page.dinOversikt.linkPanel.endringsmelding.lenkeTekst.info" />
+                        </LinkPanel>
+                    ) : (
+                        <LinkPanel
+                            image={<EndringIkon />}
+                            title={intlHelper(intl, 'page.dinOversikt.linkPanel.endring.skrivTilOss.title')}
+                            lenke={getLenker().minInnboksSkrivMelding}
+                            lenkeTekst={intlHelper(intl, 'page.dinOversikt.linkPanel.endring.skrivTilOss.lenkeTekst')}>
+                            <FormattedMessage id="page.dinOversikt.linkPanel.endring.skrivTilOss.lenkeTekst.info" />
+                        </LinkPanel>
+                    )}
+
                     <LinkPanel
                         image={<NySøknadIkon />}
                         title={intlHelper(intl, 'page.dinOversikt.linkPanel.søknad.title')}

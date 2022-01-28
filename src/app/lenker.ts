@@ -10,6 +10,7 @@ interface Lenker {
     saksoversikt: string;
     dineUtbetalinger: string;
     minInnboksSkrivMelding: string;
+    endringsdialogPleiepenger: string;
     endringerDuMåGiBeskjedOm: string;
     pleiepengerURL: string;
 }
@@ -26,6 +27,7 @@ const lenkerBokmål: Lenker = {
     minInnboksSkrivMelding: 'https://mininnboks.nav.no/sporsmal/skriv/FMLI',
     endringerDuMåGiBeskjedOm: getEnvironmentVariable('ENRINGER_DU_MA_GI_BESKJED_OM_INFO_URL'),
     pleiepengerURL: getEnvironmentVariable('PLEIEPENGER_URL'),
+    endringsdialogPleiepenger: getEnvironmentVariable('ENDRINGSDIALOG_URL'),
 };
 
 const lenkerNynorsk: Partial<Lenker> = {};
