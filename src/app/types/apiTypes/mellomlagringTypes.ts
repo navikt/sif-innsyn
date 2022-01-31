@@ -6,11 +6,14 @@ export interface StorageMetadata {
     updatedTimestemp: string;
 }
 
-export interface MellomlagringData {
+export interface MellomlagringSøknadData {
+    metadata: StorageMetadata;
+}
+export interface MellomlagringEndringData {
     metadata: StorageMetadata;
 }
 
-export const isMellomlagringDataApiResponse = (input: any): input is MellomlagringData => {
+export const isMellomlagringSøknadDataApiResponse = (input: any): input is MellomlagringSøknadData => {
     if (input && input.metadata && input.metadata.updatedTimestemp) {
         return true;
     } else {
@@ -18,21 +21,47 @@ export const isMellomlagringDataApiResponse = (input: any): input is Mellomlagri
     }
 };
 
-export type MellomlagringApiResponse = MellomlagringData;
+export const isMellomlagringEndringDataApiResponse = (input: any): input is MellomlagringEndringData => {
+    if (input && input.metadata && input.metadata.updatedTimestemp) {
+        return true;
+    } else {
+        return false;
+    }
+};
 
-export const mellomlagringApiResponseType: IoTs.Type<MellomlagringApiResponse> = new IoTs.Type<
-    MellomlagringApiResponse,
-    MellomlagringApiResponse,
+export type MellomlagringSøknadApiResponse = MellomlagringSøknadData;
+export type MellomlagringEndringApiResponse = MellomlagringEndringData;
+
+export const mellomlagringSøknadApiResponseType: IoTs.Type<MellomlagringSøknadApiResponse> = new IoTs.Type<
+    MellomlagringSøknadApiResponse,
+    MellomlagringSøknadApiResponse,
     unknown
 >(
-    'MellomlagringApiResponse',
-    isMellomlagringDataApiResponse,
+    'MellomlagringSøknadApiResponse',
+    isMellomlagringSøknadDataApiResponse,
     (input: unknown, context: IoTs.Context) =>
-        isMellomlagringDataApiResponse(input) ? IoTs.success(input) : IoTs.failure(input, context),
+        isMellomlagringSøknadDataApiResponse(input) ? IoTs.success(input) : IoTs.failure(input, context),
     IoTs.identity
 );
 
-export const mellomlagringRecipe: FetchRecipe<MellomlagringApiResponse> = {
+export const mellomlagringEndringApiResponseType: IoTs.Type<MellomlagringEndringApiResponse> = new IoTs.Type<
+    MellomlagringEndringApiResponse,
+    MellomlagringEndringApiResponse,
+    unknown
+>(
+    'MellomlagringEndringApiResponse',
+    isMellomlagringEndringDataApiResponse,
+    (input: unknown, context: IoTs.Context) =>
+        isMellomlagringEndringDataApiResponse(input) ? IoTs.success(input) : IoTs.failure(input, context),
+    IoTs.identity
+);
+
+export const mellomlagringSøknadRecipe: FetchRecipe<MellomlagringSøknadApiResponse> = {
     url: getEnvironmentVariable('PP_MELLOMLAGRING_API_URL'),
-    validator: mellomlagringApiResponseType,
+    validator: mellomlagringSøknadApiResponseType,
+};
+
+export const mellomlagringEndringRecipe: FetchRecipe<MellomlagringEndringApiResponse> = {
+    url: getEnvironmentVariable('PP_ENDRING_MELLOMLAGRING_API_URL'),
+    validator: mellomlagringEndringApiResponseType,
 };

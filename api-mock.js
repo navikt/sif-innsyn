@@ -593,7 +593,13 @@ const startServer = () => {
             formData: {},
             metadata: { lastStepID: 'tidsrom', version: '6.1', updatedTimestemp: '2021-09-20T14:18:01.060Z' },
         });
-        // res.send('{}');
+    });
+
+    server.get('/endringsmelding/mellomlagring', (req, res) => {
+        res.send({
+            formData: {},
+            metadata: { lastStepID: 'tidsrom', version: '6.1', updatedTimestemp: '2021-09-20T14:18:01.060Z' },
+        });
     });
 
     server.listen(port, () => {

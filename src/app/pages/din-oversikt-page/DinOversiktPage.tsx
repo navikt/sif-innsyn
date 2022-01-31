@@ -11,7 +11,7 @@ import Alertstripe from 'nav-frontend-alertstriper';
 import { PleiepengerSøknadInfo, Søknad, Søknadstype } from '../../types/apiTypes/søknadTypes';
 import intlHelper from '../../utils/intlUtils';
 import { erPleiepenger } from '../../utils/soknadUtils';
-import MellomlagringDataFetcher from '../MellomlagringDataFetcher';
+import MellomlagringSøknadDataFetcher from '../MellomlagringDataFetcher';
 import { getRouteUrl, InnsynRouteConfig } from '../../config/innsynRouteConfig';
 import DocumenterIkon from '../../svg/dokumenterIkon';
 import NavFrontendChevron from 'nav-frontend-chevron';
@@ -84,7 +84,7 @@ const Oversikt = ({ søknader }: Props) => {
                     </Alertstripe>
                 </Box>
             )}
-            <MellomlagringDataFetcher />
+            <MellomlagringSøknadDataFetcher />
             <Box>
                 <FrontpagePanelWrapper maxColumns={3}>
                     <LinkPanel
@@ -111,7 +111,6 @@ const Oversikt = ({ søknader }: Props) => {
                             <FormattedMessage id="page.dinOversikt.linkPanel.endring.skrivTilOss.lenkeTekst.info" />
                         </LinkPanel>
                     )}
-
                     <LinkPanel
                         image={<NySøknadIkon />}
                         title={intlHelper(intl, 'page.dinOversikt.linkPanel.søknad.title')}
