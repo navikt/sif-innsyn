@@ -80,7 +80,7 @@ const SakerListElement = ({ søknad }: Props) => {
                 return intlHelper(intl, 'page.dinOversikt.saker.sakstype.ppSøknad');
             case Søknadstype.PP_ETTERSENDING:
                 return intlHelper(intl, 'page.dinOversikt.saker.sakstype.pp.ettersendelse');
-            case Søknadstype.PP_ENDRINGSMELDING:
+            case Søknadstype.PP_SYKT_BARN_ENDRINGSMELDING:
                 return (
                     <FormattedMessage
                         id="page.dinOversikt.saker.sakstype.endringsMelding"

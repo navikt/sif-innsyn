@@ -39,6 +39,7 @@ const Oversikt = ({ søknader }: Props) => {
     const intl = useIntl();
 
     const pleiepengesoknader = søknader.filter((søknad) => erPleiepenger(søknad));
+
     const harSøknader = pleiepengesoknader.length > 0;
     const seksFørsteSoknader = pleiepengesoknader.slice(0, 5);
     const harArbeidsgiver = (søknad: PleiepengerSøknadInfo) => {

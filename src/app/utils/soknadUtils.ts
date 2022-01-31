@@ -3,11 +3,19 @@ import _ from 'lodash';
 import { Søknad, Søknadstype } from '../types/apiTypes/søknadTypes';
 
 export const erPleiepenger = (søknad: Søknad): boolean => {
-    return søknad.søknadstype == Søknadstype.PP_ETTERSENDING || søknad.søknadstype == Søknadstype.PP_SYKT_BARN;
+    return (
+        søknad.søknadstype == Søknadstype.PP_ETTERSENDING ||
+        søknad.søknadstype == Søknadstype.PP_SYKT_BARN ||
+        søknad.søknadstype == Søknadstype.PP_SYKT_BARN_ENDRINGSMELDING
+    );
 };
 
 export const søknadstypeErPleiepenger = (type: Søknadstype): boolean => {
-    return type === Søknadstype.PP_ETTERSENDING || type === Søknadstype.PP_SYKT_BARN;
+    return (
+        type === Søknadstype.PP_ETTERSENDING ||
+        type === Søknadstype.PP_SYKT_BARN ||
+        type === Søknadstype.PP_SYKT_BARN_ENDRINGSMELDING
+    );
 };
 
 export const getSøknadTitle = (søknad: Søknad, shortVersion?: boolean): string => {
@@ -16,8 +24,8 @@ export const getSøknadTitle = (søknad: Søknad, shortVersion?: boolean): strin
             return shortVersion ? 'Søknad' : 'Søknad om pleiepenger';
         case Søknadstype.PP_ETTERSENDING:
             return shortVersion ? 'Ettersending' : 'Melding om ettersending for pleiepenger';
-        case Søknadstype.PP_ENDRINGSMELDING:
-            return shortVersion ? 'Endringsmelding' : 'Endringsmelding pleiepenger - arbeidstid';
+        case Søknadstype.PP_SYKT_BARN_ENDRINGSMELDING:
+            return shortVersion ? 'Endringsmelding' : 'Endringsmelding pleiepenger';
     }
 };
 
