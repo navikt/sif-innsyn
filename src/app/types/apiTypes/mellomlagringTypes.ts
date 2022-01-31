@@ -7,14 +7,14 @@ export interface StorageMetadata {
 }
 
 export interface MellomlagringSøknadData {
-    metadata: StorageMetadata;
+    metadata?: StorageMetadata;
 }
 export interface MellomlagringEndringData {
-    metadata: StorageMetadata;
+    metadata?: StorageMetadata;
 }
 
 export const isMellomlagringSøknadDataApiResponse = (input: any): input is MellomlagringSøknadData => {
-    if (input && input.metadata && input.metadata.updatedTimestemp) {
+    if (input) {
         return true;
     } else {
         return false;
@@ -22,7 +22,7 @@ export const isMellomlagringSøknadDataApiResponse = (input: any): input is Mell
 };
 
 export const isMellomlagringEndringDataApiResponse = (input: any): input is MellomlagringEndringData => {
-    if (input && input.metadata && input.metadata.updatedTimestemp) {
+    if (input) {
         return true;
     } else {
         return false;

@@ -30,13 +30,18 @@ const MellomlagringDataFetcher = () => {
                     MellomlagringSøknadApiResponse,
                     MellomlagringEndringApiResponse
                 ]) => {
-                    console.log('mellomlagringOk');
-                    return (
-                        <MellomlagringInfo
-                            søknadUpdatedTimestemp={mellomlagretSøknad.metadata.updatedTimestemp}
-                            endringUpdatedTimestamp={mellomlagretEndring.metadata.updatedTimestemp}
-                        />
-                    );
+                    if (
+                        mellomlagretSøknad.metadata?.updatedTimestemp ||
+                        mellomlagretEndring.metadata?.updatedTimestemp
+                    ) {
+                        return (
+                            <MellomlagringInfo
+                                søknadUpdatedTimestemp={mellomlagretSøknad.metadata?.updatedTimestemp}
+                                endringUpdatedTimestamp={mellomlagretEndring.metadata?.updatedTimestemp}
+                            />
+                        );
+                    }
+                    return <></>;
                 }}
             />
         );
@@ -53,7 +58,10 @@ const MellomlagringDataFetcher = () => {
                 return <></>;
             }}
             success={([mellomlagretSøknad]: [MellomlagringSøknadApiResponse]) => {
-                return <MellomlagringInfo søknadUpdatedTimestemp={mellomlagretSøknad.metadata.updatedTimestemp} />;
+                if (mellomlagretSøknad.metadata?.updatedTimestemp) {
+                    return <MellomlagringInfo søknadUpdatedTimestemp={mellomlagretSøknad.metadata.updatedTimestemp} />;
+                }
+                return <></>;
             }}
         />
     );
