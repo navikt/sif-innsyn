@@ -24,7 +24,7 @@
         "APPSTATUS_PROJECT_ID": "ryujtq87",
         "APPSTATUS_DATASET": "staging",
         "USE_AMPLITUDE": "true",
-        "ENDRINGSDIALOG": "off",
+        "ENDRINGSDIALOG": "on",
         "ENDRINGSDIALOG_URL": "https://endringsmelding-pleiepenger.dev.nav.no/"
     }
 }
