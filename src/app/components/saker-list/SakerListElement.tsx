@@ -81,12 +81,7 @@ const SakerListElement = ({ søknad }: Props) => {
             case Søknadstype.PP_ETTERSENDING:
                 return intlHelper(intl, 'page.dinOversikt.saker.sakstype.pp.ettersendelse');
             case Søknadstype.PP_SYKT_BARN_ENDRINGSMELDING:
-                return (
-                    <FormattedMessage
-                        id="page.dinOversikt.saker.sakstype.endringsMelding"
-                        values={{ type: 'Arbeidstid' }}
-                    />
-                );
+                return intlHelper(intl, 'page.dinOversikt.saker.sakstype.endringsMelding');
         }
     };
     return (
