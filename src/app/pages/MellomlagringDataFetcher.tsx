@@ -23,12 +23,14 @@ const MellomlagringDataFetcher = () => {
                     </Box>
                 )}
                 error={() => {
+                    console.log('fetch mellomlagring feilet');
                     return <></>;
                 }}
                 success={([mellomlagretSøknad, mellomlagretEndring]: [
                     MellomlagringSøknadApiResponse,
                     MellomlagringEndringApiResponse
                 ]) => {
+                    console.log('mellomlagringOk');
                     return (
                         <MellomlagringInfo
                             søknadUpdatedTimestemp={mellomlagretSøknad.metadata.updatedTimestemp}

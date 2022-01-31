@@ -25,7 +25,6 @@ const App: React.FunctionComponent = () => {
     const [locale, setLocale] = React.useState<Locale>(localeFromSessionStorage);
 
     const appStatusSanityConfig = getAppStatusSanityConfig();
-    console.log('test');
 
     return (
         <AmplitudeProvider applicationKey={APPLICATION_KEY}>

@@ -9,7 +9,6 @@ interface Props {
 const SakerList = ({ søknader }: Props) => (
     <ul style={{ listStyleType: 'none', paddingInlineStart: 0 }}>
         {søknader.map((søknad) => {
-            console.log(søknad);
             return (
                 <li key={søknad.søknadId}>
                     <SakerListElement søknad={søknad}></SakerListElement>
