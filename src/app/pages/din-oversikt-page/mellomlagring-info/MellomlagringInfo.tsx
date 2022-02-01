@@ -55,7 +55,7 @@ const MellomlagringInfo = ({ søknadUpdatedTimestemp, endringUpdatedTimestamp }:
                             </div>
 
                             {intlHelper(intl, `page.dinOversikt.påbegyntEndringsmelding.info`, {
-                                datoNårSlettes: datoNårSøknadSlettes,
+                                datoNårSlettes: datoNårEndringSlettes,
                             })}
                         </div>
                     </LenkepanelBase>
