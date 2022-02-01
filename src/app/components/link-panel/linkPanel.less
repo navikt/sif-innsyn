@@ -2,7 +2,6 @@
 
 .linkPanel {
     @borderRadius: 0.25rem;
-
     display: block;
     background-color: white;
     border-radius: @borderRadius;
@@ -28,8 +27,11 @@
     &__content {
         padding: 1rem;
 
-        @media (min-width: @mobile-breakpoint) {
-            padding: 1rem 1.5rem 1.5rem 1.5rem;
+        @media (max-width: @mobile-breakpoint) {
+            padding: 0.5rem 0.5rem 1rem 0.5rem;
+        }
+        @media (min-width: @tablet-breakpoint) {
+            padding: 1rem 1rem 1.5rem 1rem;
         }
 
         color: @c-text;
