@@ -10,14 +10,15 @@
         text-decoration: none;
     }
 
-    &:hover,
-    &:focus {
-        a,
-        .linkPanel__contentLink {
+    a,
+    .linkPanel__contentLink {
+        &:hover,
+        &:focus {
             color: @c-link !important;
             text-decoration: underline;
         }
     }
+
     &__title {
         margin-bottom: 0.5rem;
     }
