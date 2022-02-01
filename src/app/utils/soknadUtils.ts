@@ -56,3 +56,13 @@ export const groupByYear = (søknader: Søknad[], visAlle: boolean): GruppertSø
         })
         .value()
         .sort(sortGruppertSøknaderbyYear);
+
+export const getSøknadMottattDato = (søknad: Søknad): Date | string => {
+    switch (søknad.søknadstype) {
+        case Søknadstype.PP_SYKT_BARN:
+        case Søknadstype.PP_ETTERSENDING:
+            return søknad.søknad.mottatt;
+        case Søknadstype.PP_SYKT_BARN_ENDRINGSMELDING:
+            return søknad.opprettet;
+    }
+};

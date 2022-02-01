@@ -1,18 +1,20 @@
 import React from 'react';
+import { FormattedMessage, useIntl } from 'react-intl';
+import { isArray } from 'lodash';
+import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
+import Lenke from 'nav-frontend-lenker';
+import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
+import { FileContentIcon } from '../../svg/FellesIkoner';
 import { Arbeidsgiver, Dokument, Organisasjon, Søknad, Søknadstype } from '../../types/apiTypes/søknadTypes';
 import bemUtils from '../../utils/bemUtils';
-import { FormattedMessage, useIntl } from 'react-intl';
-import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
-import Box from '../elements/box/Box';
-import intlHelper from '../../utils/intlUtils';
-import SoknadInfo from '../soknad-info/SoknadInfo';
 import { getEnvironmentVariable } from '../../utils/envUtils';
-import { FileContentIcon } from '../../svg/FellesIkoner';
-import Lenke from 'nav-frontend-lenker';
-import { isArray } from 'lodash';
-import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
-import './sakerListElement.less';
+import intlHelper from '../../utils/intlUtils';
+import Box from '../elements/box/Box';
 import { getPrettyDate } from '../pretty-date/PrettyDate';
+import SoknadInfo from '../soknad-info/SoknadInfo';
+import './sakerListElement.less';
+import { getSøknadMottattDato } from '../../utils/soknadUtils';
+
 interface Props {
     søknad: Søknad;
 }
@@ -99,9 +101,12 @@ const SakerListElement = ({ søknad }: Props) => {
                 <Box margin="l">
                     {søknad.dokumenter && søknad.dokumenter.length > 0 && (
                         <ul>
-                            {søknad.dokumenter.map((dokument) =>
-                                mapDokumenter(dokument, getPrettyDate(søknad.søknad.mottatt, 'dayDateAndTimeShort'))
-                            )}
+                            {søknad.dokumenter.map((dokument) => {
+                                return mapDokumenter(
+                                    dokument,
+                                    getPrettyDate(getSøknadMottattDato(søknad), 'dayDateAndTimeShort')
+                                );
+                            })}
                         </ul>
                     )}
                     {(søknad.dokumenter === undefined || søknad.dokumenter.length === 0) && (
