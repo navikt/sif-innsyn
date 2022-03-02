@@ -9,7 +9,7 @@ dayjs.extend(utc);
 dayjs.extend(timezone);
 dayjs.locale('nb');
 
-type FormatType = 'date' | 'dateAndTime' | 'dayDateAndTime' | 'dayDateAndTimeShort' | 'dateShort';
+type FormatType = 'filenameFriendly' | 'date' | 'dateAndTime' | 'dayDateAndTime' | 'dayDateAndTimeShort' | 'dateShort';
 
 interface Props {
     date: string | Date;
@@ -19,6 +19,8 @@ interface Props {
 
 const getFormatString = (format: FormatType): string => {
     switch (format) {
+        case 'filenameFriendly':
+            return 'DD_MM_YYYY';
         case 'date':
             return 'D. MMMM YYYY';
         case 'dateShort':

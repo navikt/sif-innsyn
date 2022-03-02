@@ -13,17 +13,28 @@ import { isArray } from 'lodash';
 import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
 import './sakerListElement.less';
 import { getPrettyDate } from '../pretty-date/PrettyDate';
+
 interface Props {
     søknad: Søknad;
 }
 
 export const bem = bemUtils('sakerListElement');
 
-export const getApiUrlBySoknadIdOgOrgnummer = (soknadID: string, organisasjonsnummer: string): string => {
+export const getArbeidsgivermeldingApiUrlBySoknadIdOgOrgnummer = (
+    soknadID: string,
+    organisasjonsnummer: string
+): string => {
     return `${getEnvironmentVariable(
         'API_URL'
     )}/soknad/${soknadID}/arbeidsgivermelding?organisasjonsnummer=${organisasjonsnummer}`;
 };
+
+export const getSøknadDokumentFilnavn = (dokument: Dokument, mottattDato: Date): string => {
+    const mottatt = getPrettyDate(mottattDato, 'filenameFriendly');
+    const filnavn = `${dokument.tittel} (${mottatt}).${dokument.filtype.toLowerCase()}`;
+    return encodeURIComponent(filnavn);
+};
+
 const SakerListElement = ({ søknad }: Props) => {
     const intl = useIntl();
 
@@ -43,7 +54,10 @@ const SakerListElement = ({ søknad }: Props) => {
             <li key={organisasjon.organisasjonsnummer}>
                 <Lenke
                     target="_blank"
-                    href={getApiUrlBySoknadIdOgOrgnummer(søknad.søknadId, organisasjon.organisasjonsnummer)}>
+                    href={getArbeidsgivermeldingApiUrlBySoknadIdOgOrgnummer(
+                        søknad.søknadId,
+                        organisasjon.organisasjonsnummer
+                    )}>
                     <FileContentIcon />
                     <span>
                         <FormattedMessage
@@ -58,14 +72,12 @@ const SakerListElement = ({ søknad }: Props) => {
         );
     };
 
-    const mapDokumenter = (dokument: Dokument, date: string) => {
+    const mapDokumenter = (dokument: Dokument, date: Date) => {
         return (
             <li key={dokument.dokumentInfoId}>
                 <Lenke
                     target="_blank"
-                    href={`${dokument.url}?dokumentTittel=${
-                        dokument.tittel
-                    } mottatt ${date}.${dokument.filtype.toLowerCase()}`}>
+                    href={`${dokument.url}?dokumentTittel=${getSøknadDokumentFilnavn(dokument, date)}`}>
                     <FileContentIcon />
                     <span>{`${dokument.tittel} (PDF)`}</span>
                 </Lenke>
@@ -104,8 +116,8 @@ const SakerListElement = ({ søknad }: Props) => {
                 <Box margin="l">
                     {søknad.dokumenter && søknad.dokumenter.length > 0 && (
                         <ul>
-                            {søknad.dokumenter.map((dokument) =>
-                                mapDokumenter(dokument, getPrettyDate(søknad.søknad.mottatt, 'dayDateAndTimeShort'))
+                            {søknad.dokumenter.map(
+                                (dokument) => mapDokumenter(dokument, søknad.søknad.mottatt) //getPrettyDate(søknad.søknad.mottatt, 'dayDateAndTimeShort'))
                             )}
                         </ul>
                     )}
