@@ -26,10 +26,10 @@ const getArbeidsgivermeldingApiUrlBySoknadIdOgOrgnummer = (soknadID: string, org
     )}/soknad/${soknadID}/arbeidsgivermelding?organisasjonsnummer=${organisasjonsnummer}`;
 };
 
-const getSøknadDokumentFilnavn = (dokument: Dokument, mottattDato: Date): string => {
-    const mottatt = dayjs(mottattDato).format('DD-MM-YYYY HH:mm');
-    const filnavn = `${dokument.tittel} (${mottatt}).${dokument.filtype.toLowerCase()}`;
-    return encodeURIComponent(filnavn);
+export const getSøknadDokumentFilnavn = (dokument: Dokument, mottattDato: Date): string => {
+    const mottatt = dayjs(mottattDato).format('DD.MM.YYYY').replace(/\./g, '%2E');
+    const filnavn = `${encodeURIComponent(dokument.tittel.toLowerCase())}%20(${mottatt})`;
+    return `${filnavn}.${dokument.filtype.toLowerCase()}`;
 };
 
 const SakerListElement = ({ søknad }: Props) => {

@@ -16,6 +16,7 @@
         "swd": "node ./src/build/scripts/start-dev.js",
         "start-express": "node ./server.js",
         "test": "jest --maxWorkers=2 --config ./jest/jest.config.js",
+        "test-w": "jest --maxWorkers=2 --config ./jest/jest.config.js --watch",
         "snyk-protect": "snyk protect",
         "eslint": "eslint --fix \"src/app/**/*.{js,jsx,ts,tsx}\"",
         "prettier:check": "prettier --check \"src/**/*.js\"",
