@@ -18,18 +18,15 @@ interface Props {
     søknad: Søknad;
 }
 
-export const bem = bemUtils('sakerListElement');
+const bem = bemUtils('sakerListElement');
 
-export const getArbeidsgivermeldingApiUrlBySoknadIdOgOrgnummer = (
-    soknadID: string,
-    organisasjonsnummer: string
-): string => {
+const getArbeidsgivermeldingApiUrlBySoknadIdOgOrgnummer = (soknadID: string, organisasjonsnummer: string): string => {
     return `${getEnvironmentVariable(
         'API_URL'
     )}/soknad/${soknadID}/arbeidsgivermelding?organisasjonsnummer=${organisasjonsnummer}`;
 };
 
-export const getSøknadDokumentFilnavn = (dokument: Dokument, mottattDato: Date): string => {
+const getSøknadDokumentFilnavn = (dokument: Dokument, mottattDato: Date): string => {
     const mottatt = getPrettyDate(mottattDato, 'filenameFriendly');
     const filnavn = `${dokument.tittel} (${mottatt}).${dokument.filtype.toLowerCase()}`;
     return encodeURIComponent(filnavn);
