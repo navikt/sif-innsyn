@@ -1,6 +1,5 @@
 import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
-import dayjs from 'dayjs';
 import { isArray } from 'lodash';
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import Lenke from 'nav-frontend-lenker';
@@ -26,9 +25,8 @@ const getArbeidsgivermeldingApiUrlBySoknadIdOgOrgnummer = (soknadID: string, org
     )}/soknad/${soknadID}/arbeidsgivermelding?organisasjonsnummer=${organisasjonsnummer}`;
 };
 
-export const getSøknadDokumentFilnavn = (dokument: Dokument, mottattDato: Date): string => {
-    const mottatt = dayjs(mottattDato).format('DD.MM.YYYY').replace(/\./g, '%2E');
-    const filnavn = `${encodeURIComponent(dokument.tittel.toLowerCase())}%20(${mottatt})`;
+export const getSøknadDokumentFilnavn = (dokument: Dokument): string => {
+    const filnavn = `${encodeURIComponent(dokument.tittel.toLowerCase())}`;
     return `${filnavn}.${dokument.filtype.toLowerCase()}`;
 };
 
@@ -69,12 +67,10 @@ const SakerListElement = ({ søknad }: Props) => {
         );
     };
 
-    const mapDokumenter = (dokument: Dokument, date: Date) => {
+    const mapDokumenter = (dokument: Dokument) => {
         return (
             <li key={dokument.dokumentInfoId}>
-                <Lenke
-                    target="_blank"
-                    href={`${dokument.url}?dokumentTittel=${getSøknadDokumentFilnavn(dokument, date)}`}>
+                <Lenke target="_blank" href={`${dokument.url}?dokumentTittel=${getSøknadDokumentFilnavn(dokument)}`}>
                     <FileContentIcon />
                     <span>{`${dokument.tittel} (PDF)`}</span>
                 </Lenke>
@@ -112,11 +108,7 @@ const SakerListElement = ({ søknad }: Props) => {
                 className={bem.block}>
                 <Box margin="l">
                     {søknad.dokumenter && søknad.dokumenter.length > 0 && (
-                        <ul>
-                            {søknad.dokumenter.map(
-                                (dokument) => mapDokumenter(dokument, søknad.søknad.mottatt) //getPrettyDate(søknad.søknad.mottatt, 'dayDateAndTimeShort'))
-                            )}
-                        </ul>
+                        <ul>{søknad.dokumenter.map((dokument) => mapDokumenter(dokument))}</ul>
                     )}
                     {(søknad.dokumenter === undefined || søknad.dokumenter.length === 0) && (
                         <Normaltekst>
