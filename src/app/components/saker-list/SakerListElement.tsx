@@ -1,29 +1,35 @@
 import React from 'react';
+import { FormattedMessage, useIntl } from 'react-intl';
+import { isArray } from 'lodash';
+import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
+import Lenke from 'nav-frontend-lenker';
+import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
+import { FileContentIcon } from '../../svg/FellesIkoner';
 import { Arbeidsgiver, Dokument, Organisasjon, Søknad, Søknadstype } from '../../types/apiTypes/søknadTypes';
 import bemUtils from '../../utils/bemUtils';
-import { FormattedMessage, useIntl } from 'react-intl';
-import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
-import Box from '../elements/box/Box';
-import intlHelper from '../../utils/intlUtils';
-import SoknadInfo from '../soknad-info/SoknadInfo';
 import { getEnvironmentVariable } from '../../utils/envUtils';
-import { FileContentIcon } from '../../svg/FellesIkoner';
-import Lenke from 'nav-frontend-lenker';
-import { isArray } from 'lodash';
-import { Normaltekst, Undertittel } from 'nav-frontend-typografi';
+import intlHelper from '../../utils/intlUtils';
+import Box from '../elements/box/Box';
+import SoknadInfo from '../soknad-info/SoknadInfo';
 import './sakerListElement.less';
-import { getPrettyDate } from '../pretty-date/PrettyDate';
+
 interface Props {
     søknad: Søknad;
 }
 
-export const bem = bemUtils('sakerListElement');
+const bem = bemUtils('sakerListElement');
 
-export const getApiUrlBySoknadIdOgOrgnummer = (soknadID: string, organisasjonsnummer: string): string => {
+const getArbeidsgivermeldingApiUrlBySoknadIdOgOrgnummer = (soknadID: string, organisasjonsnummer: string): string => {
     return `${getEnvironmentVariable(
         'API_URL'
     )}/soknad/${soknadID}/arbeidsgivermelding?organisasjonsnummer=${organisasjonsnummer}`;
 };
+
+export const getSøknadDokumentFilnavn = (dokument: Dokument): string => {
+    const filnavn = `${encodeURIComponent(dokument.tittel.toLowerCase())}`;
+    return `${filnavn}.${dokument.filtype.toLowerCase()}`;
+};
+
 const SakerListElement = ({ søknad }: Props) => {
     const intl = useIntl();
 
@@ -43,7 +49,10 @@ const SakerListElement = ({ søknad }: Props) => {
             <li key={organisasjon.organisasjonsnummer}>
                 <Lenke
                     target="_blank"
-                    href={getApiUrlBySoknadIdOgOrgnummer(søknad.søknadId, organisasjon.organisasjonsnummer)}>
+                    href={getArbeidsgivermeldingApiUrlBySoknadIdOgOrgnummer(
+                        søknad.søknadId,
+                        organisasjon.organisasjonsnummer
+                    )}>
                     <FileContentIcon />
                     <span>
                         <FormattedMessage
@@ -58,14 +67,10 @@ const SakerListElement = ({ søknad }: Props) => {
         );
     };
 
-    const mapDokumenter = (dokument: Dokument, date: string) => {
+    const mapDokumenter = (dokument: Dokument) => {
         return (
             <li key={dokument.dokumentInfoId}>
-                <Lenke
-                    target="_blank"
-                    href={`${dokument.url}?dokumentTittel=${
-                        dokument.tittel
-                    } mottatt ${date}.${dokument.filtype.toLowerCase()}`}>
+                <Lenke target="_blank" href={`${dokument.url}?dokumentTittel=${getSøknadDokumentFilnavn(dokument)}`}>
                     <FileContentIcon />
                     <span>{`${dokument.tittel} (PDF)`}</span>
                 </Lenke>
@@ -103,11 +108,7 @@ const SakerListElement = ({ søknad }: Props) => {
                 className={bem.block}>
                 <Box margin="l">
                     {søknad.dokumenter && søknad.dokumenter.length > 0 && (
-                        <ul>
-                            {søknad.dokumenter.map((dokument) =>
-                                mapDokumenter(dokument, getPrettyDate(søknad.søknad.mottatt, 'dayDateAndTimeShort'))
-                            )}
-                        </ul>
+                        <ul>{søknad.dokumenter.map((dokument) => mapDokumenter(dokument))}</ul>
                     )}
                     {(søknad.dokumenter === undefined || søknad.dokumenter.length === 0) && (
                         <Normaltekst>
