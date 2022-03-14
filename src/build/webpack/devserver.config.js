@@ -7,7 +7,7 @@ const envSettings = require('../../../envSettings');
 /* Start */
 
 const configureDevServer = (decoratorFragments) => ({
-    onBeforeSetupMiddleware: (devServer) => {
+    setupMiddlewares: (middlewares, devServer) => {
         devServer.app.engine('html', mustacheExpress());
         devServer.app.set('views', `${__dirname}/../../../dist/dev`);
         devServer.app.set('view engine', 'mustache');
@@ -23,6 +23,7 @@ const configureDevServer = (decoratorFragments) => ({
         devServer.app.get(/^\/(?!.*dist).*$/, (req, res) => {
             res.render('index.html', Object.assign(decoratorFragments));
         });
+        return middlewares;
     },
     devMiddleware: {
         index: true,

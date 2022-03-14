@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { render } from 'react-dom';
 import { AmplitudeProvider } from '@navikt/sif-common-amplitude';
-import AppStatusWrapper from './components/app-status-wrapper/AppStatusWrapper';
+import AppStatusWrapper from '@navikt/sif-common-core/lib/components/app-status-wrapper/AppStatusWrapper';
 import ApplicationWrapper from './components/application-wrapper/ApplicationWrapper';
 import InnsynDataFetcher from './pages/InnsynDataFetcher';
 import UnavailablePage from './pages/support-pages/UnavailablePage';
@@ -18,7 +18,8 @@ export const APPLICATION_KEY = 'sif-innsyn';
 const getAppStatusSanityConfig = () => {
     const projectId = getEnvironmentVariable('APPSTATUS_PROJECT_ID');
     const dataset = getEnvironmentVariable('APPSTATUS_DATASET');
-    return !projectId || !dataset ? undefined : { projectId, dataset };
+    const apiVersion = '2022-03-07';
+    return !projectId || !dataset ? undefined : { projectId, dataset, apiVersion };
 };
 
 const App: React.FunctionComponent = () => {
