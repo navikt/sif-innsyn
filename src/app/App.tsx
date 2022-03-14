@@ -18,8 +18,7 @@ export const APPLICATION_KEY = 'sif-innsyn';
 const getAppStatusSanityConfig = () => {
     const projectId = getEnvironmentVariable('APPSTATUS_PROJECT_ID');
     const dataset = getEnvironmentVariable('APPSTATUS_DATASET');
-    const apiVersion = '2022-03-07';
-    return !projectId || !dataset ? undefined : { projectId, dataset, apiVersion };
+    return !projectId || !dataset ? undefined : { projectId, dataset };
 };
 
 const App: React.FunctionComponent = () => {
