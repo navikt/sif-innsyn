@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { render } from 'react-dom';
 import { AmplitudeProvider } from '@navikt/sif-common-amplitude';
-import AppStatusWrapper from './components/app-status-wrapper/AppStatusWrapper';
+import AppStatusWrapper from '@navikt/sif-common-core/lib/components/app-status-wrapper/AppStatusWrapper';
 import ApplicationWrapper from './components/application-wrapper/ApplicationWrapper';
 import InnsynDataFetcher from './pages/InnsynDataFetcher';
 import UnavailablePage from './pages/support-pages/UnavailablePage';
