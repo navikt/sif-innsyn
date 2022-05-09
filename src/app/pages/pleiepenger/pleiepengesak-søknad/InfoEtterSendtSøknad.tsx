@@ -105,7 +105,7 @@ const InfoEtterSendtSøknad = ({ harArbeidsgiver }: Props) => {
                             {intlHelper(intl, 'page.pleiepengesakSøknad.infoEtterSøknad.melde.lenkeTitel')}
                         </Lenke>
                         <Box margin="l">
-                            <Knappelenke href={getLenker().minInnboksSkrivMelding}>
+                            <Knappelenke href={getLenker().skrivTilOss}>
                                 <FormattedMessage id="page.pleiepengesakSøknad.infoEtterSøknad.melde.knappTitle" />
                             </Knappelenke>
                         </Box>
