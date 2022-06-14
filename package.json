@@ -29,7 +29,7 @@
         "@navikt/sif-common-core": "^11.1.0",
         "@navikt/sif-common-sentry": "^0.3.1",
         "@snyk/protect": "^1.947.0",
-        "axios": "^0.25.0",
+        "axios": "^0.27.2",
         "classnames": "^2.3.1",
         "dayjs": "^1.11.3",
         "eslint-webpack-plugin": "^3.1.1",
