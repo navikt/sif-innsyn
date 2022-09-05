@@ -61,10 +61,10 @@
     "page.dinOversikt.info.innsent.søknad.behandling": "Når vi har fått legeerklæring og inntektsmelding kan vi behandle søknaden din. Vi kontakter deg hvis vi trenger flere opplysninger fra deg.",
 
     "page.dinOversikt.info.innsent.søknad.ferdigBehandlet.tittel": "Når søknaden er ferdig behandlet",
-    "page.dinOversikt.info.innsent.søknad.ferdigBehandlet": "Når vi har behandlet søknaden din, sender vi deg et svar som du finner under saksoversikten på Ditt NAV. Vi sender også svaret til deg i posten.",
+    "page.dinOversikt.info.innsent.søknad.ferdigBehandlet": "Når vi har behandlet søknaden din, sender vi deg et svar som du finner under saksoversikten på «Min side».",
 
     "page.dinOversikt.info.innsent.søknad.utbetaling.tittel": "Utbetaling",
-    "page.dinOversikt.info.innsent.søknad.utbetaling": "Du finner informasjon om utbetaling under «kommende utbetalinger» i utbetalingsoversikten på Ditt NAV.",
+    "page.dinOversikt.info.innsent.søknad.utbetaling": "Informasjon om utbetaling finner du under utbetalingsoversikten på «Min side».",
 
     "page.søknader.tittle": "Dine innsendte søknader",
     "page.søknader.crumbs.dinePP": "Dine pleiepenger",
@@ -112,7 +112,7 @@
     "page.pleiepengesakSøknad.infoEtterSøknad.step4.title.1": "Søknaden er ferdig behandlet",
     "page.pleiepengesakSøknad.infoEtterSøknad.step4.title.2": "Når søknaden din er ferdig behandlet får du et svar som du finner under",
     "page.pleiepengesakSøknad.infoEtterSøknad.step4.title.3": "saksoversikten",
-    "page.pleiepengesakSøknad.infoEtterSøknad.step4.title.4": "på Ditt NAV. I tillegg sender vi svar til deg i posten.",
+    "page.pleiepengesakSøknad.infoEtterSøknad.step4.title.4": "på «Min side». I tillegg sender vi svar til deg i posten.",
 
     "page.pleiepengesakSøknad.infoEtterSøknad.step5.title": "Utbetaling",
     "page.pleiepengesakSøknad.infoEtterSøknad.step5.info.1": "Du finner informasjon om utbetaling under «kommende utbetalinger» i ",
@@ -141,6 +141,6 @@
     "info.manglendeSøknad.title": "Har du sendt inn en søknad som du ikke ser her?",
     "info.manglendeSøknad.text.1": "Denne siden viser kun digitale søknader som vi har mottatt 4. november 2020 eller senere.",
     "info.manglendeSøknad.text.3.a": "Søknader som er sendt i posten vises ikke her. De vises i",
-    "info.manglendeSøknad.text.3.b": "saksoversikten på Ditt NAV",
+    "info.manglendeSøknad.text.3.b": "saksoversikten på Min side",
     "info.manglendeSøknad.text.3.c": "når søknaden er mottatt og registrert inn. Det tar som regel 2 uker fra en søknad er postlagt til den vises i saksoversikten."
 }
