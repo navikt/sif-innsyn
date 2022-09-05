@@ -25,6 +25,7 @@
         "APPSTATUS_DATASET": "staging",
         "USE_AMPLITUDE": "true",
         "ENDRINGSDIALOG": "false",
-        "ENDRINGSDIALOG_URL": "https://endringsmelding-pleiepenger.dev.nav.no/"
+        "ENDRINGSDIALOG_URL": "https://endringsmelding-pleiepenger.dev.nav.no/",
+        "NPM_CONFIG_CACHE": "/tmp"
     }
 }

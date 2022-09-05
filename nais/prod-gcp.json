@@ -22,6 +22,7 @@
         "MIN_SIDE_URL": "https://www.nav.no/minside",
         "APPSTATUS_PROJECT_ID": "ryujtq87",
         "APPSTATUS_DATASET": "production",
-        "USE_AMPLITUDE": "true"
+        "USE_AMPLITUDE": "true",
+        "NPM_CONFIG_CACHE": "/tmp"
     }
 }
