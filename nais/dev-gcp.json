@@ -19,12 +19,13 @@
         "ETTERSENDING_PLEIEPENGER_URL": "https://k9-ettersending-soknad.dev.nav.no/familie/sykdom-i-familien/soknad/ettersending/pleiepenger",
         "PLEIEPENGER_URL": "https://pleiepengesoknad.dev.nav.no/familie/sykdom-i-familien/soknad/pleiepenger/soknad/",
         "PP_MELLOMLAGRING_API_URL": "https://pleiepengesoknad-api.dev.nav.no/mellomlagring",
-        "DITT_NAV_URL": "https://www.dev.nav.no/person/dittnav/",
+        "MIN_SIDE_URL": "https://www.dev.nav.no/minside",
         "ENRINGER_DU_MA_GI_BESKJED_OM_INFO_URL": "https://www.nav.no/familie/sykdom-i-familien/nb/pleiepenger-for-sykt-barn#Endringer-du-ma-gi-beskjed-om",
         "APPSTATUS_PROJECT_ID": "ryujtq87",
         "APPSTATUS_DATASET": "staging",
         "USE_AMPLITUDE": "true",
         "ENDRINGSDIALOG": "false",
-        "ENDRINGSDIALOG_URL": "https://endringsmelding-pleiepenger.dev.nav.no/"
+        "ENDRINGSDIALOG_URL": "https://endringsmelding-pleiepenger.dev.nav.no/",
+        "NPM_CONFIG_CACHE": "/tmp"
     }
 }

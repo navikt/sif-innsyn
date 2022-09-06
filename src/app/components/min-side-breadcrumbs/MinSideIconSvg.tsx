@@ -3,7 +3,7 @@ import React from 'react';
 interface Props {
     size?: string;
 }
-function DittNavnIconSvg({ size = '24px' }: Props) {
+function MinSideIconSvg({ size = '24px' }: Props) {
     return (
         <svg width={size} height={size} viewBox="0 0 33 33" fill="none" focusable={false} role="presentation">
             <path
@@ -16,4 +16,4 @@ function DittNavnIconSvg({ size = '24px' }: Props) {
     );
 }
 
-export default DittNavnIconSvg;
+export default MinSideIconSvg;

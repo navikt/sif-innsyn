@@ -5,7 +5,7 @@ import getLenker from '../../lenker';
 import bemUtils from '../../utils/bemUtils';
 import useWindowSize from '../../utils/useWindowSize';
 import AriaAlternative from '../aria/AriaAlternative';
-import DittNavIconSvg from '../ditt-nav-breadcrumbs/DittNavnIconSvg';
+import MinSideIconSvg from '../min-side-breadcrumbs/MinSideIconSvg';
 import './breadcrumbs.less';
 
 const bem = bemUtils('breadcrumbs');
@@ -57,7 +57,6 @@ const Breadcrumbs = (props: Props) => {
     const { width } = useWindowSize();
     const { currentPageTitle, crumbs = [] } = props;
     const frontpageUrl = '/';
-
     let crumbsToRender: Array<Breadcrumb> = [];
 
     if (width && width < 1024) {
@@ -81,8 +80,8 @@ const Breadcrumbs = (props: Props) => {
     } else {
         crumbsToRender = [
             {
-                title: 'Ditt NAV',
-                href: getLenker().dittNAV,
+                title: 'Min side',
+                href: getLenker().minside,
             },
             ...crumbs,
             { title: currentPageTitle },
@@ -92,7 +91,7 @@ const Breadcrumbs = (props: Props) => {
         <nav aria-label="Brødsmuler" className={bem.block}>
             {crumbsToRender.length > 1 && (
                 <span style={{ marginRight: '.5rem', lineHeight: 0 }}>
-                    <DittNavIconSvg key={'dittNavIkon'} />
+                    <MinSideIconSvg key={'minSideIkon'} />
                 </span>
             )}
             {crumbsToRender.length === 1 && <Crumb {...crumbsToRender[0]} backLink={true} />}
