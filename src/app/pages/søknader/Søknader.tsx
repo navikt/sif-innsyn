@@ -49,6 +49,7 @@ const Søknader = ({ søknader }: Props) => {
         <InnsynPage title={intlHelper(intl, 'page.søknader.tittle')} breadcrumbs={crumbs} focusOnContent={false}>
             <SectionPanel
                 title={intlHelper(intl, 'page.søknader.tittle')}
+                titleTag="h1"
                 additionalInfo={<InfoManglendeSøknad mode="expandable-text" />}>
                 {harSøknader && (
                     <>
