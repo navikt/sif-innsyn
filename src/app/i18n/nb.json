@@ -30,7 +30,8 @@
     "page.dinOversikt.påbegyntSøknad.info": "Lagres til og med {datoNårSlettes}",
 
     "page.dinOversikt.saker.title": "Dette har vi mottatt fra deg",
-    "page.dinOversikt.saker.sakstype.ppSøknad": "Søknad om pleiepenger",
+    "page.dinOversikt.saker.søknadOgVedleggTittel": "Søknad og eventuelle vedlegg i søknad",
+    "page.dinOversikt.saker.sakstype.ppSøknad": "Søknad om pleiepenger sykt barn",
     "page.dinOversikt.saker.sakstype.pp.ettersendelse": "Ettersendelse av dokumenter - Pleiepenger sykt barn",
     "page.dinOversikt.saker.sakstype.endringsMelding": "Endringsmelding pleiepenger - {type}",
     "page.dinOversikt.saker.sakerlistElement.dokumenter.ingenDokumenter": "Dokumenter ikke tilgjengelig.",

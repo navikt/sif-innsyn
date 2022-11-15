@@ -15,10 +15,10 @@ const Page: React.FunctionComponent<Props> = ({ className, title, topContentRend
     });
     return (
         <DocumentTitle title={title}>
-            <>
+            <div role="main">
                 {topContentRenderer && topContentRenderer()}
                 <div className={`page ${className}`}>{children}</div>
-            </>
+            </div>
         </DocumentTitle>
     );
 };

@@ -111,6 +111,9 @@ const SakerListElement = ({ søknad }: Props) => {
                 }
                 className={bem.block}>
                 <Box margin="l">
+                    <Normaltekst tag="h4" style={{ fontWeight: 'bold' }}>
+                        <FormattedMessage id="page.dinOversikt.saker.søknadOgVedleggTittel" />
+                    </Normaltekst>
                     {søknad.dokumenter && søknad.dokumenter.length > 0 && (
                         <ul>{søknad.dokumenter.map((dokument) => mapDokumenter(dokument))}</ul>
                     )}
@@ -122,7 +125,7 @@ const SakerListElement = ({ søknad }: Props) => {
                 </Box>
 
                 {søknad.søknadstype === Søknadstype.PP_SYKT_BARN && harArbeidsgiver() && (
-                    <Box margin="xl">
+                    <Box margin="l">
                         <Normaltekst tag="h4" style={{ fontWeight: 'bold' }}>
                             <FormattedMessage id="page.dinOversikt.saker.ppSøknad.bekreftelseTilArbeidsgiver.title" />
                         </Normaltekst>
