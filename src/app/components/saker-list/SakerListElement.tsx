@@ -94,19 +94,26 @@ const SakerListElement = ({ søknad }: Props) => {
                 );
         }
     };
+
     return (
         <Box margin="m">
             <Ekspanderbartpanel
                 tittel={
                     <>
-                        <Undertittel tag="h3">{tittel()}</Undertittel>
-                        <span>
-                            <SoknadInfo søknad={søknad} />
-                        </span>
+                        <Undertittel tag="h3">
+                            {tittel()}
+                            {` `}
+                            <div>
+                                <SoknadInfo søknad={søknad} />
+                            </div>
+                        </Undertittel>
                     </>
                 }
                 className={bem.block}>
                 <Box margin="l">
+                    <Normaltekst tag="h4" style={{ fontWeight: 'bold' }}>
+                        <FormattedMessage id="page.dinOversikt.saker.søknadOgVedleggTittel" />
+                    </Normaltekst>
                     {søknad.dokumenter && søknad.dokumenter.length > 0 && (
                         <ul>{søknad.dokumenter.map((dokument) => mapDokumenter(dokument))}</ul>
                     )}
@@ -118,7 +125,7 @@ const SakerListElement = ({ søknad }: Props) => {
                 </Box>
 
                 {søknad.søknadstype === Søknadstype.PP_SYKT_BARN && harArbeidsgiver() && (
-                    <Box margin="xl">
+                    <Box margin="l">
                         <Normaltekst tag="h4" style={{ fontWeight: 'bold' }}>
                             <FormattedMessage id="page.dinOversikt.saker.ppSøknad.bekreftelseTilArbeidsgiver.title" />
                         </Normaltekst>
@@ -126,21 +133,26 @@ const SakerListElement = ({ søknad }: Props) => {
                             <FormattedMessage id="page.dinOversikt.saker.ppSøknad.bekreftelseTilArbeidsgiver.info" />
                         </Normaltekst>
 
-                        <ul>
-                            {'arbeidsgivere' in søknad.søknad &&
-                                'organisasjoner' in søknad.søknad.arbeidsgivere &&
-                                søknad.søknad.arbeidsgivere.organisasjoner.map((organisasjon) =>
-                                    mapOrganisasjoner(organisasjon)
-                                )}
-                        </ul>
-                        <ul>
-                            {'arbeidsgivere' in søknad.søknad &&
-                                isArray(søknad.søknad.arbeidsgivere) &&
-                                søknad.søknad.arbeidsgivere.map(
-                                    (organisasjon) =>
-                                        !organisasjon.sluttetFørSøknadsperiode && mapOrganisasjoner(organisasjon)
-                                )}
-                        </ul>
+                        {'arbeidsgivere' in søknad.søknad &&
+                            'organisasjoner' in søknad.søknad.arbeidsgivere &&
+                            søknad.søknad.arbeidsgivere.organisasjoner.length > 0 && (
+                                <ul>
+                                    {søknad.søknad.arbeidsgivere.organisasjoner.map((organisasjon) =>
+                                        mapOrganisasjoner(organisasjon)
+                                    )}
+                                </ul>
+                            )}
+
+                        {'arbeidsgivere' in søknad.søknad &&
+                            isArray(søknad.søknad.arbeidsgivere) &&
+                            søknad.søknad.arbeidsgivere.length > 0 && (
+                                <ul>
+                                    {søknad.søknad.arbeidsgivere.map(
+                                        (organisasjon) =>
+                                            !organisasjon.sluttetFørSøknadsperiode && mapOrganisasjoner(organisasjon)
+                                    )}
+                                </ul>
+                            )}
                     </Box>
                 )}
             </Ekspanderbartpanel>

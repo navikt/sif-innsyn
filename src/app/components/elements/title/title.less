@@ -17,24 +17,26 @@
             margin-left: -2rem;
         }
     }
-    &--centerlined {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        margin-bottom: 1.25rem;
-        text-align: center;
-        &::before,
-        &::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-            background-color: lightgray;
-        }
+    @media (min-width: @mobile-breakpoint) {
+        &--centerlined {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 1.25rem;
+            text-align: center;
+            &::before,
+            &::after {
+                content: '';
+                flex: 1;
+                height: 1px;
+                background-color: lightgray;
+            }
 
-        > span {
-            flex-shrink: 0;
-            margin: 0 1rem;
+            > span {
+                flex-shrink: 0;
+                margin: 0 1rem;
+            }
         }
     }
 }
