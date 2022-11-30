@@ -106,7 +106,7 @@ const Oversikt = ({ søknader }: Props) => {
                         <LinkPanel
                             image={<EndringIkon />}
                             title={intlHelper(intl, 'page.dinOversikt.linkPanel.endring.skrivTilOss.title')}
-                            lenke={getLenker().minInnboksSkrivMelding}
+                            lenke={getLenker().skrivTilOss}
                             lenkeTekst={intlHelper(intl, 'page.dinOversikt.linkPanel.endring.skrivTilOss.lenkeTekst')}>
                             <FormattedMessage id="page.dinOversikt.linkPanel.endring.skrivTilOss.lenkeTekst.info" />
                         </LinkPanel>

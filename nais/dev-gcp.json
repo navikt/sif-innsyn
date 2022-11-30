@@ -6,8 +6,9 @@
     "minReplicas": "1",
     "maxReplicas": "1",
     "ingresses": ["https://sif-innsyn.dev.nav.no"],
+    "externalHosts": ["www.nav.no", "dekoratoren.dev.nav.no", "dekoratoren.ekstern.dev.nav.no"],
     "env": {
-        "DEKORATOR_URL": "https://www-q1.nav.no/dekoratoren",
+        "DEKORATOR_URL": "https://dekoratoren.dev.nav.no/?simple=true&chatbot=false&urlLookupTable=false",
         "API_URL": "https://sif-innsyn-api.dev.nav.no",
         "PUBLIC_PATH": "/familie/sykdom-i-familien/soknad/innsyn",
         "LOGIN_URL": "https://loginservice.dev.nav.no/login?redirect=https://sif-innsyn.dev.nav.no/familie/sykdom-i-familien/soknad/innsyn",
@@ -20,11 +21,13 @@
         "PP_MELLOMLAGRING_API_URL": "https://pleiepengesoknad-api.dev.nav.no/mellomlagring",
         "PP_ENDRING_MELLOMLAGRING_API_URL": "https://pleiepengesoknad-api.dev.nav.no/endringsmelding/mellomlagring",
         "DITT_NAV_URL": "https://www.dev.nav.no/person/dittnav/",
+        "MIN_SIDE_URL": "https://www.dev.nav.no/minside",
         "ENRINGER_DU_MA_GI_BESKJED_OM_INFO_URL": "https://www.nav.no/familie/sykdom-i-familien/nb/pleiepenger-for-sykt-barn#Endringer-du-ma-gi-beskjed-om",
         "APPSTATUS_PROJECT_ID": "ryujtq87",
         "APPSTATUS_DATASET": "staging",
         "USE_AMPLITUDE": "true",
         "ENDRINGSDIALOG": "on",
-        "ENDRINGSDIALOG_URL": "https://endringsmelding-pleiepenger.dev.nav.no/"
+        "ENDRINGSDIALOG_URL": "https://endringsmelding-pleiepenger.dev.nav.no/",
+        "NPM_CONFIG_CACHE": "/tmp"
     }
 }

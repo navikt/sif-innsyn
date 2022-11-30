@@ -2,7 +2,7 @@ import React from 'react';
 import { Sidetittel } from 'nav-frontend-typografi';
 import bemUtils from '../../utils/bemUtils';
 import './pageBanner.less';
-import DittNavBreadcrumbs from '../ditt-nav-breadcrumbs/DittNavBreadcrumbs';
+import MinSideBreadcrumbs from '../min-side-breadcrumbs/MinSideBreadcrumbs';
 
 interface Props {
     title: React.ReactNode;
@@ -19,8 +19,8 @@ const PageBanner: React.FC<Props> = ({ title, illustration, footer, children, wi
         <div className={bem.classNames(bem.block, bem.modifierConditional('wide', wide))}>
             <div className={bem.element('borderBox')}>
                 <div className={bem.element('contentWrapper')}>
-                    <div className={bem.element('dittNavBreadcrumbs')}>
-                        <DittNavBreadcrumbs />
+                    <div className={bem.element('minSideBreadcrumbs')}>
+                        <MinSideBreadcrumbs />
                     </div>
                 </div>
                 <div className={bem.element('contentWrapper')}>

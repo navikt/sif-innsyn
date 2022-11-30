@@ -6,10 +6,10 @@ interface Lenker {
     ettersending: string;
     klageInfo: string;
     regelverkFolketrygden: string;
-    dittNAV: string;
+    minside: string;
     saksoversikt: string;
     dineUtbetalinger: string;
-    minInnboksSkrivMelding: string;
+    skrivTilOss: string;
     endringsdialogPleiepenger: string;
     endringerDuMåGiBeskjedOm: string;
     pleiepengerURL: string;
@@ -21,10 +21,10 @@ const lenkerBokmål: Lenker = {
     ettersending: getEnvironmentVariable('ETTERSENDING_PLEIEPENGER_URL'),
     klageInfo: getEnvironmentVariable('KLAGE_INFO_URL'),
     regelverkFolketrygden: getEnvironmentVariable('REGELVERK_INFO_URL'),
-    dittNAV: getEnvironmentVariable('DITT_NAV_URL'),
+    minside: getEnvironmentVariable('MIN_SIDE_URL'),
     saksoversikt: 'https://person.nav.no/mine-saker',
     dineUtbetalinger: 'https://tjenester.nav.no/utbetalingsoversikt/',
-    minInnboksSkrivMelding: 'https://mininnboks.nav.no/sporsmal/skriv/FMLI',
+    skrivTilOss: 'https://www.nav.no/person/kontakt-oss/nb/skriv-til-oss',
     endringerDuMåGiBeskjedOm: getEnvironmentVariable('ENRINGER_DU_MA_GI_BESKJED_OM_INFO_URL'),
     pleiepengerURL: getEnvironmentVariable('PLEIEPENGER_URL'),
     endringsdialogPleiepenger: getEnvironmentVariable('ENDRINGSDIALOG_URL'),

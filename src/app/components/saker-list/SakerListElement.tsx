@@ -10,22 +10,26 @@ import bemUtils from '../../utils/bemUtils';
 import { getEnvironmentVariable } from '../../utils/envUtils';
 import intlHelper from '../../utils/intlUtils';
 import Box from '../elements/box/Box';
-import { getPrettyDate } from '../pretty-date/PrettyDate';
 import SoknadInfo from '../soknad-info/SoknadInfo';
 import './sakerListElement.less';
-import { getSøknadMottattDato } from '../../utils/soknadUtils';
 
 interface Props {
     søknad: Søknad;
 }
 
-export const bem = bemUtils('sakerListElement');
+const bem = bemUtils('sakerListElement');
 
-export const getApiUrlBySoknadIdOgOrgnummer = (soknadID: string, organisasjonsnummer: string): string => {
+const getArbeidsgivermeldingApiUrlBySoknadIdOgOrgnummer = (soknadID: string, organisasjonsnummer: string): string => {
     return `${getEnvironmentVariable(
         'API_URL'
     )}/soknad/${soknadID}/arbeidsgivermelding?organisasjonsnummer=${organisasjonsnummer}`;
 };
+
+export const getSøknadDokumentFilnavn = (dokument: Dokument): string => {
+    const filnavn = `${encodeURIComponent(dokument.tittel.toLowerCase())}`;
+    return `${filnavn}.${dokument.filtype.toLowerCase()}`;
+};
+
 const SakerListElement = ({ søknad }: Props) => {
     const intl = useIntl();
 
@@ -45,7 +49,10 @@ const SakerListElement = ({ søknad }: Props) => {
             <li key={organisasjon.organisasjonsnummer}>
                 <Lenke
                     target="_blank"
-                    href={getApiUrlBySoknadIdOgOrgnummer(søknad.søknadId, organisasjon.organisasjonsnummer)}>
+                    href={getArbeidsgivermeldingApiUrlBySoknadIdOgOrgnummer(
+                        søknad.søknadId,
+                        organisasjon.organisasjonsnummer
+                    )}>
                     <FileContentIcon />
                     <span>
                         <FormattedMessage
@@ -60,14 +67,10 @@ const SakerListElement = ({ søknad }: Props) => {
         );
     };
 
-    const mapDokumenter = (dokument: Dokument, date: string) => {
+    const mapDokumenter = (dokument: Dokument) => {
         return (
             <li key={dokument.dokumentInfoId}>
-                <Lenke
-                    target="_blank"
-                    href={`${dokument.url}?dokumentTittel=${
-                        dokument.tittel
-                    } mottatt ${date}.${dokument.filtype.toLowerCase()}`}>
+                <Lenke target="_blank" href={`${dokument.url}?dokumentTittel=${getSøknadDokumentFilnavn(dokument)}`}>
                     <FileContentIcon />
                     <span>{`${dokument.tittel} (PDF)`}</span>
                 </Lenke>
@@ -86,28 +89,28 @@ const SakerListElement = ({ søknad }: Props) => {
                 return intlHelper(intl, 'page.dinOversikt.saker.sakstype.endringsMelding');
         }
     };
+
     return (
         <Box margin="m">
             <Ekspanderbartpanel
                 tittel={
                     <>
-                        <Undertittel tag="h3">{tittel()}</Undertittel>
-                        <span>
-                            <SoknadInfo søknad={søknad} />
-                        </span>
+                        <Undertittel tag="h3">
+                            {tittel()}
+                            {` `}
+                            <div>
+                                <SoknadInfo søknad={søknad} />
+                            </div>
+                        </Undertittel>
                     </>
                 }
                 className={bem.block}>
                 <Box margin="l">
+                    <Normaltekst tag="h4" style={{ fontWeight: 'bold' }}>
+                        <FormattedMessage id="page.dinOversikt.saker.søknadOgVedleggTittel" />
+                    </Normaltekst>
                     {søknad.dokumenter && søknad.dokumenter.length > 0 && (
-                        <ul>
-                            {søknad.dokumenter.map((dokument) => {
-                                return mapDokumenter(
-                                    dokument,
-                                    getPrettyDate(getSøknadMottattDato(søknad), 'dayDateAndTimeShort')
-                                );
-                            })}
-                        </ul>
+                        <ul>{søknad.dokumenter.map((dokument) => mapDokumenter(dokument))}</ul>
                     )}
                     {(søknad.dokumenter === undefined || søknad.dokumenter.length === 0) && (
                         <Normaltekst>
@@ -117,7 +120,7 @@ const SakerListElement = ({ søknad }: Props) => {
                 </Box>
 
                 {søknad.søknadstype === Søknadstype.PP_SYKT_BARN && harArbeidsgiver() && (
-                    <Box margin="xl">
+                    <Box margin="l">
                         <Normaltekst tag="h4" style={{ fontWeight: 'bold' }}>
                             <FormattedMessage id="page.dinOversikt.saker.ppSøknad.bekreftelseTilArbeidsgiver.title" />
                         </Normaltekst>
@@ -125,21 +128,26 @@ const SakerListElement = ({ søknad }: Props) => {
                             <FormattedMessage id="page.dinOversikt.saker.ppSøknad.bekreftelseTilArbeidsgiver.info" />
                         </Normaltekst>
 
-                        <ul>
-                            {'arbeidsgivere' in søknad.søknad &&
-                                'organisasjoner' in søknad.søknad.arbeidsgivere &&
-                                søknad.søknad.arbeidsgivere.organisasjoner.map((organisasjon) =>
-                                    mapOrganisasjoner(organisasjon)
-                                )}
-                        </ul>
-                        <ul>
-                            {'arbeidsgivere' in søknad.søknad &&
-                                isArray(søknad.søknad.arbeidsgivere) &&
-                                søknad.søknad.arbeidsgivere.map(
-                                    (organisasjon) =>
-                                        !organisasjon.sluttetFørSøknadsperiode && mapOrganisasjoner(organisasjon)
-                                )}
-                        </ul>
+                        {'arbeidsgivere' in søknad.søknad &&
+                            'organisasjoner' in søknad.søknad.arbeidsgivere &&
+                            søknad.søknad.arbeidsgivere.organisasjoner.length > 0 && (
+                                <ul>
+                                    {søknad.søknad.arbeidsgivere.organisasjoner.map((organisasjon) =>
+                                        mapOrganisasjoner(organisasjon)
+                                    )}
+                                </ul>
+                            )}
+
+                        {'arbeidsgivere' in søknad.søknad &&
+                            isArray(søknad.søknad.arbeidsgivere) &&
+                            søknad.søknad.arbeidsgivere.length > 0 && (
+                                <ul>
+                                    {søknad.søknad.arbeidsgivere.map(
+                                        (organisasjon) =>
+                                            !organisasjon.sluttetFørSøknadsperiode && mapOrganisasjoner(organisasjon)
+                                    )}
+                                </ul>
+                            )}
                     </Box>
                 )}
             </Ekspanderbartpanel>

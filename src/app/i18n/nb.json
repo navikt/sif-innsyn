@@ -36,7 +36,8 @@
     "page.dinOversikt.påbegyntEndringsmelding.info": "Lagres til og med {datoNårSlettes}",
 
     "page.dinOversikt.saker.title": "Dette har vi mottatt fra deg",
-    "page.dinOversikt.saker.sakstype.ppSøknad": "Søknad om pleiepenger",
+    "page.dinOversikt.saker.søknadOgVedleggTittel": "Søknad og eventuelle vedlegg i søknad",
+    "page.dinOversikt.saker.sakstype.ppSøknad": "Søknad om pleiepenger sykt barn",
     "page.dinOversikt.saker.sakstype.pp.ettersendelse": "Ettersendelse av dokumenter - Pleiepenger sykt barn",
     "page.dinOversikt.saker.sakstype.endringsMelding": "Endringsmelding pleiepenger",
     "page.dinOversikt.saker.sakerlistElement.dokumenter.ingenDokumenter": "Dokumenter ikke tilgjengelig.",
@@ -52,7 +53,7 @@
     "page.dinOversikt.lenker.nySøknad.info": "Skal du søke på nytt eller forlenge pleiepengeperioden, må du sende ny søknad",
     "page.dinOversikt.lenker.nySøknad.knapp.title": "GÅ TIL NY SØKNAD",
 
-    "page.dinOversikt.info": "Hva skjer etter at du har søknad til oss?",
+    "page.dinOversikt.info": "Hva skjer etter at du har sendt søknad til oss?",
     "page.dinOversikt.info.innsent.endringsmelding.tittel": "Saksgang etter innsendt endringsmelding",
 
     "page.dinOversikt.info.innsent.søknad.tittel": "Dette skjer etter innsendt søknad",
@@ -67,10 +68,10 @@
     "page.dinOversikt.info.innsent.søknad.behandling": "Når vi har fått legeerklæring og inntektsmelding kan vi behandle søknaden din. Vi kontakter deg hvis vi trenger flere opplysninger fra deg.",
 
     "page.dinOversikt.info.innsent.søknad.ferdigBehandlet.tittel": "Når søknaden er ferdig behandlet",
-    "page.dinOversikt.info.innsent.søknad.ferdigBehandlet": "Når vi har behandlet søknaden din, sender vi deg et svar som du finner under saksoversikten på Ditt NAV. Vi sender også svaret til deg i posten.",
+    "page.dinOversikt.info.innsent.søknad.ferdigBehandlet": "Når vi har behandlet søknaden din, sender vi deg et svar som du finner under saksoversikten på «Min side».",
 
     "page.dinOversikt.info.innsent.søknad.utbetaling.tittel": "Utbetaling",
-    "page.dinOversikt.info.innsent.søknad.utbetaling": "Du finner informasjon om utbetaling under «kommende utbetalinger» i utbetalingsoversikten på Ditt NAV.",
+    "page.dinOversikt.info.innsent.søknad.utbetaling": "Informasjon om utbetaling finner du under utbetalingsoversikten på «Min side».",
 
     "page.søknader.tittle": "Dine innsendte søknader",
     "page.søknader.crumbs.dinePP": "Dine pleiepenger",
@@ -118,7 +119,7 @@
     "page.pleiepengesakSøknad.infoEtterSøknad.step4.title.1": "Søknaden er ferdig behandlet",
     "page.pleiepengesakSøknad.infoEtterSøknad.step4.title.2": "Når søknaden din er ferdig behandlet får du et svar som du finner under",
     "page.pleiepengesakSøknad.infoEtterSøknad.step4.title.3": "saksoversikten",
-    "page.pleiepengesakSøknad.infoEtterSøknad.step4.title.4": "på Ditt NAV. I tillegg sender vi svar til deg i posten.",
+    "page.pleiepengesakSøknad.infoEtterSøknad.step4.title.4": "på «Min side». I tillegg sender vi svar til deg i posten.",
 
     "page.pleiepengesakSøknad.infoEtterSøknad.step5.title": "Utbetaling",
     "page.pleiepengesakSøknad.infoEtterSøknad.step5.info.1": "Du finner informasjon om utbetaling under «kommende utbetalinger» i ",
@@ -147,6 +148,6 @@
     "info.manglendeSøknad.title": "Har du sendt inn en søknad som du ikke ser her?",
     "info.manglendeSøknad.text.1": "Denne siden viser kun digitale søknader som vi har mottatt 4. november 2020 eller senere.",
     "info.manglendeSøknad.text.3.a": "Søknader som er sendt i posten vises ikke her. De vises i",
-    "info.manglendeSøknad.text.3.b": "saksoversikten på Ditt NAV",
+    "info.manglendeSøknad.text.3.b": "saksoversikten på Min side",
     "info.manglendeSøknad.text.3.c": "når søknaden er mottatt og registrert inn. Det tar som regel 2 uker fra en søknad er postlagt til den vises i saksoversikten."
 }

@@ -1,28 +1,26 @@
 import React from 'react';
+import useEffectOnce from '../../hooks/useEffectOnce';
 import DocumentTitle from '../document-title/DocumentTitle';
 import './page.less';
 
-interface PageProps {
+interface Props {
     className?: string;
     title: string;
     topContentRenderer?: () => React.ReactNode;
 }
 
-class Page extends React.Component<PageProps> {
-    componentDidMount() {
+const Page: React.FunctionComponent<Props> = ({ className, title, topContentRenderer, children }) => {
+    useEffectOnce(() => {
         window.scrollTo(0, 0);
-    }
-    render() {
-        const { className, title, topContentRenderer, children } = this.props;
-        return (
-            <DocumentTitle title={title}>
-                <>
-                    {topContentRenderer && topContentRenderer()}
-                    <div className={`page ${className}`}>{children}</div>
-                </>
-            </DocumentTitle>
-        );
-    }
-}
+    });
+    return (
+        <DocumentTitle title={title}>
+            <div role="main">
+                {topContentRenderer && topContentRenderer()}
+                <div className={`page ${className}`}>{children}</div>
+            </div>
+        </DocumentTitle>
+    );
+};
 
 export default Page;

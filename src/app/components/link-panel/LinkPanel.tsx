@@ -20,7 +20,7 @@ const LinkPanel: React.FC<Props> = ({ title, lenkeTekst, lenke, image, children 
             <>
                 {image && <div className={bem.element('image')}>{image}</div>}
                 <div className={bem.element('content')}>
-                    <Undertittel tag="h3" className={bem.element('title')}>
+                    <Undertittel tag="h2" className={bem.element('title')}>
                         {title}
                     </Undertittel>
                     <div className={bem.element('child')}>{children}</div>
