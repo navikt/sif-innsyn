@@ -8,17 +8,20 @@
     "ingresses": ["https://sif-innsyn.dev.nav.no"],
     "externalHosts": ["www.nav.no", "dekoratoren.dev.nav.no", "dekoratoren.ekstern.dev.nav.no"],
     "env": {
-        "DEKORATOR_URL": "https://dekoratoren.dev.nav.no/?simple=true&chatbot=false&urlLookupTable=false",
+        "DEKORATOR_URL": "https://dekoratoren.dev.nav.no/?simple=true&chatbot=false&urlLookupTable=false&logoutUrl=https://sif-innsyn.dev.nav.no/oauth2/logout",
         "API_URL": "https://sif-innsyn-api.dev.nav.no",
+        "K9_BRUKERDIALOG_API_URL": "https://k9-brukerdialog-api.dev.nav.no",
+        "FRONTEND_API_PATH": "/api",
+        "MELLOMLAGRING_PATH": "/mellomlagring",
         "PUBLIC_PATH": "/familie/sykdom-i-familien/soknad/innsyn",
-        "LOGIN_URL": "https://loginservice.dev.nav.no/login?redirect=https://sif-innsyn.dev.nav.no/familie/sykdom-i-familien/soknad/innsyn",
+        "LOGIN_URL": "https://sif-innsyn.dev.nav.no/oauth2/login?redirect=/familie/sykdom-i-familien/soknad/innsyn",
         "SYKDOM_I_FAMILIEN_INFO_URL": "https://www.nav.no/familie/sykdom-i-familien/nb/pleiepenger-for-sykt-barn",
         "SAKBEHANDLINGSTID_INFO_URL": "https://www.nav.no/no/nav-og-samfunn/om-nav/saksbehandlingstider-i-nav",
         "REGELVERK_INFO_URL": "https://lovdata.no/nav/folketrygdloven/kap9",
         "KLAGE_INFO_URL": "https://www.nav.no/person/kontakt-oss/nb/tilbakemeldinger",
         "ETTERSENDING_PLEIEPENGER_URL": "https://k9-ettersending-soknad.dev.nav.no/familie/sykdom-i-familien/soknad/ettersending/pleiepenger",
         "PLEIEPENGER_URL": "https://pleiepengesoknad.dev.nav.no/familie/sykdom-i-familien/soknad/pleiepenger/soknad/",
-        "PP_MELLOMLAGRING_API_URL": "https://pleiepengesoknad-api.dev.nav.no/mellomlagring",
+        "PP_MELLOMLAGRING_API_URL": "/mellomlagring/PLEIEPENGER_SYKT_BARN",
         "MIN_SIDE_URL": "https://www.dev.nav.no/minside",
         "ENRINGER_DU_MA_GI_BESKJED_OM_INFO_URL": "https://www.nav.no/familie/sykdom-i-familien/nb/pleiepenger-for-sykt-barn#Endringer-du-ma-gi-beskjed-om",
         "APPSTATUS_PROJECT_ID": "ryujtq87",
@@ -26,6 +29,8 @@
         "USE_AMPLITUDE": "true",
         "ENDRINGSDIALOG": "false",
         "ENDRINGSDIALOG_URL": "https://endringsmelding-pleiepenger.dev.nav.no/",
+        "API_TOKENX_AUDIENCE": "dev-gcp:dusseldorf:sif-innsyn-api",
+        "K9_BRUKERDIALOG_API_TOKENX_AUDIENCE": "dev-gcp:dusseldorf:k9-brukerdialog-api",
         "NPM_CONFIG_CACHE": "/tmp"
     }
 }

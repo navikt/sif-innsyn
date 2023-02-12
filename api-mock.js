@@ -189,7 +189,7 @@ const soknadMock = [
                 tittel: 'Søknad om pleiepenger',
                 filtype: 'PDF',
                 harTilgang: true,
-                url: 'https://sif-innsyn-api.dev.nav.no/dokument/573788132/599051418/ARKIV',
+                url: 'http://localhost:1234/dokument/573788132/599051418/ARKIV',
                 relevanteDatoer: [
                     { dato: '2022-10-27T01:17:36', datotype: 'DATO_OPPRETTET' },
                     { dato: '2022-10-27T01:17:36', datotype: 'DATO_DOKUMENT' },
@@ -333,7 +333,7 @@ const soknadMock = [
                 tittel: 'Søknad om pleiepenger',
                 filtype: 'PDF',
                 harTilgang: true,
-                url: 'https://sif-innsyn-api.dev.nav.no/dokument/573786100/599048863/ARKIV',
+                url: 'http://localhost:1234/dokument/573786100/599048863/ARKIV',
                 relevanteDatoer: [
                     { dato: '2022-10-13T16:44:18', datotype: 'DATO_OPPRETTET' },
                     { dato: '2022-10-13T16:44:18', datotype: 'DATO_DOKUMENT' },
@@ -534,7 +534,7 @@ const soknadMock = [
                 tittel: 'Søknad om pleiepenger',
                 filtype: 'PDF',
                 harTilgang: true,
-                url: 'https://sif-innsyn-api.dev.nav.no/dokument/573776664/599037904/ARKIV',
+                url: 'http://localhost:1234/dokument/573776664/599037904/ARKIV',
                 relevanteDatoer: [
                     { dato: '2022-08-25T11:43:43', datotype: 'DATO_OPPRETTET' },
                     { dato: '2022-08-25T11:43:43', datotype: 'DATO_DOKUMENT' },
@@ -594,7 +594,7 @@ const soknadMock = [
                 tittel: 'Ettersendelse pleiepenger sykt barn',
                 filtype: 'PDF',
                 harTilgang: true,
-                url: 'https://sif-innsyn-api.dev.nav.no/dokument/573802533/599105542/ARKIV',
+                url: 'http://localhost:1234/dokument/573802533/599105542/ARKIV',
                 relevanteDatoer: [
                     { dato: '2022-11-07T20:20:26', datotype: 'DATO_OPPRETTET' },
                     { dato: '2022-11-07T20:20:26', datotype: 'DATO_DOKUMENT' },
@@ -608,7 +608,7 @@ const soknadMock = [
                 tittel: 'IMG_1616.jpg',
                 filtype: 'PDF',
                 harTilgang: true,
-                url: 'https://sif-innsyn-api.dev.nav.no/dokument/573802533/599105543/ARKIV',
+                url: 'http://localhost:1234/dokument/573802533/599105543/ARKIV',
                 relevanteDatoer: [
                     { dato: '2022-11-07T20:20:26', datotype: 'DATO_OPPRETTET' },
                     { dato: '2022-11-07T20:20:26', datotype: 'DATO_DOKUMENT' },
@@ -769,7 +769,7 @@ const soknadMock = [
                 tittel: 'Søknad om pleiepenger',
                 filtype: 'PDF',
                 harTilgang: true,
-                url: 'https://sif-innsyn-api.dev.nav.no/dokument/573802547/599105571/ARKIV',
+                url: 'http://localhost:1234/dokument/573802547/599105571/ARKIV',
                 relevanteDatoer: [
                     { dato: '2022-11-08T08:00:10', datotype: 'DATO_OPPRETTET' },
                     { dato: '2022-11-08T08:00:10', datotype: 'DATO_DOKUMENT' },
@@ -1286,7 +1286,7 @@ const soknadMock = [
                 tittel: 'Søknad om pleiepenger',
                 filtype: 'PDF',
                 harTilgang: true,
-                url: 'https://sif-innsyn-api.dev.nav.no/dokument/573777622/599039030/ARKIV',
+                url: 'http://localhost:1234/dokument/573777622/599039030/ARKIV',
                 relevanteDatoer: [
                     { dato: '2022-09-02T10:20:56', datotype: 'DATO_OPPRETTET' },
                     { dato: '2022-09-02T10:20:56', datotype: 'DATO_DOKUMENT' },
@@ -1301,7 +1301,7 @@ const soknadMock = [
                 tittel: 'IMG_1075 (1).JPG',
                 filtype: 'PDF',
                 harTilgang: true,
-                url: 'https://sif-innsyn-api.dev.nav.no/dokument/573777622/599039031/ARKIV',
+                url: 'http://localhost:1234/dokument/573777622/599039031/ARKIV',
                 relevanteDatoer: [
                     { dato: '2022-09-02T10:20:56', datotype: 'DATO_OPPRETTET' },
                     { dato: '2022-09-02T10:20:56', datotype: 'DATO_DOKUMENT' },
@@ -1515,7 +1515,7 @@ const soknadMock = [
                 tittel: 'Søknad om pleiepenger',
                 filtype: 'PDF',
                 harTilgang: true,
-                url: 'https://sif-innsyn-api.dev.nav.no/dokument/573777659/599039072/ARKIV',
+                url: 'http://localhost:1234/dokument/573777659/599039072/ARKIV',
                 relevanteDatoer: [
                     { dato: '2022-09-02T11:41:35', datotype: 'DATO_OPPRETTET' },
                     { dato: '2022-09-02T11:41:35', datotype: 'DATO_DOKUMENT' },
@@ -1659,7 +1659,7 @@ const soknadMock = [
                 tittel: 'Søknad om pleiepenger',
                 filtype: 'PDF',
                 harTilgang: true,
-                url: 'https://sif-innsyn-api.dev.nav.no/dokument/573777704/599039130/ARKIV',
+                url: 'http://localhost:1234/dokument/573777704/599039130/ARKIV',
                 relevanteDatoer: [
                     { dato: '2022-09-02T14:11:26', datotype: 'DATO_OPPRETTET' },
                     { dato: '2022-09-02T14:11:26', datotype: 'DATO_DOKUMENT' },
@@ -1788,7 +1788,7 @@ const soknadMock = [
                 tittel: 'Søknad om pleiepenger',
                 filtype: 'PDF',
                 harTilgang: true,
-                url: 'https://sif-innsyn-api.dev.nav.no/dokument/573779224/599040845/ARKIV',
+                url: 'http://localhost:1234/dokument/573779224/599040845/ARKIV',
                 relevanteDatoer: [
                     { dato: '2022-09-12T13:36:09', datotype: 'DATO_OPPRETTET' },
                     { dato: '2022-09-12T13:36:09', datotype: 'DATO_DOKUMENT' },
@@ -1917,7 +1917,7 @@ const soknadMock = [
                 tittel: 'Søknad om pleiepenger',
                 filtype: 'PDF',
                 harTilgang: true,
-                url: 'https://sif-innsyn-api.dev.nav.no/dokument/573782814/599044971/ARKIV',
+                url: 'http://localhost:1234/dokument/573782814/599044971/ARKIV',
                 relevanteDatoer: [
                     { dato: '2022-09-28T12:12:34', datotype: 'DATO_OPPRETTET' },
                     { dato: '2022-09-28T12:12:34', datotype: 'DATO_DOKUMENT' },
@@ -2050,7 +2050,7 @@ const soknadMock = [
                 tittel: 'Søknad om pleiepenger',
                 filtype: 'PDF',
                 harTilgang: true,
-                url: 'https://sif-innsyn-api.dev.nav.no/dokument/573782819/599044975/ARKIV',
+                url: 'http://localhost:1234/dokument/573782819/599044975/ARKIV',
                 relevanteDatoer: [
                     { dato: '2022-09-28T12:25:31', datotype: 'DATO_OPPRETTET' },
                     { dato: '2022-09-28T12:25:31', datotype: 'DATO_DOKUMENT' },
