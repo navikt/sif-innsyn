@@ -27,7 +27,7 @@ server.use((req, res, next) => {
 server.use(compression());
 server.use(cookieParser());
 
-server.set('views', `${__dirname}/dist`);
+server.set('views', path.resolve(`${__dirname}/dist`));
 server.set('view engine', 'mustache');
 server.engine('html', mustacheExpress());
 
@@ -106,8 +106,6 @@ const startServer = async (html) => {
         res.set('content-type', 'application/javascript');
         res.send(`${envSettings()}`);
     });
-
-    MELLOMLAGRING_PATH;
 
     server.use(
         process.env.FRONTEND_API_PATH,
