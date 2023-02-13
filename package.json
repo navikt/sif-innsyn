@@ -26,10 +26,10 @@
     "dependencies": {
         "@formatjs/intl-pluralrules": "^5.1.8",
         "@navikt/sif-common-amplitude": "^2.7.3",
-        "@navikt/sif-common-core": "^11.1.0",
-        "@navikt/sif-common-sentry": "^0.3.1",
+        "@navikt/sif-common-core": "^13.0.1",
+        "@navikt/sif-common-sentry": "^0.6.2",
         "@snyk/protect": "^1.1100.0",
-        "axios": "^0.25.0",
+        "axios": "^0.27.2",
         "classnames": "^2.3.2",
         "cookie-parser": "^1.4.6",
         "dayjs": "^1.11.7",
