@@ -35,6 +35,7 @@ export type MellomlagringEndringApiResponse = MellomlagringEndringData;
 const fixSøknadMetadata = (data: MellomlagringSøknadApiResponse): MellomlagringSøknadApiResponse => {
     if (data.metadata && (data.metadata as any).updatedTimestemp) {
         data.metadata.updatedTimestamp = (data.metadata as any).updatedTimestemp;
+        delete (data.metadata as any).updatedTimestemp;
     }
     return data;
 };

@@ -22,8 +22,8 @@ const MellomlagringDataFetcher = () => {
                         <LoadingSpinner />
                     </Box>
                 )}
-                error={() => {
-                    console.log('fetch mellomlagring feilet');
+                error={(error) => {
+                    console.log('fetch mellomlagring feilet', error);
                     return <></>;
                 }}
                 success={([mellomlagretSøknad, mellomlagretEndring]: [
