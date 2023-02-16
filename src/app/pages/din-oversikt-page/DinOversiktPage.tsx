@@ -98,7 +98,7 @@ const Oversikt = ({ søknader }: Props) => {
                         <LinkPanel
                             image={<EndringIkon />}
                             title={intlHelper(intl, 'page.dinOversikt.linkPanel.endringsmelding.title')}
-                            lenke={getLenker().endringsdialogPleiepenger}
+                            lenke={getRouteUrl(InnsynRouteConfig.PLEIEPENGER_ENDRING)}
                             lenkeTekst={intlHelper(intl, 'page.dinOversikt.linkPanel.endringsmelding.lenkeTekst')}>
                             <FormattedMessage id="page.dinOversikt.linkPanel.endringsmelding.lenkeTekst.info" />
                         </LinkPanel>

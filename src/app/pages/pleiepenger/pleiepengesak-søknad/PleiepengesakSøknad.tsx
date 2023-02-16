@@ -29,7 +29,7 @@ const bem = bemUtils('ppSoknad');
 
 const getApiUrlBySoknadIdOgOrgnummer = (soknadID: string, organisasjonsnummer: string): string => {
     return `${getEnvironmentVariable(
-        'API_URL'
+        'FRONTEND_API_PATH'
     )}/soknad/${soknadID}/arbeidsgivermelding?organisasjonsnummer=${organisasjonsnummer}`;
 };
 const PleiepengesakSøknad = ({ søknad }: Props) => {

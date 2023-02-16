@@ -18,5 +18,5 @@ export const isUnauthorized = ({ response }: AxiosError): boolean =>
     response !== undefined && response.status === HttpStatus.UNAUTHORIZED;
 
 export const getApiUrlByResourceType = (resourceType: ResourceType): string => {
-    return `${getEnvironmentVariable('API_URL')}/${resourceType}`;
+    return `${getEnvironmentVariable('FRONTEND_API_PATH')}/${resourceType}`;
 };

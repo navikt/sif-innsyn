@@ -3,7 +3,10 @@ require('dotenv').config();
 
 const envSettings = () => {
     const API_URL = process.env.API_URL;
+    const K9_BRUKERDIALOG_API_URL = process.env.K9_BRUKERDIALOG_API_URL;
+    const FRONTEND_API_PATH = process.env.FRONTEND_API_PATH;
     const PUBLIC_PATH = process.env.PUBLIC_PATH;
+    const MELLOMLAGRING_PATH = process.env.MELLOMLAGRING_PATH;
     const LOGIN_URL = process.env.LOGIN_URL;
     const SYKDOM_I_FAMILIEN_INFO_URL = process.env.SYKDOM_I_FAMILIEN_INFO_URL;
     const SAKBEHANDLINGSTID_INFO_URL = process.env.SAKBEHANDLINGSTID_INFO_URL;
@@ -25,6 +28,9 @@ const envSettings = () => {
     const appSettings = `
      window.appSettings = {
          API_URL: '${API_URL}',
+         K9_BRUKERDIALOG_API_URL: '${K9_BRUKERDIALOG_API_URL}',
+         FRONTEND_API_PATH: '${FRONTEND_API_PATH}',
+         MELLOMLAGRING_PATH: '${MELLOMLAGRING_PATH}',
          SYKDOM_I_FAMILIEN_INFO_URL: '${SYKDOM_I_FAMILIEN_INFO_URL}',
          SAKBEHANDLINGSTID_INFO_URL: '${SAKBEHANDLINGSTID_INFO_URL}',
          REGELVERK_INFO_URL: '${REGELVERK_INFO_URL}',

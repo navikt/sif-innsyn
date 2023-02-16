@@ -21,7 +21,7 @@ const bem = bemUtils('sakerListElement');
 
 const getArbeidsgivermeldingApiUrlBySoknadIdOgOrgnummer = (soknadID: string, organisasjonsnummer: string): string => {
     return `${getEnvironmentVariable(
-        'API_URL'
+        'FRONTEND_API_PATH'
     )}/soknad/${soknadID}/arbeidsgivermelding?organisasjonsnummer=${organisasjonsnummer}`;
 };
 
@@ -67,10 +67,15 @@ const SakerListElement = ({ søknad }: Props) => {
         );
     };
 
+    const getDokumentFrontendUrl = (url: string): string => {
+        return url.replace(getEnvironmentVariable('API_URL'), getEnvironmentVariable('FRONTEND_API_PATH'));
+    };
+
     const mapDokumenter = (dokument: Dokument) => {
+        const path = getDokumentFrontendUrl(dokument.url);
         return (
             <li key={dokument.dokumentInfoId}>
-                <Lenke target="_blank" href={`${dokument.url}?dokumentTittel=${getSøknadDokumentFilnavn(dokument)}`}>
+                <Lenke target="_blank" href={`${path}?dokumentTittel=${getSøknadDokumentFilnavn(dokument)}`}>
                     <FileContentIcon />
                     <span>{`${dokument.tittel} (PDF)`}</span>
                 </Lenke>
@@ -105,9 +110,9 @@ const SakerListElement = ({ søknad }: Props) => {
                     </>
                 }
                 className={bem.block}>
-                <Box margin="l">
+                <Box margin="s">
                     <Normaltekst tag="h4" style={{ fontWeight: 'bold' }}>
-                        <FormattedMessage id="page.dinOversikt.saker.søknadOgVedleggTittel" />
+                        <FormattedMessage id={`page.dinOversikt.saker.dokumenterTittel.${søknad.søknadstype}`} />
                     </Normaltekst>
                     {søknad.dokumenter && søknad.dokumenter.length > 0 && (
                         <ul>{søknad.dokumenter.map((dokument) => mapDokumenter(dokument))}</ul>
