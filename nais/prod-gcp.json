@@ -22,7 +22,7 @@
         "ETTERSENDING_PLEIEPENGER_URL": "https://www.nav.no/familie/sykdom-i-familien/soknad/ettersending/pleiepenger/",
         "PLEIEPENGER_URL": "https://www.nav.no/familie/sykdom-i-familien/soknad/pleiepenger/soknad",
         "PP_MELLOMLAGRING_API_URL": "/familie/sykdom-i-familien/soknad/innsyn/mellomlagring/PLEIEPENGER_SYKT_BARN",
-        "PP_ENDRING_MELLOMLAGRING_API_URL": "/familie/sykdom-i-familien/soknad/innsyn/mellomlagring/ENDRING_PLEIEPENGER_SYKT_BARN",
+        "PP_ENDRING_MELLOMLAGRING_API_URL": "/familie/sykdom-i-familien/soknad/innsyn/mellomlagring/ENDRINGSMELDING_PLEIEPENGER_SYKT_BARN",
         "ENRINGER_DU_MA_GI_BESKJED_OM_INFO_URL": "https://www.nav.no/pleiepenger-barn#melde",
         "MIN_SIDE_URL": "https://www.nav.no/minside",
         "APPSTATUS_PROJECT_ID": "ryujtq87",

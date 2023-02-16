@@ -22,7 +22,7 @@
         "ETTERSENDING_PLEIEPENGER_URL": "https://k9-ettersending-soknad.dev.nav.no/familie/sykdom-i-familien/soknad/ettersending/pleiepenger",
         "PLEIEPENGER_URL": "https://pleiepengesoknad.dev.nav.no/familie/sykdom-i-familien/soknad/pleiepenger/soknad/",
         "PP_MELLOMLAGRING_API_URL": "/mellomlagring/PLEIEPENGER_SYKT_BARN",
-        "PP_ENDRING_MELLOMLAGRING_API_URL": "/mellomlagring/ENDRING_PLEIEPENGER_SYKT_BARN",
+        "PP_ENDRING_MELLOMLAGRING_API_URL": "/mellomlagring/ENDRINGSMELDING_PLEIEPENGER_SYKT_BARN",
         "DITT_NAV_URL": "https://www.dev.nav.no/person/dittnav/",
         "MIN_SIDE_URL": "https://www.dev.nav.no/minside",
         "ENRINGER_DU_MA_GI_BESKJED_OM_INFO_URL": "https://dev.nav.no/pleiepenger-barn#melde",
