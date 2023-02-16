@@ -3,7 +3,7 @@ import { FetchRecipe } from '../../functional/fetcher/types';
 import * as IoTs from 'io-ts/lib';
 
 export interface StorageMetadata {
-    updatedTimestemp: string;
+    updatedTimestamp: string;
 }
 
 export interface MellomlagringSøknadData {
@@ -32,6 +32,13 @@ export const isMellomlagringEndringDataApiResponse = (input: any): input is Mell
 export type MellomlagringSøknadApiResponse = MellomlagringSøknadData;
 export type MellomlagringEndringApiResponse = MellomlagringEndringData;
 
+const fixSøknadMetadata = (data: MellomlagringSøknadApiResponse): MellomlagringSøknadApiResponse => {
+    if (data.metadata && (data.metadata as any).updatedTimestemp) {
+        data.metadata.updatedTimestamp = (data.metadata as any).updatedTimestemp;
+    }
+    return data;
+};
+
 export const mellomlagringSøknadApiResponseType: IoTs.Type<MellomlagringSøknadApiResponse> = new IoTs.Type<
     MellomlagringSøknadApiResponse,
     MellomlagringSøknadApiResponse,
@@ -40,7 +47,9 @@ export const mellomlagringSøknadApiResponseType: IoTs.Type<MellomlagringSøknad
     'MellomlagringSøknadApiResponse',
     isMellomlagringSøknadDataApiResponse,
     (input: unknown, context: IoTs.Context) =>
-        isMellomlagringSøknadDataApiResponse(input) ? IoTs.success(input) : IoTs.failure(input, context),
+        isMellomlagringSøknadDataApiResponse(input)
+            ? IoTs.success(fixSøknadMetadata(input))
+            : IoTs.failure(input, context),
     IoTs.identity
 );
 

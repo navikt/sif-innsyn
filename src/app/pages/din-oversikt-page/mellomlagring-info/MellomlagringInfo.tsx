@@ -11,14 +11,14 @@ import intlHelper from '../../../utils/intlUtils';
 import './mellomlagringInfo.less';
 
 interface Props {
-    søknadUpdatedTimestemp?: string;
+    søknadUpdatedTimestamp?: string;
     endringUpdatedTimestamp?: string;
 }
 const bem = bemUtils('mellomlagringInfo');
 
-const MellomlagringInfo = ({ søknadUpdatedTimestemp, endringUpdatedTimestamp }: Props) => {
+const MellomlagringInfo = ({ søknadUpdatedTimestamp, endringUpdatedTimestamp }: Props) => {
     const intl = useIntl();
-    const datoNårSøknadSlettes = getDatoOgTidTilSlettSøknadString(søknadUpdatedTimestemp);
+    const datoNårSøknadSlettes = getDatoOgTidTilSlettSøknadString(søknadUpdatedTimestamp);
     const datoNårEndringSlettes = getDatoOgTidTilSlettSøknadString(endringUpdatedTimestamp);
 
     const title = isFeatureEnabled(Feature.ENDRINGSDIALOG)
