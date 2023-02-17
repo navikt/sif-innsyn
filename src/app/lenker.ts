@@ -24,7 +24,7 @@ const lenkerBokmål: Lenker = {
     minside: getEnvironmentVariable('MIN_SIDE_URL'),
     saksoversikt: 'https://person.nav.no/mine-saker',
     dineUtbetalinger: 'https://tjenester.nav.no/utbetalingsoversikt/',
-    skrivTilOss: 'https://www.nav.no/person/kontakt-oss/nb/skriv-til-oss',
+    skrivTilOss: 'https://www.nav.no/skriv-til-oss',
     endringerDuMåGiBeskjedOm: getEnvironmentVariable('ENRINGER_DU_MA_GI_BESKJED_OM_INFO_URL'),
     pleiepengerURL: getEnvironmentVariable('PLEIEPENGER_URL'),
     endringsdialogPleiepenger: getEnvironmentVariable('ENDRINGSDIALOG_URL'),
