@@ -35,6 +35,7 @@ const configureDevServer = (decoratorFragments) => ({
         serveIndex: true,
         watch: true,
     },
+    port: 8081,
 });
 
 module.exports = configureDevServer;
