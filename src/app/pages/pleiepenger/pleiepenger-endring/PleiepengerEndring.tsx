@@ -26,39 +26,37 @@ const PleiepengerEndring = () => {
             title="Endre pleiepenger"
             topContentRenderer={() => <PageBanner title="Pleiepenger - endring"></PageBanner>}
             breadcrumbs={crumbs}>
-            <SectionPanel title="Hva slags endring skal du melde ifra om?" titleTag="h1">
+            <SectionPanel title="Hvilken endring vil du melde fra om?" titleTag="h1">
                 <Box padBottom="m">
-                    <Undertittel>Faktisk arbeidstid i pleiepengeperioden</Undertittel>
-                </Box>
-                <p>
-                    Har du fått jobbet mer eller mindre enn hva du opplyste om i søknaden, kan du endre dette i en egen
-                    endringsmelding for arbeidstid. Der kan du endre faktisk arbeidstid inntil 3 måned tilbake i tid og
-                    12 måneder frem i tid. For andre endringer, se punktet nedenfor.
-                </p>
-                <p>
-                    <Lenke href={getLenker().endringsdialogPleiepenger}>Gå til endringsmelding for arbeidstid</Lenke>
-                </p>
-                <Box margin="xl">
                     <Box padBottom="m">
-                        <Undertittel>Arbeidsforhold</Undertittel>
-                    </Box>
-                    <p>Har det blitt andre endringer i arbeidsforholdene dine, etter at du sendte søknaden, ...</p>
-                    <p>
-                        Gå til <SkrivTilOssLenke />
-                    </p>
-                </Box>
-
-                <Box margin="xl">
-                    <Box padBottom="m">
-                        <Undertittel>Omsorgstilbud</Undertittel>
+                        <Undertittel>Jobb i pleiepengeperioden</Undertittel>
                     </Box>
                     <p>
-                        Har situasjonen for omsorgstilbud endret seg fast og regelmessig, send en melding via skriv til
-                        oss eller send inn en ny søknad. Vi trenger ikke beskjed hvis barnet har vært i omsorgstilbudet
-                        sporadisk.
+                        Bruk endringsmeldingen for å si fra om du skal jobbe mer eller mindre i perioden du har
+                        pleiepenger. Du kan gjøre endringer i opptil 3 måneder tilbake i tid, og opptil 12 måneder frem
+                        i tid. Gjelder endringen utenfor denne tidsrammen, må du sende en melding via Skriv til oss.
                     </p>
                     <p>
-                        Gå til <SkrivTilOssLenke />
+                        Hvis du er selvstendig næringsdrivene eller har pleiepenger for flere barn, kan du ikke bruke
+                        endringsmeldingen. Da må du sende en melding via Skriv til oss.
+                    </p>
+                    <p>
+                        <Lenke href={getLenker().endringsdialogPleiepenger}>
+                            Gå til endringsmelding for arbeidstid
+                        </Lenke>
+                    </p>
+                </Box>
+                <Box margin="xl" padBottom="m">
+                    <Box padBottom="m">
+                        <Undertittel>Nytt, avsluttet eller endret arbeidsforhold</Undertittel>
+                    </Box>
+                    <p>
+                        Når du har endringer i dine arbeidsforhold, melder du fra om dette via Skriv til oss. Melding om
+                        nytt arbeidsforhold må inneholde informasjon om hvor mye du jobber normalt (før
+                        pleiepengeperioden) og hvor mye du jobber i perioden med pleiepenger.
+                    </p>
+                    <p>
+                        <SkrivTilOssLenke />
                     </p>
                 </Box>
 
@@ -67,24 +65,26 @@ const PleiepengerEndring = () => {
                         <Undertittel>Ferie og utenlandsopphold</Undertittel>
                     </Box>
                     <p>
-                        Skal du ha ferie eller på utenlandsopphold i din pleiepengeperiode? Meld ifra perioden du har
-                        ferie eller skal være i utenlandet, samt hvilke land du eventuelt har reist til.
+                        Hvis du skal oppholde deg i utlandet, eller ha ferie i pleiepengeperioden, melder du fra om
+                        dette via Skriv til oss. I meldingen gir du beskjed om hvilken periode det dreier seg om, og
+                        hvilket land du eventuelt reiser til.
                     </p>
                     <p>
-                        Gå til <SkrivTilOssLenke />
+                        <SkrivTilOssLenke />
                     </p>
                 </Box>
 
                 <Box margin="xl">
                     <Box padBottom="m">
-                        <Undertittel>Forlenge periode, nytt arbeidsforhold eller større endringer</Undertittel>
+                        <Undertittel>Omsorgstilbud</Undertittel>
                     </Box>
                     <p>
-                        Send inn en ny søknad dersom du skal du forlenge din periode, du har nye arbeidsforhold du
-                        ønsker å registrere arbeidstid på eller du vil gjøre større endringer på din tidligere søknad.
+                        Hvis tiden barnet oppholder seg i omsorgstilbudet har endret seg fast og regelmessig, sender du
+                        en beskjed om endringen via Skriv til oss. Du trenger ikke sende noen beskjed hvis barnet har
+                        vært sporadisk i omsorgstilbudet.
                     </p>
                     <p>
-                        Gå til <SkrivTilOssLenke />
+                        <SkrivTilOssLenke />
                     </p>
                 </Box>
             </SectionPanel>
