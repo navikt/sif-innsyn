@@ -32,19 +32,17 @@ const PleiepengerEndring = () => {
                         <Undertittel>Jobb i pleiepengeperioden</Undertittel>
                     </Box>
                     <p>
-                        Bruk endringsmeldingen for å si fra om du skal jobbe mer eller mindre i perioden du har
+                        Bruk endringsmeldingen for å melde fra om du skal jobbe mer eller mindre i perioden du har
                         pleiepenger. Du kan gjøre endringer i opptil 3 måneder tilbake i tid, og opptil 12 måneder frem
-                        i tid. Gjelder endringen utenfor denne tidsrammen, må du sende en melding via{' '}
-                        <SkrivTilOssLenke label="Skriv til oss" />.
+                        i tid.
                     </p>
                     <p>
-                        Hvis du er selvstendig næringsdrivene eller har pleiepenger for flere barn, kan du ikke bruke
-                        endringsmeldingen. Da må du sende en melding via <SkrivTilOssLenke label="Skriv til oss" />.
+                        Du kan ikke bruke endringsmeldingen hvis endringen gjelder utenfor denne tidsrammen. Heller ikke
+                        hvis du er selvstendig næringsdrivende, eller har pleiepenger for flere barn. I disse tilfellene
+                        må du sende en melding via <SkrivTilOssLenke label="Skriv til oss" />.
                     </p>
                     <p>
-                        <Lenke href={getLenker().endringsdialogPleiepenger}>
-                            Gå til endringsmelding for arbeidstid
-                        </Lenke>
+                        <Lenke href={getLenker().endringsdialogPleiepenger}>Gå til endringsmelding for jobb</Lenke>
                     </p>
                 </Box>
                 <Box margin="xl" padBottom="m">
