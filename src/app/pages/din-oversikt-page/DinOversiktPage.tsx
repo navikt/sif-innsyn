@@ -1,34 +1,33 @@
 import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { useLogSidevisning } from '@navikt/sif-common-amplitude';
-import { AlertStripeInfo } from 'nav-frontend-alertstriper';
+import Alertstripe, { AlertStripeInfo } from 'nav-frontend-alertstriper';
+import NavFrontendChevron from 'nav-frontend-chevron';
+import Lenke from 'nav-frontend-lenker';
+import Box from '../../components/elements/box/Box';
+import FrontpagePanelWrapper from '../../components/frontpage-panel-wrapper/FrontpagePanelWrapper';
 import InfoManglendeSøknad from '../../components/info-manglende-søknad/InfoManglendeSøknad';
 import InnsynPage from '../../components/innsyn-page/InnsynPage';
+import LinkPanel from '../../components/link-panel/LinkPanel';
 import PageBanner from '../../components/page-banner/PageBanner';
+import SakerList from '../../components/saker-list/SakerList';
 import SectionPanel from '../../components/section-panel/SectionPanel';
+import { getRouteUrl, InnsynRouteConfig } from '../../config/innsynRouteConfig';
 import { PageKey } from '../../config/pageKey';
-import Alertstripe from 'nav-frontend-alertstriper';
+import getLenker from '../../lenker';
+import DocumenterIkon from '../../svg/dokumenterIkon';
+import EndringIkon from '../../svg/endringIkon';
+import EttersendIkon from '../../svg/ettersendIkon';
+import NySøknadIkon from '../../svg/nySøknadIcon';
 import { PleiepengerSøknadInfo, Søknad, Søknadstype } from '../../types/apiTypes/søknadTypes';
+import bemUtils from '../../utils/bemUtils';
+import { mindreTimerEtterInnsendtEnnMaxAntallTimer } from '../../utils/dateUtils';
+import { Feature, isFeatureEnabled } from '../../utils/featureToggleUtils';
 import intlHelper from '../../utils/intlUtils';
 import { erPleiepenger } from '../../utils/soknadUtils';
 import MellomlagringDataFetcher from '../MellomlagringDataFetcher';
-import { getRouteUrl, InnsynRouteConfig } from '../../config/innsynRouteConfig';
-import DocumenterIkon from '../../svg/dokumenterIkon';
-import NavFrontendChevron from 'nav-frontend-chevron';
-import Lenke from 'nav-frontend-lenker';
-import './dinOversiktPage.less';
-import bemUtils from '../../utils/bemUtils';
-import Box from '../../components/elements/box/Box';
-import getLenker from '../../lenker';
 import Info from './Info';
-import SakerList from '../../components/saker-list/SakerList';
-import { mindreTimerEtterInnsendtEnnMaxAntallTimer } from '../../utils/dateUtils';
-import LinkPanel from '../../components/link-panel/LinkPanel';
-import EttersendIkon from '../../svg/ettersendIkon';
-import FrontpagePanelWrapper from '../../components/frontpage-panel-wrapper/FrontpagePanelWrapper';
-import EndringIkon from '../../svg/endringIkon';
-import NySøknadIkon from '../../svg/nySøknadIcon';
-import { Feature, isFeatureEnabled } from '../../utils/featureToggleUtils';
+import './dinOversiktPage.less';
 
 const bem = bemUtils('dinOversiktPage');
 
@@ -40,6 +39,7 @@ const Oversikt = ({ søknader }: Props) => {
     const intl = useIntl();
 
     const pleiepengesoknader = søknader.filter((søknad) => erPleiepenger(søknad));
+
     const harSøknader = pleiepengesoknader.length > 0;
     const seksFørsteSoknader = pleiepengesoknader.slice(0, 5);
     const harArbeidsgiver = (søknad: PleiepengerSøknadInfo) => {
@@ -98,7 +98,7 @@ const Oversikt = ({ søknader }: Props) => {
                         <LinkPanel
                             image={<EndringIkon />}
                             title={intlHelper(intl, 'page.dinOversikt.linkPanel.endringsmelding.title')}
-                            lenke={getLenker().endringsdialogPleiepenger}
+                            lenke={getRouteUrl(InnsynRouteConfig.PLEIEPENGER_ENDRING)}
                             lenkeTekst={intlHelper(intl, 'page.dinOversikt.linkPanel.endringsmelding.lenkeTekst')}>
                             <FormattedMessage id="page.dinOversikt.linkPanel.endringsmelding.lenkeTekst.info" />
                         </LinkPanel>
@@ -111,7 +111,6 @@ const Oversikt = ({ søknader }: Props) => {
                             <FormattedMessage id="page.dinOversikt.linkPanel.endring.skrivTilOss.lenkeTekst.info" />
                         </LinkPanel>
                     )}
-
                     <LinkPanel
                         image={<NySøknadIkon />}
                         title={intlHelper(intl, 'page.dinOversikt.linkPanel.søknad.title')}

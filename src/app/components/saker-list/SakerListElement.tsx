@@ -90,13 +90,8 @@ const SakerListElement = ({ søknad }: Props) => {
                 return intlHelper(intl, 'page.dinOversikt.saker.sakstype.ppSøknad');
             case Søknadstype.PP_ETTERSENDING:
                 return intlHelper(intl, 'page.dinOversikt.saker.sakstype.pp.ettersendelse');
-            case Søknadstype.PP_ENDRINGSMELDING:
-                return (
-                    <FormattedMessage
-                        id="page.dinOversikt.saker.sakstype.endringsMelding"
-                        values={{ type: 'Arbeidstid' }}
-                    />
-                );
+            case Søknadstype.PP_SYKT_BARN_ENDRINGSMELDING:
+                return intlHelper(intl, 'page.dinOversikt.saker.sakstype.endringsMelding');
         }
     };
 
@@ -115,9 +110,9 @@ const SakerListElement = ({ søknad }: Props) => {
                     </>
                 }
                 className={bem.block}>
-                <Box margin="l">
+                <Box margin="s">
                     <Normaltekst tag="h4" style={{ fontWeight: 'bold' }}>
-                        <FormattedMessage id="page.dinOversikt.saker.søknadOgVedleggTittel" />
+                        <FormattedMessage id={`page.dinOversikt.saker.dokumenterTittel.${søknad.søknadstype}`} />
                     </Normaltekst>
                     {søknad.dokumenter && søknad.dokumenter.length > 0 && (
                         <ul>{søknad.dokumenter.map((dokument) => mapDokumenter(dokument))}</ul>

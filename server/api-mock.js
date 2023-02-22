@@ -16,7 +16,7 @@ server.use(
 );
 
 server.use((req, res, next) => {
-    res.set('Access-Control-Allow-Origin', 'http://localhost:8080');
+    res.set('Access-Control-Allow-Origin', 'http://localhost:8081');
     res.set('X-XSS-Protection', '1; mode=block');
     res.set('Feature-Policy', "geolocation 'none'; microphone 'none'; camera 'none'");
     next();
@@ -58,6 +58,13 @@ const startServer = () => {
         res.send({
             formData: {},
             metadata: { lastStepID: 'tidsrom', version: '6.1', updatedTimestemp: '2021-09-20T14:18:01.060Z' },
+        });
+    });
+
+    server.get('/mellomlagring/ENDRINGSMELDING_PLEIEPENGER_SYKT_BARN', (req, res) => {
+        res.send({
+            formData: {},
+            metadata: { lastStepID: 'tidsrom', version: '6.1', updatedTimestamp: '2021-09-20T14:18:01.060Z' },
         });
     });
 

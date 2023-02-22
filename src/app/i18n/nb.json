@@ -13,7 +13,7 @@
     "page.dinOversikt.linkPanel.ettersending.lenkeTekst.info": "Her kan du ettersende dokumenter i saken din.",
 
     "page.dinOversikt.linkPanel.endringsmelding.title": "Melde fra om endring?",
-    "page.dinOversikt.linkPanel.endringsmelding.lenkeTekst": "Gå til endringsmelding",
+    "page.dinOversikt.linkPanel.endringsmelding.lenkeTekst": "Meld fra om endringer",
     "page.dinOversikt.linkPanel.endringsmelding.lenkeTekst.info": "Her kan du melde fra om endringer som har betydning i saken din.",
 
     "page.dinOversikt.linkPanel.endring.skrivTilOss.title": "Melde fra om endring?",
@@ -25,15 +25,23 @@
     "page.dinOversikt.linkPanel.søknad.lenkeTekst.info": "Her kan du søke om forlengelse, eller sende en helt ny søknad.",
 
     "page.dinOversikt.påbegyntSøknad.title": "Vil du fortsette på en påbegynt søknad?",
-    "page.dinOversikt.påbegyntSøknad.ingenPåbegynt": "Du har ikke påbegynt søknad",
+    "page.dinOversikt.påbegyntSøknad.ingenPåbegynt": "Du har ikke påbegynt søknad.",
+    "page.dinOversikt.påbegyntEndringEllerSøknad.title": "Vil du fortsette der du slapp?",
+    "page.dinOversikt.påbegyntEndringEllerSøknad.ingenPåbegynt": "Du har ikke påbegynt endringsmelding eller søknad.",
+
     "page.dinOversikt.påbegyntSøknad.info.title": "Gå til påbegynt søknad om pleiepenger sykt barn",
     "page.dinOversikt.påbegyntSøknad.info": "Lagres til og med {datoNårSlettes}",
 
+    "page.dinOversikt.påbegyntEndringsmelding.info.title": "Gå til påbegynt endring av pleiepenger sykt barn",
+    "page.dinOversikt.påbegyntEndringsmelding.info": "Lagres til og med {datoNårSlettes}",
+
     "page.dinOversikt.saker.title": "Dette har vi mottatt fra deg",
-    "page.dinOversikt.saker.søknadOgVedleggTittel": "Søknad og eventuelle vedlegg i søknad",
+    "page.dinOversikt.saker.dokumenterTittel.PP_SYKT_BARN": "Søknad og eventuelle vedlegg i søknad",
+    "page.dinOversikt.saker.dokumenterTittel.PP_ETTERSENDELSE": "Ettersendelse og dokumenter",
+    "page.dinOversikt.saker.dokumenterTittel.PP_SYKT_BARN_ENDRINGSMELDING": "Endringsmelding",
     "page.dinOversikt.saker.sakstype.ppSøknad": "Søknad om pleiepenger sykt barn",
     "page.dinOversikt.saker.sakstype.pp.ettersendelse": "Ettersendelse av dokumenter - Pleiepenger sykt barn",
-    "page.dinOversikt.saker.sakstype.endringsMelding": "Endringsmelding pleiepenger - {type}",
+    "page.dinOversikt.saker.sakstype.endringsMelding": "Endringsmelding pleiepenger",
     "page.dinOversikt.saker.sakerlistElement.dokumenter.ingenDokumenter": "Dokumenter ikke tilgjengelig.",
     "page.dinOversikt.saker.ppSøknad.bekreftelseTilArbeidsgiver.title": "Bekreftelse til arbeidsgiver(e)",
     "page.dinOversikt.saker.ppSøknad.bekreftelseTilArbeidsgiver.info": "Dette er en bekreftelse du kan gi til arbeidsgiver ved behov. Denne bekrefter at søknaden din er mottatt, hvilken periode du har søkt for, samt informasjon om at arbeidsgiver må sende inntektsmelding til oss.",

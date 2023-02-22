@@ -14,18 +14,12 @@ export enum Søknadsstatus {
 export enum Søknadstype {
     PP_ETTERSENDING = 'PP_ETTERSENDELSE',
     PP_SYKT_BARN = 'PP_SYKT_BARN',
-    PP_ENDRINGSMELDING = 'PP_ENDRINGSMELDING',
-    // OMP_UTVIDET_RETT = 'OMP_UTVIDET_RETT',
-    // OMP_UTBETALING_SNF = 'OMP_UTBETALING_SNF',
-    // OMP_UTBETALING_ARBEIDSTAKER = 'OMP_UTBETALING_ARBEIDSTAKER',
-    // OMP_ETTERSENDING = 'OMP_ETTERSENDING',
-    // PP_NÆRSTÅENDE = 'PP_NÆRSTÅENDE',
-    // OMD_OVERFØRING = 'OMD_OVERFØRING',
-    // OPPLÆRINGSPENGER = 'OPPLÆRINGSPENGER',
+    PP_SYKT_BARN_ENDRINGSMELDING = 'PP_SYKT_BARN_ENDRINGSMELDING',
 }
 
 export enum SupportedSøknadstype {
     PP_SYKT_BARN = 'PP_SYKT_BARN',
+    PP_SYKT_BARN_ENDRINGSMELDING = 'PP_SYKT_BARN_ENDRINGSMELDING',
 }
 
 export interface Organisasjon {
@@ -87,7 +81,7 @@ export interface PleiepengerEttersending extends SøknadBase {
 }
 
 export interface PleiepengerEndringsmelding extends SøknadBase {
-    søknadstype: Søknadstype.PP_ENDRINGSMELDING;
+    søknadstype: Søknadstype.PP_SYKT_BARN_ENDRINGSMELDING;
     søknad: PleiepengerSøknadInfo;
 }
 

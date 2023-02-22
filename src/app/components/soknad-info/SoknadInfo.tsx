@@ -1,6 +1,7 @@
 import React from 'react';
 import { Søknad, Søknadstype } from '../../types/apiTypes/søknadTypes';
 import bemUtils from '../../utils/bemUtils';
+import { getSøknadMottattDato } from '../../utils/soknadUtils';
 import PrettyDate from '../pretty-date/PrettyDate';
 import './soknadInfo.less';
 
@@ -14,7 +15,7 @@ const bem = bemUtils('soknadInfo');
 const SoknadInfo = ({ søknad, utvidetInfo }: Props) => (
     <>
         <span className={bem.element('mottatt')}>
-            Mottatt <PrettyDate date={søknad.søknad.mottatt} format="dayDateAndTime" useNorwegianTime={true} />
+            Mottatt <PrettyDate date={getSøknadMottattDato(søknad)} format="dayDateAndTime" useNorwegianTime={true} />
         </span>
         {utvidetInfo && (
             <>
