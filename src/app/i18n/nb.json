@@ -1,12 +1,12 @@
 {
-    "site.title": "Dine pleiepenger",
+    "site.title": "Dine pleiepenger - sykt barn",
 
-    "sakstype.pleiepenger.title": "Dine pleiepenger",
+    "sakstype.pleiepenger.title": "Dine pleiepenger - sykt barn",
 
     "generell.SøknadOm": "Søknad om {title}",
     "lenkepanel.aria.gåTil": "Gå til",
 
-    "page.dinOversikt.title": "Dine pleiepenger",
+    "page.dinOversikt.title": "Dine pleiepenger - sykt barn",
 
     "page.dinOversikt.linkPanel.ettersending.title": "Ettersende noe?",
     "page.dinOversikt.linkPanel.ettersending.lenkeTekst": "Gå til ettersending",
@@ -14,7 +14,7 @@
 
     "page.dinOversikt.linkPanel.endringsmelding.title": "Melde fra om endring?",
     "page.dinOversikt.linkPanel.endringsmelding.lenkeTekst": "Meld fra om endringer",
-    "page.dinOversikt.linkPanel.endringsmelding.lenkeTekst.info": "Her kan du melde fra om endringer som har betydning i saken din.",
+    "page.dinOversikt.linkPanel.endringsmelding.lenkeTekst.info": "Her kan du melde fra om endringer som har betydning for dine pleiepenger mens du pleier sykt barn.",
 
     "page.dinOversikt.linkPanel.endring.skrivTilOss.title": "Melde fra om endring?",
     "page.dinOversikt.linkPanel.endring.skrivTilOss.lenkeTekst": "Gå til «Skriv til oss»",
@@ -76,7 +76,7 @@
     "page.dinOversikt.info.innsent.søknad.utbetaling": "Informasjon om utbetaling finner du under utbetalingsoversikten på «Min side».",
 
     "page.søknader.tittle": "Dine innsendte søknader",
-    "page.søknader.crumbs.dinePP": "Dine pleiepenger",
+    "page.søknader.crumbs.dinePP": "Dine pleiepenger - sykt barn",
     "page.søknader.ingenFunnet": "Vi finner ingen søknader",
     "page.søknader.visAlle": "Vis alle dokumenter",
     "page.søknader.visFærre": "Vis færre dokumenter",

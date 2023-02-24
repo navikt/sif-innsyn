@@ -13,7 +13,7 @@ const MinSideBreadcrumbs = () => (
             <MinSideIconSvg />
         </div>
         <Lenke href={getLenker().minside}>Min side</Lenke> <span className={bem.element('separator')}>/</span> Dine
-        pleiepenger
+        pleiepenger - sykt barn
     </div>
 );
 
