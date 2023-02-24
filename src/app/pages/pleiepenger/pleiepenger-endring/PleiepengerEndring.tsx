@@ -23,8 +23,8 @@ const PleiepengerEndring = () => {
 
     return (
         <InnsynPage
-            title="Endre pleiepenger"
-            topContentRenderer={() => <PageBanner title="Pleiepenger - endring"></PageBanner>}
+            title="Endre pleiepenger sykt barn"
+            topContentRenderer={() => <PageBanner title="Pleiepenger sykt barn - endring"></PageBanner>}
             breadcrumbs={crumbs}>
             <SectionPanel title="Hvilken endring vil du melde fra om?" titleTag="h1">
                 <Box padBottom="m">
