@@ -9,8 +9,8 @@
     "readinessPath": "/familie/sykdom-i-familien/soknad/innsyn/health/isReady",
     "env": {
         "DEKORATOR_URL": "https://dekoratoren.dev.nav.no/?simple=true&chatbot=false&urlLookupTable=false&logoutUrl=https://sif-innsyn.dev.nav.no/oauth2/logout",
-        "API_URL": "https://sif-innsyn-api.intern.dev.nav.no",
-        "K9_BRUKERDIALOG_API_URL": "https://k9-brukerdialog-api.intern.dev.nav.no",
+        "API_URL": "http://sif-innsyn-api",
+        "K9_BRUKERDIALOG_API_URL": "http://k9-brukerdialog-api",
         "FRONTEND_API_PATH": "/api",
         "MELLOMLAGRING_PATH": "/mellomlagring",
         "PUBLIC_PATH": "/familie/sykdom-i-familien/soknad/innsyn",
