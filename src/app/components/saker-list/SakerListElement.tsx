@@ -68,7 +68,15 @@ const SakerListElement = ({ søknad }: Props) => {
     };
 
     const getDokumentFrontendUrl = (url: string): string => {
-        return url.replace(getEnvironmentVariable('API_URL'), getEnvironmentVariable('FRONTEND_API_PATH'));
+        // https://sif-innsyn-api.intern.dev.nav.no/dokument/598130268/624878284/ARKIV
+        // Split the URL into an array of segments using ‘/’ as the separator
+        const segments = url.split('/');
+        // Extract the desired paths from the array and join them together using ‘/’
+        const paths = segments.slice(3, 7).join('/');
+
+        return `${getEnvironmentVariable('FRONTEND_API_PATH')}/${paths}`;
+
+        //return url.replace(getEnvironmentVariable('API_URL'), getEnvironmentVariable('FRONTEND_API_PATH'));
     };
 
     const mapDokumenter = (dokument: Dokument) => {
