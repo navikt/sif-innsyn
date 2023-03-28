@@ -1,9 +1,11 @@
+import { AlertStripeAdvarsel } from 'nav-frontend-alertstriper';
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import Lenke from 'nav-frontend-lenker';
 import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import getLenker from '../../lenker';
 import intlHelper from '../../utils/intlUtils';
+import Box from '../elements/box/Box';
 import ExpandableInfo from '../expandable-content/ExpandableInfo';
 
 interface Props {
@@ -30,6 +32,15 @@ const InfoManglendeSøknad = ({ mode = 'text' }: Props) => {
             return (
                 <ExpandableInfo title={intlHelper(intl, 'info.manglendeSøknad.title')}>
                     {getExpandedContent()}
+                    <Box padBottom="xl">
+                        <AlertStripeAdvarsel>
+                            <p>
+                                Hvis du sendte inn din søknad 21. mars 2023, kan det være søknaden ikke vises her, men
+                                du vil finne den på{' '}
+                                <Lenke href="https://person.nav.no/mine-saker/">nav.no/mine-saker</Lenke>
+                            </p>
+                        </AlertStripeAdvarsel>
+                    </Box>
                 </ExpandableInfo>
             );
     }
