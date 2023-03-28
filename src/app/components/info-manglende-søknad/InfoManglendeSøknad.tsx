@@ -37,7 +37,9 @@ const InfoManglendeSøknad = ({ mode = 'text' }: Props) => {
                             <p>
                                 Hvis du sendte inn din søknad 21. mars 2023, kan det være søknaden ikke vises her, men
                                 du vil finne den på{' '}
-                                <Lenke href="https://person.nav.no/mine-saker/">nav.no/mine-saker</Lenke>
+                                <Lenke href="https://person.nav.no/mine-saker/tema/OMS">
+                                    nav.no/mine-saker/tema/OMS
+                                </Lenke>
                             </p>
                         </AlertStripeAdvarsel>
                     </Box>
