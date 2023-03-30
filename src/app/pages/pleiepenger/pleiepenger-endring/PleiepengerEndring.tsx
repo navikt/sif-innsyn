@@ -42,9 +42,22 @@ const PleiepengerEndring = () => {
                         må du sende en melding via <SkrivTilOssLenke label="Skriv til oss" />.
                     </p>
                     <p>
-                        <Lenke href={getLenker().endringsdialogPleiepenger}>Gå til endringsmelding for jobb</Lenke>
+                        <Lenke href={getLenker().endringsdialogPleiepenger}>Gå til endringsmelding</Lenke>
                     </p>
                 </Box>
+                <Box margin="xl">
+                    <Box padBottom="m">
+                        <Undertittel>Ferie i pleiepengeperioden</Undertittel>
+                    </Box>
+                    <p>
+                        Bruk endringsmeldingen for å legge til eller fjerne dager med ferie i pleiepengeperioden. Du kan
+                        gjøre endringer i opptil 3 måneder tilbake i tid, og opptil 12 måneder frem i tid.
+                    </p>
+                    <p>
+                        <Lenke href={getLenker().endringsdialogPleiepenger}>Gå til endringsmelding</Lenke>
+                    </p>
+                </Box>
+
                 <Box margin="xl" padBottom="m">
                     <Box padBottom="m">
                         <Undertittel>Nytt, avsluttet eller endret arbeidsforhold</Undertittel>
@@ -61,12 +74,12 @@ const PleiepengerEndring = () => {
 
                 <Box margin="xl">
                     <Box padBottom="m">
-                        <Undertittel>Ferie og utenlandsopphold</Undertittel>
+                        <Undertittel>Utenlandsopphold</Undertittel>
                     </Box>
                     <p>
-                        Hvis du skal oppholde deg i utlandet, eller ha ferie i pleiepengeperioden, melder du fra om
-                        dette via Skriv til oss. I meldingen gir du beskjed om hvilken periode det dreier seg om, og
-                        hvilket land du eventuelt reiser til.
+                        Hvis du skal oppholde deg i utlandet pleiepengeperioden, melder du fra om dette via Skriv til
+                        oss. I meldingen gir du beskjed om hvilken periode det dreier seg om, og hvilket land du reiser
+                        til.
                     </p>
                     <p>
                         <SkrivTilOssLenke />
