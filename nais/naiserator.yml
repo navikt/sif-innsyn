@@ -33,7 +33,7 @@ spec:
             - application: sif-innsyn-api
             - application: k9-brukerdialog-api
             - application: nav-dekoratoren
-               namespace: personbruker
+              namespace: personbruker
             external:
             {{#each externalHosts as |host|}}
             - host: {{host}}
