@@ -14,15 +14,15 @@
 
     "page.dinOversikt.linkPanel.endringsmelding.title": "Melde fra om endring?",
     "page.dinOversikt.linkPanel.endringsmelding.lenkeTekst": "Meld fra om endringer",
-    "page.dinOversikt.linkPanel.endringsmelding.lenkeTekst.info": "Her kan du melde fra om endringer som har betydning for dine pleiepenger mens du pleier sykt barn.",
+    "page.dinOversikt.linkPanel.endringsmelding.lenkeTekst.info": "Her kan du melde fra om endringer som har betydning for dine pleiepenger.",
 
     "page.dinOversikt.linkPanel.endring.skrivTilOss.title": "Melde fra om endring?",
     "page.dinOversikt.linkPanel.endring.skrivTilOss.lenkeTekst": "Gå til «Skriv til oss»",
     "page.dinOversikt.linkPanel.endring.skrivTilOss.lenkeTekst.info": "Her kan du melde fra om endringer som har betydning i saken din.",
 
-    "page.dinOversikt.linkPanel.søknad.title": "Sende ny søknad?",
-    "page.dinOversikt.linkPanel.søknad.lenkeTekst": "Gå til ny søknad",
-    "page.dinOversikt.linkPanel.søknad.lenkeTekst.info": "Her kan du søke om forlengelse, eller sende en helt ny søknad.",
+    "page.dinOversikt.linkPanel.søknad.title": "Sende søknad?",
+    "page.dinOversikt.linkPanel.søknad.lenkeTekst": "Gå til søknad",
+    "page.dinOversikt.linkPanel.søknad.lenkeTekst.info": "Hvis du vil søke om ny periode eller forlengelse sender du ny søknad.",
 
     "page.dinOversikt.påbegyntSøknad.title": "Vil du fortsette på en påbegynt søknad?",
     "page.dinOversikt.påbegyntSøknad.ingenPåbegynt": "Du har ikke påbegynt søknad.",

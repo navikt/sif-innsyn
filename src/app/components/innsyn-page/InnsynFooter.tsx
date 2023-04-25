@@ -22,7 +22,7 @@ const InnsynFooter = () => {
                 </li>
                 <li>
                     <Lenke target="_blank" href={lenker.saksbehandlingstid}>
-                        Sakbehandlingstid
+                        Saksbehandlingstid
                     </Lenke>
                 </li>
                 <li>
