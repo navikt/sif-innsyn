@@ -17,8 +17,6 @@
         "start-express": "node ./server.js",
         "test": "jest --maxWorkers=2 --config ./jest/jest.config.js",
         "test-w": "jest --maxWorkers=2 --config ./jest/jest.config.js --watch",
-        "prepare": "npm run snyk-protect",
-        "snyk-protect": "snyk-protect",
         "eslint": "eslint --fix \"src/app/**/*.{js,jsx,ts,tsx}\"",
         "prettier:check": "prettier --check \"src/**/*.js\"",
         "prettier:run": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\""
@@ -28,7 +26,6 @@
         "@navikt/sif-common-amplitude": "^2.7.3",
         "@navikt/sif-common-core": "^13.0.1",
         "@navikt/sif-common-sentry": "^0.6.2",
-        "@snyk/protect": "^1.1100.0",
         "axios": "^0.27.2",
         "classnames": "^2.3.2",
         "cookie-parser": "^1.4.6",
@@ -133,6 +130,5 @@
     },
     "resolutions": {
         "babel-core": "7.0.0-bridge.0"
-    },
-    "snyk": true
+    }
 }
