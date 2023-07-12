@@ -26,7 +26,7 @@ const startServer = () => {
     const port = 1234;
 
     server.get('/soknad', (req, res) => {
-        res.send([]);
+        res.send(soknaderMock);
     });
 
     server.get('/soknad/:soknadId/dokument', (req, res) => {
