@@ -9,9 +9,6 @@ on:
             - 'CODEOWNERS'
         branches:
 
-env:
-    IMAGE: ghcr.io/${{ github.repository }}/sif-innsyn:${{ github.sha }}
-
 jobs:
     test:
         name: Test Code
@@ -34,6 +31,7 @@ jobs:
         runs-on: ubuntu-latest
         permissions:
             packages: write
+            id-token: write
         steps:
             - name: Checkout code
               uses: actions/checkout@v4
@@ -45,15 +43,15 @@ jobs:
               run: |
                   npm ci
                   npm run build
-            - name: Build Docker image
-              run: |
-                  docker build --tag ${IMAGE} .
-            - name: Login to Github Package Registry
-              env:
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-              run: |
-                  docker login ghcr.io -u ${GITHUB_REPOSITORY} -p ${GITHUB_TOKEN}
-                  docker push ${IMAGE}
+            - name: Build and publish docker image
+              uses: nais/docker-build-push@v0
+              id: docker-push
+              with:
+                  team: dusseldorf
+                  push_image: true
+                  pull: true
+                  project_id: ${{ vars.NAIS_MANAGEMENT_PROJECT_ID }}
+                  identity_provider: ${{ secrets.NAIS_WORKLOAD_IDENTITY_PROVIDER }}
 
     deploy-dev-gcp:
         name: Deploy to dev-gcp
@@ -70,6 +68,7 @@ jobs:
                   CLUSTER: dev-gcp
                   RESOURCE: nais/naiserator.yml
                   VARS: nais/dev-gcp.json
+                  IMAGE: ${{ steps.docker-push.outputs.image }}
 
     deploy-prod-gcp:
         name: deploy-prod-gcp
