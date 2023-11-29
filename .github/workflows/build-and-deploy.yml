@@ -9,9 +9,6 @@ on:
             - 'CODEOWNERS'
         branches:
 
-env:
-    IMAGE: ghcr.io/${{ github.repository }}/sif-innsyn:${{ github.sha }}
-
 jobs:
     test:
         name: Test Code
@@ -19,7 +16,7 @@ jobs:
         steps:
             - uses: actions/checkout@v4
             - name: Use Node.js 18
-              uses: actions/setup-node@v3
+              uses: actions/setup-node@v4
               with:
                   node-version: 18
             - name: Test code
@@ -33,35 +30,32 @@ jobs:
         needs: test
         runs-on: ubuntu-latest
         permissions:
-            packages: write
+            contents: read
+            id-token: write
         steps:
             - name: Checkout code
               uses: actions/checkout@v4
             - name: Use Node.js 18
-              uses: actions/setup-node@v3
+              uses: actions/setup-node@v4
               with:
                   node-version: 18
             - name: build code
               run: |
                   npm ci
                   npm run build
-            - name: Build Docker image
-              run: |
-                  docker build --tag ${IMAGE} .
-            - name: Login to Github Package Registry
-              env:
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-              run: |
-                  docker login ghcr.io -u ${GITHUB_REPOSITORY} -p ${GITHUB_TOKEN}
-                  docker push ${IMAGE}
+            - name: Build and publish docker image
+              uses: nais/docker-build-push@v0
+              id: docker-push
+              with:
+                  team: dusseldorf
+                  project_id: ${{ vars.NAIS_MANAGEMENT_PROJECT_ID }}
+                  identity_provider: ${{ secrets.NAIS_WORKLOAD_IDENTITY_PROVIDER }}
 
     deploy-dev-gcp:
         name: Deploy to dev-gcp
         if: startsWith(github.ref, 'refs/heads/dev-') || startsWith(github.ref, 'refs/heads/master') # Build and push docker if branch is either master or dev-*
         needs: build-code-and-push-docker # Depends on build-code-and-push-docker job
         runs-on: ubuntu-latest
-        permissions:
-            packages: write
         steps:
             - uses: actions/checkout@v4
             - uses: nais/deploy/actions/deploy@v1
@@ -70,14 +64,15 @@ jobs:
                   CLUSTER: dev-gcp
                   RESOURCE: nais/naiserator.yml
                   VARS: nais/dev-gcp.json
+                  IMAGE: ${{ needs.build-code-and-push-docker.outputs.image }}
+            - name: Debug Image Value
+              run: echo "Docker Image Value: ${{ needs.build-code-and-push-docker.outputs }}"
 
     deploy-prod-gcp:
         name: deploy-prod-gcp
         if: startsWith(github.ref, 'refs/heads/master')
         needs: build-code-and-push-docker # Depends on build-code-and-push-docker job
         runs-on: ubuntu-latest
-        permissions:
-            packages: write
         steps:
             - uses: actions/checkout@v3
             - uses: nais/deploy/actions/deploy@v1
@@ -86,3 +81,4 @@ jobs:
                   CLUSTER: prod-gcp
                   RESOURCE: nais/naiserator.yml
                   VARS: nais/prod-gcp.json
+                  IMAGE: ${{ needs.build-code-and-push-docker.outputs.image }}
