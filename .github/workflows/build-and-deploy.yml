@@ -65,6 +65,8 @@ jobs:
                   RESOURCE: nais/naiserator.yml
                   VARS: nais/dev-gcp.json
                   IMAGE: ${{ needs.build-code-and-push-docker.outputs.image }}
+            - name: Debug Image Value
+              run: echo "Docker Image Value: ${{ needs.build-code-and-push-docker.outputs }}"
 
     deploy-prod-gcp:
         name: deploy-prod-gcp
