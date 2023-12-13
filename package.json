@@ -1,6 +1,6 @@
 {
     "name": "sif-innsyn",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "Sykdom i familien - innsynsfrontend",
     "repository": "https://github.com/navikt/sif-innsyn",
     "license": "MIT",
